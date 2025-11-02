@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\GenerateIdentifier;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Company extends Model
 {
-    use UsesSystemConnection, GenerateIdentifier;
+    use GenerateIdentifier;
 
     protected $fillable = [
         'name', 'description', 'coc', 'tax_nr', 'email', 'url', 'authorization'

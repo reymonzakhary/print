@@ -3,14 +3,13 @@
 namespace App\Models\Tenants;
 
 use App\Models\Traits\HasGeometry;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Address extends Model
 {
-    use UsesTenantConnection, HasGeometry;
+    use HasGeometry;
 
     /**
      * The attributes that are mass assignable.

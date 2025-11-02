@@ -6,9 +6,6 @@ use App\Casts\Hostname\CustomFieldCast;
 use App\Foundation\ContractManager\Traits\HasContract;
 use App\Models\Tenants\Setting;
 use App\Models\Traits\CanBeScoped;
-use Hyn\Tenancy\Contracts\CurrentHostname;
-use Hyn\Tenancy\Models\Hostname as Hosts;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Ramsey\Uuid\Uuid;
@@ -16,26 +13,33 @@ use \App\Models\Tenants\Company;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Hostname extends Hosts
+/**
+ * Legacy Hostname model - kept for backward compatibility
+ * This is now an alias/proxy for the Domain model
+ * @deprecated Use Domain model instead
+ */
+class Hostname extends Domain
 {
-    use UsesSystemConnection, CanBeScoped, HasContract;
+    use CanBeScoped, HasContract;
 
     /**
      * @var string
      */
-    protected $table = 'hostnames';
+    protected $table = 'domains';
 
     /**
      * @var string[]
      */
-    protected $fillable = ['configure', 'supplier', 'logo', 'host_id', 'primary', 'custom_fields', 'fqdn'];
+    protected $fillable = ['configure', 'supplier', 'logo', 'host_id', 'is_primary', 'custom_fields', 'domain', 'tenant_id'];
 
     /**
      * @var string[]
      */
     protected $casts = [
-        'configure' => AsArrayObject::class,
-        'custom_fields' => CustomFieldCast::class
+        'configure' => 'array',
+        'custom_fields' => CustomFieldCast::class,
+        'is_primary' => 'bool',
+        'is_fallback' => 'bool',
     ];
 
     protected $appends = [];
@@ -54,7 +58,43 @@ class Hostname extends Hosts
      */
     public function scopeCurrent($builder): mixed
     {
-        return $this->findOrFail(app(CurrentHostname::class)?->id);
+        $tenant = tenant();
+        if (!$tenant) {
+            return null;
+        }
+        return $builder->where('tenant_id', $tenant->id)->where('is_primary', true)->first();
+    }
+
+    /**
+     * Backward compatibility attribute for 'fqdn'
+     */
+    public function getFqdnAttribute()
+    {
+        return $this->domain;
+    }
+
+    /**
+     * Backward compatibility attribute for 'primary'
+     */
+    public function getPrimaryAttribute()
+    {
+        return $this->is_primary;
+    }
+
+    /**
+     * Setter for backward compatibility
+     */
+    public function setFqdnAttribute($value)
+    {
+        $this->attributes['domain'] = $value;
+    }
+
+    /**
+     * Setter for backward compatibility
+     */
+    public function setPrimaryAttribute($value)
+    {
+        $this->attributes['is_primary'] = $value;
     }
 
     /**
@@ -63,7 +103,7 @@ class Hostname extends Hosts
      */
     public function scopeFindByFqdn($builder, string $value = null)
     {
-        $this->where('fqdn', $value);
+        return $builder->where('domain', $value);
     }
 
     /**
@@ -85,11 +125,21 @@ class Hostname extends Hosts
             ->withPivot('active');
     }
 
+    /**
+     * Relationship to website (tenant) for backward compatibility
+     */
+    public function website()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
+    }
+
     public static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->host_id = (string)Uuid::uuid4();
+            if (!$model->host_id) {
+                $model->host_id = (string)Uuid::uuid4();
+            }
         });
     }
 

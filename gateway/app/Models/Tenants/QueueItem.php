@@ -2,14 +2,13 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QueueItem extends Model
 {
-    use HasFactory, UsesTenantConnection;
+    use HasFactory;
 
     /**
      * @var string[]

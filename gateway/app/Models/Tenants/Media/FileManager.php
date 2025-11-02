@@ -5,13 +5,12 @@ namespace App\Models\Tenants\Media;
 use App\Models\Tenants\Tag;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class FileManager extends Model
 {
-    use UsesTenantConnection,
+    // use UsesTenantConnection, // Removed
         InteractsWithMedia, CanBeScoped;
 
     protected $table = 'file_manager';

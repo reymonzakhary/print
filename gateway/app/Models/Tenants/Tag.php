@@ -5,13 +5,12 @@ namespace App\Models\Tenants;
 use App\Models\Tenants\Media\FileManager;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
 
-    use UsesTenantConnection, Slugable, CanBeScoped;
+    use Slugable, CanBeScoped;
 
     protected $fillable = ['name', 'iso', 'row_id', 'hex'];
 

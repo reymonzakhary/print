@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\EloquentSortable\SortableTrait;
 
 class Npace extends Model
 {
-    use UsesSystemConnection, Slugable, SortableTrait;
+    use Slugable, SortableTrait;
 
     protected $table = 'namespaces';
 

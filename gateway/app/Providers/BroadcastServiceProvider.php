@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use BeyondCode\LaravelWebSockets\Apps\App;
-use Hyn\Tenancy\Environment;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,25 +25,29 @@ class BroadcastServiceProvider extends ServiceProvider
             $request->headers->set('referer', $referer);
         }
         $request->domain = $request->getSchemeAndHttpHost();
-        $env = app(Environment::class);
 
-        if ($fqdn = optional($env->hostname())->fqdn) {
-            $app = App::findByKey($fqdn);
-            config([
-                'broadcasting.connections.pusher' => [
-                    'driver' => 'pusher',
-                    'key' => $app->key,
-                    'secret' => $app->secret,
-                    'app_id' => $app->id,
-                    'options' => [
-                        'cluster' => env('PUSHER_APP_CLUSTER'),
-                        'encrypted' => true,
-                        'host' => '127.0.0.1',
-                        'port' => 6001,
-                        'scheme' => 'http'
-                    ],
-                ]
-            ]);
+        // Get current tenant using stancl/tenancy
+        $tenant = tenant();
+
+        if ($tenant && $domain = optional($tenant->primary_domain)->domain) {
+            $app = App::findByKey($domain);
+            if ($app) {
+                config([
+                    'broadcasting.connections.pusher' => [
+                        'driver' => 'pusher',
+                        'key' => $app->key,
+                        'secret' => $app->secret,
+                        'app_id' => $app->id,
+                        'options' => [
+                            'cluster' => env('PUSHER_APP_CLUSTER'),
+                            'encrypted' => true,
+                            'host' => '127.0.0.1',
+                            'port' => 6001,
+                            'scheme' => 'http'
+                        ],
+                    ]
+                ]);
+            }
         }
 
 //        if ($fqdn = optional(app(Environment::class)->hostname())->fqdn) {

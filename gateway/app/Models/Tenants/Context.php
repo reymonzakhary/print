@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Models\Tenants\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Context extends Model
 {
-    use UsesTenantConnection, GenerateIdentifier, HasAddresses;
+    use GenerateIdentifier, HasAddresses;
 
     protected $fillable = ['name', 'config'];
 

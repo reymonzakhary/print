@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Models\Tenants\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Company extends Model
 {
-    use UsesTenantConnection, GenerateIdentifier, HasAddresses;
+    use GenerateIdentifier, HasAddresses;
 
     /**
      * @var array

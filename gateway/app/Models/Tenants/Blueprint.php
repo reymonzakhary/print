@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use JsonException;
 use Spatie\EloquentSortable\Sortable;
@@ -12,7 +11,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Blueprint extends Model implements Sortable
 {
-    use UsesTenantConnection, Slugable, SortableTrait, CanBeScoped;
+    use Slugable, SortableTrait, CanBeScoped;
 
     /**
      * @var string[]

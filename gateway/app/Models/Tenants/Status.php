@@ -3,11 +3,10 @@
 namespace App\Models\Tenants;
 
 use App\Models\Tenants\Orm\BaseModelStatus;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 
 class Status extends BaseModelStatus
 {
-    use UsesTenantConnection;
+
 
     protected $fillable = [
         'code', 'name', 'description'

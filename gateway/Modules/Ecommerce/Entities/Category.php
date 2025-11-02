@@ -4,7 +4,6 @@ namespace Modules\Ecommerce\Entities;
 
 use App\Models\Traits\HasChildren;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
@@ -13,7 +12,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model implements Sortable
 {
-    use UsesTenantConnection, Slugable, SortableTrait, HasChildren,
+    use Slugable, SortableTrait, HasChildren,
         HasRecursiveRelationships, HasFactory;
 
     /**

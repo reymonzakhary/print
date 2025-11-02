@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Traits\GenerateIdentifier;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -23,7 +22,6 @@ class User extends Authenticatable implements LaratrustUser
     use Notifiable,
         GenerateIdentifier,
         HasRolesAndPermissions,
-        UsesSystemConnection,
         HasApiTokens ,
         SoftDeletes;
 

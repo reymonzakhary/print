@@ -19,7 +19,6 @@ use App\Plugins\Moneys;
 use App\Repositories\AddressRepository;
 use App\Repositories\LexiconRepository;
 use App\Repositories\OrderRepository;
-use Hyn\Tenancy\Environment;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -121,8 +120,9 @@ class AppServiceProvider extends ServiceProvider
             'sku' => Sku::class,
         ]);
 
-        $env = app(Environment::class);
-        if ($fqdn = optional($env->hostname())->fqdn) {
+        // Use stancl/tenancy helper to check if we're in tenant context
+        $tenant = tenant();
+        if ($tenant) {
             config(['database.default' => 'tenant']);
             if (config('app.env') === 'production') {
                 $this->app['request']->server->set('HTTPS', 'on');

@@ -3,14 +3,13 @@
 namespace Modules\Cms\Entities;
 
 use App\Models\Tenants\Team;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\EloquentSortable\SortableTrait;
 
 class ResourceGroup extends Model
 {
-    use UsesTenantConnection,
+    // use UsesTenantConnection, // Removed
         SortableTrait;
 
     protected $fillable = [

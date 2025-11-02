@@ -7,7 +7,6 @@ use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\HasChildren;
 use App\Models\Traits\ResolveLanguageRouteBinding;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +17,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Box extends Model implements Sortable
 {
-    use UsesTenantConnection, GenerateIdentifier,
+    use GenerateIdentifier,
         Slugable, SortableTrait, HasRecursiveRelationships, HasChildren, ResolveLanguageRouteBinding, InteractWithMedia;
 
     /**

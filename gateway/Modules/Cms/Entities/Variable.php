@@ -2,13 +2,12 @@
 
 namespace Modules\Cms\Entities;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\SortableTrait;
 
 class Variable extends Model
 {
-    use UsesTenantConnection, SortableTrait;
+    use SortableTrait;
 
     /**
      * @var string[]

@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class Supplier extends Model
 {
-    use UsesSystemConnection, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'supplier_id', 'name', 'share_products', 'hostname_id', 'config'

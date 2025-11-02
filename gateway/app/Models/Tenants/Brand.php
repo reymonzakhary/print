@@ -6,7 +6,6 @@ use App\Foundation\FileManager\Contracts\FileManagerInterface;
 use App\Foundation\FileManager\Traits\InteractWithMedia;
 use App\Models\Traits\ResolveLanguageRouteBinding;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
@@ -14,7 +13,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Brand extends Model implements Sortable, FileManagerInterface
 {
-    use HasFactory, UsesTenantConnection, Slugable, SortableTrait,
+    use HasFactory, Slugable, SortableTrait,
         ResolveLanguageRouteBinding,
         InteractWithMedia;
 

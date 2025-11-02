@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use App\Enums\PluginStatus;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class PluginWebhookEvent extends Model
 {
-    use HasFactory, UsesSystemConnection;
+    use HasFactory;
 
     protected $fillable = [
         'hostname_id',

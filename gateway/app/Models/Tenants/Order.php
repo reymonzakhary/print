@@ -15,7 +15,6 @@ use App\Models\Traits\VirtualColumn;
 use App\Plugins\Traits\PluginWebhookTrait;
 use Carbon\Carbon;
 use DateTimeInterface;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,7 +30,7 @@ use Illuminate\Validation\ValidationException;
  */
 class Order extends Model
 {
-    use UsesTenantConnection, GenerateIdentifier,
+    use GenerateIdentifier,
         HasParentModel, CanBeScoped, SoftDeletes,
         BelongToTenantContext, HasPrice,
         HasOrderNumber, InteractsWithMedia, HasAddresses, VirtualColumn, PluginWebhookTrait;

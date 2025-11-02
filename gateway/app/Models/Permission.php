@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laratrust\Models\Permission as PermissionModel;
 
 class Permission extends PermissionModel
 {
-    use HasFactory, UsesSystemConnection;
+    use HasFactory;
 
     public $guarded = [];
 

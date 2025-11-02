@@ -6,7 +6,6 @@ use App\Models\Tenants\Media\MediaSource;
 use App\Models\Tenants\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
 use App\Services\Tenant\Categories\CategoryService;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +20,7 @@ use Modules\Cms\Entities\ResourceGroup;
 
 class Team extends TeamModel
 {
-    use UsesTenantConnection, GenerateIdentifier, HasAddresses;
+    use GenerateIdentifier, HasAddresses;
 
     /**
      * @var array

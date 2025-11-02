@@ -6,7 +6,6 @@ use App\Foundation\FileManager\Traits\InteractWithMedia;
 use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\HasPrice;
 use App\Plugins\Moneys;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +19,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Variation extends Model implements Sortable
 {
-    use UsesTenantConnection, SortableTrait,
+    use SortableTrait,
         GenerateIdentifier, HasRecursiveRelationships, HasPrice, InteractWithMedia;
 
     /**

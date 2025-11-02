@@ -2,7 +2,6 @@
 
 namespace Modules\Cms\Entities;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,7 +9,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Chunk extends Model
 {
-    use UsesTenantConnection, SortableTrait;
+    use SortableTrait;
 
     /**
      * sorting tables column

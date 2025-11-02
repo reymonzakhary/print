@@ -3,13 +3,12 @@
 namespace App\Models\Tenants;
 
 use App\Models\Traits\GenerateIdentifier;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class OrderItem extends Model
 {
-    use GenerateIdentifier, UsesTenantConnection;
+    use GenerateIdentifier;
 
     protected $fillable = [
         'qty', 'delivery_pickup', 'shipping_cost'

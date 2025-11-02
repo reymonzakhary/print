@@ -2,14 +2,13 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Blueprintable extends MorphPivot
 {
-    use UsesTenantConnection, HasRecursiveRelationships;
+    use HasRecursiveRelationships;
 
     /**
      * @var bool

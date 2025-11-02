@@ -2,7 +2,6 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -15,7 +14,7 @@ use Spatie\EloquentSortable\SortableTrait;
  */
 class Media extends Model implements Sortable
 {
-    use UsesTenantConnection, SortableTrait;
+    use SortableTrait;
 
     /**
      * @var string

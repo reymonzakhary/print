@@ -7,7 +7,6 @@ use App\Models\Tenants\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\InteractsWithMedia;
 use App\Plugins\Traits\PluginWebhookTrait;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +22,7 @@ use Illuminate\Validation\ValidationException;
  */
 class Item extends Model
 {
-    use InteractsWithMedia, GenerateIdentifier, UsesTenantConnection, HasAddresses;
+    use InteractsWithMedia, GenerateIdentifier, HasAddresses;
 
     protected $fillable = [
         'product', 'reference', 'discount_id', 'st', 'supplier_id', 'supplier_name', 'note',

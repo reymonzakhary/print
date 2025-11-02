@@ -5,7 +5,6 @@ namespace App\Models\Tenants;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasDynamicValue;
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +13,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Setting extends Model
 {
-    use UsesTenantConnection, CanBeScoped, SortableTrait, HasDynamicValue,
+    use CanBeScoped, SortableTrait, HasDynamicValue,
         InteractsWithMedia;
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Profile extends Model
 {
-    use UsesSystemConnection;
+
 
     protected $primaryKey = 'identifier'; // or null
 

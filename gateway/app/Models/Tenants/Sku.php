@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Foundation\FileManager\Traits\InteractWithMedia;
 use App\Models\Traits\HasPrice;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,7 +16,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Sku extends Model implements Sortable
 {
-    use UsesTenantConnection, HasPrice, InteractWithMedia, SortableTrait, HasRecursiveRelationships;
+    use HasPrice, InteractWithMedia, SortableTrait, HasRecursiveRelationships;
 
 //    protected $keyType = 'string';
 

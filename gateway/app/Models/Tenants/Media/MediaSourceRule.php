@@ -2,12 +2,11 @@
 
 namespace App\Models\Tenants\Media;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 
 class MediaSourceRule extends Model
 {
-    use UsesTenantConnection;
+
 
     /**
      * The attributes that are mass assignable.

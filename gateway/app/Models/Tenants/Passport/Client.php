@@ -3,14 +3,13 @@
 namespace App\Models\Tenants\Passport;
 
 use App\Models\Tenants\User;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Passport\Client as PassportClient;
 
 class Client extends PassportClient
 {
-    use UsesTenantConnection;
+
 
     protected $table = 'oauth_clients';
 
