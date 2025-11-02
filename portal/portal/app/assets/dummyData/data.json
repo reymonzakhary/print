@@ -1,0 +1,1644 @@
+{
+  "boops": [
+    {
+      "id": "65d4d04bf26c0e680b5343b6",
+      "ref_box": null,
+      "name": "Material",
+      "display_name": [
+        {
+          "display_name": "Material",
+          "iso": "en"
+        },
+        {
+          "display_name": "Material",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Material",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Material",
+          "iso": "de"
+        }
+      ],
+      "system_key": "material",
+      "slug": "material",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72366de16b48477998e",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343b7",
+          "ref_option": null,
+          "name": "Biotop Natural",
+          "display_name": [
+            {
+              "display_name": "Biotop Natural",
+              "iso": "en"
+            },
+            {
+              "display_name": "Biotop Natural",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Biotop Natural",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Biotop Natural",
+              "iso": "de"
+            }
+          ],
+          "system_key": "biotop-natural",
+          "slug": "biotop-natural",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b484779997",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": [],
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343b8",
+          "ref_option": null,
+          "name": "Bond Text Paper",
+          "display_name": [
+            {
+              "display_name": "Bond Text Paper",
+              "iso": "en"
+            },
+            {
+              "display_name": "Bond Text Paper",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Bond Text Paper",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Bond Text Paper",
+              "iso": "de"
+            }
+          ],
+          "system_key": "bond-text-paper",
+          "slug": "bond-text-paper",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b17",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343b4"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b5"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343b9",
+          "ref_option": null,
+          "name": "Eco FSC",
+          "display_name": [
+            {
+              "display_name": "Eco FSC",
+              "iso": "en"
+            },
+            {
+              "display_name": "Eco FSC",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Eco FSC",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Eco FSC",
+              "iso": "de"
+            }
+          ],
+          "system_key": "eco-fsc",
+          "slug": "eco-fsc",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b1c",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343b4"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b3"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343ba",
+          "ref_option": null,
+          "name": "Paperwise Earth Pact Natural",
+          "display_name": [
+            {
+              "display_name": "Paperwise Earth Pact Natural",
+              "iso": "en"
+            },
+            {
+              "display_name": "Paperwise Earth Pact Natural",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Paperwise Earth Pact Natural",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Paperwise Earth Pact Natural",
+              "iso": "de"
+            }
+          ],
+          "system_key": "paperwise-earth-pact-natural",
+          "slug": "paperwise-earth-pact-natural",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b4847799a1",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343b4"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b5"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343bb",
+          "ref_option": null,
+          "name": "Vergé White",
+          "display_name": [
+            {
+              "display_name": "Vergé White",
+              "iso": "en"
+            },
+            {
+              "display_name": "Vergé White",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Vergé White",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Vergé White",
+              "iso": "de"
+            }
+          ],
+          "system_key": "verge-white",
+          "slug": "verge-white",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b19",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343b3"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "66054a98fa8e2bdf1f80fe57",
+          "ref_option": null,
+          "name": "Recycled Paper",
+          "display_name": [
+            {
+              "display_name": "Recycled Paper",
+              "iso": "en"
+            },
+            {
+              "display_name": "Recycled Paper",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Recycled Paper",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Recycled Paper",
+              "iso": "de"
+            }
+          ],
+          "system_key": "recycled-paper",
+          "slug": "recycled-paper",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b4847799a5",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    },
+    {
+      "id": "65d4d04bf26c0e680b5343b1",
+      "ref_box": null,
+      "name": "Weight",
+      "display_name": [
+        {
+          "display_name": "Weight",
+          "iso": "en"
+        },
+        {
+          "display_name": "Weight",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Weight",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Weight",
+          "iso": "de"
+        }
+      ],
+      "system_key": "weight",
+      "slug": "weight",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72366de16b4847799ab",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343b4",
+          "ref_option": null,
+          "name": "80 Grs",
+          "display_name": [
+            {
+              "display_name": "80 Grs",
+              "iso": "en"
+            },
+            {
+              "display_name": "80 Grs",
+              "iso": "fr"
+            },
+            {
+              "display_name": "80 Grs",
+              "iso": "nl"
+            },
+            {
+              "display_name": "80 Grs",
+              "iso": "de"
+            }
+          ],
+          "system_key": "80-grs",
+          "slug": "80-grs",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b4847799b2",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343ba"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b9"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b8"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343b5",
+          "ref_option": null,
+          "name": "90 Grs",
+          "display_name": [
+            {
+              "display_name": "90 Grs",
+              "iso": "en"
+            },
+            {
+              "display_name": "90 Grs",
+              "iso": "fr"
+            },
+            {
+              "display_name": "90 Grs",
+              "iso": "nl"
+            },
+            {
+              "display_name": "90 Grs",
+              "iso": "de"
+            }
+          ],
+          "system_key": "90-grs",
+          "slug": "90-grs",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b4847799b4",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343ba"
+            ],
+            [
+              "65d4d04bf26c0e680b5343b8"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343b2",
+          "ref_option": null,
+          "name": "100 Grs",
+          "display_name": [
+            {
+              "display_name": "100 Grs",
+              "iso": "en"
+            },
+            {
+              "display_name": "100 Grs",
+              "iso": "fr"
+            },
+            {
+              "display_name": "100 Grs",
+              "iso": "nl"
+            },
+            {
+              "display_name": "100 Grs",
+              "iso": "de"
+            }
+          ],
+          "system_key": "100-grs",
+          "slug": "100-grs",
+          "description": "",
+          "media": [],
+          "unit": "mm",
+          "incremental_by": 5,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72466de16b484779a57",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 100,
+          "maximum_width": 500,
+          "minimum_width": 50,
+          "height": 200,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343b3",
+          "ref_option": null,
+          "name": "120 Grs",
+          "display_name": [
+            {
+              "display_name": "120 Grs",
+              "iso": "en"
+            },
+            {
+              "display_name": "120 Grs",
+              "iso": "fr"
+            },
+            {
+              "display_name": "120 Grs",
+              "iso": "nl"
+            },
+            {
+              "display_name": "120 Grs",
+              "iso": "de"
+            }
+          ],
+          "system_key": "120-grs",
+          "slug": "120-grs",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b4847799ac",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343b9"
+            ],
+            [
+              "65d4d04bf26c0e680b5343bb"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    },
+    {
+      "id": "65d4d04bf26c0e680b5343bc",
+      "ref_box": null,
+      "name": "Format",
+      "display_name": [
+        {
+          "display_name": "Format",
+          "iso": "en"
+        },
+        {
+          "display_name": "Format",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Format",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Format",
+          "iso": "de"
+        }
+      ],
+      "system_key": "format",
+      "slug": "format",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72266de16b484779955",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343bd",
+          "ref_option": null,
+          "name": "A4",
+          "display_name": [
+            {
+              "display_name": "A4",
+              "iso": "en"
+            },
+            {
+              "display_name": "A4",
+              "iso": "fr"
+            },
+            {
+              "display_name": "A4",
+              "iso": "nl"
+            },
+            {
+              "display_name": "A4",
+              "iso": "de"
+            }
+          ],
+          "system_key": "a4",
+          "slug": "a4",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b484779964",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 210,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 297,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343be",
+          "ref_option": null,
+          "name": "A5",
+          "display_name": [
+            {
+              "display_name": "A5",
+              "iso": "en"
+            },
+            {
+              "display_name": "A5",
+              "iso": "fr"
+            },
+            {
+              "display_name": "A5",
+              "iso": "nl"
+            },
+            {
+              "display_name": "A5",
+              "iso": "de"
+            }
+          ],
+          "system_key": "a5",
+          "slug": "a5",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b484779966",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343cc"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343bf",
+          "ref_option": null,
+          "name": "Custom Sizes (3 Mm Bleed)",
+          "display_name": [
+            {
+              "display_name": "Custom Sizes (3 Mm Bleed)",
+              "iso": "en"
+            },
+            {
+              "display_name": "Custom Sizes (3 Mm Bleed)",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Custom Sizes (3 Mm Bleed)",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Custom Sizes (3 Mm Bleed)",
+              "iso": "de"
+            }
+          ],
+          "system_key": "custom-sizes-3-mm-bleed",
+          "slug": "custom-sizes-3-mm-bleed",
+          "description": "",
+          "media": [],
+          "unit": "mm",
+          "incremental_by": 1,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b48477996e",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343cf"
+            ],
+            [
+              "65d4d04bf26c0e680b5343d0"
+            ],
+            [
+              "65d4d04bf26c0e680b5343d1"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": true,
+          "dynamic_keys": null,
+          "width": 210,
+          "maximum_width": 297,
+          "minimum_width": 148,
+          "height": 297,
+          "maximum_height": 420,
+          "minimum_height": 210,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    },
+    {
+      "id": "65d4d04bf26c0e680b5343c0",
+      "ref_box": null,
+      "name": "Printing Colors",
+      "display_name": [
+        {
+          "display_name": "Printing Colors",
+          "iso": "en"
+        },
+        {
+          "display_name": "Printing Colors",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Printing Colors",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Printing Colors",
+          "iso": "de"
+        }
+      ],
+      "system_key": "printing-colors",
+      "slug": "printing-colors",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72266de16b484779936",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343c1",
+          "ref_option": null,
+          "name": "1/0 Pms",
+          "display_name": [
+            {
+              "display_name": "1/0 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "1/0 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "1/0 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "1/0 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "1-0-pms",
+          "slug": "1-0-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b25",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c2",
+          "ref_option": null,
+          "name": "1/1 Pms",
+          "display_name": [
+            {
+              "display_name": "1/1 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "1/1 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "1/1 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "1/1 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "1-1-pms",
+          "slug": "1-1-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b2f",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c3",
+          "ref_option": null,
+          "name": "2/0 Pms",
+          "display_name": [
+            {
+              "display_name": "2/0 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "2/0 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "2/0 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "2/0 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "2-0-pms",
+          "slug": "2-0-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b2a",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c4",
+          "ref_option": null,
+          "name": "2/2 Pms",
+          "display_name": [
+            {
+              "display_name": "2/2 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "2/2 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "2/2 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "2/2 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "2-2-pms",
+          "slug": "2-2-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b23",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c5",
+          "ref_option": null,
+          "name": "3/0 Pms",
+          "display_name": [
+            {
+              "display_name": "3/0 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "3/0 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "3/0 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "3/0 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "3-0-pms",
+          "slug": "3-0-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b31",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c6",
+          "ref_option": null,
+          "name": "3/3 Pms",
+          "display_name": [
+            {
+              "display_name": "3/3 Pms",
+              "iso": "en"
+            },
+            {
+              "display_name": "3/3 Pms",
+              "iso": "fr"
+            },
+            {
+              "display_name": "3/3 Pms",
+              "iso": "nl"
+            },
+            {
+              "display_name": "3/3 Pms",
+              "iso": "de"
+            }
+          ],
+          "system_key": "3-3-pms",
+          "slug": "3-3-pms",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b2d",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c7",
+          "ref_option": null,
+          "name": "4/0 Full Color",
+          "display_name": [
+            {
+              "display_name": "4/0 Full Color",
+              "iso": "en"
+            },
+            {
+              "display_name": "4/0 Full Color",
+              "iso": "fr"
+            },
+            {
+              "display_name": "4/0 Full Color",
+              "iso": "nl"
+            },
+            {
+              "display_name": "4/0 Full Color",
+              "iso": "de"
+            }
+          ],
+          "system_key": "4-0-full-color",
+          "slug": "4-0-full-color",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b484779937",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c8",
+          "ref_option": null,
+          "name": "4/1 Full Color",
+          "display_name": [
+            {
+              "display_name": "4/1 Full Color",
+              "iso": "en"
+            },
+            {
+              "display_name": "4/1 Full Color",
+              "iso": "fr"
+            },
+            {
+              "display_name": "4/1 Full Color",
+              "iso": "nl"
+            },
+            {
+              "display_name": "4/1 Full Color",
+              "iso": "de"
+            }
+          ],
+          "system_key": "4-1-full-color",
+          "slug": "4-1-full-color",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72766de16b484779b27",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343c9",
+          "ref_option": null,
+          "name": "4/4 Full Color",
+          "display_name": [
+            {
+              "display_name": "4/4 Full Color",
+              "iso": "en"
+            },
+            {
+              "display_name": "4/4 Full Color",
+              "iso": "fr"
+            },
+            {
+              "display_name": "4/4 Full Color",
+              "iso": "nl"
+            },
+            {
+              "display_name": "4/4 Full Color",
+              "iso": "de"
+            }
+          ],
+          "system_key": "4-4-full-color",
+          "slug": "4-4-full-color",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b484779939",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    },
+    {
+      "id": "65d4d04bf26c0e680b5343ca",
+      "ref_box": null,
+      "name": "Punchholes",
+      "display_name": [
+        {
+          "display_name": "Punchholes",
+          "iso": "en"
+        },
+        {
+          "display_name": "Punchholes",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Punchholes",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Punchholes",
+          "iso": "de"
+        }
+      ],
+      "system_key": "punchholes",
+      "slug": "punchholes",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72366de16b484779985",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343cb",
+          "ref_option": null,
+          "name": "2 Punchholes",
+          "display_name": [
+            {
+              "display_name": "2 Punchholes",
+              "iso": "en"
+            },
+            {
+              "display_name": "2 Punchholes",
+              "iso": "fr"
+            },
+            {
+              "display_name": "2 Punchholes",
+              "iso": "nl"
+            },
+            {
+              "display_name": "2 Punchholes",
+              "iso": "de"
+            }
+          ],
+          "system_key": "2-punchholes",
+          "slug": "2-punchholes",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b484779986",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343cc",
+          "ref_option": null,
+          "name": "4 Punchholes",
+          "display_name": [
+            {
+              "display_name": "4 Punchholes",
+              "iso": "en"
+            },
+            {
+              "display_name": "4 Punchholes",
+              "iso": "fr"
+            },
+            {
+              "display_name": "4 Punchholes",
+              "iso": "nl"
+            },
+            {
+              "display_name": "4 Punchholes",
+              "iso": "de"
+            }
+          ],
+          "system_key": "4-punchholes",
+          "slug": "4-punchholes",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b48477998a",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343be"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343cd",
+          "ref_option": null,
+          "name": "No Punchhole",
+          "display_name": [
+            {
+              "display_name": "No Punchhole",
+              "iso": "en"
+            },
+            {
+              "display_name": "No Punchhole",
+              "iso": "fr"
+            },
+            {
+              "display_name": "No Punchhole",
+              "iso": "nl"
+            },
+            {
+              "display_name": "No Punchhole",
+              "iso": "de"
+            }
+          ],
+          "system_key": "no-punchhole",
+          "slug": "no-punchhole",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72366de16b484779988",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    },
+    {
+      "id": "65d4d04bf26c0e680b5343ce",
+      "ref_box": null,
+      "name": "Bundling",
+      "display_name": [
+        {
+          "display_name": "Bundling",
+          "iso": "en"
+        },
+        {
+          "display_name": "Bundling",
+          "iso": "fr"
+        },
+        {
+          "display_name": "Bundling",
+          "iso": "nl"
+        },
+        {
+          "display_name": "Bundling",
+          "iso": "de"
+        }
+      ],
+      "system_key": "bundling",
+      "slug": "bundling",
+      "description": "",
+      "media": [],
+      "sqm": false,
+      "linked": "65d4c72266de16b48477994a",
+      "input_type": null,
+      "published": true,
+      "ops": [
+        {
+          "id": "65d4d04bf26c0e680b5343cf",
+          "ref_option": null,
+          "name": "Bundled Per 100",
+          "display_name": [
+            {
+              "display_name": "Bundled Per 100",
+              "iso": "en"
+            },
+            {
+              "display_name": "Bundled Per 100",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Bundled Per 100",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Bundled Per 100",
+              "iso": "de"
+            }
+          ],
+          "system_key": "bundled-per-100",
+          "slug": "bundled-per-100",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b48477994d",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343bf"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343d0",
+          "ref_option": null,
+          "name": "Bundled Per 250",
+          "display_name": [
+            {
+              "display_name": "Bundled Per 250",
+              "iso": "en"
+            },
+            {
+              "display_name": "Bundled Per 250",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Bundled Per 250",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Bundled Per 250",
+              "iso": "de"
+            }
+          ],
+          "system_key": "bundled-per-250",
+          "slug": "bundled-per-250",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b48477994f",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343bf"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343d1",
+          "ref_option": null,
+          "name": "Bundled Per 500",
+          "display_name": [
+            {
+              "display_name": "Bundled Per 500",
+              "iso": "en"
+            },
+            {
+              "display_name": "Bundled Per 500",
+              "iso": "fr"
+            },
+            {
+              "display_name": "Bundled Per 500",
+              "iso": "nl"
+            },
+            {
+              "display_name": "Bundled Per 500",
+              "iso": "de"
+            }
+          ],
+          "system_key": "bundled-per-500",
+          "slug": "bundled-per-500",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b48477994b",
+          "excludes": [
+            [
+              "65d4d04bf26c0e680b5343bf"
+            ]
+          ],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        },
+        {
+          "id": "65d4d04bf26c0e680b5343d2",
+          "ref_option": null,
+          "name": "No Bundling",
+          "display_name": [
+            {
+              "display_name": "No Bundling",
+              "iso": "en"
+            },
+            {
+              "display_name": "No Bundling",
+              "iso": "fr"
+            },
+            {
+              "display_name": "No Bundling",
+              "iso": "nl"
+            },
+            {
+              "display_name": "No Bundling",
+              "iso": "de"
+            }
+          ],
+          "system_key": "no-bundling",
+          "slug": "no-bundling",
+          "description": "",
+          "media": [],
+          "unit": "cm",
+          "incremental_by": 0,
+          "information": "",
+          "published": null,
+          "input_type": "",
+          "linked": "65d4c72266de16b484779951",
+          "excludes": [],
+          "sku": null,
+          "dimension": "2d",
+          "dynamic": false,
+          "dynamic_keys": null,
+          "width": 0,
+          "maximum_width": 0,
+          "minimum_width": 0,
+          "height": 0,
+          "maximum_height": 0,
+          "minimum_height": 0,
+          "length": 0,
+          "maximum_length": 0,
+          "minimum_length": 0
+        }
+      ]
+    }
+  ]
+}

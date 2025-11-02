@@ -1,0 +1,75 @@
+{
+  "custom_whitelist": {
+    "mugs": [
+
+    ]
+  },
+  "custom_excludes": {
+    "mugs": [
+
+    ]
+  },
+  "custom_multi_excludes": {
+    "mugs": [
+      ["25 cl", "Extra Large Mug", "2/0 PMS"],
+      ["25 cl", "Extra Large Mug", "3/0 PMS"],
+      ["25 cl", "Extra Large Mug", "1/0 PMS"],
+      ["25 cl", "Extra Large Mug", "4/0 PMS"],
+
+      ["25 cl", "Senseo Mug", "1/0 PMS"],
+      ["25 cl", "Senseo Mug", "2/0 PMS"],
+      ["25 cl", "Senseo Mug", "3/0 PMS"],
+      ["25 cl", "Senseo Mug", "4/0 PMS"],
+
+      ["25 cl", "Senseo Cup", "1/0 PMS"],
+      ["25 cl", "Senseo Cup", "2/0 PMS"],
+      ["25 cl", "Senseo Cup", "3/0 PMS"],
+      ["25 cl", "Senseo Cup", "4/0 PMS"],
+
+      ["19 cl", "Senseo Cup", "1/0 PMS"],
+      ["19 cl", "Senseo Cup", "2/0 PMS"],
+      ["19 cl", "Senseo Cup", "3/0 PMS"],
+      ["19 cl", "Senseo Cup", "4/0 PMS"],
+
+      ["19 cl", "Senseo Mug", "1/0 PMS"],
+      ["19 cl", "Senseo Mug", "2/0 PMS"],
+      ["19 cl", "Senseo Mug", "3/0 PMS"],
+      ["19 cl", "Senseo Mug", "4/0 PMS"],
+
+      ["19 cl", "Cappuccino Mug", "1/0 PMS"],
+      ["19 cl", "Cappuccino Mug", "2/0 PMS"],
+      ["19 cl", "Cappuccino Mug", "3/0 PMS"],
+      ["19 cl", "Cappuccino Mug", "4/0 PMS"],
+      ["19 cl", "Coffee Mug", "1/0 PMS"],
+      ["19 cl", "Coffee Mug", "2/0 PMS"],
+      ["19 cl", "Coffee Mug", "3/0 PMS"],
+      ["19 cl", "Coffee Mug", "4/0 PMS"],
+      ["19 cl", "Extra Large Mug", "1/0 PMS"],
+      ["19 cl", "Extra Large Mug", "2/0 PMS"],
+      ["19 cl", "Extra Large Mug", "3/0 PMS"],
+      ["19 cl", "Extra Large Mug", "4/0 PMS"],
+
+      ["30 cl", "Design Mug", "1/0 PMS"],
+      ["30 cl", "Design Mug", "2/0 PMS"],
+      ["30 cl", "Design Mug", "3/0 PMS"],
+      ["30 cl", "Design Mug", "4/0 PMS"],
+
+      ["30 cl", "Senseo Mug", "1/0 PMS"],
+      ["30 cl", "Senseo Mug", "2/0 PMS"],
+      ["30 cl", "Senseo Mug", "3/0 PMS"],
+      ["30 cl", "Senseo Mug", "4/0 PMS"],
+      ["30 cl", "Design Mug", "1/0 PMS"],
+      ["30 cl", "Design Mug", "2/0 PMS"],
+      ["30 cl", "Design Mug", "3/0 PMS"],
+      ["30 cl", "Design Mug", "4/0 PMS"],
+      ["30 cl", "Cappuccino Mug", "1/0 PMS"],
+      ["30 cl", "Cappuccino Mug", "2/0 PMS"],
+      ["30 cl", "Cappuccino Mug", "3/0 PMS"],
+      ["30 cl", "Cappuccino Mug", "4/0 PMS"],
+      ["30 cl", "Coffee Mug", "1/0 PMS"],
+      ["30 cl", "Coffee Mug", "2/0 PMS"],
+      ["30 cl", "Coffee Mug", "3/0 PMS"],
+      ["30 cl", "Coffee Mug", "4/0 PMS"]
+    ]
+  }
+}

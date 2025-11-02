@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mgr
+  namespace: cec
+  labels:
+    app: mgr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mgr
+  template:
+    metadata:
+      labels:
+        app: mgr
+    spec:
+      containers:
+        - name: mgr
+          image: <IMAGE>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000

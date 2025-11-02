@@ -1,0 +1,4 @@
+catalogues/.env
+catalogues/node_modules
+catalogues/yarn.lock
+catalogues/package-lock.json

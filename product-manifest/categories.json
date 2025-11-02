@@ -1,0 +1,123 @@
+{
+  "iso": "EN",
+  "sort": 1,
+  // or Empty
+  "tenant_id": "203981234kl14iu4",
+  "tenant_name": "In Promo",
+  "countries": [
+    {
+      "name": "Netherlands",
+      "iso2": "nl",
+      "iso3": "nld",
+      "un_code": "netherlands",
+      "currency": {
+        "name": "euro",
+        "symbol": "€",
+        "iso": "&euro;"
+      }
+    }
+  ],
+  "name": "letterhead",
+  // required
+  "slug": "letterHead",
+  "display_name": "posters",
+  "description": "Posters b",
+  // option
+  "sku": "qweqe-322132-qweqw",
+  // option
+  "shareable": false,
+  "published": true,
+  // option
+  "media": [
+    "path/to/image.ext",
+    "path/to/second/image.ext"
+  ],
+  // option
+  "price_build": {
+    "collection": false,
+    "semi_calculation": true,
+    "full_calculation": false
+  },
+  // required
+  "has_products": false,
+  "has_manifest": false,
+  "calculation_method": [
+    {
+      "name": "slide scale",
+      "slug": "slide-scale",
+      "active": true
+    },
+    {
+      "name": "Scale",
+      "slug": "scale",
+      "active": false
+    }
+  ],
+  // option Prep form valadation
+  //   "dlv_days": [
+  //     {
+  //       "label": "Overnight",
+  //       "days": 1,
+  //       "value": 500,
+  //       "mode": "fixed",
+  //       "default" : false
+  //     },
+  //     {
+  //       "label": "Express",
+  //       "days": 2,
+  //       "value": 200,
+  //       "mode": "percentage",
+  //       "default" : false
+  //     },
+  //     {
+  //       "label": "Normal",
+  //       "days": 3,
+  //       "value": 0,
+  //       "mode": "percentage",
+  //       "default" : true
+  //     }
+  //   ],
+  // req if semi_calculation
+  "printing_method": [
+    {
+      "name": "Digital",
+      "slug": "digital",
+      "from": 1,
+      "to": 10000,
+      "dlv_days": [
+        {
+          "availability": {
+            "from": 0,
+            "to": 1200
+          },
+          "days": 1
+        },
+        {
+          "availability": {
+            "from": 0,
+            "to": 1200
+          },
+          "days": 2
+        }
+      ],
+      "qty_build": [
+        {
+          "from": 1,
+          "to": 100,
+          //  "price": {
+          //    "value": 10,
+          //    "mode": "fixed|%",
+          //    "on" : "piece|rows|order"
+          //  },
+          "description": "Add cost on every qty",
+          "incremental_by": 10
+        }
+      ]
+    }
+  ],
+  //req if semi_calculation
+  "start_cost": {
+    "value": 0
+  }
+  //req if semi_calculation || full
+}

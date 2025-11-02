@@ -1,0 +1,582 @@
+[
+  {
+    "prefix": "fal",
+    "icon": "bell-on"
+  },
+  {
+    "prefix": "fal",
+    "icon": "bell"
+  },
+  {
+    "prefix": "fas",
+    "icon": "bell-on"
+  },
+  {
+    "prefix": "fas",
+    "icon": "bell"
+  },
+  {
+    "prefix": "fal",
+    "icon": "power-off"
+  },
+  {
+    "prefix": "fal",
+    "icon": "palette"
+  },
+  {
+    "prefix": "fal",
+    "icon": "tools"
+  },
+  {
+    "prefix": "fal",
+    "icon": "gear"
+  },
+  {
+    "prefix": "fal",
+    "icon": "user-group-crown"
+  },
+  {
+    "prefix": "fas",
+    "icon": "user"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pen-paintbrush"
+  },
+  {
+    "prefix": "fal",
+    "icon": "shoe-prints"
+  },
+  {
+    "prefix": "fal",
+    "icon": "screwdriver-wrench"
+  },
+  {
+    "prefix": "fad",
+    "icon": "user-xmark"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-pdf"
+  },
+  {
+    "prefix": "fal",
+    "icon": "rectangle-list"
+  },
+  {
+    "prefix": "fad",
+    "icon": "cubes"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-invoice-dollar"
+  },
+  {
+    "prefix": "fal",
+    "icon": "circle-bolt"
+  },
+  {
+    "prefix": "fal",
+    "icon": "table-tree"
+  },
+  {
+    "prefix": "fab",
+    "icon": "dropbox"
+  },
+  {
+    "prefix": "fab",
+    "icon": "google-drive"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pen-paintbrush"
+  },
+  {
+    "prefix": "fad",
+    "icon": "warehouse-full"
+  },
+  {
+    "prefix": "fad",
+    "icon": "hard-drive"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-excel"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-video"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-zipper"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-code"
+  },
+  {
+    "prefix": "fal",
+    "icon": "window-maximize"
+  },
+  {
+    "prefix": "fal",
+    "icon": "window-minimize"
+  },
+  {
+    "prefix": "fal",
+    "icon": "album-collection"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-import"
+  },
+  {
+    "prefix": "fad",
+    "icon": "file-import"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-export"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pallet"
+  },
+  {
+    "prefix": "fal",
+    "icon": "sliders-up"
+  },
+  {
+    "prefix": "fal",
+    "icon": "arrows-to-line"
+  },
+  {
+    "prefix": "fad",
+    "icon": "layer-plus"
+  },
+  {
+    "prefix": "fas",
+    "icon": "link-slash"
+  },
+  {
+    "prefix": "fal",
+    "icon": "grid-2"
+  },
+  {
+    "prefix": "fal",
+    "icon": "list"
+  },
+  {
+    "prefix": "fas",
+    "icon": "truck-fast"
+  },
+  {
+    "prefix": "fas",
+    "icon": "truck-flatbed"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sort"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sort-numeric-down"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sort-numeric-up"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sort-amount-down"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sort-amount-up"
+  },
+  {
+    "prefix": "fas",
+    "icon": "play"
+  },
+  {
+    "prefix": "fad",
+    "icon": "sort-alpha-down"
+  },
+  {
+    "prefix": "fad",
+    "icon": "sort-alpha-up"
+  },
+  {
+    "prefix": "fad",
+    "icon": "arrow-down-z-a"
+  },
+  {
+    "prefix": "fad",
+    "icon": "arrow-up-a-z"
+  },
+  {
+    "prefix": "fal",
+    "icon": "browsers"
+  },
+  {
+    "prefix": "fas",
+    "icon": "house"
+  },
+  {
+    "prefix": "fas",
+    "icon": "ruler-combined"
+  },
+  {
+    "prefix": "fal",
+    "icon": "circles-overlap-3"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pencil-square"
+  },
+  {
+    "prefix": "fal",
+    "icon": "sparkles"
+  },
+  {
+    "prefix": "fal",
+    "icon": "arrow-progress"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-slash"
+  },
+  {
+    "prefix": "fal",
+    "icon": "conveyor-belt"
+  },
+  {
+    "prefix": "fal",
+    "icon": "person-carry-box"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-check"
+  },
+  {
+    "prefix": "fal",
+    "icon": "lock"
+  },
+  {
+    "prefix": "fal",
+    "icon": "archive"
+  },
+  {
+    "prefix": "fal",
+    "icon": "do-not-enter"
+  },
+  {
+    "prefix": "fal",
+    "icon": "envelope"
+  },
+  {
+    "prefix": "fal",
+    "icon": "inbox-out"
+  },
+  {
+    "prefix": "fal",
+    "icon": "timer"
+  },
+  {
+    "prefix": "fal",
+    "icon": "wind-warning"
+  },
+  {
+    "prefix": "fal",
+    "icon": "circle-exclamation"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pen"
+  },
+  {
+    "prefix": "fal",
+    "icon": "conveyor-belt-arm"
+  },
+  {
+    "prefix": "fal",
+    "icon": "xmark-to-slot"
+  },
+  {
+    "prefix": "fal",
+    "icon": "check-to-slot"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-exclamation"
+  },
+  {
+    "prefix": "fal",
+    "icon": "ban"
+  },
+  {
+    "prefix": "fal",
+    "icon": "pen-to-square"
+  },
+  {
+    "prefix": "fal",
+    "icon": "truck-fast"
+  },
+  {
+    "prefix": "fas",
+    "icon": "pencil-square"
+  },
+  {
+    "prefix": "far",
+    "icon": "sparkles"
+  },
+  {
+    "prefix": "far",
+    "icon": "arrow-progress"
+  },
+  {
+    "prefix": "far",
+    "icon": "file-slash"
+  },
+  {
+    "prefix": "far",
+    "icon": "conveyor-belt"
+  },
+  {
+    "prefix": "far",
+    "icon": "person-carry-box"
+  },
+  {
+    "prefix": "far",
+    "icon": "file-check"
+  },
+  {
+    "prefix": "far",
+    "icon": "lock"
+  },
+  {
+    "prefix": "far",
+    "icon": "archive"
+  },
+  {
+    "prefix": "far",
+    "icon": "do-not-enter"
+  },
+  {
+    "prefix": "far",
+    "icon": "envelope"
+  },
+  {
+    "prefix": "far",
+    "icon": "inbox-out"
+  },
+  {
+    "prefix": "far",
+    "icon": "timer"
+  },
+  {
+    "prefix": "far",
+    "icon": "wind-warning"
+  },
+  {
+    "prefix": "far",
+    "icon": "circle-exclamation"
+  },
+  {
+    "prefix": "far",
+    "icon": "pen"
+  },
+  {
+    "prefix": "far",
+    "icon": "conveyor-belt-arm"
+  },
+  {
+    "prefix": "far",
+    "icon": "xmark-to-slot"
+  },
+  {
+    "prefix": "far",
+    "icon": "check-to-slot"
+  },
+  {
+    "prefix": "far",
+    "icon": "file-exclamation"
+  },
+  {
+    "prefix": "far",
+    "icon": "ban"
+  },
+  {
+    "prefix": "far",
+    "icon": "pen-to-square"
+  },
+  {
+    "prefix": "fad",
+    "icon": "file-signature"
+  },
+  {
+    "prefix": "far",
+    "icon": "pencil-square"
+  },
+  {
+    "prefix": "fad",
+    "icon": "money-bill-trend-up"
+  },
+  {
+    "prefix": "fad",
+    "icon": "spinner"
+  },
+  {
+    "prefix": "fal",
+    "icon": "file-invoice"
+  },
+  {
+    "prefix": "fal",
+    "icon": "send-backward"
+  },
+  {
+    "prefix": "fal",
+    "icon": "hammer-brush"
+  },
+  {
+    "prefix": "fal",
+    "icon": "swatchbook"
+  },
+  {
+    "prefix": "fal",
+    "icon": "paint-brush"
+  },
+  {
+    "prefix": "fas",
+    "icon": "eye"
+  },
+  {
+    "prefix": "fas",
+    "icon": "eye-slash"
+  },
+  {
+    "prefix": "fas",
+    "icon": "align-left"
+  },
+  {
+    "prefix": "fas",
+    "icon": "align-center"
+  },
+  {
+    "prefix": "fas",
+    "icon": "align-right"
+  },
+  {
+    "prefix": "fas",
+    "icon": "inbox-in"
+  },
+  {
+    "prefix": "fas",
+    "icon": "inbox-out"
+  },
+  {
+    "prefix": "fas",
+    "icon": "down-to-line"
+  },
+  {
+    "prefix": "fas",
+    "icon": "up-to-line"
+  },
+  {
+    "prefix": "fal",
+    "icon": "font"
+  },
+  {
+    "prefix": "fas",
+    "icon": "moon-stars"
+  },
+  {
+    "prefix": "fas",
+    "icon": "sliders-h"
+  },
+  {
+    "prefix": "fal",
+    "icon": "toggle-off"
+  },
+  {
+    "prefix": "fal",
+    "icon": "window"
+  },
+  {
+    "prefix": "fal",
+    "icon": "image"
+  },
+  {
+    "prefix": "fal",
+    "icon": "credit-card-blank"
+  },
+  {
+    "prefix": "fal",
+    "icon": "globe"
+  },
+  {
+    "prefix": "fal",
+    "icon": "gauge-simple-max"
+  },
+  {
+    "prefix": "fad",
+    "icon": "gauge-simple-max"
+  },
+  {
+    "prefix": "fad",
+    "icon": "file-invoice-dollar"
+  },
+  {
+    "prefix": "fad",
+    "icon": "users"
+  },
+  {
+    "prefix": "fad",
+    "icon": "photo-film"
+  },
+  {
+    "prefix": "fal",
+    "icon": "photo-film"
+  },
+  {
+    "prefix": "fad",
+    "icon": "shop"
+  },
+  {
+    "prefix": "fad",
+    "icon": "cart-shopping"
+  },
+  {
+    "prefix": "fal",
+    "icon": "cart-shopping"
+  },
+  {
+    "prefix": "fad",
+    "icon": "money-check-dollar"
+  },
+  {
+    "prefix": "far",
+    "icon": "images"
+  },
+  {
+    "prefix": "fas",
+    "icon": "money-bill"
+  },
+  {
+    "prefix": "far",
+    "icon": "money-bill"
+  },
+  {
+    "prefix": "fa",
+    "icon": "briefcase"
+  },
+  {
+    "prefix": "far",
+    "icon": "map-location-dot"
+  },
+  {
+    "prefix": "fa",
+    "icon": "earth-americas"
+  }
+]

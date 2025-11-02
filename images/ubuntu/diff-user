@@ -1,0 +1,290 @@
+Docker image
+# Use Ubuntu 20.04 as the base image
+FROM ubuntu:20.04
+
+# Maintainer information
+LABEL maintainer="Reymon Zakhary <reymon.zakhary@gmail.com>"
+
+# Environment variables to reduce prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update base image and install essential packages
+RUN apt-get update && \
+    apt-get install -y \
+        software-properties-common \
+        gnupg \
+        dirmngr \
+        curl \
+        wget \
+        lsb-release \
+        ca-certificates \
+        apt-transport-https \
+        vim \
+        net-tools \
+        iproute2 \
+        sudo \
+        git \
+        unzip \
+        zip \
+        cron \
+        beanstalkd \
+        supervisor \
+        build-essential \
+        ghostscript && \
+    apt-get clean
+
+# Manually add missing keys
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0B21F32 \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 \
+    && apt-get update
+
+# Add PHP repository
+RUN add-apt-repository ppa:ondrej/php -y && \
+    apt-get update
+
+# Install PHP 8.3 and necessary extensions
+RUN apt-get install -y \
+    php8.3 \
+    php8.3-cli \
+    php8.3-fpm \
+    php8.3-mysql \
+    php8.3-zip \
+    php8.3-dev \
+    php8.3-gd \
+    php8.3-mbstring \
+    php8.3-curl \
+    php8.3-xml \
+    php8.3-bcmath \
+    php8.3-opcache \
+    php-pear \
+    php8.3-redis \
+    php8.3-memcache \
+    php8.3-gmp \
+    php8.3-intl \
+    php8.3-soap \
+    php8.3-xmlrpc \
+    php8.3-pgsql \
+    php8.3-imagick \
+    && apt-get clean
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
+
+# Install Node.js 20.x and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install -y yarn
+
+# Install Nginx
+RUN apt-get install -y nginx nginx-extras
+
+# Install ImageMagick
+RUN apt-get install -y imagemagick
+
+# Install Supervisor and supervisor-stdout
+RUN apt-get install -y python3-pip && \
+    pip3 install supervisor-stdout
+
+# Install Redis
+RUN apt-get install -y redis-server
+
+# Copy configuration files
+COPY ./config/php.ini /etc/php/8.3/fpm/php.ini
+COPY ./config/www.conf /etc/php/8.3/fpm/pool.d/www.conf
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
+COPY ./config/v-host.conf /etc/nginx/conf.d/default.conf
+COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
+
+RUN rm -f /etc/nginx/sites-enabled/*
+
+# Create necessary directories with correct permissions
+RUN mkdir -p /var/lib/nginx/scgi \
+    /var/lib/nginx/uwsgi \
+    /var/log/nginx \
+    /var/log/php-fpm \
+    /var/log/supervisor \
+    /var/lib/php/session \
+    /tmp/cron \
+    /tmp/beanstalkd \
+    /tmp/supervisor \
+    /tmp/php \
+    /run/php/ \
+    /var/lib/nginx/body \
+    /var/lib/nginx/proxy \
+    /var/lib/nginx/fastcgi \
+    /var/lib/php/session/ \
+    && touch /tmp/php8.3-fpm.log \
+    && touch /run/nginx.pid \
+    && chown -R www-data:www-data /run/nginx.pid /var/lib/nginx /var/log/nginx /var/log/php-fpm /tmp/cron /var/lib/php/session /tmp/beanstalkd /tmp/supervisor /tmp/php8.3-fpm.log /tmp/php /var/www \
+    && chmod -R 755 /var/lib/nginx /var/log/nginx /var/log/php-fpm /var/lib/php/session \
+    && chmod 777 /tmp /tmp/cron /tmp/beanstalkd /tmp/supervisor /tmp/php /run/php/ /var/lib/php/session \
+    && chmod 644 /run/nginx.pid \
+    && if [ -e "/tmp/supervisor.sock" ]; then chmod 700 /tmp/supervisor.sock; fi
+
+RUN touch /var/log/crond_stdout.log /var/log/crond_stderr.log && \
+    chown root:root /var/log/crond_stdout.log /var/log/crond_stderr.log && \
+    chmod 644 /var/log/crond_stdout.log /var/log/crond_stderr.log
+
+
+# Set up PHP session directory
+RUN mkdir -p /var/lib/php/session/ && \
+    chmod -R 777 /var/lib/php/session
+
+# Expose ports
+EXPOSE 80 9001
+
+# Set the working directory
+WORKDIR /var/www
+
+# Start Supervisor
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+
+
+//// supervisord
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL for a unix socket
+
+[unix_http_server]
+file = /tmp/supervisor.sock   ; (the path to the socket file)
+chmod = 0760
+chown = www-data:www-data
+username = cec
+password = 441c31e22e55930ed68c08383535
+
+[supervisord]
+logfile = /tmp/supervisord.log ; (main log file;default $CWD/supervisord.log)
+logfile_maxbytes = 50MB        ; (max main logfile bytes b4 rotation;default 50MB)
+logfile_backups = 10           ; (num of main logfile rotation backups;default 10)
+loglevel = info                ; (log level;default info; others: debug,warn,trace)
+pidfile = /tmp/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
+nodaemon = false               ; (start in foreground if true;default false)
+minfds = 1024                  ; (min. avail startup file descriptors;default 1024)
+minprocs = 200                 ; (min. avail process descriptors;default 200)
+umask = 022                    ; (process file creation umask;default 022)
+identifier = supervisor        ; (supervisord identifier;default is 'supervisor')
+directory = /tmp
+nocleanup = true
+childlogdir = /tmp
+strip_ansi = false
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[program:nginx]
+command = /usr/sbin/nginx -g "daemon off;"
+autostart = true
+autorestart = true
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+stderr_logfile = /dev/stderr
+stderr_logfile_maxbytes = 0
+
+[program:php-fpm]
+command = /usr/sbin/php-fpm8.3 --nodaemonize --fpm-config /etc/php/8.3/fpm/php-fpm.conf
+autostart = true
+autorestart = true
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+stderr_logfile = /dev/stderr
+stderr_logfile_maxbytes = 0
+
+[program:crond]
+command = /usr/sbin/cron -f
+autostart = true
+autorestart = true
+user = root  ; Ensure crond runs as root
+stdout_logfile = /var/log/crond_stdout.log
+stderr_logfile = /var/log/crond_stderr.log
+stdout_logfile_maxbytes = 0
+stderr_logfile_maxbytes = 0
+pidfile = /var/run/cron.pid   ; Specify an alternative PID file path
+
+
+[program:beanstalkd]
+command = /usr/bin/beanstalkd
+autostart = true
+autorestart = true
+user = www-data
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+stderr_logfile = /dev/stderr
+stderr_logfile_maxbytes = 0
+
+[program:queue-worker]
+process_name = %(program_name)s_%(process_num)02d
+command = php /var/www/artisan queue:work --sleep=3 --tries=3 --timeout=2000
+autostart = true
+autorestart = true
+user = www-data
+numprocs = 16
+redirect_stderr = true
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+
+[program:socket-worker]
+process_name = %(program_name)s_%(process_num)02d
+command = php /var/www/artisan websockets:serve
+autostart = true
+autorestart = true
+user = www-data
+numprocs = 1
+redirect_stderr = true
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+
+[inet_http_server]
+port = *:9001
+username = admin
+password = admin
+
+/// child image
+# Use the base image
+FROM reymonzakhary/ubuntu:8.3.0
+
+# Switch to root to perform privileged operations
+USER root
+
+# Set the working directory
+WORKDIR /var/www
+
+# Ensure www-data group exists
+RUN groupadd -r www-data || true
+
+# Ensure www-data user exists and belongs to www-data group
+RUN useradd -r -g www-data www-data || true
+
+
+# Copy application files
+COPY . .
+
+# Copy environment example to .env
+COPY .env.example .env
+
+# Set up permissions for the application directory
+RUN mkdir -p storage/logs && \
+    chown -R www-data:www-data /var/www && \
+    rm -rf html
+
+# Set up permissions for /tmp
+RUN chmod -R 777 /tmp
+
+# Add cron jobs
+RUN (crontab -l 2>/dev/null; echo "* * * * * cd /var/www && php artisan tenancy:run schedule:run >> /dev/null 2>&1") | crontab - && \
+    (crontab -l 2>/dev/null; echo "* * * * * cd /var/www && php artisan schedule:run >> /dev/null 2>&1") | crontab -
+
+RUN touch /var/log/php8.3-fpm.log && \
+    chown www-data:www-data /var/log/php8.3-fpm.log
+
+# Switch back to www-data user
+USER www-data
+
+# Expose port
+EXPOSE 80
+
+# Start Supervisor
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+

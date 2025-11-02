@@ -1,0 +1,29 @@
+# Nuxt dev/build outputs
+portal/.output
+portal/.data
+portal/.nuxt
+portal/.nitro
+portal/.cache
+portal/dist
+
+# Node dependencies
+portal/node_modules
+
+# Logs
+portal/logs
+portal/*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+portal/.env
+portal/.env.*
+portal/!.env.example
+
+# Yarn
+portal/yarn-error.log
+portal/.yarn
+portal/.yarn/install-state.gz

@@ -1,0 +1,475 @@
+[
+  {
+    "Format":
+    [
+       {
+                "name": "Custom",
+                "slug": "custom",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 40,
+                        "height": 60
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A1",
+                "slug": "a1",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 594,
+                        "height": 841
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A2",
+                "slug": "a2",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 420,
+                        "height": 594
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A3",
+                "slug": "a3",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 297,
+                        "height": 420
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A4",
+                "slug": "a4",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 210,
+                        "height": 297
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A5",
+                "slug": "a5",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 210,
+                        "height": 148
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            },
+            {
+                "name": "A6",
+                "slug": "a6",
+                "ref": "1234",
+                "wight": "",
+                "format": {
+                    "pix": {
+                        "width": "2480",
+                        "height": "3508"
+                    },
+                    "mm": {
+                        "width": 148,
+                        "height": 105
+                    },
+                    "inc": {
+                        "width": "8.3",
+                        "height": "11.7"
+                    }
+                },
+                "additional": []
+            }
+        ]
+  },
+  {
+    "Machines": [
+      {
+        "printers": [],
+        "cutters": []
+      }
+    ]
+  },
+  {
+    "Materials": [
+      {
+        "name": "Bio top",
+        "slug": "biotop",
+        "ref": "243423"
+      }
+    ]
+  },
+  {
+    "wight": [
+      {
+        "name": "90",
+        "slug": "90",
+        "ref": "80GSM"
+      }
+    ]
+  },{
+    "printing": [
+      {
+        "name": "4/0",
+        "slug": "4-0",
+        "ref": "40S"
+      },
+      {
+        "name": "4/1",
+        "slug": "4-1",
+        "ref": "41S"
+      },
+      {
+        "name": "4/4",
+        "slug": "4-4",
+        "ref": "44S"
+      },
+      {
+        "name": "1/1",
+        "slug": "1-1",
+        "ref": "11S"
+      },{
+        "name": "1/0",
+        "slug": "1-0",
+        "ref": "10S"
+      }
+    ]
+  },{
+    "ref": [
+      {
+        "key" : "40S",
+        "run": [
+          {
+            "from": 0,
+            "to": 200,
+            "price": 49,
+            "display_price":  "€ 0,49"
+          },
+          {
+            "from": 200,
+            "to": 600,
+            "price": 46,
+            "display_price":  "€ 0,46"
+          },
+          {
+            "from": 600,
+            "to": 1000,
+            "price": 43,
+            "display_price":  "€ 0,43"
+          },
+          {
+            "from": 1000,
+            "to": 1500,
+            "price": 40,
+            "display_price":  "€ 0,40"
+          },
+          {
+            "from": 1500,
+            "to": 2000,
+            "price": 36,
+            "display_price":  "€ 0,36"
+          },
+          {
+            "from": 2000,
+            "to": 3000,
+            "price": 35,
+            "display_price":  "€ 0,35"
+          },
+          {
+            "from": 3000,
+            "to": 5000,
+            "price": 33,
+            "display_price":  "€ 0,33"
+          },
+          {
+            "from": 5000,
+            "to": 0,
+            "price": 30,
+            "display_price":  "€ 0,30"
+          }
+        ]
+      },
+      {
+        "key" : "44S",
+        "run": [
+          {
+            "from": 0,
+            "to": 200,
+            "price": 80,
+            "display_price":  "€ 0,80"
+          },
+          {
+            "from": 200,
+            "to": 600,
+            "price": 77,
+            "display_price":  "€ 0,77"
+          },
+          {
+            "from": 600,
+            "to": 1000,
+            "price": 74,
+            "display_price":  "€ 0,74"
+          },
+          {
+            "from": 1000,
+            "to": 1500,
+            "price": 70,
+            "display_price":  "€ 0,70"
+          },
+          {
+            "from": 1500,
+            "to": 2000,
+            "price": 66,
+            "display_price":  "€ 0,66"
+          },
+          {
+            "from": 2000,
+            "to": 3000,
+            "price": 63,
+            "display_price":  "€ 0,63"
+          },
+          {
+            "from": 3000,
+            "to": 5000,
+            "price": 60,
+            "display_price":  "€ 0,60"
+          },
+          {
+            "from": 5000,
+            "to": 0,
+            "price": 55,
+            "display_price":  "€ 0,55"
+          }
+        ]
+      },
+      {
+        "key" : "41S",
+        "run": [
+          {
+            "from": 0,
+            "to": 200,
+            "price": 59,
+            "display_price":  "€ 0,59"
+          },
+          {
+            "from": 200,
+            "to": 600,
+            "price": 56,
+            "display_price":  "€ 0,56"
+          },
+          {
+            "from": 600,
+            "to": 1000,
+            "price": 53,
+            "display_price":  "€ 0,53"
+          },
+          {
+            "from": 1000,
+            "to": 1500,
+            "price": 50,
+            "display_price":  "€ 0,50"
+          },
+          {
+            "from": 1500,
+            "to": 2000,
+            "price": 47,
+            "display_price":  "€ 0,47"
+          },
+          {
+            "from": 2000,
+            "to": 3000,
+            "price": 45,
+            "display_price":  "€ 0,45"
+          },
+          {
+            "from": 3000,
+            "to": 5000,
+            "price": 43,
+            "display_price":  "€ 0,43"
+          },
+          {
+            "from": 5000,
+            "to": 0,
+            "price": 40,
+            "display_price":  "€ 0,40"
+          }
+        ]
+      },
+      {
+        "key" : "11S",
+        "run": [
+          {
+            "from": 0,
+            "to": 200,
+            "price": 17,
+            "display_price":  "€ 0,17"
+          },
+          {
+            "from": 200,
+            "to": 600,
+            "price": 15,
+            "display_price":  "€ 0,15"
+          },
+          {
+            "from": 600,
+            "to": 1000,
+            "price": 13,
+            "display_price":  "€ 0,13"
+          },
+          {
+            "from": 1000,
+            "to": 1500,
+            "price": 11,
+            "display_price":  "€ 0,11"
+          },
+          {
+            "from": 1500,
+            "to": 2000,
+            "price": 10,
+            "display_price":  "€ 0,10"
+          },
+          {
+            "from": 2000,
+            "to": 3000,
+            "price": 10,
+            "display_price":  "€ 0,10"
+          },
+          {
+            "from": 3000,
+            "to": 5000,
+            "price": 9,
+            "display_price":  "€ 0,09"
+          },
+          {
+            "from": 5000,
+            "to": 0,
+            "price": 8,
+            "display_price":  "€ 0,08"
+          }
+        ]
+      },
+      {
+        "key" : "10S",
+        "run": [
+          {
+            "from": 0,
+            "to": 200,
+            "price": 11,
+            "display_price":  "€ 0,11"
+          },
+          {
+            "from": 200,
+            "to": 600,
+            "price": 9,
+            "display_price":  "€ 0,09"
+          },
+          {
+            "from": 600,
+            "to": 1000,
+            "price": 8,
+            "display_price":  "€ 0,08"
+          },
+          {
+            "from": 1000,
+            "to": 1500,
+            "price": 7,
+            "display_price":  "€ 0,07"
+          },
+          {
+            "from": 1500,
+            "to": 2000,
+            "price": 6,
+            "display_price":  "€ 0,06"
+          },
+          {
+            "from": 2000,
+            "to": 3000,
+            "price": 5,
+            "display_price":  "€ 0,05"
+          },
+          {
+            "from": 3000,
+            "to": 5000,
+            "price": 4,
+            "display_price":  "€ 0,04"
+          },
+          {
+            "from": 5000,
+            "to": 0,
+            "price": 3,
+            "display_price":  "€ 0,03"
+          }
+        ]
+      }
+    ]
+  }
+]

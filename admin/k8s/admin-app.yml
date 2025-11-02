@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin
+  namespace: cec
+  labels:
+    app: admin
+spec:
+  selector:
+    matchLabels:
+      app: admin
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+        - name: admin
+          image: <IMAGE>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: admin
+      restartPolicy: Always

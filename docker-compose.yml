@@ -1,0 +1,706 @@
+version: "3.9"
+services:
+
+  gateway:
+    build: gateway
+    container_name: gateway
+    hostname: gateway
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 6001:6001
+    volumes:
+      - ./gateway:/var/www:cached
+    tty: true
+    working_dir: /var/www
+    depends_on:
+      - postgres
+    networks:
+      - backend
+      - frontend
+
+  ##############################
+  #####       NUXT         #####
+  ##############################
+#  nuxt:
+#    build: ./portal
+#    container_name: nuxt
+#    environment:
+#      - VIRTUAL_HOST=app.test
+#    restart: unless-stopped
+#    working_dir: /app
+#    ports:
+#      - 3000:3000
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./portal:/app
+#      - /app/node_modules
+#    command: [
+#      "bash",
+#      "-c",
+#      "curl --compressed -o- -L https://yarnpkg.com/install.sh | bash &&
+#        npm config set '@fortawesome:registry' https://npm.fontawesome.com/ &&
+#        npm config set '//npm.fontawesome.com/:_authToken' 68DCA13C-6B01-4C55-B91D-D3C65EBE8592 &&
+#        yarn &&
+#        yarn run dev",
+#    ]
+
+
+  ##############################
+  #####       BOOPS        #####
+  ##############################
+  boops:
+    image: apquinit/adonisjs:latest
+    container_name: boops
+    hostname: boops
+    ports:
+      - 3334:3333
+    expose:
+      - 3333
+    restart: unless-stopped
+    #    depends_on:
+    #      - boops_db
+    volumes:
+      - ./microservices/boops:/app
+    working_dir: /app
+    networks:
+      - backend
+
+  ##############################
+  #####       PRICE        #####
+  ##############################
+  price:
+    build: ./microservices/price/price
+    container_name: price
+    hostname: price
+    ports:
+      - 3335:3333
+    restart: always
+    depends_on:
+      - assortmentDB
+    links:
+      - assortmentDB
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/price/price:/var/www
+    networks:
+      - backend
+
+  ##############################
+  #####       Margin        #####
+  ##############################
+  margin:
+    build: ./microservices/margin/margin
+    container_name: margin
+    hostname: margin
+    ports:
+      - 3336:3333
+    restart: unless-stopped
+    depends_on:
+      - assortmentDB
+    volumes:
+      - ./microservices/margin/margin:/var/www
+    command: yarn run start
+    networks:
+      - backend
+
+  #################################
+  #####       Discounts        #####
+  #################################
+  discount:
+    image: apquinit/adonisjs:latest
+    container_name: discount
+    hostname: discount
+    ports:
+      - 3338:3333
+    restart: unless-stopped
+    depends_on:
+      - assortmentDB
+    volumes:
+      - ./microservices/discount:/app
+    working_dir: /app
+    networks:
+      - backend
+
+  redis:
+    image: redis:4.0.5-alpine
+    container_name: redis
+    command: [ "redis-server", "--appendonly", "yes" ]
+    ports:
+      - "6379:6379"
+    hostname: redis
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+
+  # POSTGRESS
+  postgres:
+    build: ./etc/postgres
+#    image: postgis/postgis:17-3.4
+    container_name: postgres
+    ports:
+      - 5432:5432
+#    command: postgres -c stats_temp_directory=/tmp
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=cec
+      - POSTGRES_USER=default
+      - POSTGRES_PASSWORD=secret
+    restart: unless-stopped
+    volumes:
+      - ./databases/cec:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  ### phpMyAdmin ###########################################
+#  phpmyadmin:
+#    build: ./etc/phpmyadmin/
+#    container_name: phpmyadmin
+#    environment:
+#      - PMA_ARBITRARY=1
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=passport
+#      - MYSQL_ROOT_PASSWORD=passport
+#    ports:
+#      - 8080:80
+#    depends_on:
+#      - mariadb
+#    networks:
+#      - backend
+
+#  mariadb:
+#    image: mariadb:10.5.5
+#    container_name: mariadb
+#    restart: always
+#    environment:
+#      - MYSQL_DATABASE=umlcc
+#      - MYSQL_ROOT_PASSWORD=passport
+#      - MYSQL_USER=umlcc
+#      - MYSQL_PASSWORD=secret
+#    ports:
+#      - 3306:3306
+#    volumes:
+#      - ./databases/umlcc:/var/lib/mysql
+#    networks:
+#      - backend
+
+  ##############################
+  #####     assortments    #####
+  ##############################
+  assortments:
+    build: microservices/assortments
+    container_name: assortments
+    #    image: reymonzakhary/pystandart:latest
+    restart: unless-stopped
+    expose:
+      - 5000
+    ports:
+      - "5001:5000"
+#    environment:
+#      APP_ENV: "local"
+#      APP_DEBUG: 1
+#      APP_PORT: 5000
+#      MONGODB_DATABASE: assortments
+#      MONGODB_USERNAME: admin
+#      MONGODB_PASSWORD: ad
+#      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./microservices/assortments/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ##############################
+  #####     filemanager    #####
+  ##############################
+  filemanager:
+    build: microservices/filemanager
+    # image: reymonzakhary/filemanager :v1
+    container_name: filemanager
+    restart: unless-stopped
+    expose:
+      - 5000
+    ports:
+      - "5010:5000"
+    volumes:
+      - ./microservices/filemanager:/var/www
+      - ./gateway/storage/app/tenancy/tenants:/var/www/storage/tenants
+      - ./gateway/storage/app/tenancy/assets:/var/www/storage/assets
+      - ./gateway/storage/app/tenancy/carts:/var/www/storage/carts
+    links:
+      - gateway
+    networks:
+      - backend
+
+    ##############################
+    #####     filemanager    #####
+    ##############################
+  pdftool:
+    build: microservices/pdftool/pdftool
+    # image: reymonzakhary/filemanager :v1
+    container_name: pdftool
+    restart: unless-stopped
+    expose:
+      - 5000
+    ports:
+      - "5018:5000"
+    volumes:
+      - ./microservices/pdftool/pdftool:/var/www
+      - ./gateway/storage/app/public:/var/www/storage/public
+      - ./gateway/storage/app/tenancy/tenants:/var/www/storage/tenants
+      - ./gateway/storage/app/tenancy/assets:/var/www/storage/assets
+      - ./gateway/storage/app/tenancy/carts:/var/www/storage/carts
+    links:
+      - gateway
+    networks:
+      - backend
+
+  ##############################
+  #####       finder       #####
+  ##############################
+  finder:
+    build: microservices/find
+    #    image: reymonzakhary/finder:v1
+    container_name: finder
+    restart: unless-stopped
+    ports:
+      - 5030:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/find/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ##############################
+  #####       finder       #####
+  ##############################
+  marketplace:
+    build: microservices/finder/marketplace
+    #    image: reymonzakhary/finder:v1
+    container_name: marketplace
+    restart: unless-stopped
+    ports:
+      - 5011:5000
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./microservices/finder/marketplace/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+  ################################################
+  ##        Minio s3 Bucket for testing         ##
+  ################################################
+#  minio:
+#    image: 'bitnami/minio:2023.9.30'
+#    container_name:  minio
+#    restart: unless-stopped
+#    ports:
+#      - '9000:9000'
+#      - '9001:9001'
+#    environment:
+#      - MINIO_ROOT_USER=admin
+#      - MINIO_ROOT_PASSWORD=password
+#    volumes:
+#      - minio_data:/data
+#    networks:
+#      - backend
+
+  ################################################################
+  ## The following commands for calculation model.
+  ################################################################
+  calculation:
+    build: microservices/calculation/calculation
+    #    image: reymonzakhary/finder:v1
+    container_name: calculation
+    restart: unless-stopped
+    ports:
+      - 5035:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/calculation/calculation/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+
+  ################################################################
+  ## The following commands for calculation model.
+  ################################################################
+  machines:
+    build: microservices/machines/machines
+    #    image: reymonzakhary/finder:v1
+    container_name: machines
+    restart: unless-stopped
+    ports:
+      - 5036:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/machines/machines/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ################################################################
+  ## The following commands for calculation model.
+  ################################################################
+  catalogues:
+    build: microservices/catalogues/catalogues
+    #    image: reymonzakhary/finder:v1
+    container_name: catalogues
+    restart: unless-stopped
+    ports:
+      - 5037:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/catalogues/catalogues/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ################################################################
+  ## The following commands for calculation model.
+  ################################################################
+  categories:
+    build: microservices/categories/categories
+    #    image: reymonzakhary/finder:v1
+    container_name: categories
+    restart: unless-stopped
+    ports:
+      - 5038:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/categories/categories/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+
+  boxes:
+    build: ./microservices/boxes/boxes
+    container_name: boxes
+    ports:
+      - 3337:3333
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/boxes/boxes/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+
+  ################################################################
+  ####################### Options ###################.
+  ################################################################
+  options:
+    build: microservices/options/options
+    container_name: options
+    restart: unless-stopped
+    ports:
+      - "5044:3333"
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 3333
+      MONGODB_DATABASE: assortments
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    command: yarn run start
+    volumes:
+      - ./microservices/options/options/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+
+
+    # Discounts DB
+  assortmentDB:
+    image: mongo:4.4.3
+    container_name: assortmentDB
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=ad
+      - MONGO_INITDB_USERNAME=admin
+      - MONGO_INITDB_PASSWORD=ad
+      - MONGO_INITDB_DATABASE=assortments
+      - MONGO_NON_ROOT_USERNAME=admin
+      - MONGO_NON_ROOT_PASSWORD=ad
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./databases/assortments_data:/data/db
+    networks:
+      - backend
+
+
+  assortmentDB-express:
+    image: mongo-express
+    container_name: assortmentDB-express
+    restart: always
+    ports:
+      - 8088:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: assortmentDB
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ad
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: ad
+    depends_on:
+      - assortmentDB
+    networks:
+      - backend
+
+
+
+  ##############################
+  #####     similarity     #####
+  ##############################
+  similarity:
+    build: microservices/similarity
+    container_name: similarity
+    #    image: reymonzakhary/pystandart:latest
+    restart: unless-stopped
+    ports:
+      - 5003:5000
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: assortmentDB
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./microservices/similarity/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ##############################
+  #####   plugin print.com #####
+  ##############################
+  printcom:
+    build: plugins/printcom
+    container_name: printcom
+    restart: unless-stopped
+    ports:
+      - 5002:5000
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: assortmentDB
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./plugins/printcom/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+  ##############################
+  #####   plugin dwd.com #####
+  ##############################
+  dwd:
+    build: plugins/dwd
+    container_name: dwd
+    restart: unless-stopped
+    ports:
+      - 5004:5000
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: assortmentDB
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./plugins/dwd/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+
+  dwd-exclude:
+    build: plugins/dwd/excludes_service
+    container_name: dwd-exclude
+    restart: unless-stopped
+    ports:
+      - 5008:5000
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: assortmentDB
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: ad
+      MONGODB_HOSTNAME: mongodb
+#    volumes:
+#      - ./plugins/dwd/excludes_service/:/var/www
+    links:
+      - assortmentDB
+    networks:
+      - backend
+
+#  ##############################
+#  #####   plugin print.com #####
+#  ##############################
+#  go:
+#    build: plugins/printcom/go
+#    container_name: go
+#    restart: unless-stopped
+#    ports:
+#      - 8099:8099
+#    environment:
+#      APP_ENV: "local"
+#      APP_DEBUG: 1
+#      APP_PORT: 8099
+#      MONGODB_DATABASE: assortmentDB
+#      MONGODB_USERNAME: admin
+#      MONGODB_PASSWORD: ad
+#      MONGODB_HOSTNAME: mongodb
+#    volumes:
+#      - ./plugins/printcom/go/:/var/www
+#    links:
+#      - assortmentDB
+#    networks:
+#      - backend
+
+
+  redisearch:
+    image: redislabs/redisearch:latest
+    container_name: redisearch
+    restart: always
+    ports:
+      - "6380:6380"
+    command: ["redis-server", "--loadmodule", "/usr/lib/redis/modules/redisearch.so", "--loadmodule", "/usr/lib/redis/modules/rejson.so", "--port", "6380"]
+    networks:
+      - backend
+
+  search:
+    build: ./microservices/search/search
+    container_name: search
+    restart: always
+    environment:
+      - PYTHONPATH=/var/www
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./microservices/search/search:/var/www/
+    links:
+      - assortmentDB
+      - redisearch
+    networks:
+      - backend
+    depends_on:
+      - redisearch
+    entrypoint: ["/bin/sh", "-c", "python scripts/generate_data.py && python scripts/setup_redis.py && python scripts/load_data_set.py && uvicorn main:app --host 0.0.0.0 --port 8000"]
+
+  docs:
+    build: docs/docs
+    ports:
+      - "7001:7000"
+    container_name: docs
+
+################################################
+##              databases group               ##
+################################################
+volumes:
+  minio_data:
+    driver: local
+  databases:
+  node_modules:
+  redis-data:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+

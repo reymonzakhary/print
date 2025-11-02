@@ -1,0 +1,76 @@
+// General page transitin
+.page-enter-active, .page-leave-active {
+    transition: opacity .1s;
+
+}
+
+.page-enter, .page-leave-to {
+    /* transform: translate3d(-5vw,-5vw,0); */
+    opacity: 0;
+}
+
+// General page transitin
+.fade-enter-active, .fade-leave-active {
+    transition: all .2s;
+
+}
+
+.fade-enter, .fade-leave-to {
+    /* transform: translate3d(-5vw,-5vw,0); */
+    opacity: 0;
+}
+
+// Fade SLow
+.fadeslow-enter-active, .fadeslow-leave-active {
+    transition: opacity 1s;
+
+}
+
+.fadeslow-enter, .fadeslow-leave-to {
+    /* transform: translate3d(-5vw,-5vw,0); */
+    opacity: 0;
+}
+
+// slide down fast
+.slide-enter-active, .slide-leave-active {
+    transition: transform .2s, opacity .4s;
+}
+
+.slide-enter, .slide-leave-to {
+    transition: all .05s;
+    transform: translate3d(0, -2vh, 0);
+    opacity: 0;
+}
+
+// slide down slow
+.slidedownslow-enter-active, .slidedownslow-leave-active {
+    transition: transform .4s;
+}
+
+.slidedownslow-enter, .slidedownslow-leave-to {
+    transition: transform .4s, opacity .4s;
+    transform: translate3d(0, -.5rem, 0);
+    opacity: 0;
+}
+
+// slide left large transition
+.slideleftlarge-enter-active, .slideleftlarge-leave-active {
+    transition: transform .5s, opacity .4s;
+}
+
+.slideleftlarge-enter, .slideleftlarge-leave-to {
+    transition: all .2s;
+    transform: translateX(80vw);
+    opacity: 0;
+}
+
+// slide-left-small
+.list-enter-active, .list-leave-active {
+    transition: all .3s;
+}
+
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+{
+    opacity: 0;
+    transform: translateX(-100px);
+}

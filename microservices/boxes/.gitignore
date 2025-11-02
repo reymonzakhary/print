@@ -1,0 +1,6 @@
+boxes/.env
+boxes/node_modules
+boxes/yarn.lock
+
+# Misc
+.idea

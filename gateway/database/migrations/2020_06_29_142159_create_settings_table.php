@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSettingsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+            $table->string('value')->nullable()->index();
+            $table->boolean('active')->default(false);
+            $table->unsignedBigInteger('setting_id')->index()->nullable();
+            $table->foreign('setting_id')->references('id')->on('settings');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('settings');
+    }
+}

@@ -1,0 +1,40 @@
+@import '~@fortawesome/fontawesome-pro/css/all.css';
+
+@tailwind base;
+@tailwind components;
+
+// custom scss
+// .blur {
+//     background-color: hsla(0, 0%, 100%, 0.6) !important;
+//     backdrop-filter: blur(5px);
+//  }
+.blur {
+    background-color: hsla(0, 0%, 100%, 0.6) !important;
+    backdrop-filter: blur(15px) brightness(1.2);
+    @-moz-document url-prefix() {
+        background-color: hsla(0, 0%, 100%, 0.6) !important;
+    }
+}
+
+.dark .blur {
+    background-color: hsla(0, 0%, 0%, 0.6) !important;
+    backdrop-filter: blur(15px) brightness(1);
+    @-moz-document url-prefix() {
+        background-color: hsla(0, 0%, 0%, 0.6) !important;
+    }
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-blue-100 rounded-full;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-blue-200 rounded-full;
+}
+
+@tailwind utilities;

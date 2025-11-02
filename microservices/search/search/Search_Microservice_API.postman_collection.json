@@ -1,0 +1,969 @@
+{
+	"info": {
+		"_postman_id": "search-microservice-api",
+		"name": "Search Microservice API",
+		"description": "Complete API collection for the Search Microservice. This service provides search functionality for categories, boxes, and options with Redis-based indexing and MongoDB data synchronization.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health & Info",
+			"item": [
+				{
+					"name": "Get Redis Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/info",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"info"
+							]
+						},
+						"description": "Check Redis connection status and memory usage information."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/info",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Connected to Redis\",\n    \"index\": \"idx:category\",\n    \"memory_usage_mb\": 0.5\n}"
+						},
+						{
+							"name": "Connection Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/info",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Failed to connect to Redis\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Health check and system information endpoints."
+		},
+		{
+			"name": "Search Endpoints",
+			"item": [
+				{
+					"name": "Search Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/category-search?query={{search_query}}&iso={{language_code}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category-search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{search_query}}",
+									"description": "Search term for category autocomplete",
+									"disabled": false
+								},
+								{
+									"key": "iso",
+									"value": "{{language_code}}",
+									"description": "Language code (e.g., en, fr, es)",
+									"disabled": false
+								}
+							]
+						},
+						"description": "Search for categories with autocomplete functionality. Returns matching categories based on the query and language code."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category-search?query=electronics&iso=en",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category-search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "electronics"
+										},
+										{
+											"key": "iso",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"suggestions\": [\n        {\n            \"sku\": \"category:en:Electronics:Electronics:507f1f77bcf86cd799439011\",\n            \"name\": \"Electronics\",\n            \"origin_name\": \"Electronics\",\n            \"iso\": \"en\",\n            \"slug\": \"electronics\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Empty Query",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category-search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category-search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"suggestions\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Boxes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/boxes-search?query={{search_query}}&iso={{language_code}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boxes-search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{search_query}}",
+									"description": "Search term for box autocomplete",
+									"disabled": false
+								},
+								{
+									"key": "iso",
+									"value": "{{language_code}}",
+									"description": "Language code (e.g., en, fr, es)",
+									"disabled": false
+								}
+							]
+						},
+						"description": "Search for boxes with autocomplete functionality. Returns matching boxes based on the query and language code."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/boxes-search?query=small&iso=en",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"boxes-search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "small"
+										},
+										{
+											"key": "iso",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"suggestions\": [\n        {\n            \"sku\": \"box:en:Small Box:Small Box:507f1f77bcf86cd799439012\",\n            \"name\": \"Small Box\",\n            \"origin_name\": \"Small Box\",\n            \"iso\": \"en\",\n            \"slug\": \"small-box\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Options",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/options-search?query={{search_query}}&iso={{language_code}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"options-search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{search_query}}",
+									"description": "Search term for option autocomplete",
+									"disabled": false
+								},
+								{
+									"key": "iso",
+									"value": "{{language_code}}",
+									"description": "Language code (e.g., en, fr, es)",
+									"disabled": false
+								}
+							]
+						},
+						"description": "Search for options with autocomplete functionality. Returns matching options based on the query and language code."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/options-search?query=color&iso=en",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"options-search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "color"
+										},
+										{
+											"key": "iso",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"suggestions\": [\n        {\n            \"sku\": \"option:en:Color:Color:507f1f77bcf86cd799439013\",\n            \"name\": \"Color\",\n            \"origin_name\": \"Color\",\n            \"iso\": \"en\",\n            \"slug\": \"color\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Search and autocomplete endpoints for categories, boxes, and options."
+		},
+		{
+			"name": "Data Management",
+			"item": [
+				{
+					"name": "Re-sync All Data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/re-sync-all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"re-sync-all"
+							]
+						},
+						"description": "Complete re-sync of all data types (categories, boxes, options) in one operation. This is the recommended way to re-sync all data."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/re-sync-all",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"re-sync-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Re-sync completed successfully\",\n    \"sync_status\": {\n        \"last_sync\": \"2024-01-15T10:30:00.123456\",\n        \"sync_duration_seconds\": 45.2,\n        \"status\": \"completed\",\n        \"categories_synced\": 150,\n        \"boxes_synced\": 75,\n        \"options_synced\": 200\n    },\n    \"results\": {\n        \"categories\": {\n            \"data-set\": [\n                {\n                    \"507f1f77bcf86cd799439011\": {\n                        \"names\": [\n                            {\n                                \"iso\": \"en\",\n                                \"display_name\": \"Electronics\"\n                            }\n                        ],\n                        \"origin_names\": [\n                            {\n                                \"iso\": \"en\",\n                                \"display_name\": \"Electronics\"\n                            }\n                        ],\n                        \"slug\": \"electronics\"\n                    }\n                }\n            ]\n        },\n        \"boxes\": {\n            \"data-set\": []\n        },\n        \"options\": {\n            \"data-set\": []\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Sync Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sync-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sync-status"
+							]
+						},
+						"description": "Get the current sync status and last sync information including duration and number of items synced."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/sync-status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"sync-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"last_sync\": \"2024-01-15T10:30:00.123456\",\n    \"sync_duration_seconds\": 45.2,\n    \"status\": \"completed\",\n    \"categories_synced\": 150,\n    \"boxes_synced\": 75,\n    \"options_synced\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Category Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/generate-data-set",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate-data-set"
+							]
+						},
+						"description": "Re-sync categories from MongoDB to Redis. This endpoint fetches all categories and supplier categories from MongoDB, processes them, and stores them in Redis for search functionality. This is a full re-sync operation."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/generate-data-set",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"generate-data-set"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data-set\": [\n        {\n            \"507f1f77bcf86cd799439011\": {\n                \"names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Electronics\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Électronique\"\n                    }\n                ],\n                \"origin_names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Electronics\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Électronique\"\n                    }\n                ],\n                \"slug\": \"electronics\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "MongoDB Connection Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/generate-data-set",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"generate-data-set"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Could not connect to MongoDB\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Box Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/generate-box-data",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate-box-data"
+							]
+						},
+						"description": "Re-sync boxes from MongoDB to Redis. This endpoint fetches all boxes and supplier boxes from MongoDB, processes them, and stores them in Redis for search functionality. This is a full re-sync operation."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/generate-box-data",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"generate-box-data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data-set\": [\n        {\n            \"507f1f77bcf86cd799439012\": {\n                \"names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Small Box\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Petite Boîte\"\n                    }\n                ],\n                \"origin_names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Small Box\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Petite Boîte\"\n                    }\n                ],\n                \"slug\": \"small-box\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Option Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/generate-option-data",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate-option-data"
+							]
+						},
+						"description": "Re-sync options from MongoDB to Redis. This endpoint fetches all options and supplier options from MongoDB, processes them, and stores them in Redis for search functionality. This is a full re-sync operation."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/generate-option-data",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"generate-option-data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data-set\": [\n        {\n            \"507f1f77bcf86cd799439013\": {\n                \"names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Color\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Couleur\"\n                    }\n                ],\n                \"origin_names\": [\n                    {\n                        \"iso\": \"en\",\n                        \"display_name\": \"Color\"\n                    },\n                    {\n                        \"iso\": \"fr\",\n                        \"display_name\": \"Couleur\"\n                    }\n                ],\n                \"slug\": \"color\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Clear Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clear-data",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clear-data"
+							]
+						},
+						"description": "Clear all data from Redis indexes and JSON files. This endpoint removes all search data and should be used before re-syncing to ensure clean data."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/clear-data",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"clear-data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Data cleared successfully\",\n    \"cleared_files\": [\"data_set.json\"],\n    \"cleared_indexes\": [\"idx:category\", \"idx:box\", \"idx:option\"]\n}"
+						}
+					]
+				}
+			],
+			"description": "Data management endpoints for re-syncing and clearing search data."
+		},
+		{
+			"name": "Scheduler Management",
+			"item": [
+				{
+					"name": "Start Scheduler",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/scheduler/start",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"scheduler",
+								"start"
+							]
+						},
+						"description": "Start the automatic re-sync scheduler. This will enable automatic re-sync every 24 hours and daily at 2 AM."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/start",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"start"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Scheduler started successfully\",\n    \"status\": \"running\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Stop Scheduler",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/scheduler/stop",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"scheduler",
+								"stop"
+							]
+						},
+						"description": "Stop the automatic re-sync scheduler. This will disable automatic re-sync."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/stop",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"stop"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Scheduler stopped successfully\",\n    \"status\": \"stopped\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Scheduler Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/scheduler/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"scheduler",
+								"status"
+							]
+						},
+						"description": "Get the current scheduler status and information about scheduled jobs including next run times."
+					},
+					"response": [
+						{
+							"name": "Running Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"running\",\n    \"jobs\": [\n        {\n            \"id\": \"daily_re_sync\",\n            \"name\": \"Daily Re-sync Job\",\n            \"next_run\": \"2024-01-16T02:00:00+00:00\",\n            \"trigger\": \"cron[hour=2, minute=0]\"\n        },\n        {\n            \"id\": \"interval_re_sync\",\n            \"name\": \"Interval Re-sync Job (24h)\",\n            \"next_run\": \"2024-01-16T10:30:00+00:00\",\n            \"trigger\": \"interval[0:24:00]\"\n        }\n    ],\n    \"job_count\": 2\n}"
+						},
+						{
+							"name": "Stopped Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"stopped\",\n    \"message\": \"Scheduler is not running\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Trigger Manual Sync",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/scheduler/trigger-now",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"scheduler",
+								"trigger-now"
+							]
+						},
+						"description": "Manually trigger a re-sync immediately. This bypasses the scheduler and runs a re-sync right away."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/trigger-now",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"trigger-now"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Manual re-sync triggered successfully\",\n    \"status\": \"triggered\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Sync Interval",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/scheduler/interval?hours=12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"scheduler",
+								"interval"
+							],
+							"query": [
+								{
+									"key": "hours",
+									"value": "12",
+									"description": "Sync interval in hours (minimum 1)",
+									"disabled": false
+								}
+							]
+						},
+						"description": "Update the sync interval. This changes how often the automatic re-sync runs (in addition to the daily 2 AM sync)."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/scheduler/interval?hours=12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"scheduler",
+										"interval"
+									],
+									"query": [
+										{
+											"key": "hours",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Sync interval updated to 12 hours\",\n    \"status\": \"updated\",\n    \"new_interval_hours\": 12\n}"
+						}
+					]
+				}
+			],
+			"description": "Scheduler management endpoints for controlling automatic re-sync functionality."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string",
+			"description": "Base URL for the Search Microservice API"
+		},
+		{
+			"key": "search_query",
+			"value": "electronics",
+			"type": "string",
+			"description": "Example search query for testing"
+		},
+		{
+			"key": "language_code",
+			"value": "en",
+			"type": "string",
+			"description": "Language code for internationalization (e.g., en, fr, es)"
+		}
+	]
+} 

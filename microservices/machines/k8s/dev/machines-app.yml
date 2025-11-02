@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: machines
+  namespace: cec
+  labels:
+    app: machines
+spec:
+  selector:
+    matchLabels:
+      app: machines
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: machines
+    spec:
+      containers:
+        - name: machines
+          image: <IMAGE>
+          ports:
+            - containerPort: 3333
+              name: machines
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-machines-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-machines-env
+          configMap:
+            name: cec-machines-env
+            items:
+              - key: .env
+                path: .env

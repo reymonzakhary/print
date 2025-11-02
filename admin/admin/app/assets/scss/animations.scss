@@ -1,0 +1,297 @@
+// General page transition
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+// Component transitions
+// No transition
+.disable-enter-active,
+.disable-leave-active {
+  transition: opacity 0s;
+}
+
+.disable-enter-from,
+.disable-leave-active {
+  opacity: 1;
+}
+
+// Fade fast
+.fade-enter-active,
+.fade-leave-active,
+.fade-move {
+  transition: opacity .2s ease;
+  backface-visibility: hidden;
+}
+
+.fade-leave-active {
+  position: absolute;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  /* transform: translate3d(-5vw,-5vw,0); */
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// Fade fast
+.page-enter-active,
+.page-leave-active {
+  transition: all .2s;
+  transform: scale(1);
+  backface-visibility: hidden
+}
+
+.page-enter-from,
+.page-leave-to {
+  /* transform: translate3d(-5vw,-5vw,0); */
+  transform: scale(.995);
+  // transition: all .9s;
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// Fade SLow
+.fadeslow-enter-active,
+.fadeslow-leave-active {
+  transition: opacity 1s;
+  backface-visibility: hidden
+}
+
+.fadeslow-enter-from,
+.fadeslow-leave-to {
+  /* transform: translate3d(-5vw,-5vw,0); */
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// slide down fast
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform .2s, opacity .4s;
+  backface-visibility: hidden;
+}
+
+.slide-leave-active {
+  display: none;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transition: all .04s;
+  transform: translateY(-2vh);
+  // opacity: 0; // 
+  backface-visibility: hidden
+}
+
+// slide down slow
+.slidedownslow-enter-active,
+.slidedownslow-leave-active {
+  transition: transform .4s;
+  backface-visibility: hidden
+}
+
+.slidedownslow-enter-from,
+.slidedownslow-leave-to {
+  transition: transform .4s, opacity .4s;
+  transform: translate3d(0, -.5rem, 0);
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// slide left large transition
+.slideleftlarge-enter-active,
+.slideleftlarge-leave-active {
+  transition: transform .5s, opacity .4s;
+  overflow: hidden;
+  backface-visibility: hidden
+}
+
+.slideleftlarge-enter-from,
+.slideleftlarge-leave-to {
+  transition: all .2s;
+  transform: translateX(80vw);
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// slide left large FAST transition
+.slideleftlarge-fast-enter-active,
+.slideleftlarge-fast-leave-active {
+  transition: transform .2s, opacity .1s;
+  overflow: hidden;
+  backface-visibility: hidden
+}
+
+.slideleftlarge-fast-enter-from,
+.slideleftlarge-fast-leave-to {
+  transition: all .2s;
+  transform: translateX(80vw);
+  opacity: 0;
+  backface-visibility: hidden
+}
+
+// slide-left-small
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all .3s;
+  backface-visibility: hidden
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+  backface-visibility: hidden
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+  backface-visibility: hidden
+}
+
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+  backface-visibility: hidden;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(300px);
+  backface-visibility: hidden;
+}
+
+// Swipe
+.swipe-left-enter-active {
+  transition: all .5s ease;
+  backface-visibility: hidden;
+  opacity: 1
+}
+
+.swipe-left-leave-active {
+  transition: all 1s ease;
+  backface-visibility: hidden;
+  // display: none;
+}
+
+.swipe-left-enter-from,
+.swipe-left-leave-to {
+  transform: translate3d(0, 50vw, 0);
+  opacity: 0;
+  overflow: hidden;
+  backface-visibility: hidden
+}
+
+.nuxt-progress {
+  background: rgb(255, 69, 0);
+  background: linear-gradient(133deg, hsl(205, 100%, 63%) 5%, hsl(207, 100%, 40%) 47%, hsl(207, 74%, 31%) 54%, hsl(172, 100%, 42%) 95%);
+  height: 4px;
+
+  :after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border: 2px solid rgba($color: #00d6ba, $alpha: .5);
+    border-radius: 50px;
+  }
+}
+
+// search animation
+.search-enter-active,
+.search-leave-active,
+.search-move {
+  transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+  transition-property: opacity, transform;
+}
+
+.search-enter {
+  opacity: 0;
+  transform: translateX(50px) scaleY(0.5);
+}
+
+.search-enter-to {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center top;
+}
+
+// enter list left
+.enterlistleft-enter-active,
+.enterlistleft-leave-active,
+.enterlistleft-move {
+  transition: 300ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+  transition-property: opacity, transform;
+}
+
+.enterlistleft-enter {
+  opacity: 0;
+  transform: translateX(-50px) scaleY(0.5);
+}
+
+.enterlistleft-enter-to {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+}
+
+.enterlistleft-leave {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+}
+
+.enterlistleft-leave-to {
+  opacity: 0;
+  transform: translateX(-50px) scaleY(0.5);
+}
+
+/*********************************************************
+***************** SALES-LIST ANIMATION *******************
+**********************************************************/
+.sales-list-move,
+/* apply transition to moving elements */
+.sales-list-enter-active,
+.sales-list-leave-active {
+  @apply transition-all duration-1000;
+}
+
+.sales-list-enter-from,
+.sales-list-leave-to {
+  opacity: 0;
+}
+
+/*********************************************************
+***************** CATEGORY-LIST ANIMATION ****************
+**********************************************************/
+.category-list-move,
+/* apply transition to moving elements */
+.category-list-enter-active,
+.category-list-leave-active {
+  transition: all 0.2s ease;
+}
+
+.category-list-enter-from,
+.category-list-leave-to {
+  opacity: 0;
+  // transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.category-list-leave-active {
+  position: absolute;
+}

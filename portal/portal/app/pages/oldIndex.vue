@@ -1,0 +1,242 @@
+<template>
+  <div>
+    <VTour ref="dashboardTour" name="dashboardTour" :steps="steps" highlight />
+    <section class="container">
+      <header class="p-4">
+        <h1
+          v-if="store.state.settings.me && store.state.settings.me.profile"
+          class="flex items-center text-xl font-bold uppercase tracking-wide"
+        >
+          {{ $t("welcome") }}
+
+          {{ store.state.settings.me.profile.first_name }}
+          {{ store.state.settings.me.profile.middle_name }}
+          {{ store.state.settings.me.profile.last_name }}
+
+          <button
+            class="ml-4 rounded-full border border-theme-500 px-2 text-sm text-theme-500"
+            @click="startTour"
+          >
+            <font-awesome-icon :icon="['fal', 'route']" />
+            {{ $t("start tour") }}
+          </button>
+        </h1>
+        <h2 class="text-sm italic text-gray-600">
+          {{ $t("This what we have for you today") }}
+        </h2>
+      </header>
+
+      <div v-if="permissions" class="mb-12 mt-4 grid grid-cols-12 gap-4 p-4">
+        <!-- me widget -->
+        <section
+          v-if="me && me.profile"
+          id="dashboard-profile"
+          class="col-span-12 rounded sm:col-span-6 lg:col-span-3"
+        >
+          <UserProfile :profile="me.profile" :has-view-permission="true" />
+          <div
+            class="mt-2 rounded-md bg-white text-center shadow-md shadow-gray-200 dark:bg-gray-700 dark:shadow-gray-900"
+          >
+            <nuxt-link
+              v-if="permissions.includes('account-settings-access')"
+              to="/my-account"
+              class="mx-auto my-4 inline-block rounded-full bg-theme-100 px-2 py-1 text-center text-sm text-theme-500"
+            >
+              <font-awesome-icon :icon="['fal', 'gear']" />
+              {{ $t("Account settings") }}
+            </nuxt-link>
+          </div>
+        </section>
+
+        <!-- orders -->
+        <section
+          v-if="
+            permissions.includes('orders-access') ||
+            permissions.includes('quotations-access') ||
+            (permissions.includes('orders-access') && permissions.includes('quotations-access'))
+          "
+          id="dashboard-orders"
+          class="col-span-12 flex flex-col items-center justify-center rounded bg-white p-4 shadow-md shadow-gray-200 dark:bg-gray-700 dark:shadow-gray-900 sm:col-span-6 lg:col-span-3"
+        >
+          <OrderStatistics class="h-full w-full" :type="'orders'" />
+
+          <nuxt-link
+            to="/orders"
+            class="transition:color mx-auto rounded-full bg-theme-400 px-4 py-1 text-sm text-themecontrast-400 duration-150 hover:bg-theme-500 hover:text-themecontrast-600"
+          >
+            <font-awesome-icon :icon="['fal', 'file-invoice-dollar']" />
+            {{ capitalizeFirstLetter($t("to orders")) }}
+          </nuxt-link>
+        </section>
+
+        <!-- quotations -->
+        <!-- v-if="meta.modules.namespaces.find((ns) => ns.area === 'quotation')" -->
+        <section
+          v-if="permissions.includes('quotations-access')"
+          id="dashboard-quotations"
+          class="col-span-12 flex flex-col items-center justify-between rounded bg-white p-4 shadow-md shadow-gray-200 dark:bg-gray-700 dark:shadow-gray-900 sm:col-span-6 lg:col-span-3"
+        >
+          <!-- <font-awesome-icon :icon="['fad', 'file-signature']" class="mb-12 text-theme-400 fa-5x" /> -->
+          <OrderStatistics class="h-full w-full" :type="'quotations'" />
+
+          <nuxt-link
+            to="/quotations"
+            class="transition:color mx-auto rounded-full bg-theme-400 px-4 py-1 text-sm text-themecontrast-400 duration-150 hover:bg-theme-500 hover:text-themecontrast-600"
+          >
+            <font-awesome-icon :icon="['fal', 'file-signature']" class="mr-1" />
+            {{ capitalizeFirstLetter($t("to quotations")) }}
+          </nuxt-link>
+        </section>
+
+        <!-- <section
+          v-if="permissions.includes('campaigns-access')"
+          class="flex flex-col items-center justify-between col-span-12 p-4 bg-white rounded shadow-md shadow-gray-200 dark:shadow-gray-900 dark:bg-gray-700 sm:col-span-6 lg:col-span-3"
+        >
+          <CampaignsStatistics></CampaignsStatistics>
+        </section> -->
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+import { mapState, mapMutations, useStore } from "vuex";
+
+export default {
+  name: "Dashboard",
+  provide: {
+    endpoint: "users",
+  },
+  setup() {
+    const store = useStore();
+    const { permissions, theUser: me } = storeToRefs(useAuthStore());
+    const { capitalizeFirstLetter } = useUtilities();
+    return { store, permissions, me, capitalizeFirstLetter };
+  },
+  data() {
+    return {
+      steps: [
+        {
+          target: "#sidebarmenu [href='/manager/']",
+          title: capitalizeFirstLetter(this.$t("welcome to your dashboard!")),
+          body: capitalizeFirstLetter(
+            this.$t("This is where you will find your acount info and settings"),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu .coming-soon",
+          title: capitalizeFirstLetter(this.$t("the Product Finder")),
+          body: capitalizeFirstLetter(
+            this.$t("This is where you can find all the products you need"),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/quotations']",
+          title: capitalizeFirstLetter(this.$t("your quotations")),
+          body: capitalizeFirstLetter(
+            // prettier-ignore
+            this.$t("this is where you can find all your quotations, create new ones and manage existing quotations."),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/orders']",
+          title: this.$t("your orders"),
+          body: capitalizeFirstLetter(
+            // prettier-ignore
+            this.$t("this is where you can find all your orders, create new ones and manage existing orders."),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/customers']",
+          title: capitalizeFirstLetter(this.$t("customers")),
+          body: capitalizeFirstLetter(
+            // prettier-ignore
+            this.$t("this is where you can find all your customers, create new ones and manage existing customers."),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/assortment']",
+          title: capitalizeFirstLetter(this.$t("assortment")),
+          body: capitalizeFirstLetter(
+            // prettier-ignore
+            this.$t("this is where you can find and can manage all the products in your assortment"),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/cms']",
+          title: capitalizeFirstLetter(this.$t("cms")),
+          body: capitalizeFirstLetter(this.$t("Here you can manage your webshop or brandportal")),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#sidebarmenu [href='/manager/filemanager']",
+          title: capitalizeFirstLetter(this.$t("Media manager")),
+          body: capitalizeFirstLetter(
+            this.$t("this is where you manage all the files used in the system."),
+          ),
+          popperConfig: {
+            placement: "right",
+          },
+        },
+        {
+          target: "#dashboard-profile",
+          title: capitalizeFirstLetter(this.$t("profile")),
+          body: capitalizeFirstLetter(this.$t("a quick glance at your profile")),
+        },
+        {
+          target: "#dashboard-orders",
+          title: capitalizeFirstLetter(this.$t("orders")),
+          body: this.$t("a quick glance at your orders"),
+        },
+        {
+          target: "#dashboard-quotations",
+          title: capitalizeFirstLetter(this.$t("quotations")),
+          body: capitalizeFirstLetter(this.$t("a quick glance at your quotations")),
+        },
+      ],
+    };
+  },
+  head() {
+    return {
+      title: `${this.$t("dashboard")} | Prindustry Manager`,
+    };
+  },
+  computed: {
+    ...mapState({
+      meta: (state) => state.settings.meta,
+    }),
+  },
+  mounted() {
+    this.select_user(this.store.state.settings.me);
+  },
+  methods: {
+    ...mapMutations({
+      select_user: "users/select_user",
+    }),
+    startTour() {
+      this.$refs.dashboardTour.resetTour();
+      this.$refs.dashboardTour.startTour();
+    },
+  },
+};
+</script>

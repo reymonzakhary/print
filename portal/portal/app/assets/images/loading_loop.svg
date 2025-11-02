@@ -1,0 +1,25 @@
+<svg width="92" height="98" viewBox="0 0 92 98" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
+<path width="92" height="98" fill="" d="M0 0 L92 0 L92 98 L0 98 Z" class="JLNANSzr_0"></path>
+<path d="M2 16.5L46 2L90.5 17L89 41.75L87.5 66.5L46 96.5L24 79.8659L5 65.5L2 16.5Z" stroke="url(#paint0_angular)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="JLNANSzr_1"></path>
+<path d="M11 23L46 41.75L81.5 23" stroke="url(#paint1_angular)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="JLNANSzr_2"></path>
+<path d="M24 79.8659V54.5L46 68.5L61.5 59.5" stroke="url(#paint2_angular)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="JLNANSzr_3"></path>
+<path d="M89 41.75L78.5 48.5" stroke="url(#paint3_angular)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="JLNANSzr_4"></path>
+<defs>
+<radialGradient id="paint0_angular" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46.5 47) rotate(90.3148) scale(45.5007 45.0749)">
+<stop stop-color="#1C84FF" stop-opacity="0"></stop>
+<stop offset="1" stop-color="#006CEA"></stop>
+</radialGradient>
+<radialGradient id="paint1_angular" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46.5 47) rotate(90.3148) scale(45.5007 45.0749)">
+<stop stop-color="#1C84FF" stop-opacity="0"></stop>
+<stop offset="1" stop-color="#006CEA"></stop>
+</radialGradient>
+<radialGradient id="paint2_angular" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46.5 47) rotate(90.3148) scale(45.5007 45.0749)">
+<stop stop-color="#1C84FF" stop-opacity="0"></stop>
+<stop offset="1" stop-color="#006CEA"></stop>
+</radialGradient>
+<radialGradient id="paint3_angular" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46.5 47) rotate(90.3148) scale(45.5007 45.0749)">
+<stop stop-color="#1C84FF" stop-opacity="0"></stop>
+<stop offset="1" stop-color="#006CEA"></stop>
+</radialGradient>
+</defs>
+<style data-made-with="vivus-instant">.JLNANSzr_0{stroke-dasharray:380 382;stroke-dashoffset:381;animation:JLNANSzr_draw_0 1800ms ease-in-out 0ms infinite,JLNANSzr_fade 1800ms linear 0ms infinite;}.JLNANSzr_1{stroke-dasharray:295 297;stroke-dashoffset:296;animation:JLNANSzr_draw_1 1800ms ease-in-out 0ms infinite,JLNANSzr_fade 1800ms linear 0ms infinite;}.JLNANSzr_2{stroke-dasharray:80 82;stroke-dashoffset:81;animation:JLNANSzr_draw_2 1800ms ease-in-out 0ms infinite,JLNANSzr_fade 1800ms linear 0ms infinite;}.JLNANSzr_3{stroke-dasharray:70 72;stroke-dashoffset:71;animation:JLNANSzr_draw_3 1800ms ease-in-out 0ms infinite,JLNANSzr_fade 1800ms linear 0ms infinite;}.JLNANSzr_4{stroke-dasharray:13 15;stroke-dashoffset:14;animation:JLNANSzr_draw_4 1800ms ease-in-out 0ms infinite,JLNANSzr_fade 1800ms linear 0ms infinite;}@keyframes JLNANSzr_draw{100%{stroke-dashoffset:0;}}@keyframes JLNANSzr_fade{0%{stroke-opacity:1;}77.77777777777777%{stroke-opacity:1;}100%{stroke-opacity:0;}}@keyframes JLNANSzr_draw_0{22.22222222222222%{stroke-dashoffset: 381}50%{ stroke-dashoffset: 0;}100%{ stroke-dashoffset: 0;}}@keyframes JLNANSzr_draw_1{29.166666666666668%{stroke-dashoffset: 296}56.94444444444444%{ stroke-dashoffset: 0;}100%{ stroke-dashoffset: 0;}}@keyframes JLNANSzr_draw_2{36.11111111111111%{stroke-dashoffset: 81}63.888888888888886%{ stroke-dashoffset: 0;}100%{ stroke-dashoffset: 0;}}@keyframes JLNANSzr_draw_3{43.05555555555556%{stroke-dashoffset: 71}70.83333333333334%{ stroke-dashoffset: 0;}100%{ stroke-dashoffset: 0;}}@keyframes JLNANSzr_draw_4{50%{stroke-dashoffset: 14}77.77777777777779%{ stroke-dashoffset: 0;}100%{ stroke-dashoffset: 0;}}</style></svg>

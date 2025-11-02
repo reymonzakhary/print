@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  redisearch:
+    image: redislabs/redisearch:latest
+    container_name: redisearch
+    restart: always
+    ports:
+      - "6380:6380"
+    command: ["redis-server", "--loadmodule", "/usr/lib/redis/modules/redisearch.so", "--loadmodule", "/usr/lib/redis/modules/rejson.so", "--port", "6380"]
+
+  fastapi:
+    build: search
+    container_name: fastapi
+    restart: always
+    environment:
+      - PYTHONPATH=/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redisearch
+    volumes:
+      - ./search:/var/www/
+    entrypoint: ["/bin/sh", "-c", "python scripts/setup_redis.py && python scripts/load_data_set.py && python scripts/generate_data.py  && uvicorn main:app --host 0.0.0.0 --port 8000"]

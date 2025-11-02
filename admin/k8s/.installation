@@ -1,0 +1,1 @@
+kubectl -n cec create secret generic cec-nuxt-secret-env --from-env-file=.env

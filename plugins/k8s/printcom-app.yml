@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: printcom
+  namespace: cec
+  labels:
+    app: printcom
+spec:
+  selector:
+    matchLabels:
+      app: printcom
+  replicas: 20
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: printcom
+    spec:
+      containers:
+        - name: printcom
+          image: <IMAGE>
+          workingDir: /var/www  # Ensure correct working directory
+          env:
+            - name: PYTHONPATH
+              value: "/var/www"
+          ports:
+            - containerPort: 5000
+              name: printcom
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-printcom-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env "]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-printcom-env
+          configMap:
+            name: cec-printcom-env
+            items:
+              - key: .env
+                path: .env
+#&& pwd && ls -la && sleep 5 && python scripts/generate_data.py && python scripts/setup_redis.py && python scripts/load_data_set.py

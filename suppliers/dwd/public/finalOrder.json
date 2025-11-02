@@ -1,0 +1,137 @@
+{
+    "status": "success",
+    "data": {
+        "with_shipping": "1",
+        "with_seperate_payment": "1",
+        "payment_method_id": 1,
+        "user_id": 1,
+        "shipping_cost": "15",
+        "invoice_cost": "5",
+        "vat_total": "2",
+        "order_reference": null,
+        "extra_notes": null,
+        "discount": null,
+        "user_shipping_id": 19,
+        "payment_date": "2020-02-10 14:04:13",
+        "user_invoice_id": 19,
+        "updated_at": "2020-02-10 14:04:13",
+        "created_at": "2020-02-10 14:04:13",
+        "id": 19,
+        "invoice": {
+            "invoice_first_name": "Ahmed",
+            "invoice_last_name": "Reda",
+            "invoice_email": "reda@email.com",
+            "invoice_company": "CHD",
+            "invoice_country": "Egypt",
+            "invoice_city": "Cairo",
+            "invoice_zip_code": "11311",
+            "invoice_street": "Orouba Street",
+            "invoice_house_number": "80/1",
+            "invoice_phone_1": "01114388500",
+            "invoice_phone_2": "01096005233",
+            "invoice_vat": 14,
+            "invoice_btw": 20,
+            "invoice_iban": null,
+            "invoice_kvk": null
+        },
+        "shipping": {
+            "shipping_first_name": "Ahmed",
+            "shipping_last_name": "Reda",
+            "shipping_email": "reda@email.com",
+            "shipping_company": "CHD",
+            "shipping_country": "Egypt",
+            "shipping_city": "Cairo",
+            "shipping_zip_code": "11311",
+            "shipping_street": "Orouba Street",
+            "shipping_house_number": "80/1",
+            "shipping_phone_1": "01114388500",
+            "shipping_phone_2": "01096005233",
+            "shipping_vat": 14,
+            "shipping_btw": 20,
+            "shipping_iban": null,
+            "shipping_kvk": null
+        },
+        "payment": {
+            "method": "Cash on delivery",
+            "provider": null,
+            "issuer": null
+        },
+        "items": [
+            {
+                "id": 27,
+                "order_id": 19,
+                "supplier_id": 1,
+                "reseller_id": 2,
+                "supplier_type": "manually overridden",
+                "created_from": "webshop",
+                "category_id": "25285",
+                "collection": "ef3rcmmll312e254ops14ed15",
+                "product_object": {
+                    "options": {
+                        "fold": "single_4",
+                        "size": "a5",
+                        "folded": "yes",
+                        "urgency": "standard",
+                        "creasing": "no",
+                        "material": "135gr_gesatineerd_mc",
+                        "printtype": "44",
+                        "printingmethod": "offset"
+                    }
+                },
+                "price": "125.00",
+                "discount": "10.00",
+                "product_reference": null,
+                "extra_notes": null,
+                "quantity": 50,
+                "delivery": "normal",
+                "payment_method_id": 1,
+                "payment_status": 0,
+                "status": 0,
+                "files": [
+                    {
+                        "id": 27,
+                        "order_item_id": 27,
+                        "file_id": 1
+                    },
+                    {
+                        "id": 28,
+                        "order_item_id": 27,
+                        "file_id": 2
+                    }
+                ]
+            },
+            {
+                "id": 28,
+                "order_id": 19,
+                "supplier_id": 1,
+                "reseller_id": 2,
+                "supplier_type": "manually selected",
+                "created_from": "backend",
+                "category_id": "e5050dakdlrfje25",
+                "collection": "ef3rcmmll312e254ops14ec12",
+                "product_object": {
+                    "options": {
+                      "fold": "single_4",
+                      "size": "a4",
+                      "folded": "yes",
+                      "urgency": "standard",
+                      "creasing": "no",
+                      "material": "135gr_gesatineerd_mc",
+                      "printtype": "44",
+                      "printingmethod": "offset"
+                    }
+                },
+                "price": "200.00",
+                "discount": "0.00",
+                "product_reference": null,
+                "extra_notes": null,
+                "quantity": 500,
+                "delivery": "normal",
+                "payment_method_id": 1,
+                "payment_status": 0,
+                "status": 0,
+                "files": []
+            }
+        ]
+    }
+}

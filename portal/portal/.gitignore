@@ -1,0 +1,37 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+.prindustry
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.staging
+!.env.example
+
+# Yarn
+yarn-error.log
+.yarn
+.yarn/install-state.gz
+
+# Cursor
+.cursorrules
+
+# Memlab
+memlab

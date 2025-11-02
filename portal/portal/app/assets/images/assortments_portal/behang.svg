@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 295 295" style="enable-background:new 0 0 295 295;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E5E5E5;}
+	.st1{fill:#818080;}
+	.st2{fill:#03A9FF;}
+	.st3{fill:#E5E5E5;stroke:#B9B8B8;stroke-width:0.5;stroke-miterlimit:10;}
+	.st4{fill:#B9B8B8;}
+	.st5{fill:url(#SVGID_1_);}
+</style>
+<rect x="49.8" y="51.3" transform="matrix(-1 -5.859503e-11 5.859503e-11 -1 213.0102 312.5923)" class="st0" width="113.4" height="210"/>
+<rect x="62.8" y="69.5" class="st1" width="86.5" height="178.5"/>
+<polyline class="st2" points="62.8,248.1 84.6,128.5 98.8,199.7 116.8,97.4 149.3,248.1 "/>
+<rect x="127.6" y="49.3" transform="matrix(-1 -5.859503e-11 5.859503e-11 -1 368.5631 251.5923)" class="st3" width="113.4" height="153"/>
+<rect x="140.6" y="67.5" class="st1" width="86.5" height="137.5"/>
+<polyline class="st2" points="146.8,205.1 162.4,119.1 176.6,190.5 194.6,88 219.8,205.1 "/>
+<g>
+	<ellipse class="st4" cx="240.2" cy="202.3" rx="5.6" ry="25"/>
+	
+		<rect x="161.4" y="148.6" transform="matrix(-8.956740e-11 -1 1 -8.956740e-11 -15.887 388.7627)" class="st4" width="50" height="107.4"/>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="218.5676" y1="69.1674" x2="268.5798" y2="69.1674" gradientTransform="matrix(-4.489700e-11 1 1 4.489700e-11 63.5464 -41.255)">
+		<stop  offset="0" style="stop-color:#B9B8B8"/>
+		<stop  offset="1" style="stop-color:#818080"/>
+	</linearGradient>
+	<ellipse class="st5" cx="132.7" cy="202.3" rx="5.6" ry="25"/>
+</g>
+</svg>

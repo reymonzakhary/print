@@ -1,0 +1,71 @@
+version: "3.6"
+services:
+
+  standardization:
+    build: ./microservices/assortments
+    container_name: standardization
+    #    image: reymonzakhary/pystandart:latest
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    volumes:
+      - ./microservices/assortments/:/var/www
+    links:
+      - mongodb
+    networks:
+      - frontend
+      - backend
+
+  # Discounts DB
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+    - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=ad
+      - MONGO_INITDB_USERNAME=admin
+      - MONGO_INITDB_PASSWORD=ad
+      - MONGO_INITDB_DATABASE=adonis
+      - MONGO_NON_ROOT_USERNAME=admin
+      - MONGO_NON_ROOT_PASSWORD=ad
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongodbdata:/data/db
+    networks:
+      - frontend
+      - backend
+#
+  mongodb-express:
+    image: mongo-express
+    container_name: mongodb-express
+    restart: always
+    ports:
+      - 8087:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ad
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: ad
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+
+volumes:
+  databases:
+  node_modules:
+  redis-data:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: machines
+  namespace: cec
+  labels:
+    app: machines
+spec:
+  ports:
+    - port: 3333
+      targetPort: 3333
+      protocol: TCP
+  selector:
+    app: machines

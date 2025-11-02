@@ -1,0 +1,25 @@
+array (
+  'search' => 
+  array (
+    0 => 'the degree of [Diploma EN] - [Program ID] to',
+    1 => 'de graad van [Diploma NL] - [Program ID] aan',
+    2 => '[BirthdateE] [BirthdateN]     ',
+    3 => '[GradDateEN] [GradDateNL]',
+    4 => '[DiplSuppNr]-[Program ID]-1-[Student Nr]',
+    5 => '[HonourStat EN] [HonourStat]',
+    6 => 'grado de [Diploma NL] - [Program ID] a la persona en cuestión.',
+    7 => 'de [Diploma NL] - [Program ID] à la personne dont le nom figure sur ce document.',
+    8 => 'Grad eines [Diploma NL] - [Program ID] der angegebenen Person.',
+  ),
+  'replace' => 
+  array (
+    0 => 'the degree of Master of Business Administration - 50017303 to',
+    1 => 'de graad van Master of Business Administration - 50017303 aan',
+    2 => '1 September 1972 1 september 1972     ',
+    3 => '15 September 2022 15 september 2022',
+    4 => '-50017303-1-msm40006535',
+    5 => ' Graduated',
+    6 => 'grado de Master of Business Administration - 50017303 a la persona en cuestión.',
+    7 => 'de Master of Business Administration - 50017303 à la personne dont le nom figure sur ce document.',
+    8 => 'Grad eines Master of Business Administration - 50017303 der angegebenen Person.',
+  ),

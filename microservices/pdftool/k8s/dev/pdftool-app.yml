@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdftool
+  namespace: cec
+  labels:
+    app: pdftool
+spec:
+  selector:
+    matchLabels:
+      app: pdftool
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pdftool
+    spec:
+      containers:
+        - name: pdftool
+          image: <IMAGE>
+          ports:
+            - containerPort: 5000
+              name: pdftool
+          volumeMounts:
+            - name: cec-fm-env
+              mountPath: /tmp/.env
+              subPath: .env
+            - name: cec-reclone-config
+              mountPath: /tmp/rclone.conf
+              subPath: rclone.conf
+            - name: cec-pdftool-policy
+              mountPath: /tmp/policy.xml
+              subPath: policy.xml
+#            - mountPath: /mnt
+#              name: web-persistent-storage
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/.env /var/www/.env && cp -r /tmp/rclone.conf ~/.config/rclone/rclone.conf && chmod 600 ~/.config/rclone/rclone.conf && cp -r /tmp/policy.xml /etc/ImageMagick-6/policy.xml"]
+      volumes:
+        - name: cec-fm-env
+          configMap:
+            name: cec-fm-env
+            items:
+              - key: .env
+                path: .env
+        - name: cec-reclone-config
+          configMap:
+            name: cec-reclone-config
+            items:
+              - key: rclone.conf
+                path: rclone.conf
+        - name: cec-pdftool-policy
+          configMap:
+            name: cec-pdftool-policy
+            items:
+              - key: policy.xml
+                path: policy.xml
+#        - name: web-persistent-storage
+#          persistentVolumeClaim:`
+#            claimName: api-pv-claim

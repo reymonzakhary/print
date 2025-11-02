@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwd
+  namespace: cec
+  labels:
+    app: dwd
+spec:
+  selector:
+    matchLabels:
+      app: dwd
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dwd
+    spec:
+      containers:
+        - name: dwd
+          image: <IMAGE>
+          workingDir: /var/www  # Ensure correct working directory
+          env:
+            - name: PYTHONPATH
+              value: "/var/www"
+          ports:
+            - containerPort: 5000
+              name: dwd
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /var/crt/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-dwd-env
+              mountPath: /var/www/.env
+              subPath: .env
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-dwd-env
+          configMap:
+            name: cec-dwd-env
+            items:
+              - key: .env
+                path: .env

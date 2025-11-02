@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boxes
+  namespace: cec
+  labels:
+    app: boxes
+spec:
+  selector:
+    matchLabels:
+      app: boxes
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: boxes
+    spec:
+      containers:
+        - name: boxes
+          image: <IMAGE>
+          ports:
+            - containerPort: 3333
+              name: boxes
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-boxes-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-boxes-env
+          configMap:
+            name: cec-boxes-env
+            items:
+              - key: .env
+                path: .env

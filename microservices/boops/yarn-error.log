@@ -1,0 +1,60 @@
+Arguments: 
+  /usr/bin/node /home/code/.yarn/bin/yarn.js
+
+PATH: 
+  /home/code/.yarn/bin:/home/code/.config/yarn/global/node_modules/.bin:/home/code/.yarn/bin:/home/code/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  10.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/var/www/html/cec/microservices/boops/node_modules/@adonisjs/bodyparser/node_modules'
+
+npm manifest: 
+  {
+    "name": "adonis-fullstack-app",
+    "version": "4.1.0",
+    "adonis-version": "4.1.0",
+    "description": "The fullstack application boilerplate for Adonisjs",
+    "main": "index.js",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node ace test"
+    },
+    "keywords": [
+      "adonisjs",
+      "adonis-app"
+    ],
+    "author": "",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+      "@adonisjs/ace": "^5.0.8",
+      "@adonisjs/auth": "^3.0.7",
+      "@adonisjs/bodyparser": "^2.0.5",
+      "@adonisjs/cors": "^1.0.7",
+      "@adonisjs/fold": "^4.0.9",
+      "@adonisjs/framework": "^5.0.9",
+      "@adonisjs/ignitor": "^2.0.8",
+      "@adonisjs/lucid": "^6.1.3",
+      "@adonisjs/session": "^1.0.27",
+      "@adonisjs/shield": "^1.0.8",
+      "lucid-mongo": "^3.1.6"
+    },
+    "devDependencies": {},
+    "autoload": {
+      "App": "./app"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

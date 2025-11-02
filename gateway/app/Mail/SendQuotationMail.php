@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use App\Models\Quotation as ExternalQuotation;
+class SendQuotationMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        public $quotation,
+        public ?ExternalQuotation $external_quotation
+    ){}
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->view('emails.send-quotation');
+    }
+}

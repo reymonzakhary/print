@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculation
+  namespace: cec
+  labels:
+    app: calculation
+spec:
+  selector:
+    matchLabels:
+      app: calculation
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: calculation
+    spec:
+      containers:
+        - name: calculation
+          image: <IMAGE>
+          ports:
+            - containerPort: 3333
+              name: calculation
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-calculation-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-calculation-env
+          configMap:
+            name: cec-calculation-env
+            items:
+              - key: .env
+                path: .env

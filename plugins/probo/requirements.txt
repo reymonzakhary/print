@@ -1,0 +1,17 @@
+Flask==2.1.3
+flask_restful
+flask-mongoengine
+flask_mongorest
+mimerender
+cleancat
+mongoengine
+Flask-WTF
+wheel
+bcrypt
+uuid
+redis
+# pycurl
+requests
+awesome-slugify
+# datetime
+pymongo

@@ -1,0 +1,147 @@
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "with_shipping": "1",
+        "user_id": 1,
+        "user_invoice_id": 1,
+        "user_shipping_id": 1,
+        "order_reference": "prinCom",
+        "extra_notes": null,
+        "shipping_cost": "15.00",
+        "invoice_cost": "5.00",
+        "vat_total": "2.00",
+        "payment_method_id": 1,
+        "payment_status": 1,
+        "with_seperate_payment": "0",
+        "payment_date": "2020-01-29 12:42:54",
+        "discount": null,
+        "status": 1,
+        "created_at": "2020-01-29 12:42:54",
+        "updated_at": "2020-01-29 12:51:57",
+        "invoice": {
+            "invoice_first_name": "Ahmed",
+            "invoice_last_name": "Reda",
+            "invoice_email": "reda@email.com",
+            "invoice_company": "CHD",
+            "invoice_country": "Egypt",
+            "invoice_city": "Cairo",
+            "invoice_zip_code": "11311",
+            "invoice_street": "Orouba Street",
+            "invoice_house_number": "80/1",
+            "invoice_phone_1": "01114388500",
+            "invoice_phone_2": "01096005233",
+            "invoice_vat": 14,
+            "invoice_btw": 20,
+            "invoice_iban": null,
+            "invoice_kvk": null
+        },
+        "shipping": {
+            "shipping_first_name": "Mahmoud",
+            "shipping_last_name": "MOhsen",
+            "shipping_email": "reda@email.com",
+            "shipping_company": "CHD",
+            "shipping_country": "Egypt",
+            "shipping_city": "Cairo",
+            "shipping_zip_code": "11311",
+            "shipping_street": "Port Said Street",
+            "shipping_house_number": "80/1",
+            "shipping_phone_1": "01114388500",
+            "shipping_phone_2": "01096005233",
+            "shipping_vat": 14,
+            "shipping_btw": 20,
+            "shipping_iban": null,
+            "shipping_kvk": null
+        },
+        "payment": {
+            "method": "Cash on delivery",
+            "provider": null,
+            "issuer": null
+        },
+        "items": [
+            {
+                "id": 1,
+                "order_id": 1,
+                "supplier_id": 1,
+                "reseller_id": 2,
+                "supplier_type": "manually overridden",
+                "created_from": "webshop",
+                "category_id": "25285",
+                "collection": "ef3rcmmll312e254ops14ed15",
+                "product_object": {
+                    "ops": [
+                        "A4",
+                        "4 Dots",
+                        "4/0",
+                        "Normal"
+                    ]
+                },
+                "price": "125.00",
+                "discount": "10.00",
+                "product_reference": null,
+                "extra_notes": null,
+                "quantity": 50,
+                "delivery": "normal",
+                "payment_method_id": 1,
+                "payment_status": 0,
+                "status": 0,
+                "files": [
+                    {
+                        "id": 1,
+                        "order_item_id": 1,
+                        "file_id": 1
+                    },
+                    {
+                        "id": 2,
+                        "order_item_id": 1,
+                        "file_id": 2
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "order_id": 1,
+                "supplier_id": 1,
+                "reseller_id": 2,
+                "supplier_type": "general settings",
+                "created_from": "webshop",
+                "category_id": "1250012",
+                "collection": "ef3rcmmll3edefeg21d15",
+                "product_object": {
+                    "ops": [
+                        "A4",
+                        "no Dots",
+                        "4/0",
+                        "Normal"
+                    ]
+                },
+                "price": "425.00",
+                "discount": "0.00",
+                "product_reference": "prindustry",
+                "extra_notes": null,
+                "quantity": 150,
+                "delivery": "express",
+                "payment_method_id": null,
+                "payment_status": 2,
+                "status": 1,
+                "files": [
+                    {
+                        "id": 3,
+                        "order_item_id": 3,
+                        "file_id": 11
+                    },
+                    {
+                        "id": 4,
+                        "order_item_id": 3,
+                        "file_id": 12
+                    },
+                    {
+                        "id": 5,
+                        "order_item_id": 3,
+                        "file_id": 13
+                    }
+                ]
+            }
+        ]
+    }
+}

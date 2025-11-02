@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: print_com_integration_service
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env  # ✅ Load environment variables from .env

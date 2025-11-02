@@ -1,0 +1,15 @@
+.light .blur {
+   background-color: hsla(0, 0%, 100%, 0.6) !important; 
+   backdrop-filter: blur(15px) brightness(1.2);
+   @-moz-document url-prefix() {
+      background-color: hsla(0, 0%, 100%, 0.95) !important;
+   }
+}
+.dark .blur {
+   background-color: hsla(0, 0%, 0%, 0.6) !important; 
+   // background-color: hsla(217, 33%, 17%, 0.6) !important; 
+   backdrop-filter: blur(15px) brightness(1.2);
+   @-moz-document url-prefix() {
+      background-color: hsla(0, 0%, 0%, 0.95) !important;
+   }
+}

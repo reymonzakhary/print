@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Events\Tenant\Order;
+
+use App\Models\Quotation;
+use App\Models\Tenants\Order;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class UpdateOrderEvent implements ShouldBroadcast
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     *
+     * @param Order|Quotation $order
+     * @param mixed  $user
+     */
+    public function __construct(
+        readonly public Quotation|Order $order,
+    ){}
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return Channel|array
+     */
+    public function broadcastOn()
+    {
+        if ($this->order->type) {
+            return new PrivateChannel('orders');
+        }
+    }
+}

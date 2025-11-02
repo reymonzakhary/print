@@ -1,0 +1,12 @@
+CONFIG=Development
+APP_ENV=development
+APP_DEBUG=false
+APP_PORT=5000
+DEBUG=false
+HOST=assortmentDB
+DB=assortments
+PORT=27017
+USERNAME=admin
+PASSWORD=ad
+AUTHENTICATION_SOURCE=admin
+

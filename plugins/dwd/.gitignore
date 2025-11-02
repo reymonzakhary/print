@@ -1,0 +1,3 @@
+flask_session/*
+flask_session
+excludes_service/.env

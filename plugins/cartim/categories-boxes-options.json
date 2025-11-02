@@ -1,0 +1,4502 @@
+{
+  "categories":[
+    {
+        "poster": {
+    "colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedMultiLayeredBoard",
+        "label": "2-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedOneLayeredBoard",
+        "label": "1-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffsetLaser",
+        "label": "Soporset Premium Preprint",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "paperWeight": [
+      {
+        "value": "80",
+        "label": "80 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "90",
+        "label": "90 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "100 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "115",
+        "label": "115 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "120",
+        "label": "120 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "130",
+        "label": "130 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "140 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "150",
+        "label": "150 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "160 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "240",
+        "label": "240 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "280",
+        "label": "280 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "300",
+        "label": "300 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "350",
+        "label": "350 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossLaminatedFront",
+        "label": "Laminaat blinkend R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossLaminatedFrontBack",
+        "label": "Laminaat blinkend R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak blinkend R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak blinkend R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteLaminatedFront",
+        "label": "Laminaat mat R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteLaminatedFrontBack",
+        "label": "Laminaat mat R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteScratchFreeLaminatedFront",
+        "label": "Laminaat mat krasvrij R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteScratchFreeLaminatedFrontBack",
+        "label": "Laminaat mat krasvrij R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak mat R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak mat R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "softTouchLaminatedFront",
+        "label": "Laminaat soft touch R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "softTouchLaminatedFrontBack",
+        "label": "Laminaat soft touch R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uvVarnishFullSurfaceCoverageFront",
+        "label": "UV lak volvlak R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uvVarnishFullSurfaceCoverageFrontBack",
+        "label": "UV lak volvlak R/V",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "finishingSpotUV": [
+      {
+        "value": "noSpotUV",
+        "label": "Geen uitgespaarde UV lak",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "spotUVVarnishFront",
+        "label": "Uitgespaarde UV lak (max 30%) R",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "spotUVVarnishFrontBack",
+        "label": "Uitgespaarde UV lak (max 30%) R/V",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "drillingFinish": [
+      {
+        "value": "noDrillHoles",
+        "label": "Geen boorgaten",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "fourDrillHolesSixMm",
+        "label": "4 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCentralAtFoldSixMm",
+        "label": "1 boorgat centraal aan snede brochure (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCornerSixMm",
+        "label": "1 boorgat hoek (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoDrillHolesSixMm",
+        "label": "2 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "digitalProof": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "fiveSampleCopies": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.method": [
+      {
+        "value": "pickUp",
+        "label": "Afhalen (Cartim Print - Jan Samijnstraat 11 - 9050 Gentbrugge)",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "groupage",
+        "label": "In groupage - zonder leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "directTransport",
+        "label": "Rechtstreeks transport - met leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "bPost",
+        "label": "Bpost Gent X",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "rolledUpInBoxesOrStackedLooselyOnPallet",
+        "label": "Opgerold in dozen < 1000 ex| Los stapelen op pallet > 1000 ex",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "postersStackedLooselyOnPallet",
+        "label": "Los stapelen op pallet < 1000 ex",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "planoOnPallet",
+        "label": "Plano op pallet verpakt",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.countryCode": [
+      {
+        "value": "BEL",
+        "label": "België",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "LUX",
+        "label": "Luxemburg",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "NLD",
+        "label": "Nederland",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "FRA",
+        "label": "Frankrijk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.tailLift": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.priority": [
+      {
+        "value": "1",
+        "label": "Extended delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "Normal delivery",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "3",
+        "label": "Fast delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "4",
+        "label": "Urgent delivery",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "shipping.shipments[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "rolledUpInBoxesOrStackedLooselyOnPallet",
+        "label": "Opgerold in dozen < 1000 ex| Los stapelen op pallet > 1000 ex",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "postersStackedLooselyOnPallet",
+        "label": "Los stapelen op pallet < 1000 ex",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "planoOnPallet",
+        "label": "Plano op pallet verpakt",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageQuantity": [
+      {
+        "value": "100",
+        "label": "",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "500",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].addressant": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].address": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].postalCode": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].city": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].company": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "versions[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "versions[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ]
+  }
+    },
+    {
+        "folder": {
+    "colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedLightweightSilk",
+        "label": "Licht HH Mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedLightweightGloss",
+        "label": "Licht HH Gloss",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffsetLaser",
+        "label": "Soporset Premium Preprint",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "paperWeight": [
+      {
+        "value": "70",
+        "label": "70 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "80",
+        "label": "80 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "90",
+        "label": "90 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "100 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "115",
+        "label": "115 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "120",
+        "label": "120 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "130",
+        "label": "130 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "140 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "150",
+        "label": "150 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "160 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "240",
+        "label": "240 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "280",
+        "label": "280 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "300",
+        "label": "300 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "350",
+        "label": "350 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "foldingStyle": [
+      {
+        "value": "halfFold",
+        "label": "2 luik",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "triFold",
+        "label": "3 luik rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "zFold",
+        "label": "3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "zFoldAndRollFold",
+        "label": "3 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "zFoldAndZFold",
+        "label": "3 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "zFoldWithFrenchFold",
+        "label": "3 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelRollFold",
+        "label": "4 luik rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelAccordionFold",
+        "label": "4 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelAccordionFoldAndRollFold",
+        "label": "4 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelAccordionFoldAndZFold",
+        "label": "4 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelAccordionFoldWithFrenchFold",
+        "label": "4 luik x zigzag en 1 x kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelAccordionFoldWithFrenchFold",
+        "label": "4 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelDoubleGatefold",
+        "label": "4 luik tabernakel",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourPanelDoubleParallelFold",
+        "label": "4 luik dubbel parallel",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fivePanelRollFold",
+        "label": "5 luik rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fivePanelAccordionFold",
+        "label": "5 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fivePanelAccordionFoldAndRollFold",
+        "label": "5 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fivePanelAccordionFoldAndZFold",
+        "label": "5 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fivePanelAccordionFoldWithFrenchFold",
+        "label": "5 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixPanelRollFold",
+        "label": "6 luik rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixPanelAccordionFold",
+        "label": "6 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixPanelAccordionFoldAndRollFold",
+        "label": "6 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixPanelAccordionFoldAndZFold",
+        "label": "6 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixPanelAccordionFoldWithFrenchFold",
+        "label": "6 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sevenPanelAccordionFold",
+        "label": "7 luik zigzag",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "sevenPanelAccordionFoldAndRollFold",
+        "label": "7 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sevenPanelAccordionFoldAndZFold",
+        "label": "7 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sevenPanelAccordionFoldWithFrenchFold",
+        "label": "7 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "eightPanelAccordionFold",
+        "label": "8 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "eightPanelAccordionFoldAndRollFold",
+        "label": "8 luik zigzag en rolvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "eightPanelAccordionFoldAndZFold",
+        "label": "8 luik zigzag en 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "eightPanelAccordionFoldWithFrenchFold",
+        "label": "8 luik zigzag met kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "eightPagesFrenchFold",
+        "label": "folder 8 blz kruisvouw / kruisvouw 8 blz",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "sixteenPagesFrenchFold",
+        "label": "folder 16 blz kruisvouw / kruisvouw 16 blz",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "thirtytwoPagesFrenchFold",
+        "label": "folder 32 blz kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "shortSideHalfFoldThenFourPanelAccordion",
+        "label": "in 2 op korte kant daarna 4 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "shortSideHalfFoldThenZFold",
+        "label": "in 2 op korte kant daarna 3 luik zigzag",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "frenchFold",
+        "label": "kruisvouw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "frenchFoldWithCutOffScar",
+        "label": "kruisvouw met afsnit",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossLaminatedFrontBack",
+        "label": "Laminaat blinkend R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak blinkend R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteLaminatedFrontBack",
+        "label": "Laminaat mat R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteScratchFreeLaminatedFrontBack",
+        "label": "Laminaat mat krasvrij R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak mat R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "softTouchLaminatedFrontBack",
+        "label": "Laminaat soft touch R/V",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "creasing": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "fiveSampleCopies": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "digitalProof": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "versions[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "versions[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.method": [
+      {
+        "value": "pickUp",
+        "label": "Afhalen (Cartim Print - Jan Samijnstraat 11 - 9050 Gentbrugge)",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "groupage",
+        "label": "In groupage - zonder leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "directTransport",
+        "label": "Rechtstreeks transport - met leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "bPost",
+        "label": "Bpost Gent X",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.countryCode": [
+      {
+        "value": "BEL",
+        "label": "België",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "LUX",
+        "label": "Luxemburg",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "NLD",
+        "label": "Nederland",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "FRA",
+        "label": "Frankrijk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.tailLift": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.priority": [
+      {
+        "value": "1",
+        "label": "Extended delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "Normal delivery",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "3",
+        "label": "Fast delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "4",
+        "label": "Urgent delivery",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "shipping.shipments[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageQuantity": [
+      {
+        "value": "25",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "50",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].addressant": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].address": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].postalCode": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].city": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].company": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ]
+  }
+    },
+    {
+        "perfectBinding": {
+    "cover.colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "cover.nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "cover.paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedMultiLayeredBoard",
+        "label": "2-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedOneLayeredBoard",
+        "label": "1-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "cover.paperWeight": [
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "190",
+        "label": "190 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "200",
+        "label": "200 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "240",
+        "label": "240 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "280",
+        "label": "280 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "300",
+        "label": "300 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "350",
+        "label": "350 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling cover",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossLaminatedFront",
+        "label": "Laminaat blinkend",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak blinkend",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteLaminatedFront",
+        "label": "Laminaat mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteScratchFreeLaminatedFront",
+        "label": "Laminaat mat krasvrij",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "softTouchLaminatedFront",
+        "label": "Laminaat soft touch",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uvVarnishFullSurfaceCoverageFront",
+        "label": "UV lak volvlak",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.finishingSpotUV": [
+      {
+        "value": "noSpotUV",
+        "label": "Geen uitgespaarde UV lak",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "spotUVVarnishFront",
+        "label": "Uitgespaarde UV lak (max 30%) R",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.gateFold": [
+      {
+        "value": "noGateFold",
+        "label": "Geen flap",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "onePanel",
+        "label": "Cover met 1 flap",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoPanel",
+        "label": "Cover met 2 flappen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.gateWidth": [
+      {
+        "value": "gateWidthSmallerThanInnerPages",
+        "label": "Flap kleiner dan snede binnenwerk",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "gateWidthEqualToInnerPages",
+        "label": "Flap gelijk met snede binnenwerk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "innerPages.nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "innerPages.finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak blinkend R/V",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFrontBack",
+        "label": "Volvlak dispertielak mat R/V",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedLightweightSilk",
+        "label": "Licht HH Mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedLightweightGloss",
+        "label": "Licht HH Gloss",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffsetLaser",
+        "label": "Soporset Premium Preprint",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "innerPages.paperWeight": [
+      {
+        "value": "70",
+        "label": "70 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "80",
+        "label": "80 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "90",
+        "label": "90 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "100 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "115",
+        "label": "115 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "120",
+        "label": "120 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "130",
+        "label": "130 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "140 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "150",
+        "label": "150 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "160 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "200",
+        "label": "200 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.nPages": [
+      {
+        "value": "32",
+        "label": "cover 4 blz + 32 blz bw",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "36",
+        "label": "cover 4 blz + 36 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "40",
+        "label": "cover 4 blz + 40 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "44",
+        "label": "cover 4 blz + 44 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "48",
+        "label": "cover 4 blz + 48 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "52",
+        "label": "cover 4 blz + 52 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "56",
+        "label": "cover 4 blz + 56 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "60",
+        "label": "cover 4 blz + 60 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "64",
+        "label": "cover 4 blz + 64 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "68",
+        "label": "cover 4 blz + 68 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "72",
+        "label": "cover 4 blz + 72 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "76",
+        "label": "cover 4 blz + 76 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "80",
+        "label": "cover 4 blz + 80 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "84",
+        "label": "cover 4 blz + 84 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "88",
+        "label": "cover 4 blz + 88 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "92",
+        "label": "cover 4 blz + 92 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "96",
+        "label": "cover 4 blz + 96 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "cover 4 blz + 100 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "104",
+        "label": "cover 4 blz + 104 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "108",
+        "label": "cover 4 blz + 108 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "112",
+        "label": "cover 4 blz + 112 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "116",
+        "label": "cover 4 blz + 116 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "120",
+        "label": "cover 4 blz + 120 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "124",
+        "label": "cover 4 blz + 124 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "128",
+        "label": "cover 4 blz + 128 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "132",
+        "label": "cover 4 blz + 132 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "136",
+        "label": "cover 4 blz + 136 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "cover 4 blz + 140 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "144",
+        "label": "cover 4 blz + 144 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "148",
+        "label": "cover 4 blz + 148 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "152",
+        "label": "cover 4 blz + 152 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "156",
+        "label": "cover 4 blz + 156 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "cover 4 blz + 160 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "164",
+        "label": "cover 4 blz + 164 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "168",
+        "label": "cover 4 blz + 168 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "172",
+        "label": "cover 4 blz + 172 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "176",
+        "label": "cover 4 blz + 176 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "180",
+        "label": "cover 4 blz + 180 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "184",
+        "label": "cover 4 blz + 184 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "188",
+        "label": "cover 4 blz + 188 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "192",
+        "label": "cover 4 blz + 192 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "196",
+        "label": "cover 4 blz + 196 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "200",
+        "label": "cover 4 blz + 200 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "204",
+        "label": "cover 4 blz + 204 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "208",
+        "label": "cover 4 blz + 208 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "212",
+        "label": "cover 4 blz + 212 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "216",
+        "label": "cover 4 blz + 216 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "220",
+        "label": "cover 4 blz + 220 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "224",
+        "label": "cover 4 blz + 224 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "228",
+        "label": "cover 4 blz + 228 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "232",
+        "label": "cover 4 blz + 232 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "236",
+        "label": "cover 4 blz + 236 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "240",
+        "label": "cover 4 blz + 240 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "244",
+        "label": "cover 4 blz + 244 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "248",
+        "label": "cover 4 blz + 248 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "252",
+        "label": "cover 4 blz + 252 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "256",
+        "label": "cover 4 blz + 256 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "260",
+        "label": "cover 4 blz + 260 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "264",
+        "label": "cover 4 blz + 264 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "268",
+        "label": "cover 4 blz + 268 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "272",
+        "label": "cover 4 blz + 272 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "276",
+        "label": "cover 4 blz + 276 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "280",
+        "label": "cover 4 blz + 280 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "284",
+        "label": "cover 4 blz + 284 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "288",
+        "label": "cover 4 blz + 288 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "292",
+        "label": "cover 4 blz + 292 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "296",
+        "label": "cover 4 blz + 296 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "300",
+        "label": "cover 4 blz + 300 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "304",
+        "label": "cover 4 blz + 304 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "308",
+        "label": "cover 4 blz + 308 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "312",
+        "label": "cover 4 blz + 312 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "316",
+        "label": "cover 4 blz + 316 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "320",
+        "label": "cover 4 blz + 320 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "324",
+        "label": "cover 4 blz + 324 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "328",
+        "label": "cover 4 blz + 328 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "332",
+        "label": "cover 4 blz + 332 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "336",
+        "label": "cover 4 blz + 336 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "340",
+        "label": "cover 4 blz + 340 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "344",
+        "label": "cover 4 blz + 344 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "348",
+        "label": "cover 4 blz + 348 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "352",
+        "label": "cover 4 blz + 352 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "356",
+        "label": "cover 4 blz + 356 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "360",
+        "label": "cover 4 blz + 360 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "364",
+        "label": "cover 4 blz + 364 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "368",
+        "label": "cover 4 blz + 368 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "372",
+        "label": "cover 4 blz + 372 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "376",
+        "label": "cover 4 blz + 376 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "380",
+        "label": "cover 4 blz + 380 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "384",
+        "label": "cover 4 blz + 384 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "388",
+        "label": "cover 4 blz + 388 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "392",
+        "label": "cover 4 blz + 392 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "396",
+        "label": "cover 4 blz + 396 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "400",
+        "label": "cover 4 blz + 400 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "404",
+        "label": "cover 4 blz + 404 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "408",
+        "label": "cover 4 blz + 408 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "412",
+        "label": "cover 4 blz + 412 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "416",
+        "label": "cover 4 blz + 416 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "420",
+        "label": "cover 4 blz + 420 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "424",
+        "label": "cover 4 blz + 424 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "428",
+        "label": "cover 4 blz + 428 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "432",
+        "label": "cover 4 blz + 432 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "436",
+        "label": "cover 4 blz + 436 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "440",
+        "label": "cover 4 blz + 440 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "444",
+        "label": "cover 4 blz + 444 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "448",
+        "label": "cover 4 blz + 448 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "452",
+        "label": "cover 4 blz + 452 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "456",
+        "label": "cover 4 blz + 456 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "460",
+        "label": "cover 4 blz + 460 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "464",
+        "label": "cover 4 blz + 464 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "468",
+        "label": "cover 4 blz + 468 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "472",
+        "label": "cover 4 blz + 472 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "476",
+        "label": "cover 4 blz + 476 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "480",
+        "label": "cover 4 blz + 480 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "484",
+        "label": "cover 4 blz + 484 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "488",
+        "label": "cover 4 blz + 488 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "492",
+        "label": "cover 4 blz + 492 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "496",
+        "label": "cover 4 blz + 496 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "500",
+        "label": "cover 4 blz + 500 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "504",
+        "label": "cover 4 blz + 504 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "508",
+        "label": "cover 4 blz + 508 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "512",
+        "label": "cover 4 blz + 512 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "516",
+        "label": "cover 4 blz + 516 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "520",
+        "label": "cover 4 blz + 520 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "524",
+        "label": "cover 4 blz + 524 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "528",
+        "label": "cover 4 blz + 528 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "532",
+        "label": "cover 4 blz + 532 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "536",
+        "label": "cover 4 blz + 536 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "540",
+        "label": "cover 4 blz + 540 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "544",
+        "label": "cover 4 blz + 544 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "548",
+        "label": "cover 4 blz + 548 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "552",
+        "label": "cover 4 blz + 552 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "556",
+        "label": "cover 4 blz + 556 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "560",
+        "label": "cover 4 blz + 560 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "564",
+        "label": "cover 4 blz + 564 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "568",
+        "label": "cover 4 blz + 568 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "572",
+        "label": "cover 4 blz + 572 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "576",
+        "label": "cover 4 blz + 576 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "580",
+        "label": "cover 4 blz + 580 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "584",
+        "label": "cover 4 blz + 584 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "588",
+        "label": "cover 4 blz + 588 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "592",
+        "label": "cover 4 blz + 592 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "596",
+        "label": "cover 4 blz + 596 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "600",
+        "label": "cover 4 blz + 600 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "604",
+        "label": "cover 4 blz + 604 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "608",
+        "label": "cover 4 blz + 608 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "612",
+        "label": "cover 4 blz + 612 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "616",
+        "label": "cover 4 blz + 616 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "620",
+        "label": "cover 4 blz + 620 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "624",
+        "label": "cover 4 blz + 624 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "628",
+        "label": "cover 4 blz + 628 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "632",
+        "label": "cover 4 blz + 632 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "636",
+        "label": "cover 4 blz + 636 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "640",
+        "label": "cover 4 blz + 640 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "644",
+        "label": "cover 4 blz + 644 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "648",
+        "label": "cover 4 blz + 648 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "652",
+        "label": "cover 4 blz + 652 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "656",
+        "label": "cover 4 blz + 656 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "660",
+        "label": "cover 4 blz + 660 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "664",
+        "label": "cover 4 blz + 664 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "668",
+        "label": "cover 4 blz + 668 blz bw",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "672",
+        "label": "cover 4 blz + 672 blz bw",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "drillingFinish": [
+      {
+        "value": "noDrillHoles",
+        "label": "Geen boorgaten",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "eightDieCutDrillHolesEightMm",
+        "label": "8 gestanste gaten in cover (8mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourDrillHolesSixMm",
+        "label": "4 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCentralAtFoldSixMm",
+        "label": "1 boorgat centraal aan snede brochure (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCornerSixMm",
+        "label": "1 boorgat hoek (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoDrillHolesSixMm",
+        "label": "2 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "digitalProof": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "fiveSampleCopies": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.method": [
+      {
+        "value": "pickUp",
+        "label": "Afhalen (Cartim Print - Jan Samijnstraat 11 - 9050 Gentbrugge)",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "groupage",
+        "label": "In groupage - zonder leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "directTransport",
+        "label": "Rechtstreeks transport - met leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "bPost",
+        "label": "Bpost Gent X",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.countryCode": [
+      {
+        "value": "BEL",
+        "label": "België",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "LUX",
+        "label": "Luxemburg",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "NLD",
+        "label": "Nederland",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "FRA",
+        "label": "Frankrijk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.tailLift": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.priority": [
+      {
+        "value": "1",
+        "label": "Extended delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "Normal delivery",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "3",
+        "label": "Fast delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "4",
+        "label": "Urgent delivery",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "shipping.shipments[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageQuantity": [
+      {
+        "value": "5",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "10",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "20",
+        "label": "",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "25",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].addressant": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].address": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].postalCode": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].city": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].company": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ]
+  }
+    },
+    {
+        "stitchBinding": {
+    "cover.colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "cover.nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "cover.paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedMultiLayeredBoard",
+        "label": "2-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedOneLayeredBoard",
+        "label": "1-zijdig sulfaatkarton",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "cover.paperWeight": [
+      {
+        "value": "120",
+        "label": "120 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "130",
+        "label": "130 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "140 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "150",
+        "label": "150 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "160 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "190",
+        "label": "190 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "200",
+        "label": "200 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "240",
+        "label": "240 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "280",
+        "label": "280 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "300",
+        "label": "300 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "350",
+        "label": "350 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling cover",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossLaminatedFront",
+        "label": "Laminaat blinkend",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak blinkend",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteLaminatedFront",
+        "label": "Laminaat mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteScratchFreeLaminatedFront",
+        "label": "Laminaat mat krasvrij",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "softTouchLaminatedFront",
+        "label": "Laminaat soft touch",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uvVarnishFullSurfaceCoverageFront",
+        "label": "UV lak volvlak",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.finishingSpotUV": [
+      {
+        "value": "noSpotUV",
+        "label": "Geen uitgespaarde UV lak",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "spotUVVarnishFront",
+        "label": "Uitgespaarde UV lak (max 30%) R",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.gateFold": [
+      {
+        "value": "noGateFold",
+        "label": "Geen flap",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "onePanel",
+        "label": "Cover met 1 flap",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoPanel",
+        "label": "Cover met 2 flappen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "cover.gateWidth": [
+      {
+        "value": "gateWidthSmallerThanInnerPages",
+        "label": "Flap kleiner dan snede binnenwerk",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "gateWidthEqualToInnerPages",
+        "label": "Flap gelijk met snede binnenwerk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.colorIntent": [
+      {
+        "value": "F0B0",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B0",
+        "label": "R quadri",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F1B0",
+        "label": "R zwart",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "F4B4",
+        "label": "R/V quadri",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "F1B1",
+        "label": "R/V zwart",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.nFrontPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "innerPages.nBackPMS": [
+      {
+        "value": "1",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "0",
+        "label": "",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "innerPages.paperType": [
+      {
+        "value": "coatedSilk",
+        "label": "Maco half mat",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "coatedGloss",
+        "label": "Maco gloss",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedEco95CIE",
+        "label": "Circle PRINT",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedThickenedSilk",
+        "label": "Magno volume",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedExtraWhite",
+        "label": "Heaven 42",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "coatedLightweightSilk",
+        "label": "Licht HH Mat",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "coatedLightweightGloss",
+        "label": "Licht HH Gloss",
+        "default": false,
+        "api_available": false
+      },
+      {
+        "value": "uncoatedOffset",
+        "label": "Maxi offset",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedOffsetLaser",
+        "label": "Soporset Premium Preprint",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedEco95CIE",
+        "label": "Circle offset 95 Cie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "uncoatedCream",
+        "label": "Biotop",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "innerPages.paperWeight": [
+      {
+        "value": "70",
+        "label": "70 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "80",
+        "label": "80 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "90",
+        "label": "90 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "100",
+        "label": "100 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "115",
+        "label": "115 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "120",
+        "label": "120 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "130",
+        "label": "130 gr",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "140",
+        "label": "140 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "150",
+        "label": "150 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "160",
+        "label": "160 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "170",
+        "label": "170 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "200",
+        "label": "200 gr",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "250",
+        "label": "250 gr",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.finishing": [
+      {
+        "value": "noFinishing",
+        "label": "Geen veredeling cover",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "glossVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak blinkend",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "matteVarnishFullSurfaceCoverageFront",
+        "label": "Volvlak dispertielak mat",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "innerPages.nPages": [
+      {
+        "value": "4",
+        "label": "4",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "8",
+        "label": "8",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "12",
+        "label": "12",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "16",
+        "label": "16",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "20",
+        "label": "20",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "24",
+        "label": "24",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "28",
+        "label": "28",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "32",
+        "label": "32",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "36",
+        "label": "36",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "40",
+        "label": "40",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "44",
+        "label": "44",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "48",
+        "label": "48",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "52",
+        "label": "52",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "56",
+        "label": "56",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "60",
+        "label": "60",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "64",
+        "label": "64",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "68",
+        "label": "68",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "72",
+        "label": "72",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "76",
+        "label": "76",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "80",
+        "label": "80",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "84",
+        "label": "84",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "88",
+        "label": "88",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "92",
+        "label": "92",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "96",
+        "label": "96",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "stitchType": [
+      {
+        "value": "twoLoopStitches",
+        "label": "2 oognietjes",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourLoopStitches",
+        "label": "4 oognietjes",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "noStitches",
+        "label": "geen nietjes",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "fourSaddleStitches",
+        "label": "4 nietjes",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoSaddleStitches",
+        "label": "2 nietjes",
+        "default": true,
+        "api_available": true
+      }
+    ],
+    "drillingFinish": [
+      {
+        "value": "noDrillHoles",
+        "label": "Geen boorgaten",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "fourDrillHolesSixMm",
+        "label": "4 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCentralAtFoldSixMm",
+        "label": "1 boorgat centraal aan snede brochure (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "oneDrillHoleCornerSixMm",
+        "label": "1 boorgat hoek (6mm)",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "twoDrillHolesSixMm",
+        "label": "2 boorgaten (6mm)",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "digitalProof": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "fiveSampleCopies": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "mailingFold": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.method": [
+      {
+        "value": "pickUp",
+        "label": "Afhalen (Cartim Print - Jan Samijnstraat 11 - 9050 Gentbrugge)",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "groupage",
+        "label": "In groupage - zonder leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "directTransport",
+        "label": "Rechtstreeks transport - met leverdatumgarantie",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "bPost",
+        "label": "Bpost Gent X",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.countryCode": [
+      {
+        "value": "BEL",
+        "label": "België",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "LUX",
+        "label": "Luxemburg",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "NLD",
+        "label": "Nederland",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "FRA",
+        "label": "Frankrijk",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.tailLift": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.priority": [
+      {
+        "value": "1",
+        "label": "Flexible delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "2",
+        "label": "Normal delivery",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "3",
+        "label": "Fast delivery",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "4",
+        "label": "Urgent delivery",
+        "default": false,
+        "api_available": false
+      }
+    ],
+    "shipping.shipments[]": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].quantity": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageType": [
+      {
+        "value": "paperBandBoxes",
+        "label": "Onder papierenband + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxes",
+        "label": "Handzaam in dozen",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "stackedLooselyOnPallet",
+        "label": "Los stapelen op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianDistributionMediaNorm",
+        "label": "Verpakken volgens Belgische distributiedienst",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "BelgianPostDistributionNorm",
+        "label": "Verpakken volgens Belgische postnormen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "cardboardBoxWithLabels",
+        "label": "Handzaam in dozen met etiketten",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedLooselyOnPallet",
+        "label": "Onder PVC strap + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "strapStackedBoxes",
+        "label": "Onder PVC strap + in dozen",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedLooselyOnPallet",
+        "label": "In folie + los op pallet",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "plasticFilmStackedBoxes",
+        "label": "In folie + in dozen",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].packageQuantity": [
+      {
+        "value": "20",
+        "label": "",
+        "default": true,
+        "api_available": true
+      },
+      {
+        "value": "25",
+        "label": "",
+        "default": false,
+        "api_available": true
+      },
+      {
+        "value": "50",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].addressant": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].address": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].postalCode": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].city": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ],
+    "shipping.shipments[].company": [
+      {
+        "value": "",
+        "label": "",
+        "default": false,
+        "api_available": true
+      }
+    ]
+  }
+    }
+  ]
+}

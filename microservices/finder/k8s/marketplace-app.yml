@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketplace
+  namespace: cec
+  labels:
+    app: marketplace
+spec:
+  selector:
+    matchLabels:
+      app: marketplace
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: marketplace
+    spec:
+      containers:
+        - name: marketplace
+          image: <IMAGE>
+          workingDir: /var/www  # Ensure correct working directory
+          env:
+            - name: PYTHONPATH
+              value: "/var/www"
+          ports:
+            - containerPort: 5000
+              name: marketplace
+# Volume mounts configuration
+          volumeMounts:
+            # Configuration for CEC Assortment volume
+            - name: cec-assortment-config
+              mountPath: /var/crt/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+
+            # Configuration for CEC Marketplace Environment
+            - name: cec-marketplace-env
+              mountPath: /var/www/.env
+              subPath: .env
+
+          # Lifecycle configuration
+#          lifecycle:
+#            # Command(s) to execute after container startup
+#            postStart:
+#              exec:
+#                # Copy configuration files to their proper locations
+#                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-marketplace-env
+          configMap:
+            name: cec-marketplace-env
+            items:
+              - key: .env
+                path: .env

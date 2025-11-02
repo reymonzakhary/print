@@ -1,0 +1,77 @@
+<?php
+
+
+namespace App\Repositories;
+
+use App\Contracts\InitModelAbstract;
+use App\Contracts\RepositoryEloquentInterface;
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class Repostitory
+ * @package App\Repositories
+ */
+class DesignProviderRepository extends InitModelAbstract implements RepositoryEloquentInterface
+{
+
+    /**
+     * default access
+     * @var array
+     */
+    protected string $ctx = 'mgr'; // mgr;
+
+    /**
+     * @inheritDoc
+     */
+    public function show(int $id): ?Model
+    {
+        if ($status = $this->model->where('id', $id)->first()) {
+            return $status;
+        }
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(int $per_page = 10)
+    {
+        return $this->model->paginate($per_page);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $attributes): Model
+    {
+        $status = $this->model->create($attributes);
+        return $status;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(int $id, array $attributes): bool
+    {
+        if ($status = $this->model->where('id', $id)->first()) {
+            return $status->update(
+                $attributes
+            );
+        }
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $id): bool
+    {
+        $status = $this->model->where('id', (int)$id)->first();
+        if ($status) {
+            if ($status->delete()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

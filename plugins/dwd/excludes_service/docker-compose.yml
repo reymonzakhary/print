@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  dwd-api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./rules/custom_rules.json:/app/custom_rules.json:ro
+    environment:
+      - GIN_MODE=release

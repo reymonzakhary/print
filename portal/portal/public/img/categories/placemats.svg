@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 295 295" style="enable-background:new 0 0 295 295;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:#E5E5E5;}
+	.st2{fill:#F2F2F2;}
+	.st3{fill:#03A9FF;}
+	.st4{fill:#B9B8B8;}
+</style>
+<rect x="48.6" y="36.5" transform="matrix(-1 -4.489710e-11 4.489710e-11 -1 245.1613 283.0968)" class="st0" width="148" height="210"/>
+<rect x="73.5" y="44.5" transform="matrix(4.489748e-11 -1 1 4.489748e-11 -2.0399 297.0399)" class="st1" width="148" height="210"/>
+<g>
+	<circle class="st2" cx="147.5" cy="147.5" r="40.5"/>
+	<path class="st3" d="M147.5,109c21.2,0,38.5,17.3,38.5,38.5S168.7,186,147.5,186S109,168.7,109,147.5S126.3,109,147.5,109
+		 M147.5,105c-23.5,0-42.5,19-42.5,42.5s19,42.5,42.5,42.5s42.5-19,42.5-42.5S171,105,147.5,105L147.5,105z"/>
+</g>
+<g>
+	<rect x="42.5" y="210" class="st4" width="210" height="13.6"/>
+</g>
+<rect x="194.9" y="108" class="st4" width="6.1" height="77"/>
+<polygon class="st4" points="213,185 206.9,185 206.9,136.1 213,106 "/>
+<rect x="218.9" y="122" class="st4" width="6.1" height="63"/>
+<rect x="216.4" y="114.3" class="st4" width="11" height="19"/>
+<polygon class="st4" points="202.5,127 193.5,127 192.5,108 203.5,108 "/>
+</svg>

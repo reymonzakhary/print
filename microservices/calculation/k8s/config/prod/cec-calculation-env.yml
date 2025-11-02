@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  .env: |
+    PORT=3333
+    mongoURI=mongodb+srv://doadmin:0ex275G86IT1OPf3@private-db-mongodb-ams3-cec-prod-cdf6b254.mongo.ondigitalocean.com/admin?authSource=admin&replicaSet=db-mongodb-ams3-cec-prod&tls=true&tlsCAFile=/var/crt/ca-certificate.crt
+    APP_KEY=cec.b94d27b9934d3e08a52e52d7da7dabfae7e88ffa992c6b2c71f4920a9f1304e1ab12aace6e4bdfc63e621984d5a56e4d7dbf5008
+    HASH_TYPE=sha256
+kind: ConfigMap
+metadata:
+  managedFields:
+    - apiVersion: v1
+  name: cec-calculation-env
+  namespace: cec

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  .env: |
+    PORT=3333
+    mongoURI=mongodb+srv://doadmin:fCMt8796jW251eF0@private-db-mongodb-ams3-cec-dev-7aa88438.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=db-mongodb-ams3-cec-dev&tlsCAFile=/var/crt/ca-certificate.crt
+kind: ConfigMap
+metadata:
+  managedFields:
+    - apiVersion: v1
+  name: cec-options-env
+  namespace: cec

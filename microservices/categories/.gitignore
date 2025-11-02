@@ -1,0 +1,6 @@
+categories/.env
+categories/node_modules
+categories/yarn.lock
+
+# Misc
+.idea

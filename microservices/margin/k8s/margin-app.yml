@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: margin
+  namespace: cec
+  labels:
+    app: margin
+spec:
+  selector:
+    matchLabels:
+      app: margin
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: margin
+    spec:
+      containers:
+        - name: margin
+          image: <IMAGE>
+          ports:
+            - containerPort: 3333
+              name: margin
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-margin-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-margin-env
+          configMap:
+            name: cec-margin-env
+            items:
+              - key: .env
+                path: .env

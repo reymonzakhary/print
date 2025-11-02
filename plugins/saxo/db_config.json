@@ -1,0 +1,10 @@
+{
+  "db": {
+    "url": "mongodb://",
+    "user": "admin",
+    "password": "ad",
+    "DB": "assortmentDB",
+    "port": "27017",
+    "name": "assortments"
+  }
+}

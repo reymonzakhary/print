@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: finder-manifest
+    ports:
+      - "8090:8090"
+    environment:
+      - MONGO_URI=mongodb://admin:ad@assortmentsdb:27017
+    restart: always

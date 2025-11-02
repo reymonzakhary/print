@@ -1,0 +1,25 @@
+services:
+  cartimprint:
+    build: .
+    container_name: cartimprint_service
+    ports:
+      - "5070:5000"
+    environment:
+      - CONFIG=Development
+      - APP_PORT=5000
+      - MONGODB_DATABASE=assortments
+      - MONGODB_HOSTNAME=assortmentDB
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=ad
+      - AUTHENTICATION_SOURCE=admin
+    restart: unless-stopped
+    networks:
+      - cec_backend
+
+networks:
+  cec_backend:
+    external: true
+
+
+
+

@@ -1,0 +1,119 @@
+version: "3.9"
+services:
+
+  gateway:
+    image: reymonzakhary/gateway:v3
+    container_name: gateway
+    hostname: gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "6001:6001"
+    volumes:
+      - ./gateway:/var/www:cached
+    tty: true
+    working_dir: /var/www
+    depends_on:
+      - postgres
+      - redis
+
+  ##############################
+  #####     assortments    #####
+  ##############################
+  assortments:
+    image: reymonzakhary/assortments:v1
+    container_name: assortments
+    restart: unless-stopped
+    expose:
+      - 5000
+    ports:
+      - "5001:5000"
+    environment:
+      APP_ENV: "local"
+      APP_DEBUG: 1
+      APP_PORT: 5000
+      MONGODB_DATABASE: admin
+      MONGODB_USERNAME: doadmin
+      MONGODB_PASSWORD: S5EF891XAQ067gv3
+      MONGODB_HOSTNAME: mongodb+srv://doadmin:S5EF891XAQ067gv3@db-k8s-mongodb-ams3-prod-67e3a204.mongo.ondigitalocean.com/tls=true
+    volumes:
+      - ./microservices/assortments/:/var/www
+    networks:
+      - backend
+
+  ##############################
+  #####       NUXT         #####
+  ##############################
+  nuxt:
+    image: reymonzakhary/mgr:dv4
+    container_name: nuxt
+    environment:
+      - VIRTUAL_HOST=prindustry.test
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - ./portal:/app
+    command: ["bash", "-c", "yarn dev"]
+
+
+  #  / ****** DataBase ****** /
+  postgres:
+    image: postgres:alpine
+    container_name: db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=cec
+      - POSTGRES_USER=default
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./databases/production:/var/lib/postgresql/data
+
+  #  / ****** Redis ****** /
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    expose:
+      - "6379"
+
+  #  / ****** Mongodb ****** /
+  assortmentDB:
+    image: mongo:4.4.3
+    container_name: assortmentDB
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=ad
+      - MONGO_INITDB_USERNAME=admin
+      - MONGO_INITDB_PASSWORD=ad
+      - MONGO_INITDB_DATABASE=assortments
+      - MONGO_NON_ROOT_USERNAME=admin
+      - MONGO_NON_ROOT_PASSWORD=ad
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./databases/production/assortments:/data/db
+    networks:
+      - backend
+
+
+volumes:
+  databases:
+  node_modules:
+  redis-data:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

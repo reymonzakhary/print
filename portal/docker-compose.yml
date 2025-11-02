@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  ##############################
+  #####       NUXT         #####
+  ##############################
+  nuxt:
+    build: ./portal
+    container_name: nuxt
+    environment:
+      - VIRTUAL_HOST=app.test
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - ./portal:/app
+      - /app/node_modules
+    command: [
+      "bash",
+      "-c",
+      "curl --compressed -o- -L https://yarnpkg.com/install.sh | bash &&
+        npm config set '@fortawesome:registry' https://npm.fontawesome.com/ &&
+        npm config set '//npm.fontawesome.com/:_authToken' 68DCA13C-6B01-4C55-B91D-D3C65EBE8592 &&
+        yarn &&
+        yarn run dev",
+    ]
+
+################################################
+##              databases group               ##
+################################################
+volumes:
+  databases:
+  node_modules:
+  redis-data:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+
+
+

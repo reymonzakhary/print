@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: price
+  namespace: cec
+  labels:
+    app: price
+spec:
+  selector:
+    matchLabels:
+      app: price
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: price
+    spec:
+      containers:
+        - name: price
+          image: <IMAGE>
+          ports:
+            - containerPort: 3333
+              name: price
+          volumeMounts:
+            - name: cec-assortment-config
+              mountPath: /tmp/ca-certificate.crt
+              subPath: ca-certificate.crt
+              readOnly: true
+            - name: cec-price-env
+              mountPath: /tmp/.env
+              subPath: .env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /tmp/ca-certificate.crt /var/crt && cp -r /tmp/.env /var/www/.env"]
+      volumes:
+        - name: cec-assortment-config
+          configMap:
+            name: cec-assortment-config
+        - name: cec-price-env
+          configMap:
+            name: cec-price-env
+            items:
+              - key: .env
+                path: .env

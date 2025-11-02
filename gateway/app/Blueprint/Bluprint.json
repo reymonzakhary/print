@@ -1,0 +1,116 @@
+{
+    "name": "low res",
+    "description": "this is a low res action",
+    "processors": [
+        {
+            "node": "1",
+            "in": {
+                "from": "files",
+                "mode": "FileRequire",
+                "selector": {},
+                "files": {
+                    "xls": {
+                        "from": "files",
+                        "mode": "request",
+                        "model": "SimpleExcelReader",
+                        "type": "request",
+                        "validate": {
+                            "xls": "required|file|mimes:xls,xlsx"
+                        },
+                        "selector": {
+                            "with": {
+                                "key": "columns",
+                                "value": [
+                                    "first_name",
+                                    "last_name",
+                                    "program"
+                                ]
+                            }
+                        }
+                    },
+                    "template": {
+                        "from": "db",
+                        "mode": "DesignProviderTemplate",
+                        "model": "DesignProviderTemplate",
+                        "lookup": {},
+                        "selector": {},
+                        "type": "model",
+                        "validate": {}
+                    }
+                }
+            },
+            "pipeline": [
+                {
+                    "name": "Find and Replace",
+                    "mode": "FindAndReplace",
+                    "actions": [
+                        {
+                            "name": "ActionName",
+                            "collection": true,
+                            "uses": {
+                                "from": "$in.files.xls",
+                                "selector": {
+                                    "type": "regex",
+                                    "key": "\\<key>",
+                                    "path": null
+                                },
+                                "value": {
+                                    "type": "snippet||string",
+                                    "value": "NameOfSnippet",
+                                    "path": ""
+                                }
+                            },
+                            "on": {
+                                "type": "file",
+                                "mime": "pdf",
+                                "from": "$in.files.template",
+                                "lookup": {
+                                    "from": "$in.files.xls",
+                                    "field": "name",
+                                    "foreignField": {
+                                        "selector": "program",
+                                        "as": "program"
+                                    },
+                                    "pipeline": [
+                                        {
+                                            "$match": {
+                                                "$expr": {
+                                                    "$eq": {
+                                                        "$$field": "$program"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "as": "actionName1"
+                        }
+                    ],
+                    "as": "NameOfOutputHasToBeUnique"
+                },
+                {
+                    "name": "Merge",
+                    "mode": "Merge",
+                    "actions": [
+                        {
+                            "name": "ActionName",
+                            "collection": true,
+                            "uses": {
+                                "from": "$NameOfOutputHasToBeUnique",
+                                "selector": {},
+                                "value": {}
+                            },
+                            "on": {},
+                            "as": "actionName2"
+                        }
+                    ],
+                    "as": "NameOfOutputHasToBeUnique2"
+                }
+            ],
+            "out": {
+                "type": "pdf"
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->string('format_address')->nullable();
+            $table->string('floor')->nullable();
+            $table->string('apartment')->nullable();
+            $table->string('neighborhood')->nullable();
+            $table->string('landmark')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->dropColumn([
+               'format_address', 'floor','apartment','neighborhood','landmark',
+            ]);
+        });
+    }
+};

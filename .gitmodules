@@ -1,0 +1,45 @@
+[submodule "portal"]
+	path = portal
+	url = git@github.com:prindustry/portal.git
+[submodule "microservices/pdftool"]
+	path = microservices/pdftool
+	url = git@github.com:prindustry/pdftool.git
+[submodule "microservices/calculation"]
+	path = microservices/calculation
+	url = git@github.com:prindustry/calculation.git
+[submodule "microservices/machines"]
+	path = microservices/machines
+	url = git@github.com:prindustry/machines.git
+[submodule "microservices/catalogues"]
+	path = microservices/catalogues
+	url = git@github.com:prindustry/catalogues.git
+[submodule "microservices/price"]
+	path = microservices/price
+	url = git@github.com:prindustry/price.git
+[submodule "microservices/margin"]
+	path = microservices/margin
+	url = git@github.com:prindustry/margin.git
+[submodule "microservices/categories"]
+	path = microservices/categories
+	url = git@github.com:prindustry/categories.git
+[submodule "admin"]
+	path = admin
+	url = git@github.com:prindustry/admin.git
+[submodule "microservices/search"]
+	path = microservices/search
+	url = git@github.com:prindustry/search.git
+[submodule "microservices/finder"]
+	path = microservices/finder
+	url = git@github.com:prindustry/finder.git
+[submodule "plugins"]
+	path = plugins
+	url = git@github.com:prindustry/plugins.git
+[submodule "docs"]
+	path = docs
+	url = git@github.com:prindustry/docs.git
+[submodule "microservices/boxes"]
+	path = microservices/boxes
+	url = git@github.com:prindustry/boxes.git
+[submodule "microservices/options"]
+	path = microservices/options
+	url = git@github.com:prindustry/options.git

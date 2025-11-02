@@ -1,0 +1,3 @@
+machines/.env
+machines/node_modules
+machines/yarn.lock

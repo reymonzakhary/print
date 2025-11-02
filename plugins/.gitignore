@@ -1,0 +1,28 @@
+# Environment files
+printcom/.env
+dwd/.env
+de-groot/.env
+cartim/.env
+probo/.env
+
+# IDE files
+printcom/.idea
+dwd/.idea
+dwd/excludes_service/.idea
+
+# Python cache
+dwd/models/__pycache__/
+
+# Flask sessions (temporary files)
+de-groot/flask_session/
+dwd/flask_session/
+cartim/flask_session/
+
+# Data files
+printcom/assortments_categories.json
+cartim/excludes.json
+cartim/extract_cartim_assortments.py
+
+# Logs and temporary files
+*.log
+*.tmp

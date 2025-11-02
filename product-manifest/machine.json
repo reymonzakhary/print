@@ -1,0 +1,19 @@
+{
+    "title": "indigo",
+    "machine_type": "indigo",
+    "primary": false,
+    "model": "indigo",
+    "rpm": 50,
+    "description": "some description",
+    "tenant_id": "203981234kl14iu4",
+    "tenant_name": "In Promo",
+    "width":"320",
+    "height":"460",
+    "active": true,
+    "calculation_build":{
+        "start_cost": true,
+        "hour_rate": false,
+        "bundle": false 
+    },
+    "price" : 1000
+}

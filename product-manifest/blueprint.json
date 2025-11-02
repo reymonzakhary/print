@@ -1,0 +1,443 @@
+{
+   "drawflow": {
+      "Home": {
+         "data": {
+            "1": {
+               "id": 1,
+               "name": "Draft",
+               "data": {
+                  "color": "cyan"
+               },
+               "class": "",
+               "html": "\n               <div>\n                  <div class=\"text-cyan-500 bg-cyan-100 border border-cyan-300 rounded-full text-center\">Draft</div>\n               </div>\n            ",
+               "typenode": false,
+               "inputs": {
+                  "input_1": {
+                     "connections": []
+                  }
+               },
+               "outputs": {
+                  "output_1": {
+                     "connections": [
+                        {
+                           "node": "3",
+                           "output": "input_1"
+                        }
+                     ]
+                  }
+               },
+               "pos_x": 249.03125,
+               "pos_y": 80.390625
+            },
+            "2": {
+               "id": 2,
+               "name": "New",
+               "data": {
+                  "color": "blue",
+                  "st": 301
+               },
+               "class": "",
+               "html": "\n               <div>\n                  <div class=\"text-blue-500 bg-blue-100 border border-blue-300 rounded-full text-center\">New</div>\n               </div>\n            ",
+               "typenode": false,
+               "inputs": {
+                  "input_1": {
+                     "connections": [
+                        {
+                           "node": "3",
+                           "input": "output_1"
+                        }
+                     ]
+                  }
+               },
+               "outputs": {
+                  "output_1": {
+                     "connections": []
+                  }
+               },
+               "pos_x": 640.03125,
+               "pos_y": 205.390625
+            },
+            "3": {
+               "id": 3,
+               "name": "Action/Transition",
+               "data": {
+                  
+                  // OR
+                  "transition": {
+                     "dynamic": false,
+                     "cond": {
+                        "operator": "-",
+                        "int": 1,
+                        "type": "minute"
+                     },
+                     "after": {
+                        "int": 1,
+                        "type": "minute"
+                     },
+                     "success": {
+                        2 //-> next status, must be in connection
+                     },
+                  },
+                  // OR
+                  "actions": [
+                     {
+                        "name": "send-prepress",
+                        "params": {
+                           "from": "email@email.com",
+                           "to": "email@email.com",
+                           "body": "Hello sir",
+                           "attachment": {
+                              "id":21,
+                              "type": "pdf/jpeg"
+                           }
+                        },
+                        "success": {
+                           2 //-> next status, must be in connection
+                        },
+                        "rejected": {
+                           6 //-> rejected status, must be in connection
+                        }
+                     }
+                  ],
+                  // AND
+                  "events": [
+                     {
+                        "name": "send-mail",
+                        "params": {
+                           "from": "email@email.com",
+                           "to": "email@email.com",
+                           "body": "Hello sir",
+                           "attachment": {
+                              "id":1,
+                              "type": "xml"
+                           }
+                        }
+                     }
+                  ],
+                  // AND
+                  "validations": [
+                     {
+                        mimes: "",
+
+                     }
+                  ],
+               },
+               "class": "action",
+               "html": "\n                  <img\n                     class=\"w-6 h-6\"\n                     src=\"/img/gear-light.svg\"\n                  />",
+               "typenode": false,
+               "inputs": {
+                  "input_1": {
+                     "connections": [
+                        {
+                           "node": "1",
+                           "input": "output_1"
+                        }
+                     ]
+                  }
+               },
+               "outputs": {
+                  "output_1": {
+                     "connections": [
+                        {
+                           "node": "2",
+                           "output": "input_1"
+                        }
+                     ]
+                  }
+               },
+               "pos_x": 508.03125,
+               "pos_y": 158.390625
+            }
+         }
+      },
+      "Other": {
+         "data": {}
+      }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+   "drawflow": {
+       "Home": {
+           "data": {
+               "1": {
+                   "id": 1,
+                   "name": "Draft",
+                   "data": {
+                       "color": "cyan"
+                   },
+                   "class": "",
+                   "html": "\n               <div>\n                  <div class=\"text-cyan-500 bg-cyan-100 border border-cyan-300 rounded-full text-center\">Draft</div>\n               </div>\n            ",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": []
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "3",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 192,
+                   "pos_y": -6
+               },
+               "2": {
+                   "id": 2,
+                   "name": "New",
+                   "data": {
+                       "color": "blue"
+                   },
+                   "class": "",
+                   "html": "\n               <div>\n                  <div class=\"text-blue-500 bg-blue-100 border border-blue-300 rounded-full text-center\">New</div>\n               </div>\n            ",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "3",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "7",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 447,
+                   "pos_y": 152
+               },
+               "3": {
+                   "id": 3,
+                   "name": "Action",
+                   "data": {},
+                   "class": "action",
+                   "html": "\n                  <img\n                     class=\"w-6 h-6\"\n                     src=\"/img/gear-light.svg\"\n                  />",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "1",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "2",
+                                   "output": "input_1"
+                               },
+                               {
+                                   "node": "8",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 496,
+                   "pos_y": 15
+               },
+               "4": {
+                   "id": 4,
+                   "name": "Ready",
+                   "data": {
+                       "color": "green"
+                   },
+                   "class": "",
+                   "html": "\n               <div>\n                  <div class=\"text-green-500 bg-green-100 border border-green-300 rounded-full text-center\">Ready</div>\n               </div>\n            ",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "5",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": []
+                       }
+                   },
+                   "pos_x": 845,
+                   "pos_y": 396
+               },
+               "5": {
+                   "id": 5,
+                   "name": "Action",
+                   "data": {},
+                   "class": "action",
+                   "html": "\n                  <img\n                     class=\"w-6 h-6\"\n                     src=\"/img/gear-light.svg\"\n                  />",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "6",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "4",
+                                   "output": "input_1"
+                               },
+                               {
+                                   "node": "8",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 877,
+                   "pos_y": 278
+               },
+               "6": {
+                   "id": 6,
+                   "name": "In production",
+                   "data": {
+                       "color": "orange"
+                   },
+                   "class": "",
+                   "html": "\n               <div>\n                  <div class=\"text-orange-500 bg-orange-100 border border-orange-300 rounded-full text-center\">In production</div>\n               </div>\n            ",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "7",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "5",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 628,
+                   "pos_y": 276
+               },
+               "7": {
+                   "id": 7,
+                   "name": "Action",
+                   "data": {},
+                   "class": "action",
+                   "html": "\n                  <img\n                     class=\"w-6 h-6\"\n                     src=\"/img/gear-light.svg\"\n                  />",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "2",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": [
+                               {
+                                   "node": "6",
+                                   "output": "input_1"
+                               },
+                               {
+                                   "node": "8",
+                                   "output": "input_1"
+                               }
+                           ]
+                       }
+                   },
+                   "pos_x": 686,
+                   "pos_y": 154
+               },
+               "8": {
+                   "id": 8,
+                   "name": "In progress",
+                   "data": {
+                       "color": "amber"
+                   },
+                   "class": "",
+                   "html": "\n               <div>\n                  <div class=\"text-amber-500 bg-amber-100 border border-amber-300 rounded-full text-center\">In progress</div>\n               </div>\n            ",
+                   "typenode": false,
+                   "inputs": {
+                       "input_1": {
+                           "connections": [
+                               {
+                                   "node": "7",
+                                   "input": "output_1"
+                               },
+                               {
+                                   "node": "5",
+                                   "input": "output_1"
+                               },
+                               {
+                                   "node": "3",
+                                   "input": "output_1"
+                               }
+                           ]
+                       }
+                   },
+                   "outputs": {
+                       "output_1": {
+                           "connections": []
+                       }
+                   },
+                   "pos_x": 1040,
+                   "pos_y": 64
+               }
+           }
+       },
+       "Other": {
+           "data": {}
+       }
+   }
+}
