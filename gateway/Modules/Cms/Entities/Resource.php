@@ -24,8 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Resource extends Model implements Sortable
 {
-    // use UsesTenantConnection, // Removed
-        SoftDeletes, SortableTrait,
+     use  SoftDeletes, SortableTrait,
         InteractsWithMedia, HasRecursiveRelationships;
 
 
@@ -46,7 +45,7 @@ class Resource extends Model implements Sortable
         'resource_id', 'language', 'content', 'sort', 'isfolder', 'locked', 'published',
         'hidden', 'searchable', 'cacheable', 'hide_children_in_tree',
         'created_by', 'updated_by', 'deleted_by', 'published_by', 'template_id',
-        'ctx_id', 'parent_id', 'resource_type_id', 'published_on', 'slug', 'locked_by', 
+        'ctx_id', 'parent_id', 'resource_type_id', 'published_on', 'slug', 'locked_by',
         'category'
     ];
 
