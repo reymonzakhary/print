@@ -26,11 +26,14 @@ class BroadcastServiceProvider extends ServiceProvider
         }
         $request->domain = $request->getSchemeAndHttpHost();
 
-        // Get current tenant using stancl/tenancy
-        $tenant = tenant();
+        // Use domain-based resolution for multi-tenancy
+        // This approach works with both Laravel WebSockets and Reverb
+        $domain = domain();
 
-        if ($tenant && $domain = optional($tenant->primary_domain)->domain) {
-            $app = App::findByKey($domain);
+        if ($domain && $fqdn = $domain->domain) {
+            // Find app by domain (fqdn) - ensures proper tenant isolation
+            $app = App::findByKey($fqdn);
+
             if ($app) {
                 config([
                     'broadcasting.connections.pusher' => [

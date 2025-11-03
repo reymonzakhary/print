@@ -120,9 +120,11 @@ class AppServiceProvider extends ServiceProvider
             'sku' => Sku::class,
         ]);
 
-        // Use stancl/tenancy helper to check if we're in tenant context
-        $tenant = tenant();
-        if ($tenant) {
+        // Use domain-based resolution for multi-tenancy
+        // This ensures proper tenant isolation and Reverb compatibility
+        $domain = domain();
+
+        if ($domain && $domain->domain) {
             config(['database.default' => 'tenant']);
             if (config('app.env') === 'production') {
                 $this->app['request']->server->set('HTTPS', 'on');
