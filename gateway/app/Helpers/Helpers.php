@@ -1,7 +1,7 @@
 <?php
 
 use App\Casts\Hostname\CustomFieldCast;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Language;
 use App\Models\Tenant;
 use App\Models\Tenants\Setting;
@@ -133,15 +133,33 @@ if (!function_exists('ean13Generator')) {
     }
 }
 
-if (!function_exists('hostname')) {
-    function hostname()
+if (!function_exists('domain')) {
+    /**
+     * Get the current domain
+     *
+     * @return Domain|null
+     */
+    function domain(): ?Domain
     {
         try {
-            return Hostname::current();
+            return Domain::current();
         } catch (\Throwable $th) {
-            //\Log::debug(['hostname' =>$th->getMessage(), 'helper' => 'Line 54 in helper']);
+            //\Log::debug(['domain' =>$th->getMessage(), 'helper' => 'domain helper']);
             return null;
         }
+    }
+}
+
+if (!function_exists('hostname')) {
+    /**
+     * Legacy helper for backward compatibility
+     * @deprecated Use domain() instead
+     *
+     * @return Domain|null
+     */
+    function hostname(): ?Domain
+    {
+        return domain();
     }
 }
 
@@ -179,7 +197,7 @@ if (!function_exists('website')) {
 if (!function_exists('tenants')) {
     function tenants()
     {
-        return Hostname::all();
+        return Domain::all();
     }
 }
 
@@ -376,7 +394,7 @@ if (!function_exists('switchSupplierWebsocket')) {
         $fqdn = Website::query()
             ->where('uuid', $uuid)
             ->firstOrFail()
-            ->hostnames()
+            ->domains()
             ->firstOrFail()
             ->getAttribute('fqdn');
 

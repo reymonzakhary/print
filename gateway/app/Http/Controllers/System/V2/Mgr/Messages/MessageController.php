@@ -9,7 +9,7 @@ use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\System\Messages\ReplyRequest;
 use App\Http\Resources\Settings\MessageResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Message;
 use Hyn\Tenancy\Environment;
 use Illuminate\Database\Eloquent\Model;
@@ -66,7 +66,7 @@ class MessageController extends Controller
         ReplyRequest $request
     ): JsonResponse|MessageResource
     {
-        $targetTenant = Hostname::query()
+        $targetTenant = Domain::query()
             ->with('website')
             ->where('id', $request->input("sender_hostname"))->first();
 

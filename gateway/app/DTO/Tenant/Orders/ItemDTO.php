@@ -4,7 +4,7 @@ namespace App\DTO\Tenant\Orders;
 
 use App\Enums\Status;
 use App\Facades\Settings;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Box;
 use App\Models\Tenants\Option;
 use App\Models\Tenants\Product;
@@ -74,10 +74,10 @@ class ItemDTO
             'product' => optional($request)['product'],
             'connection' => tenant()->uuid,
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+            'tenant_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
             'external' => false,
             'external_id' => tenant()->uuid,
-            'external_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+            'external_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
             'variations' => [],
             'category' => $this->category,
             'margins' => [],
@@ -126,7 +126,7 @@ class ItemDTO
         $price = optional(optional($request)['price'])['p'];
         $vat = $this->category['vat'] ?? 0;
         $qty = optional(optional($request)['price'])['qty'];
-        $supplier = Hostname::with('website')->where('fqdn', optional($request)['supplier_name'])->first();
+        $supplier = Domain::with('website')->where('fqdn', optional($request)['supplier_name'])->first();
         return [
             "vat" => $vat,
             "reference" => optional($request)['reference'],
@@ -225,10 +225,10 @@ class ItemDTO
                 'product' => [$product->toArray()],
                 'connection' => tenant()->uuid,
                 'tenant_id' => tenant()->uuid,
-                'tenant_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+                'tenant_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
                 'external' => false,
                 'external_id' => tenant()->uuid,
-                'external_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+                'external_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
                 'variation' => $item?->variation,
                 'category' => $product->category->toArray(),
                 'margins' => [],
@@ -329,10 +329,10 @@ class ItemDTO
             'product' => optional($request)['product'],
             'connection' => tenant()->uuid,
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+            'tenant_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
             'external' => false,
             'external_id' => tenant()->uuid,
-            'external_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+            'external_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
             'variations' => [],
             'category' => $this->category,
             'margins' => [],
@@ -468,7 +468,7 @@ class ItemDTO
             'product' => $this->handelProductLayout(optional($request)['product']),
             'connection' => optional($request)['connection'],
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
             'external' => optional($request)['external_id'] !== tenant()->uuid,
             'external_id' => optional($request)['external_id'],
             'external_name' => optional($request)['external_name'],
@@ -507,8 +507,8 @@ class ItemDTO
             'product' => $this->handelProductLayout(optional($request)['product']),
             'connection' => optional($request)['connection'],
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()->fqdn,
-            'external' => optional($request)['external_name'] !== hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
+            'external' => optional($request)['external_name'] !== domain()->fqdn,
             'external_id' => optional($request)['external_id'],
             'external_name' => optional($request)['external_name'],
             'category' => $this->category,
@@ -544,11 +544,11 @@ class ItemDTO
             'connection' => tenant()->getAttribute('uuid'),
 
             'tenant_id' => $currentTenant['uuid'] ?? tenant()->getAttribute('uuid'),
-            'tenant_name' => $currentTenant['fqdn'] ?? tenant()->hostnames()->first()?->getAttribute('fqdn'),
+            'tenant_name' => $currentTenant['fqdn'] ?? tenant()->domains()->first()?->getAttribute('fqdn'),
 
             "external" => true,
             "external_id" => tenant()->getAttribute('uuid'),
-            "external_name" => tenant()->hostnames()->first()?->getAttribute('fqdn'),
+            "external_name" => tenant()->domains()->first()?->getAttribute('fqdn'),
 
             'items' => $this->getItemsForExternalProduct($categoryData, $productData),
 
@@ -592,7 +592,7 @@ class ItemDTO
             'product' => $this->handelProductLayout(optional($request)['product']),
             'connection' => optional($request)['connection'],
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
             'external' => optional($request)['external_id'] !== tenant()->uuid,
             'external_id' => optional($request)['external_id'],
             'external_name' => optional($request)['external_name'],
@@ -625,7 +625,7 @@ class ItemDTO
             'product' => $this->handelProductLayout(optional($request)['product']),
             'connection' => optional($request)['connection'],
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
             'external' => optional($request)['external_id'] !== tenant()->uuid,
             'external_id' => optional($request)['external_id'],
             'external_name' => optional($request)['external_name'],
@@ -1302,7 +1302,7 @@ class ItemDTO
         return [
             'id' => "",
             'tenant_id' => tenant()->uuid,
-            'tenant_name' => hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
             'countries' => [],
             'name' => $name,
             'slug' => Str::slug($name),

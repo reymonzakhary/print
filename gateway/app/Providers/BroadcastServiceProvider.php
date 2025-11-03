@@ -50,7 +50,7 @@ class BroadcastServiceProvider extends ServiceProvider
             }
         }
 
-//        if ($fqdn = optional(app(Environment::class)->hostname())->fqdn) {
+//        if ($fqdn = optional(app(Environment::class)->domain())->fqdn) {
 //            $app = \BeyondCode\LaravelWebSockets\Apps\App::findByKey($fqdn);
 //            config([
 //                'broadcasting.connections.pusher' => [

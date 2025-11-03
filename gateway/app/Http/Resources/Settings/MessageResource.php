@@ -32,7 +32,7 @@ class MessageResource extends JsonResource
 			"from" => $this->from,
             'path' => $this->path,
             'depth' => $this->depth,
-            'whoami' => hostname()?->id === $this->sender_hostname? 'sender':'recipient',
+            'whoami' => domain()?->id === $this->sender_hostname? 'sender':'recipient',
 			"created_at" => $this->created_at,
 			"updated_at" => $this->updated_at
         ];

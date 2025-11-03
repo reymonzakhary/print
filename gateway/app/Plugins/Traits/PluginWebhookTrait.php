@@ -3,7 +3,7 @@
 namespace App\Plugins\Traits;
 
 use App\Enums\PluginStatus;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\PluginWebhookEvent;
 use App\Plugins\WebhookQueueService;
 use Hyn\Tenancy\Facades\TenancyFacade;
@@ -110,7 +110,7 @@ trait PluginWebhookTrait
             // First try to get from TenancyFacade (for HTTP requests)
             $website = TenancyFacade::website() ?? tenant();
             if ($website) {
-                return $website->hostnames()->first();
+                return $website->domains()->first();
             }
             return null;
         } catch (\Exception $e) {

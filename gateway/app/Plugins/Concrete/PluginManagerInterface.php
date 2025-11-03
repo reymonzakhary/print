@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Plugins\Concrete;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Plugins\Config\DefaultConfigRepository;
 use Illuminate\Http\Request;
 

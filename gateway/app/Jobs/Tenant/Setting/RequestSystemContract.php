@@ -4,7 +4,7 @@ namespace App\Jobs\Tenant\Setting;
 
 use App\Enums\ContractType;
 use App\Foundation\ContractManager\Facades\ContractManager;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\User;
 use Hyn\Tenancy\Models\Website;
 use Illuminate\Bus\Queueable;
@@ -36,7 +36,7 @@ class RequestSystemContract
             'receiver_type' => User::class,
             'receiver_connection' => 'cec',
 
-            'requester_type' => Hostname::class,
+            'requester_type' => Domain::class,
             'requester_connection' => $this->website->uuid,
             'requester_id' => $this->tenant->id,
             'type' => ContractType::INTERNAL,

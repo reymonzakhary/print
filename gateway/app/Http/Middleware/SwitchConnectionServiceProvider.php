@@ -32,7 +32,7 @@ final readonly class SwitchConnectionServiceProvider
     {
         $request->domain = $request->getSchemeAndHttpHost();
 
-        if ($fqdn = $this->environment->hostname()?->fqdn) {
+        if ($fqdn = $this->environment->domain()?->fqdn) {
             config(['auth.guards.api.provider' => 'tenant']);
             config(['auth.guards.web.provider' => 'tenant']);
             config(['database.default' => 'tenant']);
@@ -46,7 +46,7 @@ final readonly class SwitchConnectionServiceProvider
 
             $request->tenant = $this->environment->tenant();
             $request->uuid = $this->environment->tenant()?->uuid;
-            $request->hostname = hostname();
+            $request->hostname = domain();
 
             request()->merge([
                 'tenant' => $request->tenant,

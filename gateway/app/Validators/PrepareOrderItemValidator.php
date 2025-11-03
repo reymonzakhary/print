@@ -8,7 +8,7 @@ use App\DTO\Tenant\Orders\ItemDTO;
 use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Foundation\Status\Status;
 use App\Http\Requests\Items\OrderItemUpdateRequest;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Website;
 use App\Services\Tenant\Calculations\CalculationService;
 use Illuminate\Database\Eloquent\Model;
@@ -136,7 +136,7 @@ class PrepareOrderItemValidator
 
         if ($this->item->connection !== tenant()->uuid){
             $current_tenant = tenant()->uuid;
-            $contract = ContractManager::getContractWithSupplierByConnection(Hostname::class , $this->item->connection);
+            $contract = ContractManager::getContractWithSupplierByConnection(Domain::class , $this->item->connection);
             $discount = optional(optional(optional($contract)->custom_fields)->contract)['discount'];
             switchTenant( $this->item->connection);
             $proxy = app(CalculationService::class)
@@ -208,7 +208,7 @@ class PrepareOrderItemValidator
 
         if ($this->item->connection !== tenant()->uuid){
             $current_tenant = tenant()->uuid;
-            $contract = ContractManager::getContractWithSupplierByConnection(Hostname::class , $this->item->connection);
+            $contract = ContractManager::getContractWithSupplierByConnection(Domain::class , $this->item->connection);
             $discount = optional(optional(optional($contract)->custom_fields)->contract)['discount'];
             switchTenant( $this->item->connection);
             $proxy = app(CalculationService::class)

@@ -61,6 +61,22 @@ class Website extends Model
     }
 
     /**
+     * Get all domains for this tenant
+     */
+    public function domains()
+    {
+        return $this->hasMany(Domain::class, 'tenant_id');
+    }
+
+    /**
+     * Get primary domain for this tenant
+     */
+    public function domain()
+    {
+        return $this->hasOne(Domain::class, 'tenant_id')->where('is_primary', true);
+    }
+
+    /**
      * @deprecated Use domains() instead
      */
     public function hostnames()
@@ -68,14 +84,12 @@ class Website extends Model
         return $this->domains();
     }
 
-    public function domains()
-    {
-        return $this->hasMany(Domain::class, 'tenant_id');
-    }
-
+    /**
+     * @deprecated Use domain() instead
+     */
     public function hostname()
     {
-        return $this->hasOne(Domain::class, 'tenant_id')->where('is_primary', true);
+        return $this->domain();
     }
 
     /**

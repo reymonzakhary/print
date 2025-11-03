@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Clients\ClientRequest;
 use App\Http\Requests\Clients\UpdateClientRequest;
 use App\Http\Resources\Hostnames\HostnameResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Module;
 use App\Models\Npace;
 use App\Models\Supplier;
@@ -57,16 +57,16 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return HostnameResource::collection(Hostname::with('website')->paginate(10));
+        return HostnameResource::collection(Domain::with('website')->paginate(10));
     }
 
     /**
      * @param
-     * @return HostnameResource|JsonResponse
+     * @return DomainResource|JsonResponse
      */
     public function show(string $client)
     {
-        $hostname = Hostname::find($client);
+        $hostname = Domain::find($client);
         if ($hostname) {
             return HostnameResource::make($hostname);
         }
@@ -85,7 +85,7 @@ class ClientController extends Controller
         ClientRequest $request
     )
     {
-        if (!Hostname::where('fqdn', $request->get('fqdn'))->exists()) {
+        if (!Domain::where('fqdn', $request->get('fqdn'))->exists()) {
             /**
              * create website
              */
@@ -247,7 +247,7 @@ class ClientController extends Controller
     )
     {
 
-        $hostname = Hostname::where('id', $client)->first();
+        $hostname = Domain::where('id', $client)->first();
 
         if ($hostname) {
             $hostname->configure = $request->get('namespaces') ? ['namespaces' => $request->get('namespaces')] : $this->prepareConfiguration();
@@ -289,7 +289,7 @@ class ClientController extends Controller
         int $id
     ): Response|ResponseFactory
     {
-        $hostname = Hostname::where('id', $id)->first();
+        $hostname = Domain::where('id', $id)->first();
 
         if ($website = $hostname?->website()->first()) {
 

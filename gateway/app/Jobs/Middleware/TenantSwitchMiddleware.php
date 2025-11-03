@@ -16,7 +16,7 @@ class TenantSwitchMiddleware
     {
         Broadcast::purge('pusher');
 
-        if (!($fqdn = app(Environment::class)->tenant()?->hostnames()?->first()?->fqdn)) {
+        if (!($fqdn = app(Environment::class)->tenant()?->domains()?->first()?->fqdn)) {
             Log::error('command not found', ['command' => $command]);
 
             throw new LogicException(

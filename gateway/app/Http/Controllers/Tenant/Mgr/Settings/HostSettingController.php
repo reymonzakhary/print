@@ -20,7 +20,7 @@ class HostSettingController extends Controller
         string                   $key
     ): JsonResponse
     {
-        $hostname = hostname();
+        $hostname = domain();
         $settings = optional($hostname->configure)['settings'];
         $index = collect($settings)->search(fn($setting) => $setting['key'] === $key);
         $settings[$index] = array_merge(

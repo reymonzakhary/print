@@ -5,7 +5,7 @@ namespace App\Http\Controllers\System\V2\Mgr\Tenant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clients\DeliveryZoneRequest;
 use App\Models\DeliveryZone;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -19,14 +19,14 @@ class DeliveryZoneController extends Controller
      * Store delivery zones for a tenant (maintains FULL accuracy)
      *
      * @param DeliveryZoneRequest $request
-     * @param Hostname $tenant
+     * @param Domain $tenant
      * @return JsonResponse
      *
      * @throws Throwable
      */
     public function store(
         DeliveryZoneRequest $request,
-        Hostname $tenant
+        Domain $tenant
     ): JsonResponse
     {
         DB::beginTransaction();
@@ -135,7 +135,7 @@ class DeliveryZoneController extends Controller
 
     public function update(
         DeliveryZoneRequest $request,
-        Hostname $tenant
+        Domain $tenant
     ): JsonResponse
     {
         DB::beginTransaction();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\System\Mgr\Clients\Media;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clients\Media\UpdateMediaRequest;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +19,7 @@ class MediaController extends Controller
      */
     public function store(
         UpdateMediaRequest $request,
-        Hostname $hostname
+        Domain $hostname
     )
     {
         $website = $hostname?->website()->first();

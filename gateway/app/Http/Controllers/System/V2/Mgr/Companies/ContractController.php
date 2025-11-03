@@ -21,7 +21,7 @@ use App\Mail\SupplierCredentialsMail;
 use App\Mail\SupplierInvitationMail;
 use App\Models\Company;
 use App\Models\Contract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Context;
 use App\Models\Tenants\Team;
 use App\Models\Tenants\User;
@@ -95,7 +95,7 @@ class ContractController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
         // Find existing hostname by COC number or domain
-        $hostname = Hostname::query()
+        $hostname = Domain::query()
             ->where('custom_fields->coc', $request->coc)
             ->orWhere('custom_fields->domain', $request->domain)
             ->with('website')
@@ -118,7 +118,7 @@ class ContractController extends Controller
             app(ClientController::class)->store($req);
 
             // Retrieve the newly created hostname
-            $hostname = Hostname::query()
+            $hostname = Domain::query()
                 ->with('website')
                 ->where('fqdn', $request->fqdn)
                 ->first();
@@ -146,7 +146,7 @@ class ContractController extends Controller
         $contract = ContractManager::createWithExternal(
             Company::class,
             $request->user()->company->id,
-            Hostname::class,
+            Domain::class,
             $hostname->id,
             [
                 'receiver_connection' => $hostname->website->uuid,
@@ -292,14 +292,14 @@ class ContractController extends Controller
 
     /**
      * @param Request $request
-     * @param Hostname $hostname
+     * @param Domain $hostname
      * @param Company $company
      * @return RedirectResponse|never|void
      * @throws AuthorizationException
      */
     public function invitation(
         Request  $request,
-        Hostname $hostname,
+        Domain $hostname,
         Company  $company
     )
     {
@@ -331,7 +331,7 @@ class ContractController extends Controller
     ): RedirectResponse
     {
         // Find the tenant hostname and switch to supplier's tenant context
-        $tenant = Hostname::query()
+        $tenant = Domain::query()
             ->where('fqdn', $tenant_url)
             ->with('website')
             ->first();

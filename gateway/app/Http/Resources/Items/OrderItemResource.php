@@ -101,7 +101,7 @@ final class OrderItemResource extends JsonResource
                 optional($this->withoutChildrenFields)['lockedBy'] ?? []
             ),
             'locked_at' => $this->locked_at ?? null,
-            'editable' => !$this->supplier_id || $this->supplier_id === hostname()->website->uuid,
+            'editable' => !$this->supplier_id || $this->supplier_id === domain()->website->uuid,
         ]);
     }
 

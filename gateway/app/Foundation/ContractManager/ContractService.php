@@ -7,7 +7,7 @@ use App\Enums\Status;
 use App\Foundation\ContractManager\Contracts\ContractServiceInterface;
 use App\Models\Company;
 use App\Models\Contract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\User;
 use App\Models\Website;
 use Carbon\Carbon;
@@ -36,7 +36,7 @@ class ContractService implements ContractServiceInterface
             return null;
         }
 
-        return $this->getContractPolicy(Hostname::class, $currentHostname->id);
+        return $this->getContractPolicy(Domain::class, $currentHostname->id);
     }
 
     /**
@@ -58,7 +58,7 @@ class ContractService implements ContractServiceInterface
 
         foreach ($myContracts as $contract) {
             // Determine the partner (the entity we have a contract with)
-            if ($contract->requester_type === Hostname::class && $contract->requester_id === $currentHostname->id) {
+            if ($contract->requester_type === Domain::class && $contract->requester_id === $currentHostname->id) {
                 // We are the requester, so the receiver is our partner
                 $partnerType = $contract->receiver_type;
                 $partnerId = $contract->receiver_id;
@@ -256,7 +256,7 @@ class ContractService implements ContractServiceInterface
         }
 
         return $this->createBetween(
-            Hostname::class,
+            Domain::class,
             $currentHostname->id,
             $receiverType,
             $receiverId,
@@ -284,14 +284,14 @@ class ContractService implements ContractServiceInterface
 
         try {
             $this->validateContractData([
-                'requester_type' => Hostname::class,
+                'requester_type' => Domain::class,
                 'requester_id' => $currentHostname->id,
                 'receiver_type' => $entityType,
                 'receiver_id' => $entityId,
             ]);
 
             $this->validateContractRules([
-                'requester_type' => Hostname::class,
+                'requester_type' => Domain::class,
                 'requester_id' => $currentHostname->id,
                 'receiver_type' => $entityType,
                 'receiver_id' => $entityId,
@@ -542,10 +542,10 @@ class ContractService implements ContractServiceInterface
         $query->where(function ($q) use ($currentHostname) {
             $q->where(function($subQuery) use ($currentHostname) {
                 $subQuery->where('contracts.requester_id', $currentHostname->id)
-                    ->where('contracts.requester_type', Hostname::class);
+                    ->where('contracts.requester_type', Domain::class);
             })->orWhere(function ($subQuery) use ($currentHostname) {
                 $subQuery->where('contracts.receiver_id', $currentHostname->id)
-                    ->where('contracts.receiver_type', Hostname::class);
+                    ->where('contracts.receiver_type', Domain::class);
             });
         });
 
@@ -658,7 +658,7 @@ class ContractService implements ContractServiceInterface
     ): ?Contract
     {
         return Contract::where(function ($query) use ($tenantId) {
-            $query->where('requester_type', Hostname::class)
+            $query->where('requester_type', Domain::class)
                 ->where('requester_id', $tenantId)
                 ->where('receiver_connection', self::SYSTEM_CONNECTION);
         })->first();
@@ -679,7 +679,7 @@ class ContractService implements ContractServiceInterface
     ): ?Contract
     {
         return Contract::where([
-            ['receiver_type', Hostname::class],
+            ['receiver_type', Domain::class],
             ['receiver_connection', $receiver_connection],
             ['receiver_id', $receiver_id],
             ['requester_type', Company::class],
@@ -819,7 +819,7 @@ class ContractService implements ContractServiceInterface
         }
 
         return $this->getContractsBetween(
-            Hostname::class,
+            Domain::class,
             $currentHostname->id,
             $entityType,
             $entityId
@@ -976,8 +976,8 @@ class ContractService implements ContractServiceInterface
         ];
 
         // Check if entity a supplier and add supplier contract data
-        if($entityType === Hostname::class) {
-            $hostname = Hostname::with('website')->find($entityId);
+        if($entityType === Domain::class) {
+            $hostname = Domain::with('website')->find($entityId);
             if ($hostname && $hostname->website && $hostname->website->supplier) {
                 $supplierContract = $contracts->filter(function($contract) use ($entityType, $entityId) {
                     return $contract->receiver_connection === 'cec' &&
@@ -1108,7 +1108,7 @@ class ContractService implements ContractServiceInterface
     ): Contract {
         // Default data for supplier contract with system
         $data = array_merge([
-            'requester_type' => Hostname::class,
+            'requester_type' => Domain::class,
             'requester_id' => $requesterId,
             'requester_connection' => $requesterConnection,
             'receiver_connection' => 'cec',
@@ -1383,7 +1383,7 @@ class ContractService implements ContractServiceInterface
                 'table' => 'hostnames',
                 'fields' => ['fqdn', 'id', 'website_id']
             ],
-            Hostname::class => [
+            Domain::class => [
                 'table' => 'hostnames',
                 'fields' => ['fqdn', 'id', 'website_id']
             ],
@@ -1478,7 +1478,7 @@ class ContractService implements ContractServiceInterface
      */
     protected function getCurrentHostname(): ?Hostname
     {
-        return hostname();
+        return domain();
     }
 
     /**
@@ -1566,17 +1566,17 @@ class ContractService implements ContractServiceInterface
         // 3. Company → Tenant (only this direction)
 
         // Handle Tenant-to-Tenant contracts with supplier logic
-        if ($requesterType === Hostname::class && $receiverType === Hostname::class) {
+        if ($requesterType === Domain::class && $receiverType === Domain::class) {
             $this->validateTenantToTenantContract($data, $errors);
         }
         // Handle other entity combinations
         else {
             $allowedCombinations = [
                 // Tenant → User (only this direction)
-                [Hostname::class, 'App\\Models\\User'],
+                [Domain::class, 'App\\Models\\User'],
 
                 // Company → Tenant (only this direction)
-                ['App\\Models\\Company', Hostname::class],
+                ['App\\Models\\Company', Domain::class],
 
                 // You can add more allowed combinations here
             ];
@@ -1624,8 +1624,8 @@ class ContractService implements ContractServiceInterface
         $receiverId = $data['receiver_id'];
 
         // Get the hostnames with their website relationships
-        $requesterHostname = Hostname::with('website')->find($requesterId);
-        $receiverHostname = Hostname::with('website')->find($receiverId);
+        $requesterHostname = Domain::with('website')->find($requesterId);
+        $receiverHostname = Domain::with('website')->find($receiverId);
 
         if (!$requesterHostname) {
             $errors['requester_id'] = ['Requester hostname not found.'];

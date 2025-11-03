@@ -2,7 +2,7 @@
 
 namespace App\Plugins;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\PluginWebhookEvent;
 use App\Models\Website;
 use App\Plugins\Concrete\PluginManagerInterface;

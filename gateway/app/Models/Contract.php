@@ -110,15 +110,15 @@ class Contract extends Model
     {
         return Attribute::make(
             get: function () {
-                $currentTenant = hostname(); // Fetch current tenant using hostname()
+                $currentTenant = domain(); // Fetch current tenant using domain()
                 if (!$currentTenant) {
                     return false;
                 }
 
                 return $this->requester_id === $currentTenant->id &&
-                    $this->requester_type === Hostname::class ||
+                    $this->requester_type === Domain::class ||
                     $this->receiver_id === $currentTenant->id &&
-                    $this->requester_type === Hostname::class;
+                    $this->requester_type === Domain::class;
             }
         );
     }
@@ -132,12 +132,12 @@ class Contract extends Model
     {
         return Attribute::make(
             get: function () {
-                $currentTenant = hostname(); // Fetch current tenant using hostname()
+                $currentTenant = domain(); // Fetch current tenant using domain()
                 if (!$currentTenant) {
                     return false;
                 }
                 return $this->requester_id === $currentTenant->id &&
-                    $this->requester_type === Hostname::class;
+                    $this->requester_type === Domain::class;
             }
         );
     }
@@ -151,12 +151,12 @@ class Contract extends Model
     {
         return Attribute::make(
             get: function () {
-                $currentTenant = hostname(); // Fetch current tenant using hostname()
+                $currentTenant = domain(); // Fetch current tenant using domain()
                 if (!$currentTenant) {
                     return false;
                 }
                 return $this->receiver_id === $currentTenant->id &&
-                    $this->receiver_type === Hostname::class;
+                    $this->receiver_type === Domain::class;
             }
         );
     }
@@ -194,7 +194,7 @@ class Contract extends Model
      */
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Hostname::class, 'receiver_id');
+        return $this->belongsTo(Domain::class, 'receiver_id');
     }
 
 
@@ -203,7 +203,7 @@ class Contract extends Model
      */
 //    public function receiver(): BelongsTo
 //    {
-//        return $this->belongsTo(Hostname::class, 'receiver_hostname_id');
+//        return $this->belongsTo(Domain::class, 'receiver_hostname_id');
 //    }
 
 }

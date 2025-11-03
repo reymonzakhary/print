@@ -48,7 +48,7 @@ final class ReplyRequest extends FormRequest
         $from = $this->message->getAttribute('from');
         $whoam = $from === 'sender'? 'recipient' : 'sender';
         $whoto = $from !== 'sender'? 'recipient' : 'sender';
-        if(hostname()->id === $this->message->getAttribute("{$from}_hostname")) {
+        if(domain()->id === $this->message->getAttribute("{$from}_hostname")) {
             throw ValidationException::withMessages([
                 'sender_hostname' => [
                     __('You cannot reply to your own message.')

@@ -13,7 +13,7 @@ use App\Http\Resources\Finder\FinderShopResource;
 use App\Http\Resources\Products\PrintProductPriceSemiCalcResource;
 use App\Http\Resources\Products\PrintProductResource;
 use App\Http\Resources\Products\PrintProductShopCalcResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Plugins\Moneys;
 use App\Services\Margins\MarginService;
 use App\Services\Tenant\Calculations\CalculationService;
@@ -95,13 +95,13 @@ class ProductController extends Controller
         $currentSupplierUuid = $environment->website()->getAttribute('uuid');
         $currentTenant = [
             'uuid' => $currentSupplierUuid,
-            'fqdn' => $environment->hostname()->getAttribute('fqdn')
+            'fqdn' => $environment->domain()->getAttribute('fqdn')
         ];
 
         $req = $request->only(['type', 'quantity', 'divided']);
 
         foreach (collect($request->validated('suppliers'))->unique() as $supplier) {
-            $contract = ContractManager::getContractWithSupplierByConnection(Hostname::class , $supplier);
+            $contract = ContractManager::getContractWithSupplierByConnection(Domain::class , $supplier);
 
             $itsNotMe = $supplier !== $currentSupplierUuid;
             if ($itsNotMe) {

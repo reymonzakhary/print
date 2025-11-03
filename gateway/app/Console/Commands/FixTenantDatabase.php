@@ -34,7 +34,7 @@ class FixTenantDatabase extends Command
 
         if ($hostname) {
             // Fix by hostname
-            $hostnameModel = \Hyn\Tenancy\Models\Hostname::where('fqdn', $hostname)->first();
+            $hostnameModel = \Hyn\Tenancy\Models\Domain::where('fqdn', $hostname)->first();
             if (!$hostnameModel || !$hostnameModel->website) {
                 $this->error("Hostname {$hostname} not found or has no associated website!");
                 return 1;
@@ -49,7 +49,7 @@ class FixTenantDatabase extends Command
             }
 
             // Check if this website has hostnames
-            if ($website->hostnames()->count() === 0) {
+            if ($website->domains()->count() === 0) {
                 $this->warn("Website {$tenantId} has no hostnames associated with it!");
                 $this->line("This might be a duplicate or orphaned record.");
 
@@ -72,11 +72,11 @@ class FixTenantDatabase extends Command
 
             // Filter out websites without hostnames
             $validWebsites = $websites->filter(function($website) {
-                return $website->hostnames()->count() > 0;
+                return $website->domains()->count() > 0;
             });
 
             $orphanedWebsites = $websites->filter(function($website) {
-                return $website->hostnames()->count() === 0;
+                return $website->domains()->count() === 0;
             });
 
             if ($orphanedWebsites->count() > 0) {

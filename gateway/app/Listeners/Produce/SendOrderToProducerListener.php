@@ -17,7 +17,7 @@ use App\Http\Requests\Addresses\StoreAddressRequest;
 use App\Http\Requests\Addresses\StoreItemAddressRequest;
 use App\Http\Resources\Items\ItemResource;
 use App\Mail\Tenant\Order\ItemProducedMail;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Company;
 use App\Models\Tenants\Country;
 use App\Models\Tenants\Item;
@@ -457,7 +457,7 @@ class SendOrderToProducerListener  implements ShouldQueue
      */
     public function SendJobTicketToProducer($event)
     {
-        $supplier = Hostname::findByFqdn($event->item->supplier_name)->firstOrFail();
+        $supplier = Domain::findByFqdn($event->item->supplier_name)->firstOrFail();
         $xml = View::make('job_tickets.job_ticket_xml', [
             'order' => $event->order,
             'item' => ItemResource::make($event->item),

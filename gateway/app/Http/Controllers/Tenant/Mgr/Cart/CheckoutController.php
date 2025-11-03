@@ -198,7 +198,7 @@ class CheckoutController extends Controller
             'vat_id' => $request->vat_id,
             'st' => Status::NEW,
             'supplier_id' => tenant()->uuid,
-            'supplier_name' => hostname()?->fqdn,
+            'supplier_name' => domain()?->fqdn,
         ];
 
     }
@@ -268,7 +268,7 @@ class CheckoutController extends Controller
                         'display_resale_p' => $qty * $price,
                         'display_resale_ppp' => $price,
                     ],
-                    'host_id' => hostname()->host_id,
+                    'host_id' => domain()->host_id,
                     'created_at' => null,
                     'supplier_id' => tenant()->uuid,
                     'supplier_name' => tenant()->uuid,
@@ -301,11 +301,11 @@ class CheckoutController extends Controller
                         'display_resale_p' => $price * $qty,
                         'display_resale_ppp' => $price,
                     ],
-                    'host_id' => hostname()->host_id,
+                    'host_id' => domain()->host_id,
                     'created_at' => null,
                     'supplier_id' => tenant()->uuid,
                     'supplier_name' => tenant()->uuid,
-                    'supplier_product' => hostname()->fqdn
+                    'supplier_product' => domain()->fqdn
                 ],
                 'category_id' => $product->category->id ?? '0',
                 'category_name' => $product->category->name . ' - ' . $product->name ?? $product->name,

@@ -69,9 +69,9 @@ final class PluginController extends Controller
      */
     public function sync(Request $request): JsonResponse
     {
-        $pluginService = Plugins::load(hostname());
+        $pluginService = Plugins::load(domain());
         $request->merge([
-            'tenant_name' => hostname()->fqdn,
+            'tenant_name' => domain()->fqdn,
             'tenant_id' => tenant()->uuid,
         ]);
 
@@ -94,7 +94,7 @@ final class PluginController extends Controller
         Request $request
     ): PrintProductPriceResource
     {
-        $pluginService = Plugins::load(hostname());
+        $pluginService = Plugins::load(domain());
 
         return PrintProductPriceResource::make(
             $pluginService->getPrice(
@@ -115,7 +115,7 @@ final class PluginController extends Controller
      */
     public function categories(): mixed
     {
-        $pluginService = Plugins::load(hostname());
+        $pluginService = Plugins::load(domain());
 
         return $pluginService->getCategories();
     }

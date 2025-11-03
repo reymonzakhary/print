@@ -3,7 +3,7 @@
 namespace App\Plugins\Config;
 
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Validation\ValidationException;
 
 class DefaultConfigRepository implements PluginConfigRepository
@@ -111,7 +111,7 @@ class DefaultConfigRepository implements PluginConfigRepository
             try {
                 $website = \Hyn\Tenancy\Facades\TenancyFacade::website();
                 if ($website) {
-                    return $website->hostnames()->first();
+                    return $website->domains()->first();
                 }
             } catch (\Exception $e) {
                 // Ignore exception, will be handled in boot()
@@ -120,7 +120,7 @@ class DefaultConfigRepository implements PluginConfigRepository
         }
 
         if (is_numeric($hostname)) {
-            $resolvedHostname = Hostname::where('id', $hostname)
+            $resolvedHostname = Domain::where('id', $hostname)
                 ->with('website')
                 ->first();
 
@@ -133,7 +133,7 @@ class DefaultConfigRepository implements PluginConfigRepository
             return $resolvedHostname;
         }
 
-        if (in_array(get_class($hostname), [Hostname::class, '\Hyn\Tenancy\Models\Hostname'])) {
+        if (in_array(get_class($hostname), [Domain::class, '\Hyn\Tenancy\Models\Hostname'])) {
             // Ensure the website relationship is loaded
             if (!$hostname->relationLoaded('website')) {
                 $hostname->load('website');

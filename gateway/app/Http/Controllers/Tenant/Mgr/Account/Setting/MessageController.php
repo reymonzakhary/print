@@ -13,7 +13,7 @@ use App\Http\Resources\Settings\MessageResource;
 use App\Jobs\Tenant\Setting\RequestContract;
 use App\Jobs\Tenant\Setting\RequestMessage;
 use App\Jobs\Tenant\Setting\RequestSystemContract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Message;
 use App\Models\Website;
 use Carbon\Carbon;
@@ -39,7 +39,7 @@ class MessageController extends Controller
     {
         $type = request()->input('type')??'recipient';
         return MessageResource::collection(
-            Message::tree()->breadthFirst()->where("{$type}_hostname", hostname()->id)->with('contract')->get()
+            Message::tree()->breadthFirst()->where("{$type}_hostname", domain()->id)->with('contract')->get()
         )
             ->additional([
                 'messages' => null,
@@ -86,7 +86,7 @@ class MessageController extends Controller
           ]),
 
           default => Bus::chain([
-              RequestSystemContract::dispatch($request, tenant(),  hostname()),
+              RequestSystemContract::dispatch($request, tenant(),  domain()),
               RequestMessage::dispatch($request)
           ])
         };
@@ -140,7 +140,7 @@ class MessageController extends Controller
     ): Builder|Model|null
     {
         $broadcast = $request->from === 'sender' ? 'recipient' : 'sender';
-        return Hostname::query()
+        return Domain::query()
             ->with('website')
             ->where('id', $request->input("{$broadcast}_hostname"))->first();
     }

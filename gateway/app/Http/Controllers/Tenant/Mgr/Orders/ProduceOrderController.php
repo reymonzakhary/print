@@ -8,7 +8,7 @@ use App\Foundation\Status\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\ProduceBulkItemsRequest;
 use App\Http\Requests\Order\ProduceItemsRequest;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Item;
 use App\Models\Tenants\Order;
 use Illuminate\Validation\ValidationException;
@@ -60,7 +60,7 @@ class ProduceOrderController extends Controller
                 if (tenant()->uuid !== $connection) {
                     /** @todo get the pipeline of the supplier **/
 
-                    $appliedContract = ContractManager::getContractWithSupplierByConnection(Hostname::class , $connection);
+                    $appliedContract = ContractManager::getContractWithSupplierByConnection(Domain::class , $connection);
                     if (!$appliedContract || !$appliedContract->active || $appliedContract->st != Status::ACCEPTED) {
                         throw ValidationException::withMessages([
                             'contract' => __('There is no contract available between you and the receiving party, please contact the system administrator.')

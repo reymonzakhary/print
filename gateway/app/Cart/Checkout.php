@@ -235,7 +235,7 @@ class Checkout implements CheckoutContractInterface
                     'reference' => $item?->reference,
                     'delivery_separated' => $this->request->get('delivery_separated'),
                     'supplier_id' => $this->request->get('host_id'),
-                    'supplier_name' => hostname()?->custom_fields?->pick('company_name') ?? hostname()->fqdn,
+                    'supplier_name' => domain()?->custom_fields?->pick('company_name') ?? domain()->fqdn,
                     'connection' => tenant()->uuid,
                     'tenant_id' => tenant()->uuid,
                     'internal' => true,

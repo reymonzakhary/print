@@ -15,7 +15,7 @@ use App\Mail\SupplierCredentialsMail;
 use App\Mail\SupplierInvitationMail;
 use App\Models\Company;
 use App\Models\Contract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -59,7 +59,7 @@ class ContractController extends Controller
         InviteSupplierRequest $request
     )
     {
-        $hostname = Hostname::query()->where('custom_fields->coc', $request->coc)
+        $hostname = Domain::query()->where('custom_fields->coc', $request->coc)
             ->orWhere('custom_fields->domain', $request->domain)->with('website')->first();
 
         if (!$hostname) {
@@ -79,11 +79,11 @@ class ContractController extends Controller
             $req = new ClientRequest($data);
             app(ClientController::class)->store($req);
 
-            $hostname = Hostname::query()->with('website')->where('fqdn', $request->fqdn)->first();
+            $hostname = Domain::query()->with('website')->where('fqdn', $request->fqdn)->first();
         }
 
         $contract = Contract::where([
-            ['receiver_type', Hostname::class],
+            ['receiver_type', Domain::class],
             ['receiver_connection', $hostname->website->uuid],
             ['receiver_id', $hostname->id],
             ['requester_type', Company::class],
@@ -94,7 +94,7 @@ class ContractController extends Controller
             $contract = Contract::create([
                 'receiver_id' => $hostname->id,
                 'receiver_connection' => $hostname->website->uuid,
-                'receiver_type' => Hostname::class,
+                'receiver_type' => Domain::class,
                 'requester_id' => $request->user()->company->id,
                 'requester_type' => Company::class,
                 'callback' => request()->callback_url,
@@ -182,13 +182,13 @@ class ContractController extends Controller
 
     /**
      * @param Request  $request
-     * @param Hostname $hostname
+     * @param Domain $hostname
      * @param Company  $company
      * @return RedirectResponse|never|void
      */
     public function invitation(
         Request  $request,
-        Hostname $hostname,
+        Domain $hostname,
         Company  $company,
         Contract $contract
     )

@@ -31,7 +31,7 @@ class Company extends Model
 
     public function suppliers()
     {
-        return $this->belongsToMany(Hostname::class, 'contracts', 'requester_id', 'receiver_id')->withPivot([
+        return $this->belongsToMany(Domain::class, 'contracts', 'requester_id', 'receiver_id')->withPivot([
             'st',
             'activated_at',
             'active',

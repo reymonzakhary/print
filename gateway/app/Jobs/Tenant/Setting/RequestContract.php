@@ -5,7 +5,7 @@ namespace App\Jobs\Tenant\Setting;
 use App\Enums\ContractType;
 use App\Enums\Status;
 use App\Foundation\ContractManager\Facades\ContractManager;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class RequestContract
      */
     public function handle(): void
     {
-        $hostname = Hostname::with('website')->find($this->request->recipient_hostname);
+        $hostname = Domain::with('website')->find($this->request->recipient_hostname);
         $data = [
             'receiver_connection' => $hostname->website->uuid,
             'requester_connection' => tenant()->uuid,
@@ -43,12 +43,12 @@ class RequestContract
             }
             $data['custom_fields']['auth'] = $auth_values;
             $contract = ContractManager::createWithExternal(
-                Hostname::class ,  hostname()->id , Hostname::class , $hostname->id ,
+                Domain::class ,  domain()->id , Domain::class , $hostname->id ,
                 additionalData: $data
             );
         } else {
             $contract = ContractManager::createBetween(
-                    Hostname::class ,  hostname()->id , Hostname::class , $hostname->id ,
+                    Domain::class ,  domain()->id , Domain::class , $hostname->id ,
                 additionalData: $data
             );
         }

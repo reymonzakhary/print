@@ -2,7 +2,7 @@
 
 namespace App\Plugins\Jobs;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\PluginWebhookEvent;
 use App\Plugins\PluginService;
 use Exception;
@@ -47,7 +47,7 @@ class PluginWebhookJob implements ShouldQueue
             $this->webhookEvent->update(['status' => 'processing']);
 
             // Get hostname and switch to tenant context
-            $hostname = Hostname::find($this->hostnameId);
+            $hostname = Domain::find($this->hostnameId);
             if (!$hostname || !$hostname->website) {
                 throw new Exception("Hostname {$this->hostnameId} not found or has no website");
             }

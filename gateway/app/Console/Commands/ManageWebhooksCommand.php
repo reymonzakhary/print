@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\PluginWebhookEvent;
 use App\Enums\PluginStatus;
 use Illuminate\Console\Command;
@@ -48,7 +48,7 @@ class ManageWebhooksCommand extends Command
 
     private function retryForSpecificTenant(int $hostnameId, int $limit): int
     {
-        $hostname = Hostname::find($hostnameId);
+        $hostname = Domain::find($hostnameId);
         if (!$hostname) {
             $this->error("Hostname {$hostnameId} not found");
             return 0;
@@ -105,7 +105,7 @@ class ManageWebhooksCommand extends Command
 
     private function showStatsForTenant(int $hostnameId): void
     {
-        $hostname = Hostname::find($hostnameId);
+        $hostname = Domain::find($hostnameId);
         if (!$hostname) {
             $this->error("Hostname {$hostnameId} not found");
             return;
@@ -159,7 +159,7 @@ class ManageWebhooksCommand extends Command
 
         $rows = [];
         foreach ($allEvents as $hostnameId => $events) {
-            $hostname = Hostname::find($hostnameId);
+            $hostname = Domain::find($hostnameId);
 
             $stats = [
                 'total' => $events->count(),
@@ -216,7 +216,7 @@ class ManageWebhooksCommand extends Command
         $this->table(
             ['ID', 'Hostname', 'Plugin', 'Model', 'Event', 'Status', 'Attempts', 'Created'],
             $webhooks->map(function ($webhook) {
-                $hostname = Hostname::find($webhook->hostname_id);
+                $hostname = Domain::find($webhook->hostname_id);
                 return [
                     $webhook->id,
                     $hostname ? $hostname->fqdn : 'Unknown',
@@ -248,7 +248,7 @@ class ManageWebhooksCommand extends Command
 
     private function getPluginEnabledHostnames()
     {
-        return Hostname::whereHas('website', function($query) {
+        return Domain::whereHas('website', function($query) {
             $query->where('supplier', true)
                 ->where('external', true)
                 ->whereNotNull('configure');

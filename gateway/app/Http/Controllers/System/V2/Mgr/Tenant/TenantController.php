@@ -16,7 +16,7 @@ use App\Http\Resources\Hostnames\HostnameResource;
 use App\Models\Area;
 use App\Models\Contract;
 use App\Models\DeliveryZone;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Message;
 use App\Models\Module;
 use App\Models\Npace;
@@ -68,7 +68,7 @@ final class TenantController extends Controller
     public function index(): mixed
     {
         return HostnameResource::collection(
-            Hostname::with('website', 'requestedContracts', 'receivedContracts')->withScopes($this->scope())->paginate(10)
+            Domain::with('website', 'requestedContracts', 'receivedContracts')->withScopes($this->scope())->paginate(10)
         )
             ->additional([
                 'message' => __('Tenants has been retrieved successfully'),
@@ -79,12 +79,12 @@ final class TenantController extends Controller
     /**
      * Show a specific tenant
      *
-     * @param Hostname $tenant
+     * @param Domain $tenant
      *
-     * @return HostnameResource
+     * @return DomainResource
      */
     public function show(
-        Hostname $tenant,
+        Domain $tenant,
     ): HostnameResource
     {
         return HostnameResource::make(
@@ -103,11 +103,11 @@ final class TenantController extends Controller
      *
      * @param ClientRequest $request
      * @param WebsiteRepository $websiteRepository
-     * @param HostnameRepository $hostnameRepository
+     * @param DomainRepository $hostnameRepository
      * @param Environment $environment
      * @param Carbon $carbon
      *
-     * @return HostnameResource
+     * @return DomainResource
      *
      * @throws Throwable
      */
@@ -126,7 +126,7 @@ final class TenantController extends Controller
                 'supplier' => $request->boolean('supplier')
             ]);
 
-            $tenant = new Hostname([
+            $tenant = new Domain([
                 'fqdn' => $request->string('fqdn')
             ]);
 
@@ -344,7 +344,7 @@ final class TenantController extends Controller
      * Update an existing tenant
      *
      * @param UpdateClientRequest $request
-     * @param Hostname $tenant
+     * @param Domain $tenant
      *
      * @return JsonResponse
      *
@@ -520,7 +520,7 @@ final class TenantController extends Controller
     /**
      * Delete a specific tenant
      *
-     * @param Hostname $tenant
+     * @param Domain $tenant
      *
      * @return JsonResponse
      *
@@ -528,7 +528,7 @@ final class TenantController extends Controller
      * @throws Throwable
      */
     public function destroy(
-        Hostname $tenant,
+        Domain $tenant,
     ): JsonResponse
     {
         $website = $tenant->website()->firstOrFail();
@@ -587,7 +587,7 @@ final class TenantController extends Controller
 
     /**
      * @param UploadedFile $uploadedFile
-     * @param Hostname $tenant
+     * @param Domain $tenant
      *
      * @return string
      *
@@ -624,11 +624,11 @@ final class TenantController extends Controller
     /**
      * Delete all contracts associated with a tenant and their dependencies
      *
-     * @param Hostname $tenant
+     * @param Domain $tenant
      * @return void
      * @throws Exception
      */
-    private function deleteTenantContracts(Hostname $tenant): void
+    private function deleteTenantContracts(Domain $tenant): void
     {
         $tenantContracts = ContractManager::getMyContracts($tenant);
 

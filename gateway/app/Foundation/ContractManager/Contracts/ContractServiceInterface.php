@@ -4,7 +4,7 @@
 namespace App\Foundation\ContractManager\Contracts;
 
 use App\Models\Contract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Database\Eloquent\Collection;
 
 interface ContractServiceInterface

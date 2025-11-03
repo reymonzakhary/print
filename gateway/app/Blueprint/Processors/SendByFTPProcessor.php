@@ -4,7 +4,7 @@ namespace App\Blueprint\Processors;
 
 use App\Blueprint\Contract\BlueprintContract;
 use App\Http\Resources\Items\ItemResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Item;
 use App\Models\Tenants\Order;
 use Closure;
@@ -70,7 +70,7 @@ class SendByFTPProcessor implements BlueprintContract
      */
     public function jobTicket(string $type = 'xml', string $columns = "*")
     {
-        if ($supplier = Hostname::findByFqdn($this->item->supplierName)->first()) {
+        if ($supplier = Domain::findByFqdn($this->item->supplierName)->first()) {
             $this->attach[] = [
                 'file' => view('job_tickets.job_ticket_xml', [
                     'order' => $this->order,

@@ -21,7 +21,7 @@ class Quotation extends Model
 
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Hostname::class, 'hostname_id', 'id', 'quotations');
+        return $this->belongsTo(Domain::class, 'hostname_id', 'id', 'quotations');
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Plugins\Config;
 
 
-use App\Models\Hostname;
+use App\Models\Domain;
 
 /**
  * @see DefaultConfigRepository;

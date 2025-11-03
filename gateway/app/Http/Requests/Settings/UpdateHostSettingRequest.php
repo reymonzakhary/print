@@ -38,7 +38,7 @@ class UpdateHostSettingRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if (!collect(optional(request()->hostname()->configure)['settings'])->filter(function ($setting) {
+        if (!collect(optional(request()->domain()->configure)['settings'])->filter(function ($setting) {
             return $setting['key'] === $this->key;
         })->count()) {
             throw ValidationException::withMessages([

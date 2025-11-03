@@ -90,7 +90,7 @@ class ProductCombinationController extends Controller
                     $category,
                     collect(PrintBoopsResource::make($boops))->toArray(),
                     tenant()->uuid,
-                    hostname()->fqdn,
+                    domain()->fqdn,
                     $request->get('hostname')?->host_id
                 )
             );

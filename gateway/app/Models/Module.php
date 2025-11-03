@@ -19,8 +19,8 @@ class Module extends Model
      * @return BelongsToMany
      */
 
-    public function hostnames()
+    public function domains()
     {
-        return $this->belongsToMany(Hostname::class, "hostname_modules");
+        return $this->belongsToMany(Domain::class, "hostname_modules");
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories\FinderMarketplaceResource;
 use App\Http\Resources\Categories\FinderPrintCategoryResource;
 use App\Http\Resources\Categories\FinderSearchCategoryResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Services\Tenant\Finder\Categories\CategoryService;
 use App\Services\Tenant\Finder\Categories\SearchService;
 use App\Services\Tenant\Finder\Marketplace\MarketplaceService;

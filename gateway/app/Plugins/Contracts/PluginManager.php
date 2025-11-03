@@ -2,7 +2,7 @@
 
 namespace App\Plugins\Contracts;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Plugins\Concrete\PluginFactoryInterface;
 use App\Plugins\Concrete\PluginManagerInterface;
 use App\Plugins\Config\DefaultConfigRepository;

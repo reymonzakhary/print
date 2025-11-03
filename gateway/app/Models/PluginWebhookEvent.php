@@ -38,9 +38,9 @@ class PluginWebhookEvent extends Model
     /**
      * Get the hostname this webhook belongs to
      */
-    public function hostname(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Hostname::class);
+        return $this->belongsTo(Domain::class);
     }
 
     /**

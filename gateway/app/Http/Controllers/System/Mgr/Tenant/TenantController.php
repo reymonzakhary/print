@@ -27,7 +27,7 @@ class TenantController extends Controller
     {
         $request->merge(['fqdn' => $request->name . '.' . env('TENANT_URL_BASE')]);
 
-        if (!Hostname::where('fqdn', $request->get('fqdn'))->exists()) {
+        if (!Domain::where('fqdn', $request->get('fqdn'))->exists()) {
             /**
              * create website
              */
