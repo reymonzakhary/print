@@ -135,13 +135,24 @@ if (!function_exists('ean13Generator')) {
 
 if (!function_exists('domain')) {
     /**
-     * Get the current domain
+     * Get the current domain using tenant-based resolution for multi-tenancy.
+     * This approach is compatible with Laravel Reverb and ensures proper tenant isolation.
      *
      * @return Domain|null
      */
     function domain(): ?Domain
     {
         try {
+            // Use tenant-based resolution via the tenant relationship
+            // This is more reliable for multi-tenancy and Reverb compatibility
+            $tenant = tenant();
+
+            if ($tenant) {
+                // Get the domain from the tenant relationship (domain-based)
+                return $tenant->primary_domain ?? $tenant->domains->first();
+            }
+
+            // Fallback to package default (CurrentDomain contract)
             return Domain::current();
         } catch (\Throwable $th) {
             //\Log::debug(['domain' =>$th->getMessage(), 'helper' => 'domain helper']);
@@ -389,15 +400,26 @@ if (!function_exists('reloadMiddlewareInstance')) {
 }
 
 if (!function_exists('switchSupplierWebsocket')) {
+    /**
+     * Switch websocket connection for a specific tenant using domain-based resolution.
+     * This ensures proper multi-tenant isolation and is compatible with both
+     * Laravel WebSockets and Laravel Reverb.
+     *
+     * @param string $uuid The tenant's UUID
+     * @return void
+     */
     function switchSupplierWebsocket(string $uuid): void
     {
+        // Use domain as the key for websocket configuration
+        // This ensures proper tenant isolation in multi-tenant environments
         $fqdn = Website::query()
             ->where('uuid', $uuid)
             ->firstOrFail()
             ->domains()
             ->firstOrFail()
-            ->getAttribute('fqdn');
+            ->getAttribute('domain');
 
+        // Find websocket app by domain (fqdn) - not by hostname
         if (!$websocketConfig = App::findByKey($fqdn)) {
             return;
         }
