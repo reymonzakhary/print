@@ -7,7 +7,6 @@ use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasChildren;
 use App\Models\Traits\ResolveLanguageRouteBinding;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,7 +16,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model implements Sortable
 {
-    use UsesTenantConnection, Slugable, SortableTrait, HasChildren,
+    use Slugable, SortableTrait, HasChildren,
         HasRecursiveRelationships, HasFactory, ResolveLanguageRouteBinding,
         CanBeScoped, InteractWithMedia;
 

@@ -3,13 +3,12 @@
 namespace Modules\Campaign\Entities;
 
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use JsonException;
 
 class CampaignExport extends Model
 {
-    use UsesTenantConnection, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'finished', 'path', 'type', 'created_at'

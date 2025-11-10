@@ -2,13 +2,12 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class UserGroup extends Model
 {
-    use UsesTenantConnection, LaratrustUserTrait;
+    use LaratrustUserTrait;
 
     /**
      * @var array

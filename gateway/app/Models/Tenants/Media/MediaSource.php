@@ -3,13 +3,12 @@
 namespace App\Models\Tenants\Media;
 
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MediaSource extends Model
 {
-    use UsesTenantConnection, slugable;
+    use slugable;
 
     public $timestamps = false;
 

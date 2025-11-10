@@ -1,14 +1,14 @@
 <?php
 
 use App\Casts\Hostname\CustomFieldCast;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Language;
+use App\Models\Tenant;
 use App\Models\Tenants\Setting;
 use App\Models\Website;
 use App\Plugins\Moneys;
 use BeyondCode\LaravelWebSockets\Apps\App;
 use Carbon\Carbon;
-use Hyn\Tenancy\Environment;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -133,29 +133,62 @@ if (!function_exists('ean13Generator')) {
     }
 }
 
-if (!function_exists('hostname')) {
-    function hostname()
+if (!function_exists('domain')) {
+    /**
+     * Get the current domain using tenant-based resolution for multi-tenancy.
+     * This approach is compatible with Laravel Reverb and ensures proper tenant isolation.
+     *
+     * @return Domain|null
+     */
+    function domain(): ?Domain
     {
         try {
-            return Hostname::current();
+            // Use tenant-based resolution via the tenant relationship
+            // This is more reliable for multi-tenancy and Reverb compatibility
+            $tenant = tenant();
+
+            if ($tenant) {
+                // Get the domain from the tenant relationship (domain-based)
+                return $tenant->primary_domain ?? $tenant->domains->first();
+            }
+
+            // Fallback to package default (CurrentDomain contract)
+            return Domain::current();
         } catch (\Throwable $th) {
-            //\Log::debug(['hostname' =>$th->getMessage(), 'helper' => 'Line 54 in helper']);
+            //\Log::debug(['domain' =>$th->getMessage(), 'helper' => 'domain helper']);
             return null;
         }
     }
 }
 
-if (!function_exists('tenantCustomFields')) {
-    function tenantCustomFields(): CustomFieldCast
+if (!function_exists('hostname')) {
+    /**
+     * Legacy helper for backward compatibility
+     * @deprecated Use domain() instead
+     *
+     * @return Domain|null
+     */
+    function hostname(): ?Domain
     {
-        return tenant()->hostnames->first()->custom_fields;
+        return domain();
+    }
+}
+
+if (!function_exists('tenantCustomFields')) {
+    function tenantCustomFields(): ?CustomFieldCast
+    {
+        $currentTenant = tenant();
+        $domain = $currentTenant?->primary_domain ?? $currentTenant?->domains->first();
+        return $domain?->custom_fields;
     }
 }
 
 if (!function_exists('tenantLogoUrl')) {
     function tenantLogoUrl(): mixed
     {
-        $logoPath = tenant()->hostnames()->first()?->getAttribute('logo');
+        $currentTenant = tenant();
+        $domain = $currentTenant?->primary_domain ?? $currentTenant?->domains->first();
+        $logoPath = $domain?->getAttribute('logo');
 
         return $logoPath ? Storage::disk('digitalocean')->url($logoPath) : null;
     }
@@ -164,28 +197,26 @@ if (!function_exists('tenantLogoUrl')) {
 if (!function_exists('website')) {
     function website()
     {
-        return Website::where('uuid', tenant()->uuid)->first();
+        $currentTenant = tenant();
+        return $currentTenant ? Website::where('id', $currentTenant->id)->first() : null;
     }
 }
 
-if (!function_exists('tenant')) {
-    function tenant()
-    {
-        return app(Environment::class)->tenant();
-    }
-}
+// Note: tenant() helper is now provided by stancl/tenancy package
+// It returns the current tenant instance or null
 
 if (!function_exists('tenants')) {
     function tenants()
     {
-        return Hostname::all();
+        return Domain::all();
     }
 }
 
 if (!function_exists('supplierName')) {
-    function supplierName($uuid)
+    function supplierName($id)
     {
-        return Website::where('uuid', $uuid)->with('hostnames')->first()->hostnames->first()->fqdn;
+        $tenant = Tenant::find($id);
+        return $tenant?->primary_domain?->domain ?? $tenant?->domains->first()?->domain;
     }
 }
 
@@ -274,11 +305,12 @@ if (!function_exists('random_password')) {
 if (!function_exists('switchSupplier')) {
     function switchSupplier($uuid)
     {
-        $env = app(Environment::class);
-        $site = Website::where('uuid', $uuid)->first();
-        $env->tenant($site);
-        DB::disconnect();
-        DB::reconnect();
+        $tenant = Tenant::find($uuid);
+        if ($tenant) {
+            tenancy()->initialize($tenant);
+            DB::disconnect();
+            DB::reconnect();
+        }
     }
 }
 
@@ -286,62 +318,59 @@ if (!function_exists('switchSupplier')) {
 if (!function_exists('switchTenant')) {
     function switchTenant($uuid): void
     {
-        $env = app(\Hyn\Tenancy\Environment::class);
-        $site = \App\Models\Website::where('uuid', $uuid)->with('hostname')->first();
+        $tenant = Tenant::find($uuid);
 
-        if (!$site) {
-            throw new \Exception("Tenant with UUID {$uuid} not found.");
+        if (!$tenant) {
+            throw new \Exception("Tenant with ID {$uuid} not found.");
         }
 
-        // Switch the tenant
-        $env->tenant($site);
+        // Switch the tenant using stancl/tenancy
+        tenancy()->initialize($tenant);
 
         // Reset tenant-related services
-        rebootTenantContainer($site);
-
-        // Ensure the tenant's DB connection is correctly set
-        app(\Hyn\Tenancy\Database\Connection::class)->set($site);
+        rebootTenantContainer($tenant);
 
         // Purge & reconnect the database
         DB::purge('tenant');
         DB::reconnect('tenant');
 
         // 🔥 Force middleware to reload
-        reloadTenantRequest($site);
+        reloadTenantRequest($tenant);
     }
 }
 
 if (!function_exists('switchToSystem')) {
     function switchToSystem(): void
     {
-        $env = app(\Hyn\Tenancy\Environment::class);
-
-        // Clear the current tenant
-        $env->tenant(null);
+        // End current tenancy
+        tenancy()->end();
 
         // Purge tenant connection
         DB::purge('tenant');
 
-        // Set back to system connection
-        config(['database.default' => 'system']);
+        // Get the central connection name from config
+        $centralConnection = config('tenancy.database.central_connection', 'cec');
+
+        // Set back to central/system connection
+        config(['database.default' => $centralConnection]);
 
         // Reconnect to system
-        DB::reconnect('system');
-
-        // Clear cached instances
-        app()->forgetInstance(\Hyn\Tenancy\Database\Connection::class);
+        DB::reconnect($centralConnection);
 
         // Clear request headers that might affect routing
         request()->headers->set('referer', 'manager' . env('APP_URL'));
-        request()->headers->set('referer', 'manager' . env('APP_URL'));
+        request()->headers->set('host', 'manager' . env('APP_URL'));
     }
 }
 
 if (!function_exists('rebootTenantContainer')) {
-    function rebootTenantContainer($site): void
+    function rebootTenantContainer($tenant): void
     {
-        request()->headers->set('referer', $site->hostname->fqdn);
-        request()->headers->set('host', $site->hostname->fqdn);
+        $domain = $tenant->primary_domain?->domain ?? $tenant->domains->first()?->domain;
+        if ($domain) {
+            request()->headers->set('referer', $domain);
+            request()->headers->set('host', $domain);
+        }
         // Ensure correct database connection is loaded for the tenant
         DB::purge('tenant');
     }
@@ -354,12 +383,15 @@ if (!function_exists('reloadMiddlewareInstance')) {
         // Explicitly clear the request instance to ensure fresh data
         app()->instance('request', new \Illuminate\Http\Request());
 
+        // Get the primary domain for the tenant
+        $domain = $site->primary_domain ?? $site->domains->first();
+
         // Update the request with the new tenant data
         request()->replace(array_merge($old_request, [
             'tenant' => $site,
-            'uuid' => $site->uuid,
-            'hostname' => $site->hostname,
-            'host_id' => $site->hostname?->host_id
+            'uuid' => $site->id,
+            'domain' => $domain,
+            'host_id' => $domain?->host_id
         ]));
 
         // 🔥 Rebind the SupplierCategoryService to ensure it gets the updated request data
@@ -371,15 +403,27 @@ if (!function_exists('reloadMiddlewareInstance')) {
 }
 
 if (!function_exists('switchSupplierWebsocket')) {
+    /**
+     * Switch websocket connection for a specific tenant using domain-based resolution.
+     * This ensures proper multi-tenant isolation and is compatible with both
+     * Laravel WebSockets and Laravel Reverb.
+     *
+     * @param string $uuid The tenant's UUID
+     * @return void
+     */
     function switchSupplierWebsocket(string $uuid): void
     {
-        $fqdn = Website::query()
-            ->where('uuid', $uuid)
-            ->firstOrFail()
-            ->hostnames()
-            ->firstOrFail()
-            ->getAttribute('fqdn');
+        // Use domain as the key for websocket configuration
+        // This ensures proper tenant isolation in multi-tenant environments
+        $tenant = Tenant::find($uuid);
 
+        if (!$tenant) {
+            return;
+        }
+
+        $fqdn = ($tenant->primary_domain ?? $tenant->domains->first())?->domain;
+
+        // Find websocket app by domain (fqdn) - not by hostname
         if (!$websocketConfig = App::findByKey($fqdn)) {
             return;
         }

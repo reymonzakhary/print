@@ -34,8 +34,8 @@ class ProductService extends ServiceContract
         array  $body
     )
     {
-        $body['suppliers'][] = ['supplier_id' => tenant()->uuid, 'host_id' => hostname()->host_id];
-        $body['me'] = ['supplier_id' => tenant()->uuid, 'host_id' => hostname()->host_id];
+        $body['suppliers'][] = ['supplier_id' => tenant()->uuid, 'host_id' => domain()->host_id];
+        $body['me'] = ['supplier_id' => tenant()->uuid, 'host_id' => domain()->host_id];
         return $this->makeRequest('post',
             "products/{$category}", $filter, $body, [], false, true
         );

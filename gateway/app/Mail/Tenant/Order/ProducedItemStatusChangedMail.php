@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Mail\Tenant\Order;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Item;
 use App\Models\Tenants\Order;
 use Illuminate\Bus\Queueable;

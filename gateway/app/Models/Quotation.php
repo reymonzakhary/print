@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Quotation extends Model
 {
-    use HasFactory, UsesSystemConnection;
+    use HasFactory;
 
     public $fillable = [
         'hostname_id',
@@ -22,7 +21,7 @@ class Quotation extends Model
 
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Hostname::class, 'hostname_id', 'id', 'quotations');
+        return $this->belongsTo(Domain::class, 'hostname_id', 'id', 'quotations');
     }
 
     /**

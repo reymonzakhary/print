@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Warehouse extends Model
 {
 
-    use HasFactory, UsesTenantConnection, Slugable, GenerateIdentifier;
+    use HasFactory, Slugable, GenerateIdentifier;
 
     protected $fillable = ['name', 'slug', 'sort', 'description'];
 

@@ -4,25 +4,20 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\System\V2\Mgr\Companies;
 
-use App\Enums\ContractType;
 use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Foundation\Status\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Mgr\Clients\ClientController;
-use App\Http\Controllers\System\V2\Mgr\Tenant\TenantController;
-use App\Http\Controllers\Tenant\Mgr\Users\UserController;
 use App\Http\Requests\Clients\ClientRequest;
 use App\Http\Requests\Contracts\UpdateContractRequest;
 use App\Http\Requests\Suppliers\InviteSupplierRequest;
-use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Resources\Suppliers\ContractResource;
 use App\Mail\CompanyInvitationInteraction;
 use App\Mail\SupplierCredentialsMail;
 use App\Mail\SupplierInvitationMail;
 use App\Models\Company;
 use App\Models\Contract;
-use App\Models\Hostname;
-use App\Models\Tenants\Context;
+use App\Models\Domain;
 use App\Models\Tenants\Team;
 use App\Models\Tenants\User;
 use App\Repositories\UserRepository;
@@ -95,7 +90,7 @@ class ContractController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
         // Find existing hostname by COC number or domain
-        $hostname = Hostname::query()
+        $hostname = Domain::query()
             ->where('custom_fields->coc', $request->coc)
             ->orWhere('custom_fields->domain', $request->domain)
             ->with('website')
@@ -118,7 +113,7 @@ class ContractController extends Controller
             app(ClientController::class)->store($req);
 
             // Retrieve the newly created hostname
-            $hostname = Hostname::query()
+            $hostname = Domain::query()
                 ->with('website')
                 ->where('fqdn', $request->fqdn)
                 ->first();
@@ -146,7 +141,7 @@ class ContractController extends Controller
         $contract = ContractManager::createWithExternal(
             Company::class,
             $request->user()->company->id,
-            Hostname::class,
+            Domain::class,
             $hostname->id,
             [
                 'receiver_connection' => $hostname->website->uuid,
@@ -292,14 +287,14 @@ class ContractController extends Controller
 
     /**
      * @param Request $request
-     * @param Hostname $hostname
+     * @param Domain $hostname
      * @param Company $company
      * @return RedirectResponse|never|void
      * @throws AuthorizationException
      */
     public function invitation(
         Request  $request,
-        Hostname $hostname,
+        Domain $hostname,
         Company  $company
     )
     {
@@ -331,7 +326,7 @@ class ContractController extends Controller
     ): RedirectResponse
     {
         // Find the tenant hostname and switch to supplier's tenant context
-        $tenant = Hostname::query()
+        $tenant = Domain::query()
             ->where('fqdn', $tenant_url)
             ->with('website')
             ->first();

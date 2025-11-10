@@ -3,7 +3,6 @@
 namespace App\Models\Tenants;
 
 use App\Foundation\FileManager\Traits\InteractWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +13,7 @@ use Illuminate\Support\Str;
 
 class Cart extends Model
 {
-    use UsesTenantConnection, HasFactory, InteractWithMedia;
+    use HasFactory, InteractWithMedia;
 
     protected $fillable = [
         'user_id'

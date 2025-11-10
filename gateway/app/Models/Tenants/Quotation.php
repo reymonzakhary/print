@@ -10,7 +10,6 @@ use App\Models\Traits\HasParentModel;
 use App\Models\Traits\HasPrice;
 use App\Models\Traits\InteractsWithMedia;
 use App\Models\Traits\Tenant\BelongToTenantContext;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,7 +31,7 @@ class Quotation extends Model
         HasPrice,
         InteractsWithMedia,
         SoftDeletes,
-        UsesTenantConnection;
+        // UsesTenantConnection; // Removed
 
     /**
      * @var string

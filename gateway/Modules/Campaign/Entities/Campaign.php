@@ -6,7 +6,6 @@ use App\Models\Tenants\DesignProviderTemplate;
 use App\Models\Tenants\User;
 use App\Models\Traits\InteractsWithMedia;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,7 +14,7 @@ use JsonException;
 
 class Campaign extends Model
 {
-    use UsesTenantConnection, Slugable, InteractsWithMedia;
+    use Slugable, InteractsWithMedia;
 
     protected $fillable = [
         'name', 'description', 'start_on', 'end_on', 'fm_id', 'config',

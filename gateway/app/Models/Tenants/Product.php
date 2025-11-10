@@ -5,7 +5,6 @@ namespace App\Models\Tenants;
 use App\Foundation\FileManager\Traits\InteractWithMedia;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +15,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Product extends Model implements Sortable
 {
-    use UsesTenantConnection, Slugable, SortableTrait,
+    use Slugable, SortableTrait,
         CanBeScoped, InteractWithMedia;
 
     /**

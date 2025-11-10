@@ -8,7 +8,7 @@ use App\Http\Resources\Categories\PrintBoopsResource;
 use App\Http\Resources\Categories\PrintCategoryResource;
 use App\Http\Resources\Suppliers\HostNameResource;
 use App\Models\Contract;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Supplier;
 use App\Models\Tenants\Context;
 use App\Models\Website;
@@ -79,7 +79,7 @@ class SupplierController extends Controller
     {
 
         $currentTenant = tenant(); // Store the current tenant
-        $currentHost = hostname();
+        $currentHost = domain();
 
         // Paginate websites to process in chunks
         $websites = Website::getEnabledSuppliersExceptMe()->paginate(10); // Adjust items per page as needed
@@ -91,7 +91,7 @@ class SupplierController extends Controller
             $hostname->external = $website->external;
             $hostname->supplier = $website->supplier;
             $hostname->website_id = $website?->id;
-            $hostname->contract = ContractManager::getContractWithSupplier(Hostname::class, $website->hostname->id);
+            $hostname->contract = ContractManager::getContractWithSupplier(Domain::class, $website->hostname->id);
 
             // Switch to the tenant's database
             app(Environment::class)->tenant($website);
@@ -169,7 +169,7 @@ class SupplierController extends Controller
         $supplier->external = $website->external;
         $supplier->supplier = $website->supplier;
         $supplier->configure = $website->configure;
-        $supplier->contract = ContractManager::getContractWithSupplier(Hostname::class, $website->hostname->id);
+        $supplier->contract = ContractManager::getContractWithSupplier(Domain::class, $website->hostname->id);
         // Switch to the tenant's database
         app(Environment::class)->tenant($website);
 

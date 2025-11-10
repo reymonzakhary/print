@@ -7,7 +7,6 @@ use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasPrice;
 use App\Models\Traits\ResolveLanguageRouteBinding;
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +18,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Option extends Model implements Sortable
 {
-    use UsesTenantConnection, CanBeScoped,
+    use CanBeScoped,
         Slugable, HasPrice, SortableTrait,
         HasRecursiveRelationships,
         ResolveLanguageRouteBinding, InteractWithMedia;

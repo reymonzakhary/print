@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
 class Area extends Model implements Sortable
 {
-    use UsesSystemConnection, Slugable, SortableTrait;
+    use Slugable, SortableTrait;
 
     /**
      * sorting tables column

@@ -99,7 +99,7 @@ class ShopPrintProduct implements ShopProductInterface
         [$quantity, $productData, $pluginManager] = [
             $this->request->integer('quantity'),
             $this->request->get('product'),
-            Plugins::load(hostname())
+            Plugins::load(domain())
         ];
 
         if (!$categoryData = $this->categoryService->obtainCategory($this->category)['data'] ?? false) {

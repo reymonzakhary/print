@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Addressable extends MorphPivot
 {
-    use HasFactory, UsesSystemConnection;
+    use HasFactory;
 
     /**
      * @var bool

@@ -3,7 +3,7 @@
 namespace App\Plugins\Config;
 
 
-use App\Models\Hostname;
+use App\Models\Domain;
 
 /**
  * @see DefaultConfigRepository;
@@ -55,9 +55,9 @@ interface PluginConfigRepository
     /**
      * Update the specified website.
      *
-     * @param \Hyn\Tenancy\Models\Hostname|int|Hostname|null $hostname The website to be updated.
+     * @param int|Domain|null $hostname The website to be updated.
      * @return self
      */
-    public function update( \Hyn\Tenancy\Models\Hostname|int|Hostname|null $hostname = null):self;
+    public function update( int|Domain|null $hostname = null):self;
 
 }

@@ -3,7 +3,6 @@
 namespace App\Models\Tenants;
 
 use App\Enums\QueueProcessStatus;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Queue extends Model
 {
-    use HasFactory, UsesTenantConnection;
+    use HasFactory;
 
     /**
      * @var string[]

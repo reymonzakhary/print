@@ -8,7 +8,7 @@ use App\DTO\Tenant\Orders\ItemDTO;
 use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Foundation\Status\Status;
 use App\Http\Requests\Items\QuotationItemUpdateRequest;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Website;
 use App\Services\Suppliers\SupplierCategoryService;
 use App\Services\Tenant\Calculations\CalculationService;
@@ -145,9 +145,9 @@ class PrepareQuotationItemValidator
                 }])
                 ->first(['id'])->hostname->id;
             $contract = ContractManager::getContractsBetween(
-                Hostname::class,
-                \hostname()->id,
-                Hostname::class,
+                Domain::class,
+                \domain()->id,
+                Domain::class,
                 $supplierHostnameId)
                 ->first();
 
@@ -231,9 +231,9 @@ class PrepareQuotationItemValidator
                 }])
                 ->first(['id'])->hostname->id;
             $contract = ContractManager::getContractsBetween(
-                Hostname::class,
-                \hostname()->id,
-                Hostname::class,
+                Domain::class,
+                \domain()->id,
+                Domain::class,
                 $supplierHostnameId)
                 ->first();
 

@@ -2,14 +2,13 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MailQueue extends Model
 {
-    use UsesTenantConnection;
+
 
     /**
      *

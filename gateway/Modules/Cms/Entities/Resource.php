@@ -9,7 +9,6 @@ use App\Models\Traits\HasChildren;
 use App\Models\Traits\InteractsWithMedia;
 use App\Models\Traits\ResolveLanguageRouteBinding;
 use App\Services\Categories\BoopsService;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,8 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Resource extends Model implements Sortable
 {
-    use UsesTenantConnection,
-        SoftDeletes, SortableTrait,
+     use  SoftDeletes, SortableTrait,
         InteractsWithMedia, HasRecursiveRelationships;
 
 
@@ -47,7 +45,7 @@ class Resource extends Model implements Sortable
         'resource_id', 'language', 'content', 'sort', 'isfolder', 'locked', 'published',
         'hidden', 'searchable', 'cacheable', 'hide_children_in_tree',
         'created_by', 'updated_by', 'deleted_by', 'published_by', 'template_id',
-        'ctx_id', 'parent_id', 'resource_type_id', 'published_on', 'slug', 'locked_by', 
+        'ctx_id', 'parent_id', 'resource_type_id', 'published_on', 'slug', 'locked_by',
         'category'
     ];
 

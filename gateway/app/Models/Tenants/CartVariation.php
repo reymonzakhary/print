@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Foundation\FileManager\Traits\InteractWithMedia;
 use App\Models\Traits\HasPrice;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +15,6 @@ class CartVariation extends Model
 {
 
     use HasFactory,
-        UsesTenantConnection,
         InteractWithMedia,
         HasPrice;
 

@@ -7,7 +7,6 @@ namespace App\Models\Tenants;
 use App\Casts\Transaction\CustomFieldCast;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasInvoiceNumber;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,7 +16,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Transaction extends Model
 {
-    use UsesTenantConnection, SoftDeletes, HasInvoiceNumber, HasRecursiveRelationships, CanBeScoped;
+    use SoftDeletes, HasInvoiceNumber, HasRecursiveRelationships, CanBeScoped;
 
     protected $fillable = [
         'order_id',

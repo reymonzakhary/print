@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Website;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;

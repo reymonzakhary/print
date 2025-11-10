@@ -3,7 +3,7 @@
 namespace App\Plugins\Config;
 
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Validation\ValidationException;
 
 class DefaultConfigRepository implements PluginConfigRepository
@@ -15,9 +15,9 @@ class DefaultConfigRepository implements PluginConfigRepository
 
     /**
      * Load instance of the website
-     * @var \Hyn\Tenancy\Models\Hostname|Hostname $hostname
+     * @var Domain $hostname
      */
-    public \Hyn\Tenancy\Models\Hostname|Hostname $hostname;
+    public Domain $hostname;
 
 
     /**
@@ -81,11 +81,11 @@ class DefaultConfigRepository implements PluginConfigRepository
     /**
      * Update the website for the application.
      *
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname The website model to update
+     * @param Domain|int|null $hostname The website model to update
      * @return self
      * @throws ValidationException
      */
-    public function update(\Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname = null): self
+    public function update(Domain|int|null $hostname = null): self
     {
 
         $this->hostname = $this->resolveHostname($hostname);
@@ -98,20 +98,20 @@ class DefaultConfigRepository implements PluginConfigRepository
     /**
      * Resolve hostname from various input types
      *
-     * @param int|\Hyn\Tenancy\Models\Hostname|Hostname|null $hostname
-     * @return \Hyn\Tenancy\Models\Hostname|null
+     * @param int|Domain|null $hostname
+     * @return Domain|null
      * @throws ValidationException
      */
     private function resolveHostname(
-        int|\Hyn\Tenancy\Models\Hostname|Hostname|null $hostname
-    ): ?\Hyn\Tenancy\Models\Hostname
+        int|Domain|null $hostname
+    ): ?Domain
     {
         if ($hostname === null) {
             // Try to get current hostname from tenancy context
             try {
-                $website = \Hyn\Tenancy\Facades\TenancyFacade::website();
+                $website = \domain();
                 if ($website) {
-                    return $website->hostnames()->first();
+                    return $website->domains()->first();
                 }
             } catch (\Exception $e) {
                 // Ignore exception, will be handled in boot()
@@ -120,7 +120,7 @@ class DefaultConfigRepository implements PluginConfigRepository
         }
 
         if (is_numeric($hostname)) {
-            $resolvedHostname = Hostname::where('id', $hostname)
+            $resolvedHostname = Domain::where('id', $hostname)
                 ->with('website')
                 ->first();
 
@@ -133,7 +133,7 @@ class DefaultConfigRepository implements PluginConfigRepository
             return $resolvedHostname;
         }
 
-        if (in_array(get_class($hostname), [Hostname::class, '\Hyn\Tenancy\Models\Hostname'])) {
+        if (in_array(get_class($hostname), [Domain::class, '\Hyn\Tenancy\Models\Hostname'])) {
             // Ensure the website relationship is loaded
             if (!$hostname->relationLoaded('website')) {
                 $hostname->load('website');

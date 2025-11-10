@@ -3,7 +3,6 @@
 namespace Modules\Ecommerce\Entities;
 
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +12,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Product extends Model implements Sortable
 {
-    use UsesTenantConnection, Slugable, SortableTrait,
+    use Slugable, SortableTrait,
         HasFactory;
 
     protected $fillable = [];

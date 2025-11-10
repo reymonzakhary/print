@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Hyn\Tenancy\Traits\UsesSystemConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Module extends Model
 {
     //
-    use UsesSystemConnection;
+
 
     protected $table = 'modules';
     protected $fillable = [
@@ -20,8 +19,8 @@ class Module extends Model
      * @return BelongsToMany
      */
 
-    public function hostnames()
+    public function domains()
     {
-        return $this->belongsToMany(Hostname::class, "hostname_modules");
+        return $this->belongsToMany(Domain::class, "hostname_modules");
     }
 }

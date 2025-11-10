@@ -6,7 +6,7 @@ namespace App\Jobs\Tenant\Setting;
 
 use App\Enums\MessageTo;
 use App\Events\Messages\CrossTenantMessage;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Message;
 use Hyn\Tenancy\Environment;
 use Illuminate\Bus\Queueable;
@@ -55,7 +55,7 @@ class RequestMessage
         LoggerInterface   $logger,
     ): void
     {
-        if (!$targetTenant = Hostname::query()
+        if (!$targetTenant = Domain::query()
             ->with('website')
             ->where('id', $message->getAttribute('recipient_hostname'))->first()
         ) {

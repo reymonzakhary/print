@@ -41,7 +41,7 @@ final class TenantHostnameController extends Controller
     /**
      * Show current tenant hostname data
      *
-     * @return HostnameResource
+     * @return DomainResource
      *
      * @throws AuthorizationException
      */
@@ -49,7 +49,7 @@ final class TenantHostnameController extends Controller
     {
         $this->ensureUserIsAuthorized();
 
-        return HostnameResource::make(hostname())
+        return HostnameResource::make(domain())
             ->hide([
                 'id',
                 'host_id',
@@ -62,7 +62,7 @@ final class TenantHostnameController extends Controller
      * Update current tenant hostname data
      *
      * @param UpdateTenantHostnameRequest $request
-     * @param HostnameRepository $hostnameRepository
+     * @param DomainRepository $hostnameRepository
      *
      * @return JsonResponse
      *
@@ -76,7 +76,7 @@ final class TenantHostnameController extends Controller
     {
         $this->ensureUserIsAuthorized();
 
-        $currentHostname = hostname();
+        $currentHostname = domain();
 
         if ($request->filled('logo')) {
             $currentHostname->setAttribute('logo', $request->get('logo'));

@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers\Tenant\Mgr\Finder\Categories;
 
-use App\Enums\Status;
-use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories\FinderMarketplaceResource;
-use App\Http\Resources\Categories\FinderPrintCategoryResource;
 use App\Http\Resources\Categories\FinderSearchCategoryResource;
-use App\Models\Hostname;
 use App\Services\Tenant\Finder\Categories\CategoryService;
 use App\Services\Tenant\Finder\Categories\SearchService;
 use App\Services\Tenant\Finder\Marketplace\MarketplaceService;
@@ -17,7 +13,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
-use function Aws\filter;
 
 class CategoryController extends Controller
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Plugins\Concrete;
 
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Plugins\Config\DefaultConfigRepository;
 use Illuminate\Http\Request;
 
@@ -27,7 +27,7 @@ interface PluginManagerInterface
      * @param array $routes The routes for the tenant
      * @param string $tenant_id The ID of the tenant
      * @param string $tenant_name The name of the tenant
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname $hostname The hostname for the tenant
+     * @param Domain $hostname The hostname for the tenant
      * @param DefaultConfigRepository $configRepository The repository for default configuration
      *
      * @return void
@@ -38,7 +38,7 @@ interface PluginManagerInterface
         array $routes,
         string $tenant_id,
         string $tenant_name,
-        \Hyn\Tenancy\Models\Hostname|Hostname $hostname,
+        Domain $hostname,
         DefaultConfigRepository $configRepository
     ): void;
 }

@@ -4,7 +4,6 @@ namespace App\Models\Tenants;
 
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +11,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class DesignProviderTemplate extends Model
 {
-    use UsesTenantConnection, CanBeScoped, InteractsWithMedia, SortableTrait;
+    use CanBeScoped, InteractsWithMedia, SortableTrait;
 
     /**
      * add the relation name for securing the key in db

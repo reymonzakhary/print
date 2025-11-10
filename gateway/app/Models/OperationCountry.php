@@ -30,9 +30,9 @@ class OperationCountry extends Model
      *
      * @return BelongsTo
      */
-    public function hostname(): BelongsTo
+    public function domain(): BelongsTo
     {
-        return $this->belongsTo(Hostname::class);
+        return $this->belongsTo(Domain::class);
     }
 
 }

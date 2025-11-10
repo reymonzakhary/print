@@ -2,13 +2,12 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Addressable extends MorphPivot
 {
-    use UsesTenantConnection;
+
 
     /**
      * @var bool

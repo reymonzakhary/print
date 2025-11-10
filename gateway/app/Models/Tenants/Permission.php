@@ -5,13 +5,12 @@ namespace App\Models\Tenants;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasAdvancedFilter;
 use DateTimeInterface;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laratrust\Models\Permission as PermissionModel;
 
 class Permission extends PermissionModel
 {
-    use UsesTenantConnection, HasAdvancedFilter, CanBeScoped;
+    use HasAdvancedFilter, CanBeScoped;
 
     public $guarded = [];
 

@@ -6,7 +6,7 @@ namespace App\Http\Controllers\System\V2\Mgr\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clients\Media\UpdateMediaRequest;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +15,12 @@ class MediaController extends Controller
 {
     /**
      * @param UpdateMediaRequest $request
-     * @param Hostname $hostname
+     * @param Domain $hostname
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function store(
         UpdateMediaRequest $request,
-        Hostname $hostname
+        Domain $hostname
     ): Response|ResponseFactory
     {
         $website = $hostname?->website()->first();

@@ -2,13 +2,12 @@
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
-    use UsesTenantConnection;
+
 
     public $timestamps = false;
     /**

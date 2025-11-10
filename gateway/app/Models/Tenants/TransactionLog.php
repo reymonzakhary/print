@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Tenants;
 
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TransactionLog extends Model
 {
-    use UsesTenantConnection;
+
 
     protected $table = 'transactions_logs';
 

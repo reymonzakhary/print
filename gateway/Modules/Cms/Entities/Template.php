@@ -3,7 +3,6 @@
 namespace Modules\Cms\Entities;
 
 use App\Models\Traits\CanBeScoped;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,7 +11,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Template extends Model
 {
-    use UsesTenantConnection, SortableTrait, CanBeScoped;
+    use SortableTrait, CanBeScoped;
 
 
     /**

@@ -3,8 +3,7 @@
 namespace App\Http\Resources\Categories;
 
 use App\Foundation\ContractManager\Facades\ContractManager;
-use App\Models\Hostname;
-use App\Models\Website;
+use App\Models\Domain;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -76,9 +75,9 @@ class FinderMarketplaceResource extends JsonResource
                 $page_description = $website->hostname->custom_fields->pick('page_description');
                 $page_media = $website->hostname->custom_fields->pick('page_media');
                 $contract = ContractManager::getContractsBetween(
-                    Hostname::class,
-                    \hostname()->id,
-                    Hostname::class,
+                    Domain::class,
+                    \domain()->id,
+                    Domain::class,
                     $website->hostname->id
                 )->first();
                 $custom_fields = optional($contract)->custom_fields;
@@ -120,7 +119,7 @@ class FinderMarketplaceResource extends JsonResource
             $hostname = Website::where('uuid', $uuid)->with('hostname')->first();
             return $hostname->hostname->logo?Storage::disk('digitalocean')->url($hostname->hostname->logo):null;
         }
-        return hostname()->logo?Storage::disk('digitalocean')->url(hostname()->logo):null;
+        return domain()->logo?Storage::disk('digitalocean')->url(domain()->logo):null;
     }
 
     /**

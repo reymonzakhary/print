@@ -3,7 +3,6 @@
 namespace App\Models\Tenants;
 
 use App\Models\Traits\InteractsWithMedia;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -14,7 +13,7 @@ use Illuminate\Support\Str;
  */
 class Profile extends Model
 {
-    use UsesTenantConnection, InteractsWithMedia;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

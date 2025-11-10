@@ -20,7 +20,7 @@ use App\Http\Controllers\System\V2\Mgr\Clients\MediaController;
 use App\Http\Controllers\System\V2\Mgr\Companies\CompanyController;
 use App\Http\Controllers\System\V2\Mgr\Companies\ContractController;
 use App\Http\Controllers\System\V2\Mgr\Companies\QuotationController;
-use App\Http\Controllers\System\V2\Mgr\Country\CountryController;
+use App\Http\Controllers\System\V2\Mgr\Countries\CountryController;
 use App\Http\Controllers\System\V2\Mgr\Currency\CurrencyController;
 use App\Http\Controllers\System\V2\Mgr\Messages\MessageController;
 use App\Http\Controllers\System\V2\Mgr\Options\MatchedOptionController;

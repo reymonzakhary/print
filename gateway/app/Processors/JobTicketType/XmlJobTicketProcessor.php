@@ -4,12 +4,10 @@ namespace App\Processors\JobTicketType;
 
 use App\Contracts\JobTicketAbstract;
 use App\Http\Resources\Items\ItemResource;
-use App\Http\Resources\Jobtickets\OrderResource;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Item;
 use App\Models\Tenants\Order;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -33,7 +31,7 @@ class XmlJobTicketProcessor extends JobTicketAbstract
        * need Check on this
        */
 
-      if ($supplier = Hostname::findByFqdn($item->supplierName)->first()) {
+      if ($supplier = Domain::findByFqdn($item->supplierName)->first()) {
          return response()->view('job_tickets.job_ticket_xml', [
             'order' => $order,
             'item' => ItemResource::make($item),
@@ -47,11 +45,12 @@ class XmlJobTicketProcessor extends JobTicketAbstract
       ], Response::HTTP_NOT_FOUND);
    }
 
-   /**
-    * @param Order  $order
-    * @param string $iso
-    * @return \Illuminate\Http\Response|JsonResponse
-    */
+    /**
+     * @param Order $order
+     * @param string $iso
+     * @param string $format
+     * @return \Illuminate\Http\Response|JsonResponse
+     */
    public static function formatOrder(
       Order  $order,
       string $iso,

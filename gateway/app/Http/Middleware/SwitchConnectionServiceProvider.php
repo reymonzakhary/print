@@ -8,19 +8,13 @@ use App\Foundation\Settings\Settings;
 use App\Models\Tenants\Media;
 use App\Providers\TenantAuthServiceProvider;
 use Closure;
-use Hyn\Tenancy\Environment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 
-final readonly class SwitchConnectionServiceProvider
+final class SwitchConnectionServiceProvider
 {
-    public function __construct(
-        private Environment $environment,
-    ) {
-    }
-
     /**
      * Handle an incoming request.
      *
@@ -32,7 +26,11 @@ final readonly class SwitchConnectionServiceProvider
     {
         $request->domain = $request->getSchemeAndHttpHost();
 
-        if ($fqdn = $this->environment->hostname()?->fqdn) {
+        // Use stancl/tenancy helpers
+        $currentTenant = tenant();
+        $currentDomain = domain();
+
+        if ($currentDomain && $fqdn = $currentDomain->domain) {
             config(['auth.guards.api.provider' => 'tenant']);
             config(['auth.guards.web.provider' => 'tenant']);
             config(['database.default' => 'tenant']);
@@ -44,15 +42,15 @@ final readonly class SwitchConnectionServiceProvider
             config(['queue.connections.database' => 'tenant']);
             config(['media-library.media_model' => Media::class]);
 
-            $request->tenant = $this->environment->tenant();
-            $request->uuid = $this->environment->tenant()?->uuid;
-            $request->hostname = hostname();
+            $request->tenant = $currentTenant;
+            $request->uuid = $currentTenant?->id;
+            $request->domain = $currentDomain;
 
             request()->merge([
                 'tenant' => $request->tenant,
                 'uuid' => $request->uuid,
-                'hostname' => $request->hostname,
-                'host_id' => $request->hostname?->host_id
+                'domain' => $request->domain,
+                'host_id' => $request->domain?->host_id
             ]);
 
             app()->register(TenantAuthServiceProvider::class);

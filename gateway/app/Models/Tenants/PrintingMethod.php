@@ -3,14 +3,13 @@
 namespace App\Models\Tenants;
 
 use App\Models\Traits\Slugable;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
 class PrintingMethod extends Model implements Sortable
 {
-    use  UsesTenantConnection, Slugable, SortableTrait, SortableTrait;
+    use  Slugable, SortableTrait, SortableTrait;
 
     /**
      * sorting tables column

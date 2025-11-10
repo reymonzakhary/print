@@ -3,7 +3,7 @@
 namespace App\Plugins\Webhooks\DWD;
 
 use App\Enums\Status;
-use App\Models\Hostname;
+use App\Models\Domain;
 use App\Models\Tenants\Item;
 use App\Models\Tenants\Order;
 use App\Models\Website;
@@ -30,7 +30,7 @@ class OrderWebhookHandler extends BaseWebhookHandler
     public function handle(array $payload, string $endpoint): array
     {
         // Get the current tenant's hostname and website configuration
-        $current_hostname = Hostname::where('id' , $this->tenant_id)->select('id' , 'website_id')->with('website')->first();
+        $current_hostname = Domain::where('id' , $this->tenant_id)->select('id' , 'website_id')->with('website')->first();
         // Validate that the tenant has a properly configured website for external webhooks
         if (!$current_hostname || !$current_hostname->website->configure || !$current_hostname->website->external) {
             return [

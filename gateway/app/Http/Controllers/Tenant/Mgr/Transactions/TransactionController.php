@@ -157,7 +157,7 @@ class TransactionController extends Controller
      *
      * @param \Illuminate\Pagination\LengthAwarePaginator $transactions
      * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
+     */    
     private function fixMalformedTransactions(
         LengthAwarePaginator $transactions
     ): LengthAwarePaginator
@@ -169,14 +169,14 @@ class TransactionController extends Controller
             // Check each product in the transaction's custom_field
             foreach($transaction->custom_field->pick('products') as $product) {
                 // If the shipping_cost is a string, flag the transaction as malformed
-                if(isset($product['shipping_cost']) && is_string($product['shipping_cost'])) {
+                if(is_string($product['shipping_cost'])) {
                     $malformedTransactions->push($transaction);
                     break;  //no need to check more
                 }
             }
         }
 
-        if($malformedTransactions->count()) {    //If any malformed transactions?
+        if($malformedTransactions->count()) {    //If any malformed transactions?   
             $transactionService = new TransactionService;
             foreach($malformedTransactions as $transaction)
             {
@@ -206,6 +206,6 @@ class TransactionController extends Controller
             ->withScopes($this->scope())
             ->orderBy('transactions.id', $this->sort)
             ->paginate($this->per_page);
-
+            
     }
 }

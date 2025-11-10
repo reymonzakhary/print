@@ -5,7 +5,7 @@ namespace App\Http\Requests\Settings;
 use App\Enums\MessageTo;
 use App\Enums\MessageType;
 use App\Facades\Plugins;
-use App\Models\Hostname;
+use App\Models\Domain;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -56,7 +56,7 @@ class SendEmailRequest extends FormRequest
     {
         $this->merge([
             'from' => 'sender',
-            'sender_hostname' => \hostname()->id,
+            'sender_hostname' => \domain()->id,
             'sender_name' => auth()->user()->profile->fullName,
             'sender_email' => auth()->user()->email,
             'to' => $this->type === 'producer' ? MessageTo::CEC->value : MessageTo::SUPPLIER->value,
@@ -66,7 +66,7 @@ class SendEmailRequest extends FormRequest
 
         if ($this->type === MessageType::CONTRACT->value) {
 
-            if ($hostname = Hostname::with('website')->where('id', $this->recipient_hostname)->first()) {
+            if ($hostname = Domain::with('website')->where('id', $this->recipient_hostname)->first()) {
                 $configure = collect($hostname->website->configure);
                 if ($configure->has('auth') && $hostname->website->external) {
                     $this->validate($configure->get('auth'), $this->all());

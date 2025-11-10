@@ -91,12 +91,22 @@ final class UpdateOptionRequest extends FormRequest
             'dynamic' => 'nullable|boolean',
             'dynamic_type' => 'required_if:dynamic,true|string',
             'dynamic_keys' => 'nullable|array',
-            'start_on' => [Rule::requiredIf(function () {
-                    in_array($this->dynamic_type, ['pages', 'sides']);
-            }), 'numeric'],
-            'end_on' => [Rule::requiredIf(function () {
-                in_array($this->dynamic_type, ['pages', 'sides']);
-            }), 'numeric'],
+            'start_on' => [
+                Rule::requiredIf(
+                    fn () => in_array(
+                        $this->input('dynamic_type'), 
+                        ['pages', 'sides'])
+                    ), 
+                'numeric'
+            ],
+            'end_on' => [
+                Rule::requiredIf(
+                    fn () => in_array(
+                        $this->input('dynamic_type'), 
+                        ['pages', 'sides'])
+                    ), 
+                'numeric'
+            ],        
             'generate' => 'required_if:dynamic,true|boolean',
             'dimension' => 'nullable|string',
             'start_cost' => 'integer',

@@ -92,13 +92,22 @@ final class StoreOptionRequest extends FormRequest
             'parent' => 'nullable|boolean',
             'dynamic' => 'nullable|boolean',
             'dynamic_keys' => 'nullable|array',
-            'start_on' => [Rule::requiredIf(function () {
-                in_array($this->dynamic_type, ['pages', 'sides']);
-            }), 'numeric'],
-            'end_on' => [Rule::requiredIf(function () {
-                in_array($this->dynamic_type, ['pages', 'sides']);
-            }), 'numeric'],
-            'generate' => 'required_if:dynamic,true|boolean',
+            'start_on' => [
+                Rule::requiredIf(
+                    fn () => in_array(
+                        $this->input('dynamic_type'), 
+                        ['pages', 'sides'])
+                    ), 
+                'numeric'
+            ],
+            'end_on' => [
+                Rule::requiredIf(
+                    fn () => in_array(
+                        $this->input('dynamic_type'), 
+                        ['pages', 'sides'])
+                    ), 
+                'numeric'
+            ],            'generate' => 'required_if:dynamic,true|boolean',
             'dynamic_type' => 'required_if:dynamic,true|string',
             'dimension' => 'nullable|string',
             'start_cost' => 'integer',
@@ -129,13 +138,8 @@ final class StoreOptionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $display_name = Language::all()->map(fn($item) => (object)[
-            'iso' => $item->iso,
-            'display_name' => $this->display_name ?? $this->name
-        ]);
+
         $this->merge([
-            'iso' => App::getLocale(),
-            'display_name' => $display_name->toArray(),
             'calculation_method' => $this->calculation_method ?? CalculationMethod::QTY->value,
             'rpm' => $this->rpm ?? 0
         ]);

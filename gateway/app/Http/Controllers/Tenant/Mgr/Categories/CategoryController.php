@@ -260,7 +260,7 @@ class CategoryController extends Controller
                 ], $response['status']);
             }
 
-            SharedCategoryJob::dispatch(hostname(), $response['data'], $response['data']['shareable']);
+            SharedCategoryJob::dispatch(domain(), $response['data'], $response['data']['shareable']);
 
             return PrintBoopsResource::make($response['data'])->additional([
                 "message" => __("Category has been updated successfully"),

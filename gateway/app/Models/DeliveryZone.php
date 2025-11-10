@@ -36,7 +36,7 @@ class DeliveryZone extends Model
 
     public function tenant(): BelongsTo
     {
-        return $this->belongsTo(Hostname::class, 'tenant_id');
+        return $this->belongsTo(Domain::class, 'tenant_id');
     }
 
     /**

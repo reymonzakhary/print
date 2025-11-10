@@ -6,7 +6,6 @@ use App\Models\Tenants\Trait\HasAddresses;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\GenerateIdentifier;
 use App\Notifications\Tenant\Email\Member\VerifyEmailNotification;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -31,7 +30,6 @@ class Member extends Authenticatable implements MustVerifyEmail, LaratrustUser
     use HasRolesAndPermissions,
         SoftDeletes,
         Notifiable,
-        UsesTenantConnection,
         GenerateIdentifier,
         HasApiTokens, HasAddresses,
         CanBeScoped;
