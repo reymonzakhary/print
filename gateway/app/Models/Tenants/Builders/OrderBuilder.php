@@ -16,10 +16,12 @@ class OrderBuilder extends VirtualColumnBuilder
         if (auth()->user()->isOwner() || auth()->user()->contexts()->where('member', false)->exists()) {
             return $this;
         }
-        return $this->where('orders.user_id', auth()->user()->id)
-            ->orWhereIn(
-                'orders.team_id',
-                auth()->user()->userTeams()->where('user_teams.admin', true)->pluck('id')->toArray()
-            );
+        return $this->where(function ($query) {
+            $query->where('orders.user_id', auth()->user()->id)
+                  ->orWhereIn(
+                      'orders.team_id',
+                      auth()->user()->userTeams()->where('user_teams.admin', true)->pluck('id')->toArray()
+                  );
+        });
     }
 }

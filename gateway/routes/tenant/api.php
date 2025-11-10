@@ -58,7 +58,7 @@ Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic
     Route::get('/info', function () {
 
         return response()->json([
-            'logo' => hostname()->logo?Storage::disk('digitalocean')->url(hostname()->logo):null,
+            'logo' => hostname()->logo_url ?? null,
             'fqdn' => hostname()->fqdn,
         ]);
     });

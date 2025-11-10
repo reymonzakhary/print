@@ -3,6 +3,9 @@
 
 
 $customer_data = $order->orderedBy;
+if (!$customer_data) {
+    $customer_data = $order->customer ? json_decode(json_encode($order->customer)) : null;
+}
 $supplier_data = $supplierData;
 $type = 'orders';
 
@@ -38,7 +41,8 @@ $products = $order->items()->whereStatusIsNotCancelled()->get()->map(function ($
 /*
  * Company Data
  */
-$customer_address = $customer_data?->invoiceAddress();
+
+$customer_address = $order->invoice_address()->first() ?? null;
 $company_name = "";
 $company_representative = $customer_data->profile?->first_name . ' ' . $customer_data->profile?->last_name;
 $company_address = trim($customer_address?->getAttribute('address') . ' ' . $customer_address?->getAttribute('number'));
@@ -138,6 +142,7 @@ $first_table_height = 467 + 25 * (16 - $font_size) - $offset;
 $extra_table_height = 518;
 $first_product_row_limit = floor($first_table_height / (2.5 * $font_size)) - 3;
 $extra_product_row_limit = floor($extra_table_height / (2.5 * $font_size)) - 2;
+$row_height = 1.5 * $font_size;
 
 @endphp
 

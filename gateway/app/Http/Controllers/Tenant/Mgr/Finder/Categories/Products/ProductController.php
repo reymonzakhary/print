@@ -186,9 +186,9 @@ class ProductController extends Controller
                 });
 
                 // Ensure only valid products are processed
-                if (count($product) !== count($available_manifest)) {
-                    return;
-                }
+//                if (count($product) !== count($available_manifest)) {
+//                    return;
+//                }
 
                 $supplier_request = new FilterProductRequest(
                     array_merge(
@@ -299,7 +299,7 @@ class ProductController extends Controller
 
                     $oldPrices = $proxy['prices'];
                     $proxy['prices'] = [];
-                    
+
                     foreach($oldPrices as $price) {
                         array_push($proxy['prices'], Moneys::applyMyMargin($price, $margin));
                     }
@@ -328,7 +328,7 @@ class ProductController extends Controller
 
                     $oldPrices = $proxy['prices'];
                     $proxy['prices'] = [];
-                    
+
                     foreach($oldPrices as $price) {
                         array_push($proxy['prices'], Moneys::applyMyMargin($price, $margin));
                     }

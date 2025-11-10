@@ -9,8 +9,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class ResourceGroup extends Model
 {
-    // use UsesTenantConnection, // Removed
-        SortableTrait;
+     use SortableTrait;
 
     protected $fillable = [
         'name', 'sort'

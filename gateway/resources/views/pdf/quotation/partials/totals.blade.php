@@ -18,11 +18,11 @@
 
     @foreach ($vat_amounts as $vat)
         <tr>
-            <td style="width: 81%; text-align: right; "> {{ __('quotations.vat') }}
+            <td style="width: 80%; text-align: right; "> {{ __('quotations.vat') }}
                 {{ $vat['vat_percentage'] }}%
                 <strong>({{ moneys()->setDecimal(0)->setAmount($vat['subtotal'])->format()}})</strong>
             </td>
-            <td class="currency-cell" style="width: 12%; color: #5A6572">
+            <td class="currency-cell" style="width: 18%; color: #5A6572">
                 {{ moneys()->setAmount($vat['total_vat'])->format()}}
             </td>
             <td class="currency-cell" style="width: 8%;">
