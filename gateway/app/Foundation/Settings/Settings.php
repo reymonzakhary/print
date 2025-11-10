@@ -33,7 +33,7 @@ class Settings
             if (app(SettingsContractInterface::class)->exists($key)) {
                 return app(SettingsContractInterface::class)->get($key);
             }
-            dd(Setting::get());
+//            dd(Setting::get());
 
             if ($setting = Setting::where('key', Str::snake($method))->first()) {
                 app(SettingsContractInterface::class)->add($key, $setting->value);

@@ -64,7 +64,7 @@ final class SwitchConnectionServiceProvider
                 'host_id' => $request->domain?->host_id
             ]);
 
-            dd(Settings::mailSmtpHosts());
+//            dd(Settings::mailSmtpHosts());
             app()->register(TenantAuthServiceProvider::class);
 
 

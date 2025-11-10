@@ -2,7 +2,7 @@
 
 namespace App\Foundation\Settings\Contracts;
 
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Setting;
 use Closure;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Support\Arrayable;
