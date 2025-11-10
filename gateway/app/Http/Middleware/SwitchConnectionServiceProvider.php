@@ -67,18 +67,34 @@ final class SwitchConnectionServiceProvider
 //            dd(Settings::mailSmtpHosts());
             app()->register(TenantAuthServiceProvider::class);
 
+            // Configure mail settings (with error handling for migrations)
+            try {
+                config([
+                    'mail.mailers.smtp.host' => Settings::mailSmtpHosts(),
+                    'mail.mailers.smtp.port' => (int)Settings::mailSmtpPort(),
+                    'mail.mailers.smtp.username' => Settings::mailSmtpUser(),
+                    'mail.mailers.smtp.password' => Settings::mailSmtpPass(),
+                    'mail.mailers.smtp.encryption' => Settings::mailSmtpPrefix(),
+                    'mail.from.name' => Settings::mailSmtpFromName(),
+                    'mail.from.address' => Settings::mailSmtpFrom(),
+                ]);
 
-            config([
-                'mail.mailers.smtp.host' => Settings::mailSmtpHosts(),
-                'mail.mailers.smtp.port' => (int)Settings::mailSmtpPort(),
-                'mail.mailers.smtp.username' => Settings::mailSmtpUser(),
-                'mail.mailers.smtp.password' => Settings::mailSmtpPass(),
-                'mail.mailers.smtp.encryption' => Settings::mailSmtpPrefix(),
-                'mail.from.name' => Settings::mailSmtpFromName(),
-                'mail.from.address' => Settings::mailSmtpFrom(),
-            ]);
+                config(['app.fallback_locale', Settings::managerLanguage()]);
+            } catch (\Exception $e) {
+                // Settings table might not exist or have wrong schema
+                // Log the error but don't crash the request
+                \Log::warning('Failed to load tenant settings: ' . $e->getMessage(), [
+                    'tenant_id' => $currentTenant?->id,
+                    'domain' => $fqdn,
+                    'error' => $e->getMessage()
+                ]);
 
-            config(['app.fallback_locale', Settings::managerLanguage()]);
+                // Use default mail configuration
+                config([
+                    'mail.from.name' => config('mail.from.name', 'Tenant'),
+                    'mail.from.address' => config('mail.from.address', 'noreply@example.com'),
+                ]);
+            }
 
             return $next($request);
         }

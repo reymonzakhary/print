@@ -18,16 +18,23 @@ class CacheServiceProvider extends ServiceProvider
     {
         if(!$this->app->runningInConsole()){
             if (PHP_SAPI === 'fpm-fcgi') {
-                $uuid = Str::slug(env('APP_NAME', 'laravel'), '_').'_cache';
+                $tenantId = Str::slug(env('APP_NAME', 'laravel'), '_').'_cache';
             } else {
-                $fqdn = request()->getHost();
-                $uuid = DB::table('hostnames')
-                    ->select('websites.uuid')
-                    ->join('websites', 'hostnames.website_id', '=', 'websites.id')
-                    ->where('fqdn', $fqdn)
-                    ->value('uuid');
+                // Use stancl/tenancy helper to get current tenant
+                $currentTenant = tenant();
+
+                if ($currentTenant) {
+                    $tenantId = $currentTenant->id;
+                } else {
+                    // Fallback: try to find tenant by domain
+                    $fqdn = request()->getHost();
+                    $tenantId = DB::connection('cec')
+                        ->table('domains')
+                        ->where('domain', $fqdn)
+                        ->value('tenant_id') ?? Str::slug(env('APP_NAME', 'laravel'), '_').'_cache';
+                }
             }
-            Cache::store('redis')->setPrefix(Str::slug(tenant()?->uuid??$uuid, '_').'_cache');
+            Cache::store('redis')->setPrefix(Str::slug($tenantId, '_').'_cache');
         }
 
     }
