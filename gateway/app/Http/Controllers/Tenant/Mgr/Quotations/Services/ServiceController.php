@@ -12,8 +12,8 @@ use App\Http\Requests\Order\ServiceOrderStoreRequest;
 use App\Http\Requests\Order\ServiceOrderUpdateRequest;
 use App\Http\Resources\Services\QuotationServiceResource;
 use App\Http\Resources\Services\QuotationServiceResourceCollection;
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Service;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Service;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Contexts;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Context\ContextResource;
 use App\Http\Resources\Users\UserResource;
-use App\Models\Tenants\Context;
+use App\Models\Tenant\Context;
 use App\Repositories\ContextRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

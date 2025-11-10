@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Tenants;
 
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory

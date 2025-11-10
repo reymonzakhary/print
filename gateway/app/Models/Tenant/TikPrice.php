@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models\Tenant;
+
+use App\Models\Traits\GenerateIdentifier;
+use App\Models\Traits\HasPrice;
+use Illuminate\Database\Eloquent\Model;
+
+class TikPrice extends Model
+{
+    use GenerateIdentifier, HasPrice;
+
+    /**
+     * add the relation name for securing the key in db
+     * @var string|null
+     */
+    protected string $relation;
+
+    protected $fillable = [
+        'bio_id', 'machine_id', 'from', 'to', 'price', 'active'
+    ];
+}

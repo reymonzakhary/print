@@ -6,12 +6,12 @@
 
     use App\Actions\PriceAction\CalculationAction;
     use App\Models\Tenant\Item;
-    use App\Models\Tenants\Service;
+    use App\Models\Tenant\Service;
     use App\Plugins\Moneys;
     use Carbon\Carbon;
 @endphp
 
-        <!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -176,8 +176,8 @@
                         <td style="text-align: left;">
                             @if(!empty($settings['logo']))
                                 <img
-                                        src="{{ $settings['logo'] }}"
-                                        style="width: 100%; max-width: 300px"
+                                    src="{{ $settings['logo'] }}"
+                                    style="width: 100%; max-width: 300px"
                                 />
                             @endif
                             <br/>

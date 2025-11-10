@@ -5,7 +5,7 @@ namespace App\Foundation\Settings;
 
 
 use App\Foundation\Settings\Contracts\SettingsContractInterface;
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Setting;
 use Illuminate\Support\Str;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
