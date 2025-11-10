@@ -28,7 +28,8 @@ class Settings
 
         $method = Str::snake($method);
         if ($tenant = tenant()) {
-            $key = $tenant->uuid . $method;
+            // Use tenant->id instead of tenant->uuid (stancl/tenancy uses 'id' as primary key)
+            $key = $tenant->id . $method;
 
             if (app(SettingsContractInterface::class)->exists($key)) {
                 return app(SettingsContractInterface::class)->get($key);
