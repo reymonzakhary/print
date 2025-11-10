@@ -6,7 +6,7 @@ namespace App\Http\Requests\Boxes\Printing;
 
 use App\Enums\BoxCalcRefs;
 use App\Http\Requests\MediaImageValidatorTrait;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 

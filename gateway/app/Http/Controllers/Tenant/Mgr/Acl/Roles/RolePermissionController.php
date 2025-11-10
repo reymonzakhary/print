@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Acl\Roles;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\AttachPermissionToRoleRequest;
-use App\Models\Tenants\Role;
+use App\Models\Tenant\Role;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Tenants\DesignProviderTemplate;
+use App\Models\Tenant\DesignProviderTemplate;
 use Illuminate\Http\Request;
 use Spatie\SimpleExcel\SimpleExcelReader;
 

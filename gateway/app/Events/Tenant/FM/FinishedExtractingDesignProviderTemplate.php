@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\FM;
 
-use App\Models\Tenants\DesignProviderTemplate;
+use App\Models\Tenant\DesignProviderTemplate;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

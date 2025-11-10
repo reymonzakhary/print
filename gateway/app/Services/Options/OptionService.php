@@ -5,7 +5,7 @@ namespace App\Services\Options;
 
 
 use App\Contracts\ServiceContract;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use App\Utilities\Traits\ConsumesExternalServices;
 use GuzzleHttp\Exception\GuzzleException;
 

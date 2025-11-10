@@ -1,7 +1,6 @@
 <?php
 
 use App\Blueprint\Blueprint;
-use App\Events\BroadcastMessageEvent;
 use App\Http\Controllers\Tenant\Mgr\Account\AccountController;
 use App\Http\Controllers\Tenant\Mgr\Account\Setting\SettingController;
 use App\Http\Controllers\Tenant\Mgr\Apps\AppController;
@@ -33,11 +32,10 @@ use App\Http\Controllers\Tenant\Mgr\Users\Companies\Addresses\AddressController 
 use App\Http\Controllers\Tenant\Mgr\Users\Companies\CompanyController as UserCompanyController;
 use App\Http\Controllers\Tenant\Mgr\Users\Profile\ProfileController;
 use App\Http\Controllers\Tenant\Mgr\Users\UserController;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use Cart\CartController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic.user','auth.tenant.gate']], function () {
 

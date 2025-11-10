@@ -4,7 +4,7 @@ namespace Modules\Ecommerce\Http\Controllers\Web\Cart;
 
 use App\Cart\Cart;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use JsonException;

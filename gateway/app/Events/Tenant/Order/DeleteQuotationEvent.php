@@ -2,9 +2,9 @@
 
 namespace App\Events\Tenant\Order;
 
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

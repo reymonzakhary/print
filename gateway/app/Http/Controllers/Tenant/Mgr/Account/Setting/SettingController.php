@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Account\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UpdateUserSettingRequest;
 use App\Http\Resources\UserSettings\UserSettingResource;
-use App\Models\Tenants\UserSetting;
+use App\Models\Tenant\UserSetting;
 use App\Scoping\Scopes\Settings\AreaScope;
 use App\Scoping\Scopes\Settings\NameSpaceScope;
 use App\Scoping\Scopes\Settings\SearchScope;
@@ -49,11 +49,11 @@ class SettingController extends Controller
 
     /**
      * Account Settings
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      *     "data":[
@@ -75,7 +75,7 @@ class SettingController extends Controller
      *      }
      *     ]
      * }
-     * 
+     *
      * @param Request $request
      * @return mixed
      */

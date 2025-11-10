@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Products\Stocks;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\Stocks\StoreProductsStockRequest;
 use App\Http\Resources\Products\Stocks\StockResource;
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 

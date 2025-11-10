@@ -2,8 +2,8 @@
 
 namespace App\Blueprint;
 
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Str;
 

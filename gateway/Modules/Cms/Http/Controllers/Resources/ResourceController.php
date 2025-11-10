@@ -3,8 +3,8 @@
 namespace Modules\Cms\Http\Controllers\Resources;
 
 use Alexusmai\LaravelFileManager\Events\FilesUploaded;
-use App\Models\Tenants\Language;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Language;
+use App\Models\Tenant\Media\FileManager;
 use App\Services\Categories\BoopsService;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
@@ -82,7 +82,7 @@ class ResourceController extends Controller
         event(new CreateResourceEvent($resource, $user, $language));
 
         if ($resource->isCustomCategory()) {
-            $category = CategoryResource::make(\App\Models\Tenants\Category::find($resource->category));
+            $category = CategoryResource::make(\App\Models\Tenant\Category::find($resource->category));
         } else if (!$resource->isCustomCategory() && $resource->category) {
             $obtainedCategory = $this->boopsService->obtainCategoryBoops($resource->category);
 

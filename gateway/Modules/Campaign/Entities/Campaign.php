@@ -2,8 +2,8 @@
 
 namespace Modules\Campaign\Entities;
 
-use App\Models\Tenants\DesignProviderTemplate;
-use App\Models\Tenants\User;
+use App\Models\Tenant\DesignProviderTemplate;
+use App\Models\Tenant\User;
 use App\Models\Traits\InteractsWithMedia;
 use App\Models\Traits\Slugable;
 use Illuminate\Database\Eloquent\Model;

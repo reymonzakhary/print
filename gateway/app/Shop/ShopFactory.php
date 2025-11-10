@@ -4,7 +4,7 @@ namespace App\Shop;
 
 use App\Http\Controllers\Tenant\Mgr\Categories\CategoryController;
 use App\Http\Controllers\Tenant\Mgr\Custom\Categories\CategoryController as CustomCategoryController;
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use Illuminate\Http\Request;
 
 class ShopFactory

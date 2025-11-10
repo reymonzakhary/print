@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ImpersonateLoginRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Impersonation;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Utilities\ProxyRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
@@ -80,6 +80,7 @@ class AuthenticationController extends Controller
     ): JsonResponse|Response|ResponseFactory
     {
 
+        dd('d');
         $user = User::where('email', $request->email)->first();
 
         abort_unless($user, 404, __('This combination does not exists.'));

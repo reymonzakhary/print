@@ -6,7 +6,7 @@ use App\Cart\Cart;
 use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateRequest;
 use App\Http\Resources\Cart\CartResource;
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

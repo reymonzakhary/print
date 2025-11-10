@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Custom;
 
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

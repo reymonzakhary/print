@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Products\Variations\Stocks;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomProducts\Variations\Stocks\StoreCustomProductVariationStocks;
 use App\Http\Resources\Products\ProductSkuResource;
-use App\Models\Tenants\Product;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Product;
+use App\Models\Tenant\Sku;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -8,8 +8,8 @@ use App\Events\Tenant\Order\CreateQuotationEvent;
 use App\Events\Tenant\Order\DeleteQuotationEvent;
 use App\Events\Tenant\Order\UpdateOrderForCustomerEvent;
 use App\Events\Tenant\Order\UpdateQuotationEvent;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
 
 class OrderObserver
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Utilities\Order\Transaction\Lexicon;
 
 use App\Enums\Transaction\TransactionLexiconTag;
-use App\Models\Tenants\Transaction;
+use App\Models\Tenant\Transaction;
 use LogicException;
 
 /**

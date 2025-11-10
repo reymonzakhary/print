@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PasswordResetRequest extends FormRequest

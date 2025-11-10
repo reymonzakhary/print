@@ -2,11 +2,11 @@
 
 namespace App\Events\Tenant\Order\Service\Media;
 
-use App\Models\Tenants\Media;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Service;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Media;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Service;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

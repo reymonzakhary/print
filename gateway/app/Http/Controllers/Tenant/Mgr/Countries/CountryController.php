@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Addresses\StoreAddressRequest;
 use App\Http\Resources\Address\AddressResource;
 use App\Http\Resources\Country\CountryResource;
-use App\Models\Tenants\Address;
-use App\Models\Tenants\Country;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\Country;
 use App\Repositories\CountryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,13 +39,13 @@ class CountryController extends Controller
     }
 
     /**
-     * List Countries 
-     * 
+     * List Countries
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @response 200 
+     *
+     * @response 200
      * {
      * "data": [
 	 *	{
@@ -75,20 +75,20 @@ class CountryController extends Controller
     }
 
     /**
-     * Search of Country Addresses 
-     * 
+     * Search of Country Addresses
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @bodyParam address string 
+     *
+     * @bodyParam address string
      * @bodyParam number int
      * @bodyParam city string
      * @bodyParam region string
      * @bodyParam state string
      * @bodyParam zip_code string
      * @bodyParam country_id bigint
-     * 
+     *
      * @response 200
      * {
      * "data": [
@@ -113,7 +113,7 @@ class CountryController extends Controller
      * "status": 200,
 	 * "message": null
      * }
-     * 
+     *
      * @param Request $request
      * @param Country $country
      * @return mixed
@@ -149,12 +149,12 @@ class CountryController extends Controller
 
     /**
      * Store a new address
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @response 201 
+     *
+     * @response 201
      *  {
      * 	"data": {
      * 		"id": 6,
@@ -177,7 +177,7 @@ class CountryController extends Controller
      * 	"status": 200,
      * 	"message": null
      * }
-     * 
+     *
      * @param StoreAddressRequest $request
      * @param Country             $country
      * @return AddressResource

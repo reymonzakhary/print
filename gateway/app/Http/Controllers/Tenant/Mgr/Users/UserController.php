@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\Users\UserResource;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\JsonResponse;

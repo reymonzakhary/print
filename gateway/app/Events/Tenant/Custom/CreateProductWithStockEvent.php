@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Custom;
 
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

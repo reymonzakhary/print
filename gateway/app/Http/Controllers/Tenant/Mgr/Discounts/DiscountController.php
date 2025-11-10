@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Discounts\StoreDiscountRequest;
 use App\Http\Requests\Discounts\UpdateDiscountRequest;
 use App\Http\Resources\Discounts\DiscountResource;
-use App\Models\Tenants\Discount;
+use App\Models\Tenant\Discount;
 use App\Repositories\DiscountRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -53,11 +53,11 @@ class DiscountController extends Controller
 
     /**
      * list discounts
-     *  
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"data": [
@@ -73,7 +73,7 @@ class DiscountController extends Controller
      * 	"status": 200,
      * 	"message": null
      * }
-     * 
+     *
      * @return mixed
      */
     public function index()
@@ -99,12 +99,12 @@ class DiscountController extends Controller
     }
 
     /**
-     * show discount 
-     * 
+     * show discount
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -118,7 +118,7 @@ class DiscountController extends Controller
      * 	"status": 200,
      * 	"message": null
      * }
-     * 
+     *
      * obtain single discount
      * @param Discount $discount
      * @return DiscountResource
@@ -137,11 +137,11 @@ class DiscountController extends Controller
 
     /**
      * store discount
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 201
      * {
      * 	"data": {
@@ -155,7 +155,7 @@ class DiscountController extends Controller
      * 	"status": 201,
      * 	"message": null
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The type field is required. (and 2 more errors)",
@@ -171,7 +171,7 @@ class DiscountController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @param StoreDiscountRequest $request
      * @return DiscountResource|JsonResponse
      */
@@ -192,18 +192,18 @@ class DiscountController extends Controller
     }
 
     /**
-     * update discount 
-     * 
+     * update discount
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"message": "Discount has been updated successfully.",
      * 	"status": 200
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The type field is required. (and 2 more errors)",
@@ -219,13 +219,13 @@ class DiscountController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"message": "We could'not handel your request, please try again later",
      * 	"status": 400
      * }
-     * 
+     *
      * @param UpdateDiscountRequest $request
      * @param int                   $id
      * @return DiscountResource|JsonResponse
@@ -260,23 +260,23 @@ class DiscountController extends Controller
 
     /**
      * delete discount
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"message": "discount has been removed.",
      * 	"status": 200
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"message": "We could'not handel your request, please try again later",
      * 	"status": 400
      * }
-     * 
+     *
      * @param int $id
      * @return JsonResponse
      */

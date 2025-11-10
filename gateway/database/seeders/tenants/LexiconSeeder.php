@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Tenants;
 
-use App\Models\Tenants\Lexicon;
+use App\Models\Tenant\Lexicon;
 use Illuminate\Database\Seeder;
 
 class LexiconSeeder extends Seeder

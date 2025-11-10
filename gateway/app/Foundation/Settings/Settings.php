@@ -5,7 +5,7 @@ namespace App\Foundation\Settings;
 
 
 use App\Foundation\Settings\Contracts\SettingsContractInterface;
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Setting;
 use Illuminate\Support\Str;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -34,6 +34,7 @@ class Settings
             if (app(SettingsContractInterface::class)->exists($key)) {
                 return app(SettingsContractInterface::class)->get($key);
             }
+//            dd(Setting::get());
 
             if ($setting = Setting::where('key', Str::snake($method))->first()) {
                 app(SettingsContractInterface::class)->add($key, $setting->value);

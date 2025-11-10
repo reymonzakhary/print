@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Warehouses\Locations;
 
 use App\Http\Resources\Warehouses\WarehouseResource;
-use App\Models\Tenants\Warehouse;
+use App\Models\Tenant\Warehouse;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

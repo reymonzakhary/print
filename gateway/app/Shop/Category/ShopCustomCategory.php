@@ -3,7 +3,7 @@
 namespace App\Shop\Category;
 
 use App\Http\Resources\Shops\ShopCategoryResource;
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use App\Shop\Contracts\ShopCategoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

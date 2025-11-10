@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Blueprints;
 
-use App\Models\Tenants\QueueItem;
+use App\Models\Tenant\QueueItem;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;

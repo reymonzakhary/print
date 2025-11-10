@@ -9,12 +9,12 @@ use App\Foundation\Settings\Contracts\SettingsContract;
 use App\Foundation\Settings\Contracts\SettingsContractInterface;
 use App\Foundation\Settings\Setting;
 use App\Jobs\Middleware\TenantSwitchMiddleware;
-use App\Models\Tenants\Address;
-use App\Models\Tenants\Company;
-use App\Models\Tenants\Context;
-use App\Models\Tenants\Lexicon;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\Company;
+use App\Models\Tenant\Context;
+use App\Models\Tenant\Lexicon;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Sku;
 use App\Plugins\Moneys;
 use App\Repositories\AddressRepository;
 use App\Repositories\LexiconRepository;
@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
             return new DesignProvider(
                 request(),
                 new \App\Repositories\DesignProviderTemplateRepository(
-                    new \App\Models\Tenants\DesignProviderTemplate
+                    new \App\Models\Tenant\DesignProviderTemplate
                 ),
                 new \App\Services\DesignProviders\ConneoPreflightService
             );

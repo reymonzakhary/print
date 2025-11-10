@@ -3,7 +3,7 @@
 namespace App\Http\Requests\DesignProviderTemplates;
 
 use App\Facades\DesignProvider;
-use App\Models\Tenants\DesignProvider as TenantsDesignProvider;
+use App\Models\Tenant\DesignProvider as TenantsDesignProvider;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;

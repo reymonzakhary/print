@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Quotation;
 use EmreYarligan\EnumConcern\EnumConcern;
 
 enum LexiconStaticTag: string
@@ -30,7 +30,7 @@ enum LexiconStaticTag: string
     case CUSTOMER_GENDER = 'customer.gender';
     case CUSTOMER_EMAIL = 'customer.email';
     case QUOTATION_CREATED_FROM = 'quotation.created_from';
-    
+
     public function render(Quotation $quotation): mixed
     {
         $resolvedTemplate = match ($this) {

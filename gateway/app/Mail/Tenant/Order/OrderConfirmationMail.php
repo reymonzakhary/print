@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Mail\Tenant\Order;
 
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

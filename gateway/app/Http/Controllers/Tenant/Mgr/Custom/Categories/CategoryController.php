@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\StoreCustomCategoryRequest;
 use App\Http\Requests\Categories\UpdateCustomCategoryRequest;
 use App\Http\Resources\Categories\CategoryResource;
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use App\Scoping\Scopes\Settings\SearchScope;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 /**
- * @group Tenant Custom Assortment 
- * 
+ * @group Tenant Custom Assortment
+ *
  * @subgroup Categories
  */
 class CategoryController extends Controller
@@ -36,14 +36,14 @@ class CategoryController extends Controller
     protected int $per_page = 10;
 
     /**
-     * List Categories 
-     * 
+     * List Categories
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam search string value to search in categories
-     * 
+     *
      * @response 200
      * {
 	 * "data": [
@@ -77,7 +77,7 @@ class CategoryController extends Controller
      * "status":200,
      * "message": null
      * }
-     * 
+     *
      * @return mixed
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
@@ -101,12 +101,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show Category 
-     * 
+     * Show Category
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -135,7 +135,7 @@ class CategoryController extends Controller
      * 	"message": null,
      * 	"status": 200
      * }
-     * 
+     *
      * @param Category $category
      * @return CategoryResource
      */
@@ -151,12 +151,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store Category 
-     * 
+     * Store Category
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -185,7 +185,7 @@ class CategoryController extends Controller
      * 	"message": null,
      * 	"status": 200
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required.",
@@ -195,7 +195,7 @@ class CategoryController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @param StoreCustomCategoryRequest $request
      * @return CategoryResource
      *
@@ -220,12 +220,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update Category 
-     * 
+     * Update Category
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      *	"data": {
@@ -254,7 +254,7 @@ class CategoryController extends Controller
      *	"message": "Category has been updated successfully.",
      *	"status": 200
      *}
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The published by field is required. (and 1 more error)",
@@ -267,13 +267,13 @@ class CategoryController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"message": "We could'nt handle this request!",
      * 	"status": 400
      * }
-     * 
+     *
      * @param UpdateCustomCategoryRequest $request
      * @param Category                    $category
      * @return CategoryResource|JsonResponse
@@ -313,24 +313,24 @@ class CategoryController extends Controller
     }
 
     /**
-     * Delete Category 
-     * 
+     * Delete Category
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @response 200 
+     *
+     * @response 200
      * {
      * 	"message": "Category has been deleted successfully.",
      * 	"status": 200
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "Category has products linked with, please remove the products first.",
      * 	"status": 422
      * }
-     * 
+     *
      * @param Category $category
      * @return JsonResponse
      * @throws Exception

@@ -4,7 +4,7 @@ use App\Casts\Hostname\CustomFieldCast;
 use App\Models\Domain;
 use App\Models\Language;
 use App\Models\Tenant;
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Setting;
 use App\Models\Website;
 use App\Plugins\Moneys;
 use BeyondCode\LaravelWebSockets\Apps\App;
@@ -261,7 +261,7 @@ if (!function_exists('getDisplayName')) {
 if (!function_exists('setDisplayName')) {
     function setDisplayName($name, $connection = 'tenant')
     {
-        $lang = \App\Models\Tenants\Language::get();
+        $lang = \App\Models\Tenant\Language::get();
         if ($connection === 'system') {
             $lang = Language::get();
         }

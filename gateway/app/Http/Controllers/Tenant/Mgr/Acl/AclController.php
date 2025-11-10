@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Tenant\Mgr\Acl;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Permissions\PermissionIndexResource;
-use App\Models\Tenants\Npace;
-use App\Models\Tenants\Permission;
+use App\Models\Tenant\Npace;
+use App\Models\Tenant\Permission;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

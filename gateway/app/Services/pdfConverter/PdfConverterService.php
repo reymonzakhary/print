@@ -7,7 +7,7 @@ namespace App\Services\pdfConverter;
 use App\Contracts\ServiceContract;
 use App\Foundation\Media\FileManager;
 use App\Http\Requests\Cart\CartStoreRequest;
-use App\Models\Tenants\Cart;
+use App\Models\Tenant\Cart;
 use App\Utilities\Traits\ConsumesExternalServices;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
@@ -179,7 +179,7 @@ class PdfConverterService extends ServiceContract
 
         collect($media)->map(function ($file) use ($fileManager) {
             Storage::disk('carts')->delete(tenant()->uuid . '/' . $file['path'] . $file['name']);
-            (new \App\Models\Tenants\Media\FileManager())->find($file->id)->delete();
+            (new \App\Models\Tenant\Media\FileManager())->find($file->id)->delete();
         });
     }
 }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Tenant\Mgr\Quotations\Items\Services\Media;
 use App\Events\Tenant\Order\Item\Service\Media\CreateOrderItemServiceMediaEvent;
 use App\Events\Tenant\Order\Item\Service\Media\DeleteOrderItemServiceMediaEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Media;
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Service;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Media;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Service;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

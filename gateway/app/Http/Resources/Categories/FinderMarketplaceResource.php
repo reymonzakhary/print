@@ -4,7 +4,6 @@ namespace App\Http\Resources\Categories;
 
 use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Models\Domain;
-use App\Models\Website;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

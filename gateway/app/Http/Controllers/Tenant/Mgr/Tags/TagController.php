@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Tags\StoreTagRequest;
 use App\Http\Requests\Tags\UpdateTagRequest;
 use App\Http\Resources\Tags\TagResource;
-use App\Models\Tenants\Tag;
+use App\Models\Tenant\Tag;
 use App\Scoping\Scopes\Tags\SearchNameScope;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -21,13 +21,13 @@ class TagController extends Controller
 
     /**
      * List Tags
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @queryParam search string search with name space. Example: core
-     * 
+     *
      * @response 200
      * {
      *  "data": [
@@ -43,7 +43,7 @@ class TagController extends Controller
      * "status":200,
      * "message": null
      * }
-     * 
+     *
      * @return AnonymousResourceCollection
      */
     public function index()
@@ -56,15 +56,15 @@ class TagController extends Controller
     }
 
     /**
-     * Store Tag 
-     * 
+     * Store Tag
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @bodyParam name string required name of tag. Example: newTag
-     * @bodyParam hex string 
-     * 
+     * @bodyParam hex string
+     *
      * @response 201
      * {
      * 	"data": {
@@ -76,7 +76,7 @@ class TagController extends Controller
      * 	"message": "Items added successfully",
      * 	"status": 201
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required.",
@@ -102,13 +102,13 @@ class TagController extends Controller
 
     /**
      * show Tag
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam tag_id integer required The ID of the tag.
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -133,16 +133,16 @@ class TagController extends Controller
     }
 
     /**
-     * Update Tag 
-     * 
+     * Update Tag
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam tag_id integer required The ID of the tag.
-     * 
+     *
      * @bodyParam name string required name of tag. Example: newTag
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -154,7 +154,7 @@ class TagController extends Controller
      * 	"message": "tag.updated",
      * 	"status": 200
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required.",
@@ -180,13 +180,13 @@ class TagController extends Controller
 
     /**
      * Delete Tag
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam tag_id integer required The ID of the tag.
-     * 
+     *
      * @response 202
      * {
      * 	"data": {
@@ -194,7 +194,7 @@ class TagController extends Controller
      * 		"status": 202
      * 	}
      * }
-     * 
+     *
      * @param Tag $tag
      * @return JsonResponse
      */

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Utilities\Order;
 
 use App\Enums\Status;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use App\Repositories\OrderRepository;
 use Throwable;
 

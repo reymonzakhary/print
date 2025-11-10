@@ -10,10 +10,10 @@ use App\Http\Requests\Order\ServiceOrderStoreRequest;
 use App\Http\Requests\Order\ServiceOrderUpdateRequest;
 use App\Http\Resources\Services\QuotationServiceResource;
 use App\Http\Resources\Services\ServiceResource;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Service;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 

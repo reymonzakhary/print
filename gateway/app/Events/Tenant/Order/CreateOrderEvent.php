@@ -3,7 +3,7 @@
 namespace App\Events\Tenant\Order;
 
 use App\Models\Quotation;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

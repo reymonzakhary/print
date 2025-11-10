@@ -3,7 +3,7 @@
 namespace App\Foundation\FileManager;
 
 use App\Foundation\FileManager\Contracts\FileManagerInterface;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;

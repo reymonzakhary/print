@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Foundation;
 
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Modules\Cms\Entities\Resource;
 use Modules\Cms\Foundation\Contracts\CmsContract;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class Cms
     {
         return $this->router->route();
     }
-    
+
     private function render($content)
     {
         return $content;
@@ -47,5 +47,5 @@ class Cms
         return DB::table('languages')->all()->toArray();
     }
 
-    
+
 }

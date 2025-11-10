@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Foundation\Settings\Settings;
-use App\Models\Tenants\Media;
+use App\Models\Tenant\Media;
 use App\Providers\TenantAuthServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -64,6 +64,7 @@ final class SwitchConnectionServiceProvider
                 'host_id' => $request->domain?->host_id
             ]);
 
+//            dd(Settings::mailSmtpHosts());
             app()->register(TenantAuthServiceProvider::class);
 
             // Configure mail settings (with error handling for migrations)

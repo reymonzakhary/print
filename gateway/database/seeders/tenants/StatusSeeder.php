@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Tenants;
 
-use App\Models\Tenants\Status;
+use App\Models\Tenant\Status;
 use Illuminate\Database\Seeder;
 
 class StatusSeeder extends Seeder

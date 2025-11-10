@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Lexicons;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Lexicons\UpdateLexiconRequest;
 use App\Http\Resources\Lexicons\LexiconResource;
-use App\Models\Tenants\Lexicon;
+use App\Models\Tenant\Lexicon;
 use App\Scoping\Scopes\Lexicons\LexiconAreaScope;
 use App\Scoping\Scopes\Lexicons\LexiconLanguageScope;
 use App\Scoping\Scopes\Lexicons\LexiconNamespaceScope;

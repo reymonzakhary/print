@@ -2,7 +2,7 @@
 
 namespace Modules\Campaign\Http\Controllers\Campaigns;
 
-use App\Models\Tenants\DesignProviderTemplate;
+use App\Models\Tenant\DesignProviderTemplate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Mail\Tenant\Order;
 
 use App\Models\Domain;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

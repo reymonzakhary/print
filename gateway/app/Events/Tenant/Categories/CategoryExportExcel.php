@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Categories;
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

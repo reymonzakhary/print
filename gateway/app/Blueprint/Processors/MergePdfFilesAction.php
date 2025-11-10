@@ -2,7 +2,7 @@
 
 namespace App\Blueprint\Processors;
 
-use App\Models\Tenants\Cart;
+use App\Models\Tenant\Cart;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;

@@ -52,11 +52,11 @@ class PluginService
     /**
      * Load the plugin configuration for the given Hostname instance.
      *
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname The hostname for which to load the plugin configuration
+     * @param Domain|int|null $hostname The hostname for which to load the plugin configuration
      * @return self
      */
     #[NoReturn] public function load(
-        \Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname = null,
+        Domain|int|null $hostname = null,
     ): self
     {
         $this->instance = app(PluginConfigRepository::class)->update($hostname);

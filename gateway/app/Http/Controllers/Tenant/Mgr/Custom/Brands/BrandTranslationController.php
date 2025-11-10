@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Brands;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brands\BrandResource;
-use App\Models\Tenants\Brand;
+use App\Models\Tenant\Brand;
 use Symfony\Component\HttpFoundation\Response;
 
 class BrandTranslationController extends Controller

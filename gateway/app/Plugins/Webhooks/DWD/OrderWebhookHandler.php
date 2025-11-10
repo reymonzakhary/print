@@ -4,8 +4,8 @@ namespace App\Plugins\Webhooks\DWD;
 
 use App\Enums\Status;
 use App\Models\Domain;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use App\Models\Website;
 use App\Plugins\Webhooks\BaseWebhookHandler;
 use GuzzleHttp\Exception\GuzzleException;

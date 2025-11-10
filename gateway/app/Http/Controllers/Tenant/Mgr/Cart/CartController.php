@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateRequest;
 use App\Http\Resources\Cart\CartResource;
-use App\Models\Tenants\CartVariation;
+use App\Models\Tenant\CartVariation;
 use App\Shop\Contracts\ShopProductInterface;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;

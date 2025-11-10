@@ -2,8 +2,8 @@
 
 namespace Modules\Cms\Http\Controllers;
 
-use App\Models\Tenants\Context;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Context;
+use App\Models\Tenant\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

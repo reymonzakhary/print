@@ -3,8 +3,8 @@
 namespace Modules\Cms\Entities;
 
 use App\Http\Resources\Categories\PrintBoopsResource;
-use App\Models\Tenants\Context;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Context;
+use App\Models\Tenant\User;
 use App\Models\Traits\HasChildren;
 use App\Models\Traits\InteractsWithMedia;
 use App\Models\Traits\ResolveLanguageRouteBinding;

@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Entities;
 
-use App\Models\Tenants\Team;
+use App\Models\Tenant\Team;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\EloquentSortable\SortableTrait;
