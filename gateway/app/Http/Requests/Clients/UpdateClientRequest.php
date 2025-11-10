@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Clients;
 
 use App\Models\Country;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;

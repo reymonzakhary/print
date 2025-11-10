@@ -2,7 +2,7 @@
 
 namespace App\Events\PrintingMethods;
 
-use App\Models\Tenants\PrintingMethod;
+use App\Models\Tenant\PrintingMethod;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

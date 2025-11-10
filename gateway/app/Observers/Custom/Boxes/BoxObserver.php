@@ -2,7 +2,7 @@
 
 namespace App\Observers\Custom\Boxes;
 
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 
 class BoxObserver
 {

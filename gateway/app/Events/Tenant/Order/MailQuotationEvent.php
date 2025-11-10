@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Order;
 
-use App\Models\Tenants\MailQueue;
+use App\Models\Tenant\MailQueue;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

@@ -2,7 +2,7 @@
 
 namespace App\Models\Tenants;
 
-use App\Models\Tenants\Orm\BaseModelStatus;
+use App\Models\Tenant\Orm\BaseModelStatus;
 
 class Status extends BaseModelStatus
 {

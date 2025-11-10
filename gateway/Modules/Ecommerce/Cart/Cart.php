@@ -4,7 +4,7 @@
 namespace Modules\Ecommerce\Cart;
 
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Plugins\Moneys;
 use JsonException;
 

@@ -8,8 +8,8 @@ use App\Events\Tenant\Order\Item\Address\UpdateOrderItemAddressEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Addresses\StoreOrderItemAddressRequest;
 use App\Http\Resources\Items\OrderItemResource;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use Illuminate\Validation\ValidationException;
 
 final class AddressController extends Controller

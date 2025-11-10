@@ -25,6 +25,8 @@ class CreateDomainsTable extends Migration
             $table->boolean('is_primary')->default(false);
             $table->boolean('is_fallback')->default(false);
             $table->string('certificate_status', 64)->nullable();
+            $table->uuid('host_id')->nullable();
+            $table->jsonb('custom_fields')->nullable();
 
 
             $table->timestamps();

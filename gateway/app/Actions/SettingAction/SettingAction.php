@@ -4,8 +4,8 @@
 namespace App\Actions\SettingAction;
 
 
-use App\Models\Tenants\Setting;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Setting;
+use App\Models\Tenant\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 

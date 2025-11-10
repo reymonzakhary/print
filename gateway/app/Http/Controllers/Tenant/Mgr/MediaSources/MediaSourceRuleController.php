@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MediaSources\StoreMediaSourceRuleRequest;
 use App\Http\Requests\MediaSources\UpdateMediaSourceRuleRequest;
 use App\Http\Resources\MediaSources\MediaSourceAclRuleResource;
-use App\Models\Tenants\Media\MediaSource;
-use App\Models\Tenants\Media\MediaSourceRule;
+use App\Models\Tenant\Media\MediaSource;
+use App\Models\Tenant\Media\MediaSourceRule;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

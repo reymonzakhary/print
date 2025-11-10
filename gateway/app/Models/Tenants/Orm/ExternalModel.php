@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Tenants\Orm;
+namespace App\Models\Tenant\Orm;
 
 use App\Contracts\ServiceContract;
 use ArrayAccess;

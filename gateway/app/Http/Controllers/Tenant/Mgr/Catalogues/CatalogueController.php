@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Catalogues\CatalogueStoreRequest;
 use App\Http\Requests\Catalogues\CatalogueUpdateRequest;
 use App\Http\Resources\Catalogues\CatalogueResource;
-use App\Models\Tenants\Catalogue;
+use App\Models\Tenant\Catalogue;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;

@@ -4,8 +4,8 @@ namespace App\Listeners\Tenant\Custom;
 
 use App\Events\Tenant\Custom\CreateBrandEvent;
 use App\Events\Tenant\Custom\UpdatedBrandEvent;
-use App\Models\Tenants\Brand;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Brand;
+use App\Models\Tenant\Language;
 use Illuminate\Support\Str;
 
 class BrandEventListener

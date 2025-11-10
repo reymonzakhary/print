@@ -3,7 +3,7 @@
 namespace Modules\Cms\Foundation\Traits;
 
 use Illuminate\Support\Facades\Validator;
-use App\Models\Tenants\Address;
+use App\Models\Tenant\Address;
 use Carbon\Carbon;
 
 trait InteractsWithAccount
@@ -14,7 +14,7 @@ trait InteractsWithAccount
 
         $data = $this->request->except(['__data', '__command', '_token']);
         $callback = optional($this->request->__data)['callback_uri']??'/';
-        
+
         $validationMessages = array_key_exists('validation_messages', $this->request->__data??[])? $this->request->__data['validation_messages']: [];
         $validationRules = array_key_exists('validation_rules', $this->request->__data??[])? $this->request->__data['validation_rules']: [];
 
@@ -159,6 +159,6 @@ trait InteractsWithAccount
         $this->refreshUserCache();
 
         return redirect($callback);
-        
+
     }
 }

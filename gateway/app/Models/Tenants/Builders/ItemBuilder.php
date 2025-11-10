@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Tenants\Builders;
+namespace App\Models\Tenant\Builders;
 
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Builder;

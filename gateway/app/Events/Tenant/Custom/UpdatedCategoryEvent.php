@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Events\Tenant\Custom;
 
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

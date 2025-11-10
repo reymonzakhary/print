@@ -2,8 +2,8 @@
 
 namespace App\Models\Tenants;
 
-use App\Models\Tenants\Builders\ItemBuilder;
-use App\Models\Tenants\Trait\HasAddresses;
+use App\Models\Tenant\Builders\ItemBuilder;
+use App\Models\Tenant\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\InteractsWithMedia;
 use App\Plugins\Traits\PluginWebhookTrait;

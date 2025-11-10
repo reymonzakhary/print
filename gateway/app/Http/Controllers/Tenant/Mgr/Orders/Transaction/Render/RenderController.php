@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Tenant\Mgr\Orders\Transaction\Render;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Transaction;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Transaction;
 use App\Utilities\Order\Transaction\Generator\TransactionPdfGenerator;
 use Illuminate\Http\Response;
 
@@ -17,7 +17,7 @@ final class RenderController extends Controller
 {
     /**
      * Render the transaction as a PDF file
-     * 
+     *
      * @param Order $order
      * @param Transaction $transaction
      * @param TransactionPdfGenerator $generator

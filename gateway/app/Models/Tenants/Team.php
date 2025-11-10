@@ -2,8 +2,8 @@
 
 namespace App\Models\Tenants;
 
-use App\Models\Tenants\Media\MediaSource;
-use App\Models\Tenants\Trait\HasAddresses;
+use App\Models\Tenant\Media\MediaSource;
+use App\Models\Tenant\Trait\HasAddresses;
 use App\Models\Traits\GenerateIdentifier;
 use App\Services\Tenant\Categories\CategoryService;
 use Illuminate\Database\Eloquent\Builder;

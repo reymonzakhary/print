@@ -19,12 +19,12 @@ return new class extends Migration
             $table->unsignedBigInteger('design_provider_template_id')->index();
             $table->string('assets')->nullable();
 
-            $table->foreign('campaign_id')->references('id')
-                ->on('campaigns')
-                ->cascadeOnDelete();
-            $table->foreign('design_provider_template_id')->references('id')
-                ->on('design_provider_templates')
-                ->cascadeOnDelete();
+//            $table->foreign('campaign_id')->references('id')
+//                ->on('campaigns')
+//                ->cascadeOnDelete();
+//            $table->foreign('design_provider_template_id')->references('id')
+//                ->on('design_provider_templates')
+//                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

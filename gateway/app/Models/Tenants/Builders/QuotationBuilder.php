@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Tenants\Builders;
+namespace App\Models\Tenant\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
 

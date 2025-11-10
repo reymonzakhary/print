@@ -2,8 +2,8 @@
 
 namespace Modules\Cms\Events\Resources;
 
-use App\Models\Tenants\Language;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Language;
+use App\Models\Tenant\User;
 use Illuminate\Queue\SerializesModels;
 use Modules\Cms\Entities\Resource;
 

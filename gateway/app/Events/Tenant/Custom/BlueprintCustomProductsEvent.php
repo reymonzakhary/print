@@ -2,8 +2,8 @@
 
 namespace App\Events\Tenant\Custom;
 
-use App\Models\Tenants\Cart;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Cart;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

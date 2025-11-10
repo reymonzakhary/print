@@ -7,7 +7,7 @@ use App\Http\Requests\Auth\PasswordResetEmailVerificationRequest;
 use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Http\Requests\Auth\PasswordUpdateRequest;
 use App\Mail\Tenant\Auth\UpdatePasswordMail;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

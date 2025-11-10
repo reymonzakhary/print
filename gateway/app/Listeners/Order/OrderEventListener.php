@@ -24,8 +24,8 @@ use App\Events\Tenant\Order\Service\UpdateOrderServiceEvent;
 use App\Events\Tenant\Order\UnlockOrderEvent;
 use App\Events\Tenant\Order\UpdateItemOrderEvent;
 use App\Jobs\Tenant\Quotations\DeleteEntityFromDiskJob;
-use App\Models\Tenants\Media;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Media;
+use App\Models\Tenant\Order;
 use App\Models\User;
 use App\Processors\Status\ChangeItemStatus;
 use Carbon\Carbon;
@@ -150,7 +150,7 @@ final class OrderEventListener implements ShouldQueue
     ): void
     {
         $parentEntity = $event->order;
-        if (count(optional($event->item)->getMedia() ?? []) === 0 
+        if (count(optional($event->item)->getMedia() ?? []) === 0
         ) {
             return;
         }

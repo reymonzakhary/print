@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Transactions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Transactions\TransactionResource;
-use App\Models\Tenants\Transaction;
+use App\Models\Tenant\Transaction;
 use App\Scoping\Scopes\Transactions\TransactionCompanyScope;
 use App\Scoping\Scopes\Transactions\TransactionContractScope;
 use App\Scoping\Scopes\Transactions\TransactionDueDateScope;
@@ -157,7 +157,7 @@ class TransactionController extends Controller
      *
      * @param \Illuminate\Pagination\LengthAwarePaginator $transactions
      * @return \Illuminate\Pagination\LengthAwarePaginator
-     */    
+     */
     private function fixMalformedTransactions(
         LengthAwarePaginator $transactions
     ): LengthAwarePaginator
@@ -176,7 +176,7 @@ class TransactionController extends Controller
             }
         }
 
-        if($malformedTransactions->count()) {    //If any malformed transactions?   
+        if($malformedTransactions->count()) {    //If any malformed transactions?
             $transactionService = new TransactionService;
             foreach($malformedTransactions as $transaction)
             {
@@ -206,6 +206,6 @@ class TransactionController extends Controller
             ->withScopes($this->scope())
             ->orderBy('transactions.id', $this->sort)
             ->paginate($this->per_page);
-            
+
     }
 }

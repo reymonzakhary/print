@@ -3,7 +3,7 @@
 namespace App\Blueprint\Processors;
 
 use App\Http\Requests\Cart\CartStoreRequest;
-use App\Models\Tenants\Cart;
+use App\Models\Tenant\Cart;
 
 class UploadFileProcessor
 {

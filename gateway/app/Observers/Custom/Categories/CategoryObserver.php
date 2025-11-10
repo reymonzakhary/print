@@ -2,7 +2,7 @@
 
 namespace App\Observers\Custom\Categories;
 
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 
 class CategoryObserver
 {

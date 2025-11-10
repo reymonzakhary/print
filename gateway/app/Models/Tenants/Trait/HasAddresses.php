@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Tenants\Trait;
+namespace App\Models\Tenant\Trait;
 
 use App\Models\Country;
-use App\Models\Tenants\Address;
-use App\Models\Tenants\Addressable;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\Addressable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasAddresses

@@ -6,8 +6,8 @@ use App\Events\Tenant\Order\Item\Address\UpdateOrderItemAddressEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Addresses\StoreItemAddressRequest;
 use App\Http\Resources\Items\QuotationItemResource;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Quotation;
 use Illuminate\Validation\ValidationException;
 
 class AddressController extends Controller

@@ -2,7 +2,7 @@
 
 namespace Modules\Campaign\Http\Controllers\Campaigns;
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Services\Tenant\FM\FileManagerService;
 use Carbon\Carbon;
 use Exception;

@@ -6,8 +6,8 @@
 
         use App\Actions\PriceAction\CalculationAction;
         use App\Facades\Settings;
-        use App\Models\Tenants\Item;
-        use App\Models\Tenants\Service;
+        use App\Models\Tenant\Item;
+        use App\Models\Tenant\Service;
         use App\Plugins\Money;
 @endphp
 
@@ -232,7 +232,8 @@
 
                             @if($contextAddress)
                                 {{ $contextAddress->getAttribute('number') }} <br/>
-                                {{ $contextAddress->getAttribute('zip_code') }}, {{ $contextAddress?->getAttribute('city') }}<br/>
+                                {{ $contextAddress->getAttribute('zip_code') }}
+                                , {{ $contextAddress?->getAttribute('city') }}<br/>
                                 {{ $contextAddress->pivot->getAttribute('phone_number') }} <br/>
                             @endif
 
@@ -293,11 +294,11 @@
 
         <tr class="heading">
             <td>{{ __('quotations.name') }}</td>
-            <td  style="width: 25%">{{ __('quotations.description') }}</td>
-            <td  style="width: 13%">{{ __('quotations.amount') }}</td>
-            <td  style="width: 12%; text-align: center;">{{ __('quotations.quantity') }}</td>
-            <td  style="width: 20%">{{ __('quotations.total') }}</td>
-            <td  style="width: 2%">{{ __('quotations.vat') }}</td>
+            <td style="width: 25%">{{ __('quotations.description') }}</td>
+            <td style="width: 13%">{{ __('quotations.amount') }}</td>
+            <td style="width: 12%; text-align: center;">{{ __('quotations.quantity') }}</td>
+            <td style="width: 20%">{{ __('quotations.total') }}</td>
+            <td style="width: 2%">{{ __('quotations.vat') }}</td>
             {{-- <td>
                 <table class="pricing-grid">
                     <tr>
@@ -403,21 +404,22 @@
             }
         @endphp
         @foreach ($vatsAggregated as $vatPercentageAsString => $pricesAggregatedRaw)
-        <tr>
-            <td></td>
-            <td colspan="3" style="text-align: center">{{ $vatPercentageAsString }}% {{ __('quotations.vat') }} over {{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->format() }}</td>
-            <td colspan="2">{{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->newFromTax((float) $vatPercentageAsString)->format() }}</td>
-            {{-- <td colspan="2">
-                <table class="pricing-grid">
-                    @foreach ($vatsAggregated as $vatPercentageAsString => $pricesAggregatedRaw)
-                        <tr>
-                            <td style="width: 87%; text-align: right;">{{ $vatPercentageAsString }}% {{ __('quotations.vat') }} over {{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->format() }}</td>
-                            <td style="width: 13%;">{{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->newFromTax((float) $vatPercentageAsString)->format() }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-            </td> --}}
-        </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" style="text-align: center">{{ $vatPercentageAsString }}% {{ __('quotations.vat') }}
+                    over {{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->format() }}</td>
+                <td colspan="2">{{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->newFromTax((float) $vatPercentageAsString)->format() }}</td>
+                {{-- <td colspan="2">
+                    <table class="pricing-grid">
+                        @foreach ($vatsAggregated as $vatPercentageAsString => $pricesAggregatedRaw)
+                            <tr>
+                                <td style="width: 87%; text-align: right;">{{ $vatPercentageAsString }}% {{ __('quotations.vat') }} over {{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->format() }}</td>
+                                <td style="width: 13%;">{{ ((new \App\Plugins\Moneys())->setAmount($pricesAggregatedRaw))->newFromTax((float) $vatPercentageAsString)->format() }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </td> --}}
+            </tr>
         @endforeach
         <tr class="heading">
             <td></td>

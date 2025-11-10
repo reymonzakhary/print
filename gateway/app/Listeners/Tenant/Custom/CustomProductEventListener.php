@@ -12,12 +12,12 @@ use App\Events\Tenant\Custom\CreateProductWithStockEvent;
 use App\Events\Tenant\Custom\UpdatedProductEvent;
 use App\Events\Tenant\Custom\UpdateProductExcludesUpdated;
 use App\Events\Tenant\Custom\UpdateProductSkuUpdated;
-use App\Models\Tenants\Box;
-use App\Models\Tenants\Language;
-use App\Models\Tenants\Option;
-use App\Models\Tenants\Product;
-use App\Models\Tenants\Sku;
-use App\Models\Tenants\Variation;
+use App\Models\Tenant\Box;
+use App\Models\Tenant\Language;
+use App\Models\Tenant\Option;
+use App\Models\Tenant\Product;
+use App\Models\Tenant\Sku;
+use App\Models\Tenant\Variation;
 use Illuminate\Support\Str;
 use function BenTools\CartesianProduct\cartesian_product;
 

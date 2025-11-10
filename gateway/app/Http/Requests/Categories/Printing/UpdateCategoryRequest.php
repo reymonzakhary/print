@@ -6,7 +6,7 @@ namespace App\Http\Requests\Categories\Printing;
 
 use App\Facades\Context;
 use App\Http\Requests\MediaImageValidatorTrait;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

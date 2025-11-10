@@ -3,13 +3,13 @@
 namespace Modules\Cms\Foundation\Cart;
 
 use App\Foundation\Status\Status;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Modules\Cms\Foundation\Cart\Contracts\CartContractInterface;
 use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager;
-use App\Models\Tenants\Cart as CartModel;
-use App\Models\Tenants\Product;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Cart as CartModel;
+use App\Models\Tenant\Product;
+use App\Models\Tenant\Sku;
 
 class Cart implements CartContractInterface
 {
@@ -154,7 +154,7 @@ class Cart implements CartContractInterface
     }
 
     /**
-     * 
+     *
      * @return bool
      */
     final public function clean(): bool

@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Boxes\BoxStoreRequest;
 use App\Http\Requests\Boxes\UpdateBoxRequest;
 use App\Http\Resources\Boxes\BoxResource;
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;

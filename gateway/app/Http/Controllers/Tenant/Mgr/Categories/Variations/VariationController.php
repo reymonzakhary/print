@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Variations\StoreVariationRequest;
 use App\Http\Requests\Variations\UpdateVariationRequest;
 use App\Http\Resources\Variations\VariationResource;
-use App\Models\Tenants\Variation;
+use App\Models\Tenant\Variation;
 use App\Repositories\VariationRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

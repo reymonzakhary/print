@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Tenants\Orm;
+namespace App\Models\Tenant\Orm;
 
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model as EloquentModel;

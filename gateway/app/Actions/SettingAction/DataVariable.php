@@ -4,7 +4,7 @@
 namespace App\Actions\SettingAction;
 
 
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Setting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 

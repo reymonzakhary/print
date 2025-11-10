@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Http\Controllers\Tree;
 
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;

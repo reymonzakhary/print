@@ -3,8 +3,8 @@
 namespace Modules\Cms\Http\Controllers;
 
 use App\Http\Middleware\CmsMiddlewareManager;
-use App\Models\Tenants\Context;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Context;
+use App\Models\Tenant\User;
 use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Filesystem\Filesystem;
@@ -265,7 +265,7 @@ class CmsController extends Controller
         $empty_filesystem_instance = new Filesystem;
         $blade = new BladeCompiler($empty_filesystem_instance, 'datatables');
         $parsed_string = $blade->render($str);
-        
+
         $obLevel = ob_get_level();
         ob_start();
         $__data['__env'] = app(\Illuminate\View\Factory::class);

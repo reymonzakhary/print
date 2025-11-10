@@ -3,8 +3,8 @@
 namespace App\Shop\Product;
 
 use App\Http\Resources\Shops\ShopVariationsResource;
-use App\Models\Tenants\Blueprint;
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Blueprint;
+use App\Models\Tenant\Category;
 use App\Shop\Contracts\ShopProductInterface;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\ValidationException;

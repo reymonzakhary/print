@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Tenant\Mgr\Dashboard;
 
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

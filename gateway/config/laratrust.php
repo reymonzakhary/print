@@ -73,8 +73,8 @@ return [
     |
     */
     'user_models' => [
-        'users' => App\Models\Tenants\User::class,
-        'members' => App\Models\Tenants\Member::class,
+        'users' => App\Models\Tenant\User::class,
+        'members' => App\Models\Tenant\Member::class,
         'system_users' => App\Models\User::class,
     ],
 

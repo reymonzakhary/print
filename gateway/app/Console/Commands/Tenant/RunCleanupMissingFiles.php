@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Tenant;
 
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use App\Models\Website;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

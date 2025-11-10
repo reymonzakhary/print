@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Auth;
 
 use App\Events\SendPasswordEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Models\Website;
 use Carbon\Carbon;
 use Hyn\Tenancy\Environment;
@@ -22,14 +22,14 @@ class VerificationApiController extends Controller
 
     /**
      * Verify E-mail Address
-     * 
+     *
      * Mark the authenticated user's email address as verified.
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
-     * 
+     *
      * @urlParam id integer required The ID of the User.
-     * 
+     *
      * @response 200
      * {
      *     "message": "Your Email has been verified!",
@@ -41,7 +41,7 @@ class VerificationApiController extends Controller
      *     "message": "User already have verified email!",
      *     "status": 422
      * }
-     * 
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -74,7 +74,7 @@ class VerificationApiController extends Controller
     }
 
     /**
-     * 
+     *
      * Resend the email verification notification.
      *
      * @param Request $request

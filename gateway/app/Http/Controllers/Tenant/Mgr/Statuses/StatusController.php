@@ -7,7 +7,7 @@ use App\Http\Requests\Status\StoreStatusRequest;
 use App\Http\Requests\Status\UpdateStatusRequest;
 use App\Http\Resources\Statuses\StatusModelResource;
 use App\Http\Resources\Statuses\StatusResource;
-use App\Models\Tenants\Status;
+use App\Models\Tenant\Status;
 use App\Repositories\StatusRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

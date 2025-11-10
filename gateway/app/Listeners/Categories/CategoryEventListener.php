@@ -10,7 +10,7 @@ use App\Events\Tenant\Categories\FinishedCategoryProductsImport;
 use App\Events\Tenant\Categories\OnDeletedCategoryEvent;
 use App\Foundation\Media\FileManager;
 use App\Foundation\Media\MediaType;
-use App\Models\Tenants\Media\FileManager as FileManagerModel;
+use App\Models\Tenant\Media\FileManager as FileManagerModel;
 use App\Services\Suppliers\SupplierCategoryService;
 use App\Services\Suppliers\SupplierProductService;
 use App\Services\Tenant\Categories\SupplierCategoryService as CategoryService;

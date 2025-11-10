@@ -3,8 +3,8 @@
 namespace App\Validators;
 
 use App\Http\Requests\Cart\CartStoreRequest;
-use App\Models\Tenants\Product;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Product;
+use App\Models\Tenant\Sku;
 use Illuminate\Validation\ValidationException;
 
 class PrepareCartVariationValidator

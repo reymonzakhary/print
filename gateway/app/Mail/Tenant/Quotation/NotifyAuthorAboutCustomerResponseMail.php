@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Mail\Tenant\Quotation;
 
 use App\Facades\Settings;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Quotation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;

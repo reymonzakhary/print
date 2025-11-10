@@ -6,8 +6,8 @@ namespace App\Utilities\Order\Transaction;
 
 use App\DTO\Tenant\Orders\Transaction\TransactionDTO;
 use App\Enums\Status;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Transaction;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Transaction;
 use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;

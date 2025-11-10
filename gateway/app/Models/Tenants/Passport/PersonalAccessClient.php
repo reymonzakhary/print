@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Tenants\Passport;
+namespace App\Models\Tenant\Passport;
 
 use Laravel\Passport\PersonalAccessClient as BaseAccessClient;
 

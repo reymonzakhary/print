@@ -3,8 +3,8 @@
 namespace App\Listeners\PrintingMethods;
 
 use App\Events\PrintingMethods\CreatePrintingMethodEvent;
-use App\Models\Tenants\Language;
-use App\Models\Tenants\PrintingMethod;
+use App\Models\Tenant\Language;
+use App\Models\Tenant\PrintingMethod;
 
 class PrintingMethodEventListener
 {

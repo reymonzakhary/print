@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Orders\Discounts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\DiscountOrderStoreRequest;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

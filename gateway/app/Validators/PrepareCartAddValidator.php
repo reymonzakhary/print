@@ -4,7 +4,7 @@ namespace App\Validators;
 
 use App\Blueprint\Contract\BlueprintFactoryInterface;
 use App\Http\Requests\Cart\CartStoreRequest;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Sku;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Addresses;
 
-use App\Models\Tenants\Address;
+use App\Models\Tenant\Address;
 use App\Repositories\AddressRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;

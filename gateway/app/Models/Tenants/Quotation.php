@@ -2,8 +2,8 @@
 
 namespace App\Models\Tenants;
 
-use App\Models\Tenants\Builders\QuotationBuilder;
-use App\Models\Tenants\Trait\HasAddresses;
+use App\Models\Tenant\Builders\QuotationBuilder;
+use App\Models\Tenant\Trait\HasAddresses;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\GenerateIdentifier;
 use App\Models\Traits\HasParentModel;

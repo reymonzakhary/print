@@ -2,7 +2,7 @@
 
 namespace App\Models\Tenants;
 
-use App\Models\Tenants\Trait\HasAddresses;
+use App\Models\Tenant\Trait\HasAddresses;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\GenerateIdentifier;
 use App\Notifications\Tenant\Email\Member\VerifyEmailNotification;

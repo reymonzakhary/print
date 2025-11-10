@@ -2,8 +2,8 @@
 
 namespace Modules\Cms\Foundation\Helpers;
 
-use App\Models\Tenants\Address;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -80,7 +80,7 @@ class Account extends SnippetContract
     {
         return Cache::remember(
             tenant()->uuid.'.authUser',
-            Carbon::now()->addMinutes(30), 
+            Carbon::now()->addMinutes(30),
             fn () => auth()->user()?->load('profile', 'addresses.country', 'settings', 'orders.items')
         );
     }

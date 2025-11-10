@@ -2,7 +2,7 @@
 
 namespace App\Observers\Custom\Products;
 
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 
 class ProductObserver
 {

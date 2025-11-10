@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Mail\Tenant\Quotation;
 
 use App\Facades\Settings;
-use App\Models\Tenants\MailQueue;
-use App\Models\Tenants\Media\FileManager;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\MailQueue;
+use App\Models\Tenant\Media\FileManager;
+use App\Models\Tenant\Quotation;
 use App\Utilities\Quotation\QuotationHasher;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -85,7 +85,7 @@ final class InternalQuotationMail extends Mailable
                     ->map(fn($value) => parseMailSetting($value))
                     ->toArray();
         if ($settings['mail_logo']) {
-            $media = FileManager::find($settings['mail_logo']);    
+            $media = FileManager::find($settings['mail_logo']);
             $image_url = Storage::disk('assets')->url(tenant()->uuid . '/' . $media->name);
             $urls['image_url'] = $image_url;
         }

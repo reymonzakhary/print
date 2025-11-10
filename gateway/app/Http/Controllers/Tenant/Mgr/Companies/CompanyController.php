@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Companies\CompanyStoreRequest;
 use App\Http\Requests\Companies\CompanyUpdateRequest;
 use App\Http\Resources\Companies\CompanyResource;
-use App\Models\Tenants\Company;
+use App\Models\Tenant\Company;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

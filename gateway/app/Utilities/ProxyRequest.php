@@ -4,7 +4,7 @@
 namespace App\Utilities;
 
 
-use App\Models\Tenants\Passport\Token;
+use App\Models\Tenant\Passport\Token;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
