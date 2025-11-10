@@ -5,7 +5,6 @@ namespace App\Jobs\Middleware;
 
 use App\Facades\Settings;
 use BeyondCode\LaravelWebSockets\Apps\App;
-use Hyn\Tenancy\Environment;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Log;
 use LogicException;
@@ -16,7 +15,12 @@ class TenantSwitchMiddleware
     {
         Broadcast::purge('pusher');
 
-        if (!($fqdn = app(Environment::class)->tenant()?->domains()?->first()?->fqdn)) {
+        // Use stancl/tenancy helpers
+        $currentTenant = tenant();
+        $currentDomain = $currentTenant?->primary_domain ?? $currentTenant?->domains->first();
+        $fqdn = $currentDomain?->domain;
+
+        if (!$fqdn) {
             Log::error('command not found', ['command' => $command]);
 
             throw new LogicException(

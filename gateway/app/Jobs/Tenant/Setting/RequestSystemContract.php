@@ -5,8 +5,8 @@ namespace App\Jobs\Tenant\Setting;
 use App\Enums\ContractType;
 use App\Foundation\ContractManager\Facades\ContractManager;
 use App\Models\Domain;
+use App\Models\Tenant;
 use App\Models\User;
-use Hyn\Tenancy\Models\Website;
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\Request;
@@ -22,8 +22,8 @@ class RequestSystemContract
      */
     public function __construct(
         public Request $request,
-        public Website $website,
-        public Hostname $tenant
+        public Tenant $tenant,
+        public Domain $domain
     ) {}
 
     /**
@@ -37,8 +37,8 @@ class RequestSystemContract
             'receiver_connection' => 'cec',
 
             'requester_type' => Domain::class,
-            'requester_connection' => $this->website->uuid,
-            'requester_id' => $this->tenant->id,
+            'requester_connection' => $this->tenant->id,
+            'requester_id' => $this->domain->id,
             'type' => ContractType::INTERNAL,
         ]);
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Events\Tenant\Quotation;
 
+use App\Models\Tenant;
 use App\Models\Tenants\Quotation;
-use Hyn\Tenancy\Contracts\Website;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -20,7 +20,7 @@ final class QuotationRejectedEvent
      */
     public function __construct(
         public readonly Quotation $quotation,
-        public readonly Website $tenant
+        public readonly Tenant $tenant
     ) {
     }
 }
