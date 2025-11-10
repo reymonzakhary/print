@@ -383,12 +383,15 @@ if (!function_exists('reloadMiddlewareInstance')) {
         // Explicitly clear the request instance to ensure fresh data
         app()->instance('request', new \Illuminate\Http\Request());
 
+        // Get the primary domain for the tenant
+        $domain = $site->primary_domain ?? $site->domains->first();
+
         // Update the request with the new tenant data
         request()->replace(array_merge($old_request, [
             'tenant' => $site,
-            'uuid' => $site->uuid,
-            'hostname' => $site->hostname,
-            'host_id' => $site->hostname?->host_id
+            'uuid' => $site->id,
+            'domain' => $domain,
+            'host_id' => $domain?->host_id
         ]));
 
         // 🔥 Rebind the SupplierCategoryService to ensure it gets the updated request data
@@ -412,12 +415,13 @@ if (!function_exists('switchSupplierWebsocket')) {
     {
         // Use domain as the key for websocket configuration
         // This ensures proper tenant isolation in multi-tenant environments
-        $fqdn = Website::query()
-            ->where('uuid', $uuid)
-            ->firstOrFail()
-            ->domains()
-            ->firstOrFail()
-            ->getAttribute('domain');
+        $tenant = Tenant::find($uuid);
+
+        if (!$tenant) {
+            return;
+        }
+
+        $fqdn = ($tenant->primary_domain ?? $tenant->domains->first())?->domain;
 
         // Find websocket app by domain (fqdn) - not by hostname
         if (!$websocketConfig = App::findByKey($fqdn)) {

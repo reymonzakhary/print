@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Tenant;
 use BeyondCode\LaravelWebSockets\Apps\App;
 use BeyondCode\LaravelWebSockets\Apps\AppProvider;
-use Hyn\Tenancy\Models\Website;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
@@ -16,13 +16,13 @@ class WebsocketsServiceProvider implements AppProvider
     public function __construct()
     {
         $this->apps = Cache::remember('WebsocketsServiceProvider_apps', 3600, function () {
-            return Website::with('hostnames')->get()->flatMap(fn($tenant) =>
-                collect($tenant?->hostnames)->map(fn($hostname) => [
-                        'id' => $tenant->uuid,
-                        'name' => $tenant->uuid,
-                        'key' => $hostname?->fqdn,
-                        'secret' => $tenant->uuid,
-                        'path' => $tenant->uuid,
+            return Tenant::with('domains')->get()->flatMap(fn($tenant) =>
+                collect($tenant?->domains)->map(fn($domain) => [
+                        'id' => $tenant->id,
+                        'name' => $tenant->id,
+                        'key' => $domain?->domain,
+                        'secret' => $tenant->id,
+                        'path' => $tenant->id,
                         'capacity' => null,
                         'enable_client_messages' => false,
                         'enable_statistics' => true,
