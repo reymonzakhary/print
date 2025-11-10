@@ -35,7 +35,8 @@ RUN mkdir -p /var/log && \
     chown www-data:www-data /var/log/webhook-*.log
 
 # Add cron jobs (updated with webhook monitoring)
-RUN (crontab -l 2>/dev/null; echo "* * * * * cd /var/www && php artisan tenancy:run schedule:run >> /dev/null 2>&1") | crontab - && \
+# For stancl/tenancy, use tenants:artisan to run commands for all tenants
+RUN (crontab -l 2>/dev/null; echo "* * * * * cd /var/www && php artisan tenants:artisan 'schedule:run' >> /dev/null 2>&1") | crontab - && \
     (crontab -l 2>/dev/null; echo "* * * * * cd /var/www && php artisan schedule:run >> /dev/null 2>&1") | crontab - && \
     (crontab -l 2>/dev/null; echo "*/5 * * * * /usr/local/bin/webhook-monitor.sh") | crontab - && \
     (crontab -l 2>/dev/null; echo "0 */6 * * * cd /var/www && php artisan webhook:rebalance >> /var/log/webhook-rebalance.log 2>&1") | crontab -
