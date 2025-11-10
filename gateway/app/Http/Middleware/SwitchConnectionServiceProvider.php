@@ -27,8 +27,19 @@ final class SwitchConnectionServiceProvider
         $request->domain = $request->getSchemeAndHttpHost();
 
         // Use stancl/tenancy helpers
+        // These helpers only work because InitializeTenancyByDomain middleware ran first
         $currentTenant = tenant();
         $currentDomain = domain();
+
+        // Debug logging (remove in production)
+        if (config('app.debug')) {
+            \Log::debug('SwitchConnectionServiceProvider Debug:', [
+                'request_host' => $request->getHost(),
+                'request_url' => $request->url(),
+                'tenant_found' => $currentTenant ? $currentTenant->id : 'NULL',
+                'domain_found' => $currentDomain ? $currentDomain->domain : 'NULL',
+            ]);
+        }
 
         if ($currentDomain && $fqdn = $currentDomain->domain) {
             config(['auth.guards.api.provider' => 'tenant']);

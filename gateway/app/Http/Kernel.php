@@ -48,7 +48,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        // Stancl/tenancy middleware MUST run before custom tenant middleware
+        // This initializes the tenant context so tenant() and domain() helpers work
+        \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+        \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+
+        // Custom tenant middleware runs after tenancy is initialized
         SwitchConnectionServiceProvider::class,
+
         // \App\Http\Middleware\TrustHosts::class,
         TrustProxies::class,
         CheckForMaintenanceMode::class,
