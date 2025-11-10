@@ -297,10 +297,6 @@
         <td class="right">{{ moneys()->setAmount($vat_total)->format() }}</td>
     </tr>
     <tr>
-        <td class="right">Shipping:</td>
-        <td class="right">{{ $shipping_cost->format() }}</td>
-    </tr>
-    <tr>
         <td class="right"><strong>Total (incl. VAT):</strong></td>
         <td class="right"><strong>{{ $total_incl_vat->format() }}</strong></td>
     </tr>

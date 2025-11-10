@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Domain;
 use App\Models\Website;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Hyn\Tenancy\Environment;
 use Exception;
 
 class FixTenantDatabase extends Command
@@ -34,7 +34,7 @@ class FixTenantDatabase extends Command
 
         if ($hostname) {
             // Fix by hostname
-            $hostnameModel = \Hyn\Tenancy\Models\Domain::where('fqdn', $hostname)->first();
+            $hostnameModel = Domain::where('fqdn', $hostname)->first();
             if (!$hostnameModel || !$hostnameModel->website) {
                 $this->error("Hostname {$hostname} not found or has no associated website!");
                 return 1;

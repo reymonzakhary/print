@@ -19,7 +19,7 @@ class ClientUpdatedEvent
      * Create a new event instance.
      */
     public function __construct(
-        public Hostname $hostname
+        public Domain $hostname
     )
     { }
 }

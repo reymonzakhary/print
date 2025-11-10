@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class FileManager extends Model
 {
-    // use UsesTenantConnection, // Removed
-        InteractsWithMedia, CanBeScoped;
+    use InteractsWithMedia, CanBeScoped;
 
     protected $table = 'file_manager';
     /**

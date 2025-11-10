@@ -101,7 +101,7 @@ class PrintOptionResource extends JsonResource
             "parent" => optional($this->resource)['parent'],
             "rpm" => optional($this->resource)['rpm'],
             "runs" => optional($this->resource)['runs'],
-            "sheet_runs" => [],
+            "sheet_runs" => optional($this->resource)['sheet_runs'],
             "additional" => optional($this->resource)['additional'],
             "boxes" => optional($this->resource)['boxes'],
             "excludes" => optional($this->resource)['excludes'] ?? [],

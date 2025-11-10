@@ -154,7 +154,9 @@ class OptionController extends Controller
                     "status" => $response['status']
                 ], $response['status']);
             }
-            
+            unset($response['data']['sheet_runs']);
+            unset($response['data']['runs']);
+
             return PrintOptionResource::make($response['data'])->additional([
                 "message" => __("Option has been created successfully."),
                 "status" => Response::HTTP_CREATED,

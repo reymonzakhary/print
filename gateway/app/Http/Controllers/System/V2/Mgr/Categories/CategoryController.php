@@ -131,10 +131,19 @@ class CategoryController extends Controller
     )
     {
         $response =  $this->categoryService->storeSystemCategory($request->validated());
-        return response()->json([
-            'message' => optional($response)['message'],
-            'status' => optional($response)['status'],
-        ] , optional($response)['status']);
+        if(!isset($response['data']) || $response['status'] !== 201) {
+            return response()->json([
+                'message' => optional($response)['message'],
+                'status' => optional($response)['status'],
+            ] , optional($response)['status']);
+        }
+        return SystemCategoryResource::make(
+            $response['data']??[]
+        )->additional([
+            'message' => null,
+            'status' => Response::HTTP_OK
+        ]);
+
     }
 
     /**
