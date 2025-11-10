@@ -42,9 +42,9 @@ abstract class PluginManager implements PluginManagerInterface
     protected string $tenant_name;
 
     /**
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname $hostname
+     * @param Domain $hostname
      */
-    protected \Hyn\Tenancy\Models\Hostname|Hostname $hostname;
+    protected Domain $hostname;
 
     /**
      * @param DefaultConfigRepository $configRepository
@@ -69,7 +69,7 @@ abstract class PluginManager implements PluginManagerInterface
      * @param array $routes The routes to associate with the URI.
      * @param string $tenant_id
      * @param string $tenant_name
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname $hostname
+     * @param Domain $hostname
      * @param DefaultConfigRepository $configRepository
      * @return void
      */
@@ -79,7 +79,7 @@ abstract class PluginManager implements PluginManagerInterface
         array $routes,
         string $tenant_id,
         string $tenant_name,
-        \Hyn\Tenancy\Models\Hostname|Hostname $hostname,
+        Domain $hostname,
         DefaultConfigRepository $configRepository
     ): void
     {
