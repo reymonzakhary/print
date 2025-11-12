@@ -8,6 +8,7 @@ const PriceCalculationService = require('./PriceCalculationService');
 const PriceFormatterService = require('./PriceFormatterService');
 const DividedCalculationHandler = require('./DividedCalculationHandler');
 const DurationCalculator = require('./DurationCalculator');
+const V2ResponseFormatter = require('./V2ResponseFormatter');
 const { filterByCalcRef, findDiscountSlot } = require('../Helpers/Helper');
 
 /**
@@ -47,6 +48,7 @@ class CalculationPipeline {
         this.priceFormatterService = new PriceFormatterService();
         this.dividedCalculationHandler = new DividedCalculationHandler();
         this.durationCalculator = new DurationCalculator();
+        this.v2ResponseFormatter = new V2ResponseFormatter();
 
         // Pipeline data (populated during execution)
         this.category = null;
@@ -290,11 +292,38 @@ class CalculationPipeline {
      * @returns {Object} Formatted response
      */
     async _formatResponse() {
+        // Check if V2 detailed format requested
+        if (this.context.v2DetailedFormat === true) {
+            return this._formatV2DetailedResponse();
+        }
+
+        // Otherwise use V1-compatible format
         if (this.isDivided) {
             return this._formatDividedResponse();
         } else {
             return this._formatSimpleResponse();
         }
+    }
+
+    /**
+     * Format V2 detailed response (new transparent format)
+     *
+     * @private
+     * @returns {Object} V2 detailed response
+     */
+    _formatV2DetailedResponse() {
+        return this.v2ResponseFormatter.formatDetailedResponse({
+            isDivided: this.isDivided,
+            dividedResult: this.dividedResult,
+            finalPrice: this.finalPrice,
+            formatResult: this.formatResult,
+            catalogue: this.catalogue,
+            category: this.category,
+            margins: this.margins
+        }, {
+            ...this.context,
+            matchedItems: this.matchedItems
+        });
     }
 
     /**

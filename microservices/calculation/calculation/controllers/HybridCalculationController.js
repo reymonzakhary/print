@@ -120,7 +120,7 @@ module.exports = class HybridCalculationController {
             );
             console.log('Items enriched with IDs:', enrichedItems.length);
 
-            // Step 3: Create V2 calculation context
+            // Step 3: Create V2 calculation context with detailed format flag
             const context = {
                 slug,
                 supplierId: supplier_id,
@@ -130,6 +130,7 @@ module.exports = class HybridCalculationController {
                 vatOverride: v1Payload.vat_override || false,
                 internal: v1Payload.internal || false,
                 contract: v1Payload.contract || null,
+                v2DetailedFormat: true,  // 🆕 Enable V2 detailed response format
                 request: {
                     ...v1Payload,
                     bleed: v1Payload.bleed || null,
@@ -147,11 +148,12 @@ module.exports = class HybridCalculationController {
             const result = await pipeline.execute();
 
             console.log('=== V2 Pipeline Complete ===');
-            console.log('Prices generated:', result.prices?.length || 0);
-            console.log('Calculation details:', result.calculation?.length || 0);
-
-            // Add V2 flag to response
-            result.v2_pipeline = true;
+            console.log('Response version:', result.version || 'unknown');
+            console.log('Calculation type:', result.calculation_type);
+            if (result.summary) {
+                console.log('Total cost:', result.summary.total_cost?.formatted || 'N/A');
+                console.log('Production time:', result.summary.production_time?.formatted || 'N/A');
+            }
 
             return res.status(200).json(result);
 
