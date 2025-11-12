@@ -6,6 +6,8 @@ const CatalogueService = require('./CatalogueService');
 const MachineCalculationService = require('./MachineCalculationService');
 const PriceCalculationService = require('./PriceCalculationService');
 const PriceFormatterService = require('./PriceFormatterService');
+const DividedCalculationHandler = require('./DividedCalculationHandler');
+const DurationCalculator = require('./DurationCalculator');
 const { filterByCalcRef, findDiscountSlot } = require('../Helpers/Helper');
 
 /**
@@ -43,6 +45,8 @@ class CalculationPipeline {
         this.machineCalculationService = new MachineCalculationService();
         this.priceCalculationService = new PriceCalculationService();
         this.priceFormatterService = new PriceFormatterService();
+        this.dividedCalculationHandler = new DividedCalculationHandler();
+        this.durationCalculator = new DurationCalculator();
 
         // Pipeline data (populated during execution)
         this.category = null;
@@ -55,6 +59,8 @@ class CalculationPipeline {
         this.catalogue = null;
         this.combinations = [];
         this.finalPrice = null;
+        this.isDivided = false;
+        this.dividedResult = null;
     }
 
     /**
@@ -86,13 +92,19 @@ class CalculationPipeline {
             await this._fetchCatalogue();
             console.log(`✓ Materials fetched: ${this.catalogue.results.length} materials`);
 
-            // Step 6: Run machine calculations
-            await this._runMachineCalculations();
-            console.log(`✓ Machine combinations: ${this.combinations.length} options`);
+            // Step 6: Check if calculation should be divided
+            this.isDivided = this.dividedCalculationHandler.shouldDivide(
+                this.matchedItems,
+                this.boops
+            );
+            console.log(`✓ Calculation type: ${this.isDivided ? 'Divided' : 'Simple'}`);
 
-            // Step 7: Calculate final prices
-            await this._calculateFinalPrices();
-            console.log(`✓ Final price calculated: €${this.finalPrice.cheapest.row_price.toFixed(2)}`);
+            // Step 7: Calculate (divided or simple)
+            if (this.isDivided) {
+                await this._calculateDivided();
+            } else {
+                await this._calculateSimple();
+            }
 
             // Step 8: Format response
             const response = await this._formatResponse();
@@ -200,11 +212,42 @@ class CalculationPipeline {
     }
 
     /**
-     * Step 6: Run machine calculations and create combinations
+     * Calculate divided calculation (cover + content, etc.)
      *
      * @private
      */
-    async _runMachineCalculations() {
+    async _calculateDivided() {
+        console.log('🔀 Running divided calculation');
+
+        // Store full context for divided handler
+        const divContext = {
+            ...this.context,
+            machines: this.machines,
+            category: this.category,
+            boops: this.boops,
+            matchedItems: this.matchedItems,
+            margins: this.margins
+        };
+
+        this.dividedResult = await this.dividedCalculationHandler.calculateDivided(
+            divContext,
+            this.formatResult,
+            this.catalogue
+        );
+
+        console.log(`✓ Divided calculation complete: ${this.dividedResult.divisions.length} divisions`);
+        console.log(`✓ Total price: €${this.dividedResult.combined.total_row_price.toFixed(2)}`);
+    }
+
+    /**
+     * Calculate simple (non-divided) calculation
+     *
+     * @private
+     */
+    async _calculateSimple() {
+        console.log('Running simple calculation');
+
+        // Step 6: Run machine calculations
         const bindingMethod = filterByCalcRef(this.matchedItems, 'binding_method');
         const bindingDirection = filterByCalcRef(this.matchedItems, 'binding_direction');
         const endpapers = filterByCalcRef(this.matchedItems, 'endpapers');
@@ -216,19 +259,15 @@ class CalculationPipeline {
             this.matchedItems,
             this.context.request,
             this.category,
-            {}, // content (for divided calculations)
+            {},
             bindingMethod,
             bindingDirection,
             endpapers
         );
-    }
 
-    /**
-     * Step 7: Calculate final prices for all combinations
-     *
-     * @private
-     */
-    async _calculateFinalPrices() {
+        console.log(`✓ Machine combinations: ${this.combinations.length} options`);
+
+        // Step 7: Calculate final prices
         this.finalPrice = this.priceCalculationService.calculatePrices(
             this.combinations,
             this.matchedItems,
@@ -240,6 +279,8 @@ class CalculationPipeline {
         if (this.finalPrice.status !== 200) {
             throw new Error(this.finalPrice.message);
         }
+
+        console.log(`✓ Final price calculated: €${this.finalPrice.cheapest.row_price.toFixed(2)}`);
     }
 
     /**
@@ -249,7 +290,58 @@ class CalculationPipeline {
      * @returns {Object} Formatted response
      */
     async _formatResponse() {
+        if (this.isDivided) {
+            return this._formatDividedResponse();
+        } else {
+            return this._formatSimpleResponse();
+        }
+    }
+
+    /**
+     * Format divided calculation response
+     *
+     * @private
+     * @returns {Object} Formatted divided response
+     */
+    _formatDividedResponse() {
+        const response = this.dividedCalculationHandler.formatDividedResponse(
+            this.dividedResult,
+            {
+                ...this.context,
+                matchedItems: this.matchedItems
+            },
+            this.margins,
+            this.category
+        );
+
+        // Add V2 metadata
+        response.v2_pipeline = true;
+        response.calculation_version = '2.0';
+        response.connection = this.category.tenant_id;
+        response.external_id = this.category.tenant_id;
+        response.external_name = this.category.tenant_name;
+
+        return response;
+    }
+
+    /**
+     * Format simple calculation response
+     *
+     * @private
+     * @returns {Object} Formatted simple response
+     */
+    _formatSimpleResponse() {
         const cheapest = this.finalPrice.cheapest;
+
+        // Calculate duration if not present
+        let duration = cheapest.duration;
+        if (!duration && cheapest.machine && cheapest.calculation) {
+            duration = this.durationCalculator.calculateDuration(
+                { machine: cheapest.machine, results: { calculation: cheapest.calculation } },
+                this.formatResult,
+                this.context.quantity
+            );
+        }
 
         // Format price object using PriceFormatterService
         const formattedPrice = this.priceFormatterService.formatPriceObject({
@@ -266,7 +358,7 @@ class CalculationPipeline {
             vatOverride: this.context.vatOverride
         });
 
-        // Build response structure (matches V1 format)
+        // Build response structure (matches V1 format but with improvements)
         return {
             type: 'print',
             connection: this.category.tenant_id,
@@ -274,6 +366,8 @@ class CalculationPipeline {
             external_id: this.category.tenant_id,
             external_name: this.category.tenant_name,
             calculation_type: 'full_calculation',
+            v2_pipeline: true,
+            calculation_version: '2.0',
             items: this.matchedItems,
             product: this.context.items,
             category: this.category,
@@ -287,7 +381,7 @@ class CalculationPipeline {
                 machine: cheapest.machine,
                 color: cheapest.color,
                 row_price: cheapest.row_price,
-                duration: cheapest.duration,
+                duration: duration, // Now properly calculated!
                 price_list: cheapest.calculation?.price_list,
                 details: cheapest.calculation,
                 price: formattedPrice,
