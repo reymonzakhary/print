@@ -6,6 +6,7 @@ const router = express.Router();
 /* General Options controller group. */
 router.get('/suppliers/:supplier_id/options', OptionController.index);
 router.post('/suppliers/:supplier_id/options', OptionController.store);
+router.put('/suppliers/:supplier_id/options/:option_id', OptionController.update);
 // router.delete('/suppliers/:supplier_id/options/:option_id', OptionController.destroy);
 
 

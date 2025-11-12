@@ -241,11 +241,15 @@ class DataSetService:
                     "sku": sku,
                     "name": main_name,  # Main collection name (single string)
                     "display_name": display_name,  # Localized display_name for this iso
+                    "display_name_exact": display_name,
                     "origin_name": origin_name,  # Origin's display_name for this iso, or fallback to supplier's
                     "iso": iso,
                     "slug": slug,
                     "linked": linked
                 }
+                # Store ISO-specific value explicitly for retrieval
+                if iso:
+                    product_data[iso] = display_name
                 self.redis_service.client.json().set(key, "$", product_data)
 
         print("Options inserted into Redis successfully!")
@@ -372,11 +376,14 @@ class DataSetService:
                     "sku": sku,
                     "name": main_name,  # Main collection name (origin_name from payload)
                     "display_name": display_name,  # Localized display_name for this iso
+                    "display_name_exact": display_name,
                     "origin_name": origin_name,  # Origin's display_name for this iso, or fallback to main_name
                     "iso": iso,
                     "slug": slug,
                     "linked": linked,  # Use linked from payload
                 }
+                if iso:
+                    product_data[iso] = display_name
                 self.redis_service.client.json().set(key, "$", product_data)
 
             print(f"Option {sku} inserted into Redis successfully!")

@@ -1,0 +1,266 @@
+[
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "opId": "66fd0da70184ca2d82954bfd",
+    "opName": "Bottle Green",
+    "excludeId": "6674377469c372eb54d1ce9f",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "opId": "66fd0da80184ca2d82954c5d",
+    "opName": "Basic Apron Long With Pockets",
+    "excludeId": "6674377469c372eb54d1ce9f",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04824b88bd5cfaece44b7",
+    "opName": "90gsm uncoated premium white (writable)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04824b88bd5cfaece44b7",
+    "opName": "90gsm uncoated premium white (writable)",
+    "excludeId": "67e048fbb88bd5cfaece4559",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04860b88bd5cfaece44e9",
+    "opName": "90gsm uncoated (writable)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04860b88bd5cfaece44e9",
+    "opName": "90gsm uncoated (writable)",
+    "excludeId": "67e048fbb88bd5cfaece4559",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04862b88bd5cfaece44eb",
+    "opName": "120gsm uncoated (writable)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04865b88bd5cfaece44ed",
+    "opName": "170gsm uncoated (writable)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0486cb88bd5cfaece44f1",
+    "opName": "300gsm uncoated (writable)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04854b88bd5cfaece44df",
+    "opName": "90gsm Bio Top 3® natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e457434802b8c4975d7333",
+    "opName": "100gsm Bio Top 3® natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04856b88bd5cfaece44e1",
+    "opName": "120gsm Bio Top 3® natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04859b88bd5cfaece44e3",
+    "opName": "160gsm Bio Top 3® natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0485fb88bd5cfaece44e7",
+    "opName": "300gsm Bio Top 3® natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048b0b88bd5cfaece451d",
+    "opName": "90gsm Paperwise® Earth Pact Natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048b2b88bd5cfaece451f",
+    "opName": "150gsm Paperwise® Earth Pact Natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048b4b88bd5cfaece4521",
+    "opName": "295gsm Paperwise® Earth Pact Natural",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0489fb88bd5cfaece450f",
+    "opName": "250gr Tinteretto Gesso",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048a1b88bd5cfaece4511",
+    "opName": "300gsm Tintoretto Gesso",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0489cb88bd5cfaece450d",
+    "opName": "280gsm Constellation Snow (linen)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048c4b88bd5cfaece452d",
+    "opName": "90gsm BalancePure®",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048c7b88bd5cfaece452f",
+    "opName": "120gsm BalancePure®",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048c9b88bd5cfaece4531",
+    "opName": "170gsm BalancePure®",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04849b88bd5cfaece44d7",
+    "opName": "90gsm RecyStar® Nature",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0484db88bd5cfaece44d9",
+    "opName": "115gsm RecyStar® Nature",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0484fb88bd5cfaece44db",
+    "opName": "170gsm RecyStar® Nature",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e04839b88bd5cfaece44cb",
+    "opName": "135gsm silk ",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e0483cb88bd5cfaece44cd",
+    "opName": "170gsm silk",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048b7b88bd5cfaece4523",
+    "opName": "80gsm recycled paper (VIVUS 89 or Rebello)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048bab88bd5cfaece4525",
+    "opName": "90gsm recycled paper (VIVUS 89 or Rebello)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048bdb88bd5cfaece4527",
+    "opName": "135gsm recycled paper (VIVUS 89 or Rebello)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048c0b88bd5cfaece4529",
+    "opName": "170gsm recycled paper (VIVUS 89 or Rebello)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "opId": "67e048c2b88bd5cfaece452b",
+    "opName": "300gsm recycled paper (VIVUS 89 or Rebello)",
+    "excludeId": "67e0490ab88bd5cfaece4566",
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  }
+]

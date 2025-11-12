@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-11-04T11:35:51.684Z",
+  "boxesNotFound": 0,
+  "optionsNotFound": 18,
+  "excludesNotFound": 33,
+  "total": 51,
+  "byTenant": {
+    "8f05bfc5-f960-4bc5-9e93-47b39401419c": {
+      "boxes": 0,
+      "options": 17,
+      "excludes": 2
+    },
+    "b83a29c5-14a9-4704-9bce-bc35ac826e99": {
+      "boxes": 0,
+      "options": 1,
+      "excludes": 31
+    }
+  }
+}

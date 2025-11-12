@@ -118,7 +118,7 @@ class CategoriesApi(Resource):
         # return {"dddd" : "dddd"}, 400
         category = Category(
             name=name,
-            system_key=slugify(name),
+            system_key=slugify(name, to_lower=True),
             display_name=display_names
         ).save()
         return jsonify({

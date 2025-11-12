@@ -4,6 +4,7 @@ const Box = require("../Models/Box");
 const SupplierBoops = require("../Models/SupplierBoops");
 const slugify = require('slugify');
 const mongoose = require("mongoose");
+const axios = require('axios');
 const ObjectId = mongoose.Types.ObjectId;
 const {
     mergeDisplayNames,
@@ -13,6 +14,7 @@ const {
     handleLinkedBox,
     handleStandaloneBox,
 } = require('../Helpers/Helpers');
+const StoreSupplierBoxRequest = require("../Requests/StoreSupplierBoxRequest");
 
 module.exports = class BoxController {
 
@@ -35,6 +37,14 @@ module.exports = class BoxController {
 
             // Build query filter
             const filter = { tenant_id: supplierId };
+
+            if (request.query.filter ?? false) {
+                filter.$or = [
+                    { name: { $regex: request.query.filter, $options: 'i' } },
+                    { 'display_name.display_name': { $regex: request.query.filter, $options: 'i' } }
+                ];
+
+            }
 
             // Get total count for pagination
             const totalCount = await SupplierBox.countDocuments(filter);
@@ -153,66 +163,55 @@ module.exports = class BoxController {
      * with the same name and slug under a specific tenant. If a linked box is provided
      * and exists, it processes the linked box creation; otherwise, it creates a standalone box.
      *
-     * @param {Object} req - The request object containing the supplier ID in `req.params.supplier_id`
+     * @param {Object} request - The request object containing the supplier ID in `req.params.supplier_id`
      * and box details in `req.body`.
-     * @param {Object} res - The response object used to return the status and result of the operation.
+     * @param {Object} response - The response object used to return the status and result of the operation.
      * @return {Promise<Object>} JSON response containing the created box object, a success message,
      * and the HTTP status code. If an error occurs, returns an error message and a 422 status code.
      */
-    static async store(req, res) {
-        try {
-            const supplierId = req.params.supplier_id;
-            const body = req.body;
+    static async store(request, response) {
 
-            const existingBox = await SupplierBox.findOne({
-                tenant_id: supplierId,
-                slug: slugify(body.name, { lower: true, strict: true })
+        try {
+            const { supplier_id } = request.params;
+            let box = await SupplierBox.findOne({
+                tenant_id: supplier_id,
+                slug: slugify(request.body.name, {lower: true}),
             });
 
-            if (existingBox) {
-                return res.status(201).json({
-                    data: existingBox,
-                    message: 'Box has been created successfully.',
+            if (box) {
+                return response.json({
+                    data: box,
+                    message: 'Box has been retrieved successfully',
                     status: 201
                 });
             }
 
-            let newSupplierBox;
+            const system_box = await Box.findById(request.body.linked);
+            const {display_name} = request.body.display_name[0];
+            box = await SupplierBox.create(new StoreSupplierBoxRequest().prepare(
+                request.body,
+                supplier_id,
+                system_box ?
+                    mergeDisplayNames(system_box.display_name, request.body.display_name):
+                    generate_display_name(request.body.lang, display_name),
+                system_box?._id,
+            ));
 
-            if (body.linked) {
-                const systemBox = await Box.findById(new ObjectId(body.linked));
-
-                if (!systemBox) {
-                    body.linked = null;
-                }else{
-                    const display_names = systemBox?.display_name ?
-                        mergeDisplayNames(systemBox.display_name, body.display_name) :
-                        generate_display_name(body.lang, body.name);
-
-
-                    newSupplierBox = await handleLinkedBox(
-                        supplierId,
-                        body,
-                        display_names
-                    );
-                }
-            } else {
-                newSupplierBox = await handleStandaloneBox(
-                    supplierId, 
-                    body, 
-                    generate_display_name(body.lang, body.name)
-                );
+            if (!system_box) {
+                // Call external similarity service (non-blocking)
+                BoxController.callSimilarityService(supplier_id, request.body);
             }
 
-
-            return res.status(201).json({
-                data: newSupplierBox,
-                message: 'Supplier box has been created successfully.',
+            return response.json({
+                data: box,
+                message: 'Box has been created successfully',
                 status: 201
-            });
+            })
+
         } catch (error) {
-            console.error('Error in supplier box post:', error);
-            return res.status(200).json({ 
+            console.error('Error in supplier box creation:', error);
+            return response.status(200).json({
+                data: null,
                 message: error.message,
                 status: 422
             });
@@ -343,5 +342,26 @@ module.exports = class BoxController {
                 }
             }
         );
+    }
+
+
+    static async callSimilarityService(supplier_id, body) {
+        try {
+            const payload = {
+                tenant: supplier_id,
+                tenant_name: body.tenant_name,
+                boxes: [{
+                    name: body.name,
+                    sku: ""
+                }]
+            };
+
+            await axios.post('http://assortments:5000/similarity/boxes', payload, {
+                headers: { 'Content-Type': 'application/json' },
+                timeout: 5000
+            });
+        } catch (error) {
+            console.error('Error calling similarity service:', error.message);
+        }
     }
 }

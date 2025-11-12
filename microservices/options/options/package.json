@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "prod": "node index.js",
-    "migrate": "node migrations/migration-fix-all-data.js"
+    "migrate:all": "node migrations/migration-fix-all-data.js",
+    "migrate:display-names": "node migrations/fix-display-names-migration.js",
+    "migrate:runs": "node migrations/fix-runs-migration.js",
+    "migrate:merge-linked": "node migrations/merge-linked-options-migration.js",
+    "migrate:normalize-slugs": "node migrations/normalize-slugs-migration.js",
+    "migrate:normalize-boops": "node migrations/normalize-supplier-boops.js"
   },
   "author": "",
   "license": "ISC",

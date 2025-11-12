@@ -39,7 +39,6 @@ class SimilarityCategory(Resource):
             for standard in standard_data:
 
                 found = checkSimilarity(posted_slug_name, standard['slug'])
-                print(found)
 
                 if found and found['percentage'] == 100 or posted_slug_name == standard["slug"]:
                     supplier_cat = SupplierCategory.objects(tenant_id=data['tenant'], slug=posted_slug_name).first()

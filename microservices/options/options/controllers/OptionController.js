@@ -9,6 +9,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const {
     generate_display_name, update_display_name, mergeDisplayNames
 } = require('../Helpers/Helper');
+const SupplierBoops = require("../Models/SupplierBoops");
 
 module.exports = class OptionController {
 
@@ -34,6 +35,13 @@ module.exports = class OptionController {
                 filter['additional.calc_ref'] = request.query.ref;
             }
 
+            if (request.query.filter ?? false) {
+                filter.$or = [
+                    { name: { $regex: request.query.filter, $options: 'i' } },
+                    { 'display_name.display_name': { $regex: request.query.filter, $options: 'i' } }
+                ];
+            }
+
             // Use Promise.all for parallel execution
             const [totalCount, options] = await Promise.all([
                 SupplierOption.countDocuments(filter),
@@ -52,7 +60,23 @@ module.exports = class OptionController {
             // Build pagination URLs
             const host = request.query.host || request.get('host');
             const basePath = `${host}/api/v1/mgr/supplier/${supplierId}/options`;
-            const buildPageUrl = (pageNum) => pageNum ? `${basePath}?page=${pageNum}&per_page=${limit}` : null;
+            
+            const buildPageUrl = (pageNum) => {
+                if (!pageNum) return null;
+                let url = `${basePath}?page=${pageNum}&per_page=${limit}`;
+                
+                // Include filter in pagination URLs if present
+                if (request.query.filter) {
+                    url += `&filter=${encodeURIComponent(request.query.filter)}`;
+                }
+                
+                // Include ref in pagination URLs if present
+                if (request.query.ref) {
+                    url += `&ref=${encodeURIComponent(request.query.ref)}`;
+                }
+                
+                return url;
+            };
 
             const pagination = {
                 total: totalCount,
@@ -85,7 +109,6 @@ module.exports = class OptionController {
         }
     }
 
-
     /**
      * Store a specific Supplier Option based on the provided supplier_id and option slug.
      *
@@ -96,73 +119,65 @@ module.exports = class OptionController {
     static async store(request, response) {
         try {
             const { supplier_id } = request.params;
-
-            const validation = ValidationHelper.validateRequired(request.body, ['name']);
-            if (!validation.isValid) {
-                return response.status(422).json({
-                    data: null,
-                    message: `Missing required fields: ${validation.missingFields.join(', ')}`,
-                    status: 422
-                });
-            }
-
-            const sanitizedName = ValidationHelper.sanitizeString(request.body.name);
-            const slug = slugify(sanitizedName, { lower: true });
-
-            // Check for duplicate option
-            const existingOption = await SupplierOption.findOne({
+            let option = await SupplierOption.findOne({
                 tenant_id: supplier_id,
-                slug : slug
+                slug: slugify(request.body.name, {lower: true}),
             });
 
-            if (existingOption) {
+            if (option) {
                 return response.json({
-                    data: existingOption,
+                    data: option,
                     message: 'Option has been retrieved successfully',
                     status: 201
                 });
             }
 
-            // Validate linked option if provided
-            let linkedOption = null;
-            if (request.body.linked) {
-                linkedOption = await Option.findById(request.body.linked);
-                if (!linkedOption) {
-                    return response.status(422).json({
-                        data: null,
-                        message: 'Linked Option does not exist',
-                        status: 422
+            const system_option = await Option.findById(request.body.linked);
+
+            if(system_option) {
+                option = await SupplierOption.findOne({
+                    tenant_id: supplier_id,
+                    linked: system_option._id
+                })
+
+                if(option) {
+                    return response.json({
+                        data: option,
+                        message: 'Option has been retrieved successfully',
+                        status: 201
                     });
                 }
             }
-            const display_name = linkedOption?.display_name ?
-                mergeDisplayNames(linkedOption?.display_name, request.body.display_name) :
-                generate_display_name(request.body.lang, sanitizedName);
 
-            const optionData = new StoreOptionRequest().prepare(
+            const {display_name} = request.body.display_name[0];
+
+            option = await SupplierOption.create(new StoreOptionRequest().prepare(
                 request.body,
                 supplier_id,
-                display_name,
-                linkedOption?._id
-            );
+                system_option ?
+                    mergeDisplayNames(system_option.display_name, request.body.display_name):
+                    generate_display_name(request.body.lang, display_name),
+                system_option?._id,
+            ));
 
-            const newSupplierOption = await SupplierOption.create(optionData);
+            if (!system_option) {
+                // Call external similarity service (non-blocking)
+                OptionController.callSimilarityService(supplier_id, request.body);
+            }
 
-            // Call external similarity service (non-blocking)
-            OptionController.callSimilarityService(supplier_id, request.body);
 
-            return response.status(201).json({
-                data: newSupplierOption,
+            return response.json({
+                data: option,
                 message: 'Option has been created successfully',
                 status: 201
-            });
+            })
 
         } catch (error) {
             console.error('Error in supplier option creation:', error);
-            return response.status(500).json({
+            return response.status(200).json({
                 data: null,
                 message: error.message,
-                status: 500
+                status: 422
             });
         }
     }
@@ -176,7 +191,7 @@ module.exports = class OptionController {
                 tenant: supplier_id,
                 tenant_name: body.tenant_name,
                 options: [{
-                    name: body.system_key || body.name,
+                    name: body.name,
                     sku: ""
                 }]
             };
@@ -187,6 +202,101 @@ module.exports = class OptionController {
             });
         } catch (error) {
             console.error('Error calling similarity service:', error.message);
+        }
+    }
+
+    /**
+     * Update option general information only (display_name, description, additional, images)
+     *
+     * @param {Object} request - The request object containing supplier_id and option data
+     * @param {Object} response - The response object to return the result
+     * @returns {Object} - An object containing the updated Supplier Option or an error message
+     */
+    static async update(request, response) {
+        try {
+
+            console.log(request.body.published)
+
+            const { supplier_id, option_id } = request.params;
+            const option = await SupplierOption.findOne({
+                tenant_id: supplier_id,
+                _id: new ObjectId(option_id)
+            });
+
+            if (!option) {
+                return response.status(404).json({
+                    data: null,
+                    message: 'Option not found',
+                    status: 404
+                });
+            }
+
+            const updateData = {};
+
+            if (request.body.display_name) {
+                updateData.display_name = request.body.display_name || option.display_name;
+            }
+
+            if (request.body.description !== undefined) {
+                updateData.description = request.body.description || option.description;
+            }
+
+            if (request.body.additional !== undefined) {
+                updateData.additional = request.body.additional || option.additional;
+            }
+
+            if (request.body.media) {
+                updateData.media = request.body.media ||  option.media;
+            }
+
+            updateData.published = 'published' in request.body ? request.body.published : option.published;
+
+
+            const updatedOption = await SupplierOption.findOneAndUpdate(
+                { tenant_id: supplier_id, _id: new ObjectId(option_id) },
+                { $set: updateData },
+                { new: true }
+            );
+
+            // Build the COMPLETE update object with ALL fields
+            const boopsUpdateFields = {
+                // Basic fields from option
+                'boops.$[boop].ops.$[opt].display_name': updatedOption.display_name,
+                'boops.$[boop].ops.$[opt].description': updatedOption.description,
+                'boops.$[boop].ops.$[opt].media': updatedOption.media,
+                'boops.$[boop].ops.$[opt].additional': updatedOption.additional
+            };
+
+            // Update all SupplierBoops that belong to this category and contain this option
+            await SupplierBoops.updateMany(
+                {
+                    tenant_id: supplier_id,
+                    'boops.ops.id': new ObjectId(option_id)
+                },
+                {
+                    $set: boopsUpdateFields
+                },
+                {
+                    arrayFilters: [
+                        { 'boop.ops.id': new ObjectId(option_id) },
+                        { 'opt.id': new ObjectId(option_id) }
+                    ]
+                }
+            );
+
+            return response.json({
+                data: updatedOption,
+                message: 'Option general information has been updated successfully',
+                status: 200
+            });
+
+        } catch (error) {
+            console.error('Error updating option general info:', error);
+            return response.status(500).json({
+                data: null,
+                message: error.message,
+                status: 500
+            });
         }
     }
 

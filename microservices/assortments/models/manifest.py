@@ -47,7 +47,7 @@ class BoopOperation(db.EmbeddedDocument):
     length = db.IntField(default=0)
     maximum_length = db.IntField(default=0)
     minimum_length = db.IntField(default=0)
-    source_slug = db.ListField()
+
     display_name = db.ListField(db.DictField(), default=list)  # Multi-language support
 
 
@@ -72,7 +72,6 @@ class Boop(db.EmbeddedDocument):
     sku = db.StringField()
     input_type = db.StringField()
     appendage = db.BooleanField(default=False)
-    source_slug = db.ListField()
     ops = db.ListField(db.EmbeddedDocumentField(BoopOperation), default=list)  # List of operations
     display_name = db.ListField(db.DictField(), default=list)  # Multi-language support
 

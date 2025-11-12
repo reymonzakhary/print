@@ -1,0 +1,182 @@
+[
+  {
+    "boopId": "670ba3464540345b559300d0",
+    "boopName": "Magazines Glued",
+    "boxId": "670bd30b779cd7c4be226fad",
+    "boxName": "Cover printing colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "670ba3464540345b559300d0",
+    "boopName": "Magazines Glued",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1ce9f",
+    "optionName": "4/0 Full Color",
+    "linkedId": "663343d3dce8243559655e89",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "66fd0da70184ca2d82954c12",
+    "optionName": "4/0 Pms",
+    "linkedId": "6633440adce82435596566e6",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671a1ce012c3469a92eb6d01",
+    "boopName": "Aprons",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "66fd0da70184ca2d82954c13",
+    "optionName": "4/4 PMS",
+    "linkedId": "66334416dce824355965685e",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "671f73b7540563c74bcb4b68",
+    "boopName": "book",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "6728737ab9ad3b6eaebe6ca1",
+    "boopName": "Hardcover boeken",
+    "boxId": "6728c1a1a7ca015495985dfb",
+    "boxName": "Cover printing color",
+    "optionId": "6674377469c372eb54d1ce9f",
+    "optionName": "4/0 Full Color",
+    "linkedId": "663343d3dce8243559655e89",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "6728737ab9ad3b6eaebe6ca1",
+    "boopName": "Hardcover boeken",
+    "boxId": "6728bb4da7ca015495985de9",
+    "boxName": "Endpapers",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "6728737ab9ad3b6eaebe6ca1",
+    "boopName": "Hardcover boeken",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "672c9c8fb9ad3b6eaebe719d",
+    "boopName": "marian",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "672c9c8fb9ad3b6eaebe719d",
+    "boopName": "marian",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "672c9c8fb9ad3b6eaebe719d",
+    "boopName": "marian",
+    "boxId": "66fd0da70184ca2d82954bf5",
+    "boxName": "Color",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "673dbca430fc9aa57d3ef4ce",
+    "boopName": "Aluminium Textile Frame (Replaces PRD-CCGVHTW0)",
+    "boxId": "673dbc53fdf1db8593a97fc2",
+    "boxName": "Printing",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "673dd9b845a811f97895a686",
+    "boopName": "divided",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "675ad59ce0fc7ac8604a8861",
+    "boopName": "voorbeeld Magazines",
+    "boxId": "6674377469c372eb54d1ce9e",
+    "boxName": "Printing Colors",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "675ad59ce0fc7ac8604a8861",
+    "boopName": "voorbeeld Magazines",
+    "boxId": "675ad81650da9f677860eec8",
+    "boxName": "Printing colors cover",
+    "optionId": "6674377469c372eb54d1cea0",
+    "optionName": "4/4 Full Color",
+    "linkedId": "663343d3dce8243559655e8b",
+    "tenantId": "8f05bfc5-f960-4bc5-9e93-47b39401419c"
+  },
+  {
+    "boopId": "680f9948d55bed432e15940d",
+    "boopName": "Placemats",
+    "boxId": "67d44f70c001f12511328cfe",
+    "boxName": "Lamination",
+    "optionId": "67e0490ab88bd5cfaece4566",
+    "optionName": "Double sided matt lamination",
+    "linkedId": null,
+    "tenantId": "b83a29c5-14a9-4704-9bce-bc35ac826e99"
+  }
+]
