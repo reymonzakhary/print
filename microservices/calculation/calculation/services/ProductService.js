@@ -32,6 +32,21 @@ class ProductService {
         const boxIds = filtered.boxes;
         const optionIds = filtered.options;
 
+        console.log('Extracted IDs:', {
+            boxIds: boxIds.length,
+            optionIds: optionIds.length,
+            firstItem: items[0]
+        });
+
+        // Validate that we have arrays
+        if (!Array.isArray(boxIds) || !Array.isArray(optionIds)) {
+            throw new ValidationError('Failed to extract box and option IDs from items');
+        }
+
+        if (boxIds.length === 0 && optionIds.length === 0) {
+            throw new ValidationError('No valid box or option IDs found in items. Check that items have key_id and value_id fields.');
+        }
+
         // Fetch boxes and options from database
         const { boxes, options } = await this.repository.findBoxesAndOptions(
             boxIds,
