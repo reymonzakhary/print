@@ -223,6 +223,12 @@ class V2ResponseFormatter {
                     time_minutes: cheapest.duration.cooling_time,
                     description: 'Cooling/drying time'
                 } : null,
+                lamination: cheapest.duration.lamination_time > 0 ? {
+                    time_minutes: cheapest.duration.lamination_time,
+                    sheets: calculation.amount_of_sheets_printed || 0,
+                    machine: cheapest.laminate_machine?.name,
+                    description: `Laminating ${calculation.amount_of_sheets_printed || 0} sheets`
+                } : null,
                 finishing: cheapest.duration.finishing_time > 0 ? {
                     time_minutes: cheapest.duration.finishing_time,
                     description: 'Finishing operations'
@@ -341,7 +347,16 @@ class V2ResponseFormatter {
 
             // Lamination (if applicable)
             lamination: division.laminate_machine ? {
-                machine: division.laminate_machine.name,
+                machine: {
+                    id: division.laminate_machine._id?.toString() || division.laminate_machine.id?.toString(),
+                    name: division.laminate_machine.name,
+                    type: division.laminate_machine.type || 'lamination',
+                    specifications: {
+                        width: division.laminate_machine.width || 0,
+                        height: division.laminate_machine.height || 0,
+                        speed_spm: division.laminate_machine.spm || 0
+                    }
+                },
                 cost: this._formatMoney(division.costs.lamination || 0)
             } : null,
 
@@ -457,19 +472,40 @@ class V2ResponseFormatter {
     }
 
     _extractLaminationCost(cheapest) {
-        // Extract from options_cost breakdown if available
+        // Check if lamination machine is present
+        if (!cheapest.laminate_machine) {
+            return null;
+        }
+
+        const laminateMachine = cheapest.laminate_machine;
+        let laminationCost = 0;
+
+        // Try to get cost from options_cost breakdown
         if (cheapest.options_cost && cheapest.options_cost.breakdown) {
             const laminationOption = cheapest.options_cost.breakdown.find(
-                opt => opt.type === 'option' && opt.key === 'lamination'
+                opt => opt.type === 'option' && (opt.key === 'lamination' || opt.box_calc_ref === 'lamination')
             );
             if (laminationOption) {
-                return {
-                    description: 'Lamination finishing',
-                    total: this._formatMoney(laminationOption.total_cost || 0)
-                };
+                laminationCost = laminationOption.total_cost || 0;
             }
         }
-        return null;
+
+        // Build detailed lamination section with machine info
+        return {
+            description: 'Lamination finishing applied',
+            machine: {
+                id: laminateMachine._id?.toString() || laminateMachine.id?.toString(),
+                name: laminateMachine.name,
+                type: laminateMachine.type || 'lamination',
+                specifications: {
+                    width: laminateMachine.width || 0,
+                    height: laminateMachine.height || 0,
+                    speed_spm: laminateMachine.spm || 0
+                }
+            },
+            cost: this._formatMoney(laminationCost),
+            total: this._formatMoney(laminationCost)
+        };
     }
 
     _extractOptionsCost(cheapest) {
