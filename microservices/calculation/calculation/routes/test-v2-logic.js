@@ -53,6 +53,23 @@ router.post(
 );
 
 /**
+ * POST /test/v2-pipeline/shop/suppliers/:supplier_id/categories/:slug/products/calculate/price
+ *
+ * V2 PIPELINE calculation (NEW organized architecture)
+ *
+ * Uses the new V2 calculation pipeline with organized services:
+ * - FormatService, CatalogueService, MachineCalculationService, etc.
+ *
+ * This is the FULLY ORGANIZED V2 system for better testing and scaling
+ *
+ * Request Body: Same V1 format
+ */
+router.post(
+    '/v2-pipeline/shop/suppliers/:supplier_id/categories/:slug/products/calculate/price',
+    HybridCalculationController.calculateV2
+);
+
+/**
  * POST /test/v2-logic/shop/suppliers/:supplier_id/categories/:slug/products/calculate/price/list
  *
  * Price list calculation using V2 logic
