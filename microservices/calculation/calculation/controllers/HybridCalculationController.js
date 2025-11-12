@@ -3,6 +3,7 @@ const CategoryService = require('../services/CategoryService');
 const ProductService = require('../services/ProductService');
 const V1toV2PayloadTransformer = require('../services/V1toV2PayloadTransformer');
 const FetchCatalogue = require('../Calculations/Catalogues/FetchCatalogue');
+const CalculationPipeline = require('../services/CalculationPipeline');
 const { ApplicationError } = require('../errors');
 
 /**
@@ -77,6 +78,80 @@ module.exports = class HybridCalculationController {
             console.log('=== Calculation Complete ===');
             console.log('Prices generated:', result.prices?.length || 0);
             console.log('Calculation details:', result.calculation?.length || 0);
+
+            return res.status(200).json(result);
+
+        } catch (error) {
+            return HybridCalculationController._handleError(error, res);
+        }
+    }
+
+    /**
+     * Calculate using V2 pipeline (organized services)
+     *
+     * POST /test/v2-pipeline/shop/suppliers/:supplier_id/categories/:slug/products/calculate/price
+     *
+     * Uses the new organized V2 calculation pipeline with separate services:
+     * - FormatService, CatalogueService, MachineCalculationService, etc.
+     *
+     * @param {Object} req - Express request
+     * @param {Object} res - Express response
+     * @returns {Promise<Response>} JSON response
+     */
+    static async calculateV2(req, res) {
+        try {
+            const { supplier_id, slug } = req.params;
+            const v1Payload = req.body;
+
+            console.log('=== V2 Pipeline Calculation ===');
+            console.log('Supplier:', supplier_id);
+            console.log('Category:', slug);
+            console.log('Quantity:', v1Payload.quantity);
+            console.log('Products count:', v1Payload.product?.length);
+
+            // Step 1: Get category and boops for enrichment
+            const categoryService = new CategoryService();
+            const { boops } = await categoryService.getCategory(slug, supplier_id);
+
+            // Step 2: Enrich V1 items with IDs
+            const enrichedItems = HybridCalculationController._enrichItemsWithIds(
+                v1Payload.product,
+                boops
+            );
+            console.log('Items enriched with IDs:', enrichedItems.length);
+
+            // Step 3: Create V2 calculation context
+            const context = {
+                slug,
+                supplierId: supplier_id,
+                items: enrichedItems,
+                quantity: v1Payload.quantity || 100,
+                vat: v1Payload.vat || 21,
+                vatOverride: v1Payload.vat_override || false,
+                internal: v1Payload.internal || false,
+                contract: v1Payload.contract || null,
+                request: {
+                    ...v1Payload,
+                    bleed: v1Payload.bleed || null,
+                    quantity_range_start: v1Payload.quantity_range_start || 0,
+                    quantity_range_end: v1Payload.quantity_range_end || 0,
+                    quantity_incremental_by: v1Payload.quantity_incremental_by || 0,
+                    range_override: v1Payload.range_override || false,
+                    dlv: v1Payload.dlv || null,
+                    divided: v1Payload.divided || false
+                }
+            };
+
+            // Step 4: Execute V2 pipeline
+            const pipeline = new CalculationPipeline(context);
+            const result = await pipeline.execute();
+
+            console.log('=== V2 Pipeline Complete ===');
+            console.log('Prices generated:', result.prices?.length || 0);
+            console.log('Calculation details:', result.calculation?.length || 0);
+
+            // Add V2 flag to response
+            result.v2_pipeline = true;
 
             return res.status(200).json(result);
 
