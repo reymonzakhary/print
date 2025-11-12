@@ -32,8 +32,21 @@ class CategoryService {
             throw new NotFoundError(`Category '${slug}' not found`);
         }
 
+        // Extract machines from either legacy 'machine' field or new 'additional' array
+        let machines = [];
+
+        if (category.machine && Array.isArray(category.machine) && category.machine.length > 0) {
+            // Legacy structure: machines directly in 'machine' field
+            machines = category.machine;
+        } else if (category.additional && Array.isArray(category.additional) && category.additional.length > 0) {
+            // New structure: machines in 'additional' array
+            machines = category.additional
+                .filter(item => item && item.machine)
+                .map(item => item.machine);
+        }
+
         // Validate category has machines
-        if (!category.machine || category.machine.length === 0) {
+        if (machines.length === 0) {
             throw new ValidationError(`Category '${slug}' has no machines configured`);
         }
 
@@ -44,7 +57,7 @@ class CategoryService {
 
         return {
             category,
-            machines: category.machine,
+            machines: machines,
             boops: category.boops[0] // First boops element
         };
     }
