@@ -165,12 +165,13 @@ class MigrateFromHynToTenancy extends Command
             $this->newLine();
             $this->warn('⚠️  IMPORTANT: Next Steps Required');
             $this->warn('================================');
-            $this->info('1. Install Passport OAuth clients for all tenants:');
-            $this->info('   php artisan tenants:passport-install');
+            $this->info('1. Run Passport migrations (adds tenant_id column):');
+            $this->info('   php artisan migrate');
             $this->newLine();
             $this->info('2. Verify tenant databases have been migrated:');
             $this->info('   php artisan tenants:verify-migrations');
             $this->newLine();
+            $this->info('Note: Using Passport Universal Mode - all OAuth data in central DB');
         }
 
         return $errors > 0 ? 1 : 0;

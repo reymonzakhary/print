@@ -12,11 +12,6 @@ use App\Models\Tenants\Brand;
 use App\Models\Tenants\Category;
 use App\Models\Tenants\Option;
 use App\Models\Tenants\Order;
-use App\Models\Tenants\Passport\AuthCode;
-use App\Models\Tenants\Passport\Client;
-use App\Models\Tenants\Passport\PersonalAccessClient;
-use App\Models\Tenants\Passport\RefreshToken;
-use App\Models\Tenants\Passport\Token;
 use App\Models\Tenants\Product;
 use App\Observers\Blueprints\BlueprintObserver;
 use App\Observers\Custom\Boxes\BoxObserver;
@@ -26,13 +21,8 @@ use App\Observers\Custom\Options\OptionObserver;
 use App\Observers\Custom\Products\ProductObserver;
 use App\Observers\Orders\OrderObserver;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Laravel\Passport\Console\ClientCommand;
-use Laravel\Passport\Console\InstallCommand;
-use Laravel\Passport\Console\KeysCommand;
-use Laravel\Passport\Passport;
 
 class TenantAuthServiceProvider extends ServiceProvider
 {
@@ -43,13 +33,9 @@ class TenantAuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-
         $this->app->singleton(FileManagerInterface::class, function () {
-//            return new FileManager(app(ConfigRepository::class));
             return new FileManagerFactory();
         });
-
 
         App::setLocale(Str::lower(Str::lower(Settings::managerLanguage('en')?->value)));
     }
@@ -64,43 +50,15 @@ class TenantAuthServiceProvider extends ServiceProvider
     {
         $migration->register(__DIR__ . '/../Database/Migrations');
 
-        // Load tenant-specific OAuth clients dynamically
-        try {
-            $passwordClient = Client::where('password_client', true)->first();
-
-            if ($passwordClient) {
-                Config::set('services.passport.password_client_id', $passwordClient->id);
-                Config::set('services.passport.password_client_secret', $passwordClient->secret);
-            } else {
-                // Log warning if no password client exists for this tenant
-                if (config('app.debug')) {
-                    \Log::warning('No password grant client found for tenant', [
-                        'tenant_id' => tenant()?->id,
-                        'hint' => 'Run: php artisan tenants:passport-install'
-                    ]);
-                }
-            }
-        } catch (\Exception $e) {
-            // Silently fail if we can't load clients (might be during migration)
-            if (config('app.debug')) {
-                \Log::debug('Could not load tenant OAuth clients: ' . $e->getMessage());
-            }
-        }
-
-        Passport::useTokenModel(Token::class);
-        Passport::useClientModel(Client::class);
-        Passport::useAuthCodeModel(AuthCode::class);
-        Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
-        Passport::useRefreshTokenModel(RefreshToken::class);
-
-        $this->commands([
-            InstallCommand::class,
-            ClientCommand::class,
-            KeysCommand::class,
-        ]);
-        Passport::tokensExpireIn(now()->addDays(5));
-        Passport::refreshTokensExpireIn(now()->addMinutes(10));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        /**
+         * Universal Mode for Passport:
+         *
+         * All Passport data (clients, tokens, etc.) is stored in the central database.
+         * Tokens automatically get a tenant_id when created in a tenant context.
+         * The central OAuth clients are shared by all tenants.
+         *
+         * No need to load tenant-specific clients - they're in the central DB!
+         */
 
         /**
          * observer list
@@ -112,12 +70,6 @@ class TenantAuthServiceProvider extends ServiceProvider
         Box::observe(BoxObserver::class);
         Option::observe(OptionObserver::class);
         Product::observe(ProductObserver::class);
-
-
-        /**
-         * CMS
-         */
-
-
     }
 }
+
