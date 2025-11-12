@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Passport\AuthCode;
+use App\Models\Passport\Token;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\InstallCommand;
@@ -27,8 +29,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        // Enable password grant
+
+        // Only configure Passport for central/non-tenant context
         if (!tenancy()->initialized) {
+            // Enable password grant
             Passport::enablePasswordGrant();
 
             $this->commands([
@@ -36,10 +40,18 @@ class AuthServiceProvider extends ServiceProvider
                 ClientCommand::class,
                 KeysCommand::class,
             ]);
-            Passport::tokensExpireIn(now()->addMinutes(30));
+
+            // Universal Mode: Use custom models that automatically add tenant_id
+            Passport::useTokenModel(Token::class);
+            Passport::useAuthCodeModel(AuthCode::class);
+
+            // Token lifetimes
+            Passport::tokensExpireIn(now()->addDays(5));
             Passport::refreshTokensExpireIn(now()->addDays(10));
             Passport::personalAccessTokensExpireIn(now()->addMonths(6));
-        }
 
+            // Ignore migrations - we have custom migrations
+            Passport::ignoreMigrations();
+        }
     }
 }

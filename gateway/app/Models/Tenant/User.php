@@ -316,7 +316,7 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
     public function sendApiEmailVerificationNotification($uuid = null, $generatePassword = false): void
     {
         $this->notify(
-            new VerifyEmailNotification($uuid ?? tenant()->uuid, $generatePassword)
+            new VerifyEmailNotification($uuid ?? tenant()->id, $generatePassword)
         );
     }
 

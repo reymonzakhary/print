@@ -128,5 +128,6 @@ class Kernel extends HttpKernel
         'auth.gate' => SystemAuthGates::class,
         'inertia' => HandleInertiaRequests::class,
         'dynamic.user' => SetDynamicUserMiddleware::class,
+        'verify.tenant.token' => \App\Http\Middleware\VerifyTenantToken::class,
     ];
 }
