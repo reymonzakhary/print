@@ -253,6 +253,15 @@ class V2ResponseFormatter {
                 delivery_options: color?.dlv || []
             },
 
+            // 💵 Prices (V1-compatible format with delivery days)
+            prices: this._formatPricesArray(cheapest, context, margins),
+
+            // 📋 Price List (quantity ranges)
+            price_list: this._formatPriceList(calculation.price_list, context),
+
+            // 📐 Imposetioning (sheet layout)
+            imposetioning: this._formatImposetioning(calculation, machine),
+
             // 🔧 Calculation Details (for debugging)
             calculation_details: {
                 calculation_method: category.calculation_method,
@@ -310,7 +319,16 @@ class V2ResponseFormatter {
                     amount: this._formatMoney(combined.total_row_price * (context.vat || 21) / 100)
                 },
                 total_with_vat: this._formatMoney(combined.total_row_price * (1 + (context.vat || 21) / 100))
-            }
+            },
+
+            // 💵 Prices (V1-compatible format with delivery days)
+            prices: this._formatDividedPricesArray(divisions, combined, context, margins),
+
+            // 📐 Imposetioning (per division)
+            imposetioning: divisions.map(division => ({
+                division: division.name,
+                layout: this._formatImposetioning(division.calculation, division.machine)
+            }))
         };
     }
 
@@ -533,6 +551,221 @@ class V2ResponseFormatter {
             value: margin.value,
             description: margin.type === 'percentage' ? `${margin.value}% margin` : `€${margin.value} fixed margin`
         };
+    }
+
+    /**
+     * Format prices array in V1-compatible format with delivery days
+     *
+     * @private
+     */
+    _formatPricesArray(cheapest, context, margins) {
+        const grossPrice = Math.round(cheapest.row_price * 100); // In cents
+        const grossPpp = Math.round((cheapest.row_price / context.quantity) * 100);
+        const vatRate = context.vat || 21;
+        const vatAmount = Math.round(grossPrice * vatRate / 100);
+
+        // Build delivery options with days
+        const deliveryOptions = (cheapest.color?.dlv || cheapest.dlv || []).map(dlvOption => ({
+            days: dlvOption.days || dlvOption.dlv || 0,
+            price: dlvOption.price || 0,
+            name: dlvOption.name || `${dlvOption.days || dlvOption.dlv || 0} days`
+        }));
+
+        // Generate unique ID for this price combination
+        const priceId = this._generatePriceId(cheapest, context.quantity);
+
+        return [{
+            id: priceId,
+            qty: context.quantity,
+            dlv: deliveryOptions,
+            pm: cheapest.machine?.pm || 'digital',
+            gross_price: grossPrice,
+            gross_ppp: grossPpp / 100,
+            p: grossPrice,
+            ppp: grossPpp / 100,
+            selling_price_ex: grossPrice,
+            selling_price_inc: grossPrice + vatAmount,
+            profit: margins.length > 0 && context.internal ? this._calculateProfit(grossPrice, margins[0]) : null,
+            discount: [],
+            margins: margins.length > 0 && context.internal ? [this._formatMarginForPrice(margins[0])] : [],
+            vat: vatRate,
+            vat_p: vatAmount / 100,
+            vat_ppp: (vatAmount / context.quantity) / 100,
+            delivery_days: cheapest.duration?.estimated_delivery_days || 1
+        }];
+    }
+
+    /**
+     * Format prices array for divided calculations
+     *
+     * @private
+     */
+    _formatDividedPricesArray(divisions, combined, context, margins) {
+        const grossPrice = Math.round(combined.total_row_price * 100); // In cents
+        const grossPpp = Math.round((combined.total_row_price / context.quantity) * 100);
+        const vatRate = context.vat || 21;
+        const vatAmount = Math.round(grossPrice * vatRate / 100);
+
+        // Get delivery options from first division
+        const firstDivision = divisions[0];
+        const deliveryOptions = (firstDivision?.machine?.dlv || []).map(dlvOption => ({
+            days: dlvOption.days || dlvOption.dlv || 0,
+            price: dlvOption.price || 0,
+            name: dlvOption.name || `${dlvOption.days || dlvOption.dlv || 0} days`
+        }));
+
+        // Generate unique ID for this price combination
+        const priceId = this._generatePriceId({
+            machine: firstDivision?.machine,
+            row_price: combined.total_row_price
+        }, context.quantity);
+
+        return [{
+            id: priceId,
+            qty: context.quantity,
+            dlv: deliveryOptions,
+            pm: firstDivision?.machine?.pm || 'digital',
+            gross_price: grossPrice,
+            gross_ppp: grossPpp / 100,
+            p: grossPrice,
+            ppp: grossPpp / 100,
+            selling_price_ex: grossPrice,
+            selling_price_inc: grossPrice + vatAmount,
+            profit: margins.length > 0 && context.internal ? this._calculateProfit(grossPrice, margins[0]) : null,
+            discount: [],
+            margins: margins.length > 0 && context.internal ? [this._formatMarginForPrice(margins[0])] : [],
+            vat: vatRate,
+            vat_p: vatAmount / 100,
+            vat_ppp: (vatAmount / context.quantity) / 100,
+            delivery_days: combined.duration?.estimated_days || 1,
+            divided: true,
+            divisions_count: divisions.length
+        }];
+    }
+
+    /**
+     * Format price list for quantity ranges
+     *
+     * @private
+     */
+    _formatPriceList(priceList, context) {
+        if (!priceList || priceList.length === 0) {
+            return null;
+        }
+
+        return priceList.map(priceItem => ({
+            quantity: priceItem.quantity || priceItem.qty,
+            price: priceItem.price,
+            price_per_piece: priceItem.price_per_piece || (priceItem.price / priceItem.quantity),
+            delivery_days: priceItem.delivery_days || 1,
+            formatted: {
+                price: this._formatMoney(priceItem.price / 100),
+                price_per_piece: this._formatMoney((priceItem.price / priceItem.quantity) / 100)
+            }
+        }));
+    }
+
+    /**
+     * Format imposetioning (sheet layout information)
+     *
+     * @private
+     */
+    _formatImposetioning(calculation, machine) {
+        return {
+            sheet_size: {
+                width: machine.width,
+                height: machine.height,
+                unit: 'mm',
+                area_sqm: (machine.width * machine.height) / 1000000
+            },
+            product_size: {
+                width: calculation.width_with_bleed || 0,
+                height: calculation.height_with_bleed || 0,
+                unit: 'mm'
+            },
+            layout: {
+                products_per_sheet: calculation.maximum_prints_per_sheet || 0,
+                orientation: calculation.ps || 'Unknown',
+                rows: calculation.rows || null,
+                columns: calculation.columns || null
+            },
+            efficiency: {
+                sheet_usage_percentage: this._calculateSheetEfficiency(calculation, machine),
+                waste_area_sqm: this._calculateWasteArea(calculation, machine)
+            },
+            visualization: {
+                description: `${calculation.maximum_prints_per_sheet || 0} products fit on each ${machine.width}x${machine.height}mm sheet`,
+                layout_pattern: calculation.ps || 'optimized'
+            }
+        };
+    }
+
+    /**
+     * Generate unique price ID
+     *
+     * @private
+     */
+    _generatePriceId(cheapest, quantity) {
+        const crypto = require('crypto');
+        const hash = crypto.createHash('sha256');
+        hash.update(`${cheapest.machine._id}-${quantity}-${cheapest.row_price}`);
+        return hash.digest('hex');
+    }
+
+    /**
+     * Calculate profit from margins
+     *
+     * @private
+     */
+    _calculateProfit(grossPrice, margin) {
+        if (!margin) return null;
+
+        if (margin.type === 'percentage') {
+            return Math.round(grossPrice * margin.value / 100) / 100;
+        } else {
+            return margin.value;
+        }
+    }
+
+    /**
+     * Format margin for price object
+     *
+     * @private
+     */
+    _formatMarginForPrice(margin) {
+        return {
+            type: margin.type,
+            value: margin.value,
+            amount: margin.type === 'percentage' ? null : margin.value
+        };
+    }
+
+    /**
+     * Calculate sheet efficiency percentage
+     *
+     * @private
+     */
+    _calculateSheetEfficiency(calculation, machine) {
+        const sheetArea = (machine.width * machine.height) / 1000000; // sqm
+        const productArea = ((calculation.width_with_bleed || 0) * (calculation.height_with_bleed || 0)) / 1000000; // sqm
+        const productsPerSheet = calculation.maximum_prints_per_sheet || 0;
+        const usedArea = productArea * productsPerSheet;
+
+        return sheetArea > 0 ? Math.round((usedArea / sheetArea) * 100 * 10) / 10 : 0;
+    }
+
+    /**
+     * Calculate waste area per sheet
+     *
+     * @private
+     */
+    _calculateWasteArea(calculation, machine) {
+        const sheetArea = (machine.width * machine.height) / 1000000; // sqm
+        const productArea = ((calculation.width_with_bleed || 0) * (calculation.height_with_bleed || 0)) / 1000000; // sqm
+        const productsPerSheet = calculation.maximum_prints_per_sheet || 0;
+        const usedArea = productArea * productsPerSheet;
+
+        return Math.round((sheetArea - usedArea) * 10000) / 10000; // 4 decimal places
     }
 }
 
