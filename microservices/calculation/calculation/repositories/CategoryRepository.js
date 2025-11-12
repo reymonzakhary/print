@@ -1,4 +1,5 @@
 const SupplierCategory = require('../Models/SupplierCategory');
+const SupplierBoops = require('../Models/SupplierBoops');
 
 /**
  * CategoryRepository
@@ -16,6 +17,7 @@ class CategoryRepository {
      */
     async findBySlugAndSupplier(slug, supplierId) {
         try {
+            // Step 1: Fetch category and populate machines
             const category = await SupplierCategory.findOne({
                 slug: slug,
                 tenant_id: supplierId,
@@ -23,8 +25,25 @@ class CategoryRepository {
             })
             .populate('machine')  // Legacy field (if exists)
             .populate('additional.machine')  // New location in additional array
-            .populate('boops')
             .lean();
+
+            if (!category) {
+                return null;
+            }
+
+            // Step 2: Fetch boops separately (it's a different collection)
+            const boops = await SupplierBoops.findOne({
+                supplier_category: category._id,
+                tenant_id: supplierId,
+                published: true
+            }).lean();
+
+            // Step 3: Attach boops to category (for backward compatibility)
+            if (boops) {
+                category.boops = [boops]; // Array for backward compatibility
+            } else {
+                category.boops = [];
+            }
 
             return category;
         } catch (error) {
