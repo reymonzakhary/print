@@ -64,13 +64,27 @@ class TenantAuthServiceProvider extends ServiceProvider
     {
         $migration->register(__DIR__ . '/../Database/Migrations');
 
+        // Load tenant-specific OAuth clients dynamically
+        try {
+            $passwordClient = Client::where('password_client', true)->first();
 
-        $tokens = Client::where('password_client', true)->pluck('secret', 'id');
-        if ($tokens) {
-            collect($tokens)->map(function ($v, $k) {
-                Config::set('services.passport.password_client_id', $k);
-                Config::set('services.passport.password_client_secret', $v);
-            });
+            if ($passwordClient) {
+                Config::set('services.passport.password_client_id', $passwordClient->id);
+                Config::set('services.passport.password_client_secret', $passwordClient->secret);
+            } else {
+                // Log warning if no password client exists for this tenant
+                if (config('app.debug')) {
+                    \Log::warning('No password grant client found for tenant', [
+                        'tenant_id' => tenant()?->id,
+                        'hint' => 'Run: php artisan tenants:passport-install'
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            // Silently fail if we can't load clients (might be during migration)
+            if (config('app.debug')) {
+                \Log::debug('Could not load tenant OAuth clients: ' . $e->getMessage());
+            }
         }
 
         Passport::useTokenModel(Token::class);

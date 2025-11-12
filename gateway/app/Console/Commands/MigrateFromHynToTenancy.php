@@ -158,7 +158,20 @@ class MigrateFromHynToTenancy extends Command
             }
         }
 
+        $this->info('========================================');
         $this->info('Migration completed!');
+
+        if (!$dryRun && $migrated > 0) {
+            $this->newLine();
+            $this->warn('⚠️  IMPORTANT: Next Steps Required');
+            $this->warn('================================');
+            $this->info('1. Install Passport OAuth clients for all tenants:');
+            $this->info('   php artisan tenants:passport-install');
+            $this->newLine();
+            $this->info('2. Verify tenant databases have been migrated:');
+            $this->info('   php artisan tenants:verify-migrations');
+            $this->newLine();
+        }
 
         return $errors > 0 ? 1 : 0;
     }
