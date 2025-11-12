@@ -51,10 +51,18 @@ module.exports = class HybridCalculationController {
             console.log('Category loaded:', category.name || category.slug);
             console.log('Machines available:', machines?.length || 0);
 
-            // Step 2: Match products from V1 payload
+            // Step 2: Enrich V1 payload items with IDs from boops
+            // V1 payload only has slugs (key, value), we need to add IDs (key_id, value_id)
+            const enrichedItems = HybridCalculationController._enrichItemsWithIds(
+                v1Payload.product,
+                boops
+            );
+            console.log('Items enriched with IDs:', enrichedItems.length);
+
+            // Step 3: Match products from enriched payload
             const productService = new ProductService();
             const matchedProducts = await productService.getMatchedProducts(
-                v1Payload.product,
+                enrichedItems,
                 supplier_id,
                 boops,
                 category._id.toString()
@@ -62,19 +70,20 @@ module.exports = class HybridCalculationController {
 
             console.log('Products matched:', matchedProducts.length);
 
-            // Step 3: Extract material and weight from matched products
-            const material = productService.getMaterial(matchedProducts);
-            const weight = productService.getWeight(matchedProducts);
+            // Step 4: Extract material and weight from matched products
+            // FetchCatalogue expects array format: [{option_id: ..., option: {...}}]
+            const materialProduct = matchedProducts.find(p => p.box_calc_ref === 'material');
+            const weightProduct = matchedProducts.find(p => p.box_calc_ref === 'weight');
 
-            console.log('Material extracted:', material?.[0]?.option?.value || 'none');
-            console.log('Weight extracted:', weight?.[0]?.option?.value || 'none');
+            console.log('Material extracted:', materialProduct?.option?.name || 'none');
+            console.log('Weight extracted:', weightProduct?.option?.name || 'none');
 
-            // Step 4: Fetch catalogues (materials with prices) from database
+            // Step 5: Fetch catalogues (materials with prices) from database
             let catalogues = [];
-            if (material && weight) {
+            if (materialProduct && weightProduct) {
                 const fetchCatalogue = new FetchCatalogue(
-                    material,
-                    weight,
+                    [materialProduct],  // Array format expected
+                    [weightProduct],    // Array format expected
                     supplier_id
                 );
                 const catalogueResult = await fetchCatalogue.get();
@@ -82,19 +91,19 @@ module.exports = class HybridCalculationController {
                 console.log('Catalogues fetched:', catalogues.length);
             }
 
-            // Step 5: Transform V1 payload to V2 format
+            // Step 6: Transform V1 payload to V2 format
             const v2Payload = V1toV2PayloadTransformer.transform(
                 v1Payload,
                 slug,
                 supplier_id
             );
 
-            // Step 6: Enhance V2 payload with actual catalogue data
+            // Step 7: Enhance V2 payload with actual catalogue data
             if (catalogues.length > 0) {
                 const catalogue = catalogues[0]; // Use first matching catalogue
                 v2Payload.material = {
                     type: v2Payload.material?.type || 'paper_uncoated',
-                    name: material?.[0]?.option?.value || v2Payload.material?.name,
+                    name: materialProduct?.option?.name || v2Payload.material?.name,
                     grs: catalogue.grs || catalogue.gsm,
                     price: catalogue.price || 0,
                     calc_type: catalogue.calc_type || (catalogue.sheet ? 'sheet' : 'kg'),
@@ -102,9 +111,9 @@ module.exports = class HybridCalculationController {
                     height: catalogue.height,
                     sheet: catalogue.sheet
                 };
-            } else if (weight?.[0]?.option?.value) {
+            } else if (weightProduct?.option?.name) {
                 // Fallback: use weight from matched products
-                const grsMatch = weight[0].option.value.match(/(\d+)/);
+                const grsMatch = weightProduct.option.name.match(/(\d+)/);
                 const grsValue = grsMatch ? parseInt(grsMatch[1]) : 0;
                 v2Payload.material = {
                     ...v2Payload.material,
@@ -120,7 +129,7 @@ module.exports = class HybridCalculationController {
             console.log('- Colors:', v2Payload.colors?.front + '/' + v2Payload.colors?.back);
             console.log('- Finishing:', v2Payload.finishing?.length, 'operations');
 
-            // Step 7: Use V2 calculation service (but skip category fetch since we already have it)
+            // Step 8: Use V2 calculation service
             const calculationService = new CalculationServiceV2();
 
             const v2Result = await calculationService.calculate({
@@ -307,6 +316,64 @@ module.exports = class HybridCalculationController {
                 }
             });
         }
+    }
+
+    /**
+     * Enrich V1 items with IDs from boops configuration
+     *
+     * V1 payload only has slugs (key='format', value='a4')
+     * We need to add IDs from boops (key_id, value_id) for database lookups
+     *
+     * @param {Array} items - V1 payload items (with key and value slugs)
+     * @param {Object} boops - Boops configuration from category
+     * @returns {Array} Enriched items with key_id and value_id
+     * @private
+     */
+    static _enrichItemsWithIds(items, boops) {
+        if (!items || !Array.isArray(items)) {
+            return [];
+        }
+
+        if (!boops || !boops.boops || !Array.isArray(boops.boops)) {
+            console.warn('No boops configuration available for enrichment');
+            return items;
+        }
+
+        const enrichedItems = [];
+
+        for (const item of items) {
+            const enrichedItem = { ...item };
+
+            // Find matching box by slug
+            const box = boops.boops.find(b =>
+                b.slug === item.key ||
+                b.system_key === item.key ||
+                b.name.toLowerCase().replace(/\s+/g, '-') === item.key
+            );
+
+            if (box) {
+                enrichedItem.key_id = box.id.toString();
+
+                // Find matching option within the box
+                const option = box.ops?.find(op =>
+                    op.slug === item.value ||
+                    op.system_key === item.value ||
+                    op.name.toLowerCase().replace(/\s+/g, '-') === item.value
+                );
+
+                if (option) {
+                    enrichedItem.value_id = option.id.toString();
+                } else {
+                    console.warn(`Option not found for value: ${item.value} in box: ${item.key}`);
+                }
+            } else {
+                console.warn(`Box not found for key: ${item.key}`);
+            }
+
+            enrichedItems.push(enrichedItem);
+        }
+
+        return enrichedItems;
     }
 
     /**
