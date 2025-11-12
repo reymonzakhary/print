@@ -13,7 +13,7 @@ const MarginService = 'http://margin:3333/'
 const {
     combinations,
     getDividerByKey, formatPriceObject, mergePriceObject,
-    refactorPriceObject, groupByDividerWithCalcRefCopy, throwError, getUniqueIds, getUniqueIdsFromDirectIds,
+    refactorPriceObject, groupByDividerWithCalcRefCopy, throwError, slugsMatch, getUniqueIdsFromDirectIds,
     fetchDataKey, filterByCalcRef, calculatePages, getDefaultFormat,findDiscountSlot
 } = require('../Helpers/Helper')
 
@@ -129,15 +129,14 @@ module.exports = class FetchProduct {
         }
 
         try {
-
-            /** @type{{boxes, options}} */
-            const filtered = getUniqueIdsFromDirectIds(this.items);
-
+            /**
+             * @type {{boxes: ObjectId[], options: ObjectId[]}}
+             */
+            const filtered = await getUniqueIdsFromDirectIds(this.items, this.supplier_id);
 
             /** @type {Array<SupplierBox>||Aggregate}*/
-            // IDs are already ObjectIds from helper
             const boxIds = filtered.boxes;
-            
+
             const boxes = await SupplierBox.aggregate([
                 {
                     $match: {
@@ -162,11 +161,9 @@ module.exports = class FetchProduct {
                     }
                 }
             ]);
-            
-            // IDs are already ObjectIds from helper
+
             const optionIds = filtered.options;
 
-            
             const op = await SupplierOption.aggregate([
                 {
                     $match: {
@@ -191,8 +188,55 @@ module.exports = class FetchProduct {
                     }
                 }
             ]);
-            
 
+            // Normalize items - ensure all items have both slugs and IDs
+            this.items = this.items.map(item => {
+                const normalizedItem = { ...item };
+
+                // If item has key_id but no key (slug), find and add the slug
+                if (item.key_id && !item.key) {
+                    const box = boxes.find(b => b._id.toString() === item.key_id.toString());
+                    if (box) {
+                        normalizedItem.key = box.slug;
+                    } else {
+                        console.warn(`Box not found for key_id: ${item.key_id}`);
+                    }
+                }
+
+                // If item has key (slug) but no key_id, find and add the ID with fuzzy matching
+                if (item.key && !item.key_id) {
+                    const box = boxes.find(b => slugsMatch(b.slug, item.key));
+                    if (box) {
+                        normalizedItem.key_id = box._id.toString();
+                        normalizedItem.key = box.slug; // Update to canonical slug
+                    } else {
+                        console.warn(`Box not found for key: ${item.key}`);
+                    }
+                }
+
+                // If item has value_id but no value (slug), find and add the slug
+                if (item.value_id && !item.value) {
+                    const option = op.find(o => o._id.toString() === item.value_id.toString());
+                    if (option) {
+                        normalizedItem.value = option.slug;
+                    } else {
+                        console.warn(`Option not found for value_id: ${item.value_id}`);
+                    }
+                }
+
+                // If item has value (slug) but no value_id, find and add the ID with fuzzy matching
+                if (item.value && !item.value_id) {
+                    const option = op.find(o => slugsMatch(o.slug, item.value));
+                    if (option) {
+                        normalizedItem.value_id = option._id.toString();
+                        normalizedItem.value = option.slug; // Update to canonical slug
+                    } else {
+                        console.warn(`Option not found for value: ${item.value}`);
+                    }
+                }
+
+                return normalizedItem;
+            });
 
             let options = []
 
@@ -215,18 +259,38 @@ module.exports = class FetchProduct {
             }
 
             for (let item of this.items) {
-                // Since we're using direct IDs, match by ID instead of slug
-                let b = boxes.filter(box => box._id.toString() === item.key_id)
+                // Match by ID first, fallback to fuzzy slug matching if ID not available
+                let b = boxes.filter(box => {
+                    if (item.key_id) {
+                        return box._id.toString() === item.key_id.toString();
+                    } else if (item.key) {
+                        return slugsMatch(box.slug, item.key);
+                    }
+                    return false;
+                });
+
                 /** check if box exists */
                 if (b.length === 0) {
-                    throwError(this.error, 'We couldn\'t find the selected box ' + item.key_id + ' in system.');
+                    const identifier = item.key_id || item.key || 'unknown';
+                    throwError(this.error, 'We couldn\'t find the selected box ' + identifier + ' in system.');
                 }
 
-                let o = options.filter(opt => opt._id.toString() === item.value_id)
+                // Match by ID first, fallback to fuzzy slug matching if ID not available
+                let o = options.filter(opt => {
+                    if (item.value_id) {
+                        return opt._id.toString() === item.value_id.toString();
+                    } else if (item.value) {
+                        return slugsMatch(opt.slug, item.value);
+                    }
+                    return false;
+                });
+
                 /** check if option exists */
                 if (o.length === 0) {
-                    throwError(this.error, 'The selected option ' + item.value_id + ' isn\'t available any more.');
+                    const identifier = item.value_id || item.value || 'unknown';
+                    throwError(this.error, 'The selected option ' + identifier + ' isn\'t available any more.');
                 }
+
                 let option = o[0];
 
                 if (o[0].dynamic) {
@@ -235,13 +299,12 @@ module.exports = class FetchProduct {
 
                 this.object.push({
                     "key_link": b[0].linked,
-                    "divider": item.divider ??
-                        getDividerByKey(this.boops.boops, item.key),
+                    "divider": item.divider ?? getDividerByKey(this.boops.boops, item.key),
                     "appendage": b[0].appendage,
                     "dynamic": o[0].dynamic,
-                    "key": item.key,
+                    "key": item.key || b[0].slug,
                     "value_link": o[0].linked,
-                    "value": item.value,
+                    "value": item.value || o[0].slug,
                     "option_id": o[0]._id,
                     "box_calc_ref": b[0].calc_ref,
                     "option_calc_ref": option.additional?.calc_ref ? option.additional.calc_ref : null,

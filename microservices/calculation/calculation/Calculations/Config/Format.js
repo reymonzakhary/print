@@ -156,7 +156,6 @@ module.exports = class Format {
      * @param {Array} binding_direction - The array of binding directions.
      * @param {Array} folding - The array of folding options.
      * @param {Array} endpapers - The array of endpapers.
-     * @param {Array} sides - The array of sides elements.
      * @returns {void}
      */
     constructor(
@@ -173,8 +172,7 @@ module.exports = class Format {
         binding_method,
         binding_direction,
         folding,
-        endpapers,
-        sides
+        endpapers
     ) {
         this.category = category;
         this.props = props;
@@ -186,7 +184,6 @@ module.exports = class Format {
         this.range_override = range_override;
         this.pages = pages ?? [];
         this.cover = cover ?? [];
-        this.sides = sides ?? [];
         this.binding_method = this.getBindingMethod(binding_method)
         this.binding_direction = binding_direction?.length ? binding_direction[0]?.option_calc_ref: {};
         this.endpapers = endpapers;
@@ -440,17 +437,13 @@ module.exports = class Format {
         let net_width = width;
         let calc_width = net_width;
 
-
         switch (this.is_sides) {
             case true:
                 calc_width = ((this.num_pages / parseInt(this.binding_method.outside_divider??2)) * net_width);
-                console.log(this.num_pages, this.binding_method.outside_divider, calc_width)
                 break;
             case false:
                 let inside_divider = this.binding_method.inside_divider === undefined ?2:this.binding_method.inside_divider;
                 calc_width = this.num_pages? net_width * parseInt(inside_divider):net_width;
-
-                console.log(calc_width, this.num_pages, inside_divider)
         }
 
         return {
@@ -514,18 +507,14 @@ module.exports = class Format {
     {
         let calc_width = format.width;
 
-        console.log(">>>" ,calc_width, this.is_sides)
         switch (this.is_sides) {
             case true:
-                // console.log(">>> after " ,calc_width, this.is_sides, this.num_pages, this.binding_method.outside_divider)
                 calc_width = ((this.num_pages / parseInt(this.binding_method.outside_divider??2)) * calc_width);
                 break;
             case false:
                 let inside_divider = this.binding_method.inside_divider === undefined ?2:this.binding_method.inside_divider;
                 calc_width = this.num_pages? calc_width * parseInt(inside_divider) :calc_width
         }
-
-
         return {
             'is_sides' : this.is_sides,
             'pages' : this.num_pages,
@@ -626,12 +615,10 @@ module.exports = class Format {
 
         let pages = 0;
         this.num_pages = 0;
-
         if(this.cover.length > 0) {
             this.is_sides = true;
             if(this.cover[0].dynamic) {
                 pages = this.cover[0].option._.sides;
-                console.log(pages)
                 if(!isNumberOrStringNumber(pages)) {
                     this.error.message = "Sides parameter is required with dynamic option, and should be a integer.";
                     this.error.status = 422;

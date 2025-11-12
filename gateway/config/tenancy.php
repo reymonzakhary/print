@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 use App\Models\Domain;
 use App\Models\Tenant;
+use Database\Seeders\Tenants\TenantTableSeeder;
 
 return [
     'tenant_model' => Tenant::class,
@@ -193,7 +194,7 @@ return [
      * Parameters used by the tenants:seed command.
      */
     'seeder_parameters' => [
-        '--class' => 'TenantDatabaseSeeder', // root seeder class
+        '--class' => TenantTableSeeder::class, // root seeder class
         '--force' => true, // This needs to be true to seed tenant databases in production
     ],
 ];

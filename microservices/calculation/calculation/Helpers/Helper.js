@@ -1,5 +1,6 @@
 const crypto = require("crypto");
-
+const SupplierOption = require("../Models/SupplierOption.js");
+const SupplierBox = require("../Models/SupplierBox.js");
 const DEFAULT_FORMAT = {
     'a0': {
         'width': 841,
@@ -1401,37 +1402,6 @@ const getUniqueIds = (items, boops) => {
     };
 };
 
-/**
- * Extracts unique box and option IDs directly from items that contain key_id and value_id.
- * Returns MongoDB ObjectId arrays ready for aggregation queries.
- *
- * @param {Array} items - Array of items with key_id and value_id properties
- * @returns {{options: Array, boxes: Array}} Object containing arrays of unique ObjectIds
- */
-const getUniqueIdsFromDirectIds = (items) => {
-    const { ObjectId } = require('mongodb');
-
-    const box_ids = new Set();
-    const option_ids = new Set();
-
-    items.forEach((item) => {
-        if (item.key_id) {
-            try {
-                box_ids.add(new ObjectId(item.key_id));
-            } catch (e) { /* ignore invalid ids here; will be handled upstream */ }
-        }
-        if (item.value_id) {
-            try {
-                option_ids.add(new ObjectId(item.value_id));
-            } catch (e) { /* ignore invalid ids here; will be handled upstream */ }
-        }
-    });
-
-    return {
-        options: [...option_ids],
-        boxes: [...box_ids]
-    };
-};
 
 /**
  * Calculates the thickness of paper in millimeters based on the given GSM (Grams per square meter) and density.
@@ -1865,6 +1835,175 @@ const getDiscountFromContract = (contract, categoryId,quantity) => {
 
 }
 
+/**
+ * Normalize slug for comparison - handles variations like "4-4-full-color" vs "44-full-color"
+ * @param {string} slug
+ * @returns {string}
+ */
+const normalizeSlug = (slug) => {
+    if (!slug) return '';
+    // Remove extra dashes and normalize
+    return slug.toLowerCase().replace(/--+/g, '-').trim();
+};
+
+/**
+ * Generate slug variations for fuzzy matching
+ * @param {string} slug
+ * @returns {string[]}
+ */
+const generateSlugVariations = (slug) => {
+    if (!slug) return [];
+
+    const normalized = normalizeSlug(slug);
+    const variations = new Set([normalized]);
+
+    // Add variation with digits compacted (4-4 -> 44)
+    const compacted = normalized.replace(/(\d)-(\d)/g, '$1$2');
+    variations.add(compacted);
+
+    // Add variation with digits expanded (44 -> 4-4)
+    const expanded = normalized.replace(/(\d)(\d)/g, '$1-$2');
+    variations.add(expanded);
+
+    // Also add the original slug as-is
+    variations.add(slug.toLowerCase().trim());
+
+    return [...variations];
+};
+
+/**
+ * Check if two slugs match with fuzzy logic
+ * @param {string} slug1
+ * @param {string} slug2
+ * @returns {boolean}
+ */
+const slugsMatch = (slug1, slug2) => {
+    if (!slug1 || !slug2) return false;
+
+    const normalized1 = normalizeSlug(slug1);
+    const normalized2 = normalizeSlug(slug2);
+
+    // Direct match
+    if (normalized1 === normalized2) return true;
+
+    // Try matching without single digit separators (4-4 becomes 44)
+    const compact1 = normalized1.replace(/(\d)-(\d)/g, '$1$2');
+    const compact2 = normalized2.replace(/(\d)-(\d)/g, '$1$2');
+
+    if (compact1 === compact2) return true;
+
+    // Try matching with single digit separators added back
+    const expanded1 = normalized1.replace(/(\d)(\d)/g, '$1-$2');
+    const expanded2 = normalized2.replace(/(\d)(\d)/g, '$1-$2');
+
+    return expanded1 === expanded2;
+};
+
+/**
+ * Extract unique box and option IDs from items, supporting both old slug format and new ID format
+ * @param {Array} items - Array of items with either slugs or IDs
+ * @param {string|ObjectId} supplier_id - Supplier/tenant ID for slug lookups
+ * @returns {Promise<{boxes: ObjectId[], options: ObjectId[]}>}
+ */
+const getUniqueIdsFromDirectIds = async (items, supplier_id) => {
+    const { ObjectId } = require('mongodb');
+
+    const box_ids = new Set();
+    const option_ids = new Set();
+    const box_slugs = new Set();
+    const option_slugs = new Set();
+
+    // Check what format we're dealing with and collect slugs/IDs
+    items.forEach((item) => {
+        // Handle new format with IDs
+        if (item.key_id) {
+            try {
+                box_ids.add(new ObjectId(item.key_id));
+            } catch (e) {
+                console.warn('Invalid key_id:', item.key_id);
+            }
+        } else if (item.key) {
+            // Old format - collect slug for later lookup
+            box_slugs.add(item.key);
+        }
+
+        if (item.value_id) {
+            try {
+                option_ids.add(new ObjectId(item.value_id));
+            } catch (e) {
+                console.warn('Invalid value_id:', item.value_id);
+            }
+        } else if (item.value) {
+            // Old format - collect slug for later lookup
+            option_slugs.add(item.value);
+        }
+    });
+
+    // If we have slugs (old format), we need to query the database
+    if (box_slugs.size > 0 || option_slugs.size > 0) {
+        if (!supplier_id) {
+            throw new Error('supplier_id is required for slug-based lookups');
+        }
+
+        // Query boxes by slug with fuzzy matching
+        if (box_slugs.size > 0) {
+            // Generate all possible slug variations
+            const allBoxSlugVariations = new Set();
+            for (const slug of box_slugs) {
+                const variations = generateSlugVariations(slug);
+                variations.forEach(v => allBoxSlugVariations.add(v));
+            }
+
+            // Query with all variations
+            const boxes = await SupplierBox.find({
+                tenant_id: supplier_id,
+                slug: { $in: [...allBoxSlugVariations] }
+            }).select('_id slug').lean();
+
+            // For each found box, check if it matches any of our original slugs
+            boxes.forEach(box => {
+                for (const originalSlug of box_slugs) {
+                    if (slugsMatch(box.slug, originalSlug)) {
+                        box_ids.add(box._id);
+                        break;
+                    }
+                }
+            });
+        }
+
+        // Query options by slug with fuzzy matching
+        if (option_slugs.size > 0) {
+            // Generate all possible slug variations
+            const allOptionSlugVariations = new Set();
+            for (const slug of option_slugs) {
+                const variations = generateSlugVariations(slug);
+                variations.forEach(v => allOptionSlugVariations.add(v));
+            }
+
+            // Query with all variations
+            const options = await SupplierOption.find({
+                tenant_id: supplier_id,
+                slug: { $in: [...allOptionSlugVariations] }
+            }).select('_id slug').lean();
+
+            // For each found option, check if it matches any of our original slugs
+            options.forEach(option => {
+                for (const originalSlug of option_slugs) {
+                    if (slugsMatch(option.slug, originalSlug)) {
+                        option_ids.add(option._id);
+                        break;
+                    }
+                }
+            });
+        }
+    }
+
+    return {
+        options: [...option_ids],
+        boxes: [...box_ids]
+    };
+};
+
 module.exports = {
     generateList, crossMachine,
     combinations, mergeByDynamicKey,
@@ -1875,6 +2014,6 @@ module.exports = {
     isNumber, calculateArea, formatPriceObject, calculateDeliveryDay, formatDate, mergePriceObject,
     refactorPriceObject, throwError, isEmptyString, getUniqueIds, getUniqueIdsFromDirectIds, calculatePaperThickness,calculateCoverWidth,
     calculateFit, fetchDataKey, filterByCalcRef,calculatePages, isNumberOrStringNumber, rangeListFromCategory,getDefaultFormat,
-    calculateDeliveryDays, findDiscountSlot, getDiscountFromContract
+    calculateDeliveryDays, findDiscountSlot, getDiscountFromContract, slugsMatch
 
 };

@@ -59,8 +59,8 @@ return [
 
     'storage' => [
         'database' => [
-            'connection' => env('DB_CONNECTION', 'mysql'),
-            'tenant' => env('TENANCY_DEFAULT_CONNECTION', 'system'),
+            'connection' => env('DB_CONNECTION', 'pgsql'),
+            'tenant' => env('TENANCY_DEFAULT_CONNECTION', 'tenant'),
         ],
     ],
 

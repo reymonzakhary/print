@@ -1,35 +1,46 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const Schema = mongoose.Schema;
-
+const ObjectId = Schema.Types.ObjectId
 
 const SupplierBoxSchema = Schema({
-    iso:{type: String, required: true},
     row_id:{type: String, required: false},
     sort:{type: Number, required: false, default: 0},
     tenant_id:{type: String, required: true},
     tenant_name:{type: String, required: false},
     sku:{type: String, required: false, default:''},
-    name:{type: String }, // = db.String(required=True, default='', unique_with=('tenant_id'))
-    display_name:{type: [], required: true}, // = db.[](required=True, default=[])
-    system_key:{type: String, required: true}, // = db.String(required=True)
-    input_type:{type: String, required: false}, // = db.String(required=False, default='')
-    calc_ref: {type: String, required: false},
-    incremental:{type: Boolean, required: true}, // = db.Boolean(required=True, default=False)
-    select_limit:{type: Number, required: true}, // = db.Number(required=True, default=0)
-    option_limit:{type: Number, required: true}, // = db.Number(required=True, default=0)
-    sqm:{type: Boolean, required: true}, // = db.Boolean(required=True, default=False)
-    slug:{type: String, required: true}, // = db.String(required=True, default='', unique_with=('tenant_id'))
-    appendage:{type: String, required: true}, // = db.String(required=True, default='', unique_with=('tenant_id'))
-    calculation_type:{type: String, required: true}, // = db.String(required=True, default='', unique_with=('tenant_id'))
-    // linked:{type: ReferenceField}, // = db.ReferenceField(Box)
-    description:{type: String, required: false}, // = db.String(required=False, default='')
-    media:{type: []}, // = db.[]()
-    shareable:{type: Boolean, default: true}, // = db.Boolean(default=True)
-    published:{type: Boolean, default: true}, // = db.Boolean(default=True)
-    created_at:{type: Date, required: true}, // = db.DateTimeField(default=datetime.datetime.now, required=True)
-    // additional:{type: DictField, required: true}, // = db.DictField(required=False, default={})
-    additional:{type: String, required: true},
+    name:{type: String },
+    source_slug:{type: String, required: false, default:'' },
+    display_name: { type: [Object], required: true, default: [] },
+    system_key:{type: String, required: true},
+    input_type:{type: String, required: false},
+    calc_ref:{type: String, required: false},
+    incremental:{type: Boolean, required: true,default: false},
+    select_limit:{type: Number, required: false,default: 0},
+    option_limit:{type: Number, required: false,default: 0},
+    sqm:{type: Boolean, required: true},
+    appendage:{type: Boolean, required: true, default: false},
+    calculation_type:{type: String, required: false, default:''},
+    slug:{type: String, required: true},
+    linked: { type: ObjectId, required: false, index: true , default: null},
+    description:{type: String, required: false},
+    media:{type: Array, required: false, default: []},
+    shareable:{type: Boolean, default: true},
+    start_cost:{type: String, required: false, default: 0},
+    published:{type: Boolean, default: true},
+    created_at: { type: Date, default: Date.now },
+    additional:{type: Array, required: false},
+}, {
+    versionKey: false // You should be aware of the outcome after set to false
 });
+
+SupplierBoxSchema.pre('save', function(next) {
+    if (this.name) {
+        this.slug = slugify(this.name, {lower: true});
+        this.system_key = slugify(this.name, { lower: true });
+    }
+    next();
+})
 
 
 module.exports = SupplierBox = mongoose.model("supplier_boxes", SupplierBoxSchema);
