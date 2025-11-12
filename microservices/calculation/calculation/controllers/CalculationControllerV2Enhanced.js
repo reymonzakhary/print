@@ -59,7 +59,9 @@ module.exports = class CalculationControllerV2Enhanced {
      * @returns {Promise<Response>} JSON response
      */
     static async calculate(req, res) {
+        console.log(req.body)
         try {
+
             const {
                 slug,
                 supplier_id,
@@ -74,11 +76,11 @@ module.exports = class CalculationControllerV2Enhanced {
 
             // Validate required fields
             if (!slug || !supplier_id || !quantity || !format) {
-                return res.status(400).json({
+                return res.status(422).json({
                     error: {
                         message: 'Missing required fields: slug, supplier_id, quantity, format',
                         code: 'VALIDATION_ERROR',
-                        status: 400
+                        status: 422
                     }
                 });
             }

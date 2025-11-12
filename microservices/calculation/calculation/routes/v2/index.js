@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const CalculationController = require('../../controllers/CalculationControllerV2Enhanced');
+
+const calculationRoutes = require('./calculations');
+
 
 /**
  * V2 API Routes
@@ -50,7 +52,7 @@ const CalculationController = require('../../controllers/CalculationControllerV2
  *   "internal": false
  * }
  */
-router.post('/calculate', CalculationController.calculate);
+// router.post('/calculate', CalculationController.calculate);
 
 /**
  * POST /v2/calculate/internal
@@ -58,7 +60,7 @@ router.post('/calculate', CalculationController.calculate);
  * Internal calculation (includes margins and profit)
  * Same request format as /calculate but forces internal=true
  */
-router.post('/calculate/internal', CalculationController.calculateInternal);
+// router.post('/calculate/internal', CalculationController.calculateInternal);
 
 /**
  * POST /v2/calculate/shop
@@ -66,7 +68,7 @@ router.post('/calculate/internal', CalculationController.calculateInternal);
  * Shop calculation (excludes internal margins and profit)
  * Same request format as /calculate but forces internal=false
  */
-router.post('/calculate/shop', CalculationController.calculateShop);
+// router.post('/calculate/shop', CalculationController.calculateShop);
 
 /**
  * POST /v2/calculate/price-list
@@ -81,7 +83,7 @@ router.post('/calculate/shop', CalculationController.calculateShop);
  *
  * Returns prices for each quantity in the array
  */
-router.post('/calculate/price-list', CalculationController.calculatePriceList);
+// router.post('/calculate/price-list', CalculationController.calculatePriceList);
 
 /**
  * GET /v2/calculate/machine-types
@@ -89,6 +91,11 @@ router.post('/calculate/price-list', CalculationController.calculatePriceList);
  * Get available machine types and their configuration requirements
  * Useful for building dynamic forms
  */
-router.get('/calculate/machine-types', CalculationController.getMachineTypes);
+// router.get('/calculate/machine-types', CalculationController.getMachineTypes);
 
+
+// Mount route modules
+router.use('/', calculationRoutes);
+
+module.exports = router;
 module.exports = router;

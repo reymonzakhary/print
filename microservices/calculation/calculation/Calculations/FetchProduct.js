@@ -640,7 +640,7 @@ module.exports = class FetchProduct {
                     this.binding_direction,
                     folding,
                     this.endpapers,
-                    sides
+                    // sides
                 ).calculate();
 
                 if (this.format.status !== 200) {

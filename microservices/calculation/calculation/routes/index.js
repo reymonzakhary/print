@@ -13,14 +13,15 @@ const router = express.Router();
  * Both versions work simultaneously - no breaking changes.
  */
 
-const v1Routes = require('./v1');
+// const v1Routes = require('./v1');
 const v2Routes = require('./v2');
 
 // Mount V1 routes at root level for backward compatibility
-router.use('/', v1Routes);
+// router.use('/', v1Routes);
 
 // Mount V2 routes at /v2 prefix
-router.use('/v2', v2Routes);
+router.use('/', v2Routes);
+
 
 module.exports = router;
 
