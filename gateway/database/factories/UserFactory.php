@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 /** @var Factory $factory */
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Str;

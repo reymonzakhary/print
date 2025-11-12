@@ -3,9 +3,9 @@
 namespace App\Listeners\System;
 
 use App\Events\System\ClientUpdatedEvent;
-use App\Models\Tenants\Npace;
-use App\Models\Tenants\Permission;
-use App\Models\Tenants\Role;
+use App\Models\Tenant\Npace;
+use App\Models\Tenant\Permission;
+use App\Models\Tenant\Role;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;

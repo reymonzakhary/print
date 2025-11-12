@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PrintingMethods\PrintingMethodStoreRequest;
 use App\Http\Requests\PrintingMethods\PrintingMethodUpdateRequest;
 use App\Http\Resources\PrintingMethods\PrintingMethodResource;
-use App\Models\Tenants\PrintingMethod;
+use App\Models\Tenant\PrintingMethod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +30,11 @@ class PrintingMethodController extends Controller
 
     /**
      * List of printing methods
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
 	 * "data": [
@@ -71,12 +71,12 @@ class PrintingMethodController extends Controller
 
 
     /**
-     * show printing Method 
-     * 
+     * show printing Method
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -90,7 +90,7 @@ class PrintingMethodController extends Controller
      * 	"message": null,
      * 	"status": 200
      * }
-     * 
+     *
      * @param PrintingMethod $printingMethod
      * @return PrintingMethodResource
      */
@@ -108,11 +108,11 @@ class PrintingMethodController extends Controller
 
     /**
      * store printing method
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 201
      * {
      * 	"data": {
@@ -126,7 +126,7 @@ class PrintingMethodController extends Controller
      * 	"message": null,
      * 	"status": 201
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required.",
@@ -136,7 +136,7 @@ class PrintingMethodController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @return PrintingMethodResource
      */
     public function store(
@@ -157,8 +157,8 @@ class PrintingMethodController extends Controller
 
 
     /**
-     * update printing method 
-     * 
+     * update printing method
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
@@ -176,13 +176,13 @@ class PrintingMethodController extends Controller
      * 	"message": "Printing method has been updated successfully.",
      * 	"status": 200
      * }
-     * 
+     *
      * @response 400
      * {
      *  "message": "We couldn\'t update this printing method, please try again later.",
      *  "status": 400
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required.",
@@ -192,7 +192,7 @@ class PrintingMethodController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @param PrintingMethodUpdateRequest $request
      * @param PrintingMethod              $printingMethod
      * @return JsonResponse|PrintingMethodResource
@@ -219,23 +219,23 @@ class PrintingMethodController extends Controller
 
     /**
      * delete printing method
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      * 	"message": "Printing method has been deleted successfully.",
      * 	"status": 200
      * }
-     *  
+     *
      * @response 400
      * {
      * 	"message": "We couldn't delete this printing method, please try again later.",
      * 	"status": 400
      * }
-     * 
+     *
      * @param PrintingMethod $printingMethod
      * @return JsonResponse
      */

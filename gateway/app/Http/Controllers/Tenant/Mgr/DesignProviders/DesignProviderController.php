@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\DesignProviders;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DesignProviders\UpdateDesignProviderRequest;
 use App\Http\Resources\DesignProviders\DesignProviderResource;
-use App\Models\Tenants\DesignProvider;
+use App\Models\Tenant\DesignProvider;
 use App\Repositories\DesignProviderRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

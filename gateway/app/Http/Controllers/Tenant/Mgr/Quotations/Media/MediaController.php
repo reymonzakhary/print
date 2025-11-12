@@ -7,8 +7,8 @@ use Alexusmai\LaravelFileManager\Events\FilesUploading;
 use App\Events\Tenant\Order\Media\DeleteOrderMediaEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Quotation\Media\StoreQuotationMediaRequest;
-use App\Models\Tenants\Media\FileManager;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Media\FileManager;
+use App\Models\Tenant\Quotation;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

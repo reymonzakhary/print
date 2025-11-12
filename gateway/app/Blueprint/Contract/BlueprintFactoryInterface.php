@@ -2,7 +2,7 @@
 
 namespace App\Blueprint\Contract;
 
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 
 interface BlueprintFactoryInterface
 {

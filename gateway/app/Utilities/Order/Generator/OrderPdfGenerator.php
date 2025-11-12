@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Utilities\Order\Generator;
 
 use App\Facades\Settings;
-use App\Models\Tenants\Media\FileManager;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Media\FileManager;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Setting;
 use Barryvdh\DomPDF\PDF as DomPdf;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;

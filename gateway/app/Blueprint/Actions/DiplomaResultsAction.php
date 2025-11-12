@@ -4,8 +4,8 @@ namespace App\Blueprint\Actions;
 
 use App\Blueprint\Actions\Traits\HasReportingTraits;
 use App\Blueprint\Contract\BluePrintActionContract;
-use App\Models\Tenants\CartVariation;
-use App\Models\Tenants\User;
+use App\Models\Tenant\CartVariation;
+use App\Models\Tenant\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

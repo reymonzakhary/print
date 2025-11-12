@@ -2,7 +2,7 @@
 
 namespace App\Observers\Products;
 
-use App\Models\Tenants\Variation;
+use App\Models\Tenant\Variation;
 
 class VariationObserver
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Options;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Options\OptionResource;
-use App\Models\Tenants\Option;
+use App\Models\Tenant\Option;
 use Symfony\Component\HttpFoundation\Response;
 
 class OptionTranslationController extends Controller

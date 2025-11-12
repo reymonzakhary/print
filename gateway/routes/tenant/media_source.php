@@ -3,6 +3,8 @@
 
 // check role management
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:media-sources', 'namespace' => 'MediaSources'], function () {
     Route::resource('/media-sources', 'MediaSourceController', [
         'names' => [

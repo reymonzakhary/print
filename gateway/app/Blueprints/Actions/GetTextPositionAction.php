@@ -4,8 +4,8 @@ namespace App\Blueprints\Actions;
 
 use App\Blueprints\Contracts\Abstracts\Action;
 use App\Blueprints\Contracts\ActionContractInterface;
-use App\Models\Tenants\DesignProviderTemplate;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\DesignProviderTemplate;
+use App\Models\Tenant\Media\FileManager;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

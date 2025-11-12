@@ -30,23 +30,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $this->commands([
-            InstallCommand::class,
-            ClientCommand::class,
-            KeysCommand::class,
-        ]);
+        // Only configure Passport for central/non-tenant context
+        if (!tenancy()->initialized) {
+            // Enable password grant
+            Passport::enablePasswordGrant();
 
-        // Universal Mode: Use custom models that automatically add tenant_id
-        Passport::useTokenModel(Token::class);
-        Passport::useAuthCodeModel(AuthCode::class);
+            $this->commands([
+                InstallCommand::class,
+                ClientCommand::class,
+                KeysCommand::class,
+            ]);
 
-        // Token lifetimes
-        Passport::tokensExpireIn(now()->addDays(5));
-        Passport::refreshTokensExpireIn(now()->addDays(10));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+            // Universal Mode: Use custom models that automatically add tenant_id
+            Passport::useTokenModel(Token::class);
+            Passport::useAuthCodeModel(AuthCode::class);
 
-        // Ignore migrations - we have custom migrations
-        Passport::ignoreMigrations();
+            // Token lifetimes
+            Passport::tokensExpireIn(now()->addDays(5));
+            Passport::refreshTokensExpireIn(now()->addDays(10));
+            Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+
+            // Ignore migrations - we have custom migrations
+            Passport::ignoreMigrations();
+        }
     }
 }
-

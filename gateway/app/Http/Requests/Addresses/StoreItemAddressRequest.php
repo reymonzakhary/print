@@ -4,11 +4,11 @@ namespace App\Http\Requests\Addresses;
 
 use App\Facades\Context;
 use App\Facades\Settings;
-use App\Models\Tenants\Address;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Member;
-use App\Models\Tenants\Team;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Member;
+use App\Models\Tenant\Team;
+use App\Models\Tenant\User;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\RequiredIf;

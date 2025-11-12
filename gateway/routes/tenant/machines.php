@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:print-assortments,machines', 'namespace' => 'Machines'], function () {
     Route::resource('/machines', 'MachineController', [
         'names' => [

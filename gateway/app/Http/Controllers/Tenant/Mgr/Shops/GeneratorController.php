@@ -6,7 +6,7 @@ use App\Blueprint\BluePrintList;
 use App\Blueprint\BluePrintNode;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shops\GeneratorRequest;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Sku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 

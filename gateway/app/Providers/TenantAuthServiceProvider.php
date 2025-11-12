@@ -6,13 +6,13 @@ use App\Actions\Migration\TenancyMigrationAction;
 use App\Facades\Settings;
 use App\Foundation\FileManager\Contracts\FileManagerInterface;
 use App\Foundation\FileManager\FileManagerFactory;
-use App\Models\Tenants\Blueprint as ModelBlueprint;
-use App\Models\Tenants\Box;
-use App\Models\Tenants\Brand;
-use App\Models\Tenants\Category;
-use App\Models\Tenants\Option;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Blueprint as ModelBlueprint;
+use App\Models\Tenant\Box;
+use App\Models\Tenant\Brand;
+use App\Models\Tenant\Category;
+use App\Models\Tenant\Option;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Product;
 use App\Observers\Blueprints\BlueprintObserver;
 use App\Observers\Custom\Boxes\BoxObserver;
 use App\Observers\Custom\Brands\BrandObserver;
@@ -37,7 +37,11 @@ class TenantAuthServiceProvider extends ServiceProvider
             return new FileManagerFactory();
         });
 
-        App::setLocale(Str::lower(Str::lower(Settings::managerLanguage('en')?->value)));
+        try {
+            App::setLocale(Str::lower(Settings::managerLanguage('en')?->value ?? 'en'));
+        } catch (\Exception $e) {
+            App::setLocale('en');
+        }
     }
 
     /**
@@ -48,6 +52,11 @@ class TenantAuthServiceProvider extends ServiceProvider
      */
     public function boot(TenancyMigrationAction $migration)
     {
+        // Only run if tenant is initialized
+        if (!tenancy()->initialized) {
+            return;
+        }
+
         $migration->register(__DIR__ . '/../Database/Migrations');
 
         /**
@@ -72,4 +81,3 @@ class TenantAuthServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
     }
 }
-

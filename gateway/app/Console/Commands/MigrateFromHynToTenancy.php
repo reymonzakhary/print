@@ -23,7 +23,7 @@ class MigrateFromHynToTenancy extends Command
         $this->info('========================================');
 
         // Get all Hyn websites with their hostnames
-        $websites = Website::with('hostnames')->get();
+        $websites = Website::with('hostname')->get();
 
         $this->info("Found {$websites->count()} websites to migrate");
         $this->newLine();
@@ -54,27 +54,30 @@ class MigrateFromHynToTenancy extends Command
                 if (!$dryRun) {
                     DB::beginTransaction();
 
-                    $hostname_data = $website->hostnames->first();
-                    $custom_filed_array = json_decode($hostname_data?->custom_fields, true) ?? [];
+                    $hostname_data = $website->hostname->first();
+                    $custom_filed_array = $hostname_data?->custom_fields->toArray();
                     $email = $website->uuid . '@example.com';
 
                     // Create or update tenant
-                    $tenant = Tenant::updateOrCreate(
-                        ['id' => $website->uuid],
-                        [
-                            'email' => $email,
-                            'configure' => $website->configure,
-                            'supplier' => $website->supplier,
-                            'external' => $website->external,
-                            'data' => $custom_filed_array
-                        ]
-                    );
+                    $tenant = Tenant::unguarded(function () use ($website, $email, $custom_filed_array) {
+                        return Tenant::updateOrCreate(
+                            ['id' => $website->uuid],
+                            [
+                                'id' => $website->uuid, // Include ID in both arrays
+                                'email' => $email,
+                                'configure' => $website->configure,
+                                'supplier' => $website->supplier,
+                                'external' => $website->external,
+                                'data' => $custom_filed_array
+                            ]
+                        );
+                    });
 
                     $this->info("  ✅ Tenant created/updated: {$tenant->id}");
 
                     // Create domains for this tenant
                     $domainCount = 0;
-                    foreach ($website->hostnames as $hostname) {
+                    foreach ($website->hostname as $hostname) {
                         $domain = Domain::updateOrCreate(
                             [
                                 'domain' => $hostname->fqdn,
@@ -109,7 +112,7 @@ class MigrateFromHynToTenancy extends Command
 
                 } else {
                     $this->info("  [DRY RUN] Would create tenant: {$website->uuid}");
-                    foreach ($website->hostnames as $hostname) {
+                    foreach ($website->hostname as $hostname) {
                         $this->info("  [DRY RUN] Would add domain: {$hostname->fqdn}");
                     }
                 }

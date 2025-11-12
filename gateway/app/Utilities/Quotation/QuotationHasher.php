@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Utilities\Quotation;
 
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Quotation;
 use Illuminate\Contracts\Hashing\Hasher;
 use Psr\Log\LoggerInterface;
 

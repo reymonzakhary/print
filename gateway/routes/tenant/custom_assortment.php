@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Tenant\Mgr\Custom\Boxes\BoxTranslationController;
+use App\Http\Controllers\Tenant\Mgr\Custom\Brands\BrandTranslationController;
+use App\Http\Controllers\Tenant\Mgr\Custom\Categories\CategoryTranslationController;
+use App\Http\Controllers\Tenant\Mgr\Custom\Options\OptionTranslationController;
+use App\Http\Controllers\Tenant\Mgr\Custom\Products\ProductSelector;
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:custom-assortments,brands', 'namespace' => 'Custom\Brands'], function () {
     Route::resource('/brands', 'BrandController', [
         'names' => [
@@ -12,7 +19,7 @@ Route::group(['middleware' => 'grant:custom-assortments,brands', 'namespace' => 
     ])->except([
         'create', 'edit'
     ]);
-    Route::get('/brands/{brand}/translations', BrandTranslationController::class)
+    Route::get('/brands/{brand}/translations', [BrandTranslationController::class, '__invoke'])
         ->name('custom-assortments-brands-list');
 });
 
@@ -28,7 +35,7 @@ Route::group(['middleware' => 'grant:custom-assortments,options', 'namespace' =>
     ])->except([
         'create', 'edit'
     ]);
-    Route::get('/options/{option}/translations', OptionTranslationController::class)
+    Route::get('/options/{option}/translations', [OptionTranslationController::class, '__invoke'])
         ->name('custom-assortments-options-list');
 });
 
@@ -45,7 +52,7 @@ Route::group(['middleware' => 'grant:custom-assortments,boxes', 'namespace' => '
     ])->except([
         'create', 'edit'
     ]);
-    Route::get('/boxes/{box}/translations', BoxTranslationController::class)
+    Route::get('/boxes/{box}/translations', [BoxTranslationController::class, '__invoke'])
         ->name('custom-assortments-boxes-list');
 });
 
@@ -62,7 +69,7 @@ Route::group(['middleware' => 'grant:custom-assortments,categories', 'namespace'
         'create', 'edit'
     ]);
 
-    Route::get('/categories/{category}/translations', CategoryTranslationController::class)
+    Route::get('/categories/{category}/translations', [CategoryTranslationController::class, '__invoke'])
         ->name('custom-assortments-categories-list');
 });
 
@@ -122,7 +129,7 @@ Route::group(['middleware' => 'grant:custom-assortments,products', 'namespace' =
      * product selector
      */
 
-    Route::get('/products/{product}/selector/{option?}', ProductSelector::class)->name('custom-assortments-products-list');
+    Route::get('/products/{product}/selector/{option?}', [ProductSelector::class, '__invoke'])->name('custom-assortments-products-list');
 
 
     Route::group(['prefix' => 'products', 'namespace' => 'Imports'], function () {

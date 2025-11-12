@@ -4,8 +4,8 @@ namespace App\Foundation\FileManager;
 
 use Alexusmai\LaravelFileManager\Services\ConfigService\ConfigRepository;
 use App\Foundation\Media\MediaType;
-use App\Models\Tenants\Media\FileManager;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Media\FileManager;
+use App\Models\Tenant\User;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;

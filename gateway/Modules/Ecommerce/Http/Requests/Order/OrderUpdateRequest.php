@@ -3,7 +3,7 @@
 namespace Modules\Ecommerce\Http\Requests\Order;
 
 use App\Events\Tenant\Order\UpdateOrderEvent;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use App\Rules\Addresses\AddressBlongsToUserRule;
 use App\Rules\Orders\ContextValidationRule;
 use App\Rules\Orders\UserBelongsToContextRule;

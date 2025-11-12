@@ -15,9 +15,9 @@ class DefaultConfigRepository implements PluginConfigRepository
 
     /**
      * Load instance of the website
-     * @var \Hyn\Tenancy\Models\Hostname|Hostname $hostname
+     * @var Domain $hostname
      */
-    public \Hyn\Tenancy\Models\Hostname|Hostname $hostname;
+    public Domain $hostname;
 
 
     /**
@@ -81,11 +81,11 @@ class DefaultConfigRepository implements PluginConfigRepository
     /**
      * Update the website for the application.
      *
-     * @param \Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname The website model to update
+     * @param Domain|int|null $hostname The website model to update
      * @return self
      * @throws ValidationException
      */
-    public function update(\Hyn\Tenancy\Models\Hostname|Hostname|int|null $hostname = null): self
+    public function update(Domain|int|null $hostname = null): self
     {
 
         $this->hostname = $this->resolveHostname($hostname);
@@ -98,18 +98,18 @@ class DefaultConfigRepository implements PluginConfigRepository
     /**
      * Resolve hostname from various input types
      *
-     * @param int|\Hyn\Tenancy\Models\Hostname|Hostname|null $hostname
-     * @return \Hyn\Tenancy\Models\Hostname|null
+     * @param int|Domain|null $hostname
+     * @return Domain|null
      * @throws ValidationException
      */
     private function resolveHostname(
-        int|\Hyn\Tenancy\Models\Hostname|Hostname|null $hostname
-    ): ?\Hyn\Tenancy\Models\Hostname
+        int|Domain|null $hostname
+    ): ?Domain
     {
         if ($hostname === null) {
             // Try to get current hostname from tenancy context
             try {
-                $website = \Hyn\Tenancy\Facades\TenancyFacade::website();
+                $website = \domain();
                 if ($website) {
                     return $website->domains()->first();
                 }

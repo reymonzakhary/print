@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Foundation\Media\Traits;
 
-use App\Models\Tenants\Media\FileManager as FileManagerModel;
+use App\Models\Tenant\Media\FileManager as FileManagerModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use LogicException;

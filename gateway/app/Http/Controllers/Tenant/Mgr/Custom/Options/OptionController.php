@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Options\StoreOptionRequest;
 use App\Http\Requests\Options\UpdateOptionRequest;
 use App\Http\Resources\Options\OptionResource;
-use App\Models\Tenants\Option;
+use App\Models\Tenant\Option;
 use App\Scoping\Scopes\Boxes\BoxScope;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;

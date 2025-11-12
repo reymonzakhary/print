@@ -3,7 +3,7 @@
 namespace Database\Seeders\tenants;
 
 use App\Events\PrintingMethods\CreatePrintingMethodEvent;
-use App\Models\Tenants\PrintingMethod;
+use App\Models\Tenant\PrintingMethod;
 use Illuminate\Database\Seeder;
 
 class PrintingMethods extends Seeder

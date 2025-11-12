@@ -2,8 +2,8 @@
 
 namespace App\Events\Tenant\DesignTemplate;
 
-use App\Models\Tenants\DesignProviderTemplate;
-use App\Models\Tenants\User;
+use App\Models\Tenant\DesignProviderTemplate;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

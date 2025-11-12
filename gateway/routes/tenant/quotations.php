@@ -19,7 +19,7 @@ Route::group(['middleware' => 'grant:quotations', 'namespace' => 'Quotations'], 
     });
 
     Route::group(['namespace' => 'Render'], function () {
-        Route::get('quotations/{quotation}/render/pdf', RenderPdfController::class)
+        Route::get('quotations/{quotation}/render/pdf', [RenderPdfController::class, '__invoke'])
             ->name('quotations-read');
     });
 
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'grant:quotations', 'namespace' => 'Quotations'], 
      * discounts orders
      */
     Route::group(['middleware' => 'grant:quotations,discount', 'namespace' => 'Discounts'], function () {
-        Route::post('quotations/{quotation}/discounts', 'DiscountController')->name('quotations-discount-create');
+        Route::post('quotations/{quotation}/discounts', 'DiscountController@__invoke')->name('quotations-discount-create');
     });
 
     Route::group(['middleware' => 'grant:quotations,services', 'namespace' => 'Services'], function () {

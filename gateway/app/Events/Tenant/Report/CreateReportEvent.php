@@ -2,7 +2,7 @@
 
 namespace App\Events\Tenant\Report;
 
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

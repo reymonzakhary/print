@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Quotations\Render;
 
 use App\Actions\PriceAction\CalculationAction;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Quotation;
 use App\Http\Resources\Quotations\QuotationResource;
 use App\Utilities\Quotation\Generator\QuotationPdfGenerator;
 use Illuminate\Http\Request;

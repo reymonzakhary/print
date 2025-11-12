@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Alexusmai\LaravelFileManager\Middleware\FileManagerACL as FMACL;
 use Alexusmai\LaravelFileManager\Services\ACLService\ACL;
 use App\Http\Requests\FileManager\RequestValidator;
-use App\Models\Tenants\Media\FileManager as FileManagerModel;
+use App\Models\Tenant\Media\FileManager as FileManagerModel;
 use Closure;
 use Hyn\Tenancy\Website\Directory;
 use Illuminate\Http\Request;

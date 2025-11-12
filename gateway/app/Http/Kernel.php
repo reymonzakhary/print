@@ -14,12 +14,10 @@ use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RestrictionMiddleware;
 use App\Http\Middleware\SetDynamicUserMiddleware;
-use App\Http\Middleware\StartSessionReadonly;
 use App\Http\Middleware\SwitchConnectionServiceProvider;
 use App\Http\Middleware\SystemAuthGates;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\VerifyCompanyIAM;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
@@ -40,6 +38,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel
 {
+
     /**
      * The application's global HTTP middleware stack.
      *
@@ -48,14 +47,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        // Stancl/tenancy middleware MUST run before custom tenant middleware
-        // This initializes the tenant context so tenant() and domain() helpers work
-        \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-        \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
-
-        // Custom tenant middleware runs after tenancy is initialized
-        SwitchConnectionServiceProvider::class,
-
         // \App\Http\Middleware\TrustHosts::class,
         TrustProxies::class,
         CheckForMaintenanceMode::class,
@@ -93,6 +84,14 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // Stancl/tenancy middleware MUST run before custom tenant middleware
+            // This initializes the tenant context so tenant() and domain() helpers work
+//            \Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain::class,
+//            \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+
+            // Custom tenant middleware runs after tenancy is initialized
+            SwitchConnectionServiceProvider::class,
+
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
             StartSession::class,

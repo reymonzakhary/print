@@ -6,7 +6,7 @@ namespace App\Foundation\Media\Traits;
 
 use App\Events\Tenant\FM\RenameEvent;
 use App\Foundation\Media\MediaType;
-use App\Models\Tenants\Media\FileManager as FileManagerModel;
+use App\Models\Tenant\Media\FileManager as FileManagerModel;
 use Hyn\Tenancy\Contracts\Website;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

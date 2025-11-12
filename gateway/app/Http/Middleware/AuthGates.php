@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Tenants\Member;
-use App\Models\Tenants\Role;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Member;
+use App\Models\Tenant\Role;
+use App\Models\Tenant\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;

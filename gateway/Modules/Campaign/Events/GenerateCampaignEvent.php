@@ -3,8 +3,8 @@
 namespace Modules\Campaign\Events;
 
 //use App\Models\Tenants\Campaign;
-use App\Models\Tenants\DesignProviderTemplate;
-use App\Models\Tenants\User;
+use App\Models\Tenant\DesignProviderTemplate;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

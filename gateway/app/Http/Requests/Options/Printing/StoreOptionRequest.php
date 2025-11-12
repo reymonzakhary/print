@@ -6,7 +6,7 @@ namespace App\Http\Requests\Options\Printing;
 
 use App\Enums\CalculationMethod;
 use App\Http\Requests\MediaImageValidatorTrait;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Rule;
@@ -95,17 +95,17 @@ final class StoreOptionRequest extends FormRequest
             'start_on' => [
                 Rule::requiredIf(
                     fn () => in_array(
-                        $this->input('dynamic_type'), 
+                        $this->input('dynamic_type'),
                         ['pages', 'sides'])
-                    ), 
+                    ),
                 'numeric'
             ],
             'end_on' => [
                 Rule::requiredIf(
                     fn () => in_array(
-                        $this->input('dynamic_type'), 
+                        $this->input('dynamic_type'),
                         ['pages', 'sides'])
-                    ), 
+                    ),
                 'numeric'
             ],            'generate' => 'required_if:dynamic,true|boolean',
             'dynamic_type' => 'required_if:dynamic,true|string',

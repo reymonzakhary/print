@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Tenant\Mgr\Acl\Teams;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Acl\StoreMediaToTeamRequest;
 use App\Http\Resources\MediaSources\MediaSourceResource;
-use App\Models\Tenants\Media\MediaSource;
-use App\Models\Tenants\Team;
+use App\Models\Tenant\Media\MediaSource;
+use App\Models\Tenant\Team;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

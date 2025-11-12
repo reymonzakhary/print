@@ -7,8 +7,8 @@ use App\Http\Requests\Roles\RolePermissionUpdateRequest;
 use App\Http\Requests\Roles\RoleStoreRequest;
 use App\Http\Requests\Roles\RoleUpdateRequest;
 use App\Http\Resources\Roles\RoleResource;
-use App\Models\Tenants\Role;
-use App\Models\Tenants\Team;
+use App\Models\Tenant\Role;
+use App\Models\Tenant\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -37,11 +37,11 @@ class RoleController extends Controller
 
     /**
      * List Roles
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @response 200
      * {
      *  "data": [
@@ -72,16 +72,16 @@ class RoleController extends Controller
 
     /**
      * Create Role
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @bodyParam name string required unique name of role. Example: newRole
      * @bodyParam display_name string required display name of role. Example: newRole
      * @bodyParam description string The description of role. Example: role description
-     * 
-     * @response 201 
+     *
+     * @response 201
      * {
      * "data": {
 	 * 	"id": 1,
@@ -92,7 +92,7 @@ class RoleController extends Controller
 	 * "status": 201,
 	 * "message": "Your record has been created"
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The name field is required. (and 1 more error)",
@@ -105,7 +105,7 @@ class RoleController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"data": {
@@ -113,7 +113,7 @@ class RoleController extends Controller
      * 		"message": "We could'not handel your request, please try again later"
      * 	}
      * }
-     * 
+     *
      * @param RoleStoreRequest $request
      * @return RoleResource|JsonResponse
      */
@@ -141,17 +141,17 @@ class RoleController extends Controller
 
     /**
      * Update Role
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam role_id integer required The ID of the role.
-     * 
+     *
      * @bodyParam name string required unique name of role. Example: newRole
      * @bodyParam display_name string display name of role. Example: newRole
      * @bodyParam description string The description of role. Example: role description
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -163,7 +163,7 @@ class RoleController extends Controller
      * 	"status": 200,
      * 	"message": "Role has been updated successfully."
      * }
-     * 
+     *
      * @response 422
      * {
      *	"message": "The name field is required.",
@@ -173,7 +173,7 @@ class RoleController extends Controller
      *		]
      *	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"data": {
@@ -181,7 +181,7 @@ class RoleController extends Controller
      * 		"message": "We could'not handel your request, please try again later"
      * 	}
      * }
-     * 
+     *
      * @param RoleStoreRequest $request
      * @param Role $role
      * @return RoleResource|JsonResponse
@@ -210,15 +210,15 @@ class RoleController extends Controller
 
     /**
      * Add Permissions to a role
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam role_id integer required The ID of the role.
-     * 
+     *
      * @bodyParam permissions array required names of Permissions.Example: ['auth-access' ,'settings-list']
-     * 
+     *
      * @response 200
      * {
      * 	"data": {
@@ -230,7 +230,7 @@ class RoleController extends Controller
      * 	"status": 200,
      * 	"message": "Role has been updated successfully."
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The selected permissions.0 is invalid.",
@@ -240,7 +240,7 @@ class RoleController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"data": {
@@ -248,7 +248,7 @@ class RoleController extends Controller
      * 		"message": "We could'not handel your request, please try again later"
      * 	}
      * }
-     * 
+     *
      * @param Role $role
      * @param RolePermissionUpdateRequest $request
      * @return RoleResource|JsonResponse
@@ -277,21 +277,21 @@ class RoleController extends Controller
 
     /**
      * Delete Role
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
+     *
      * @urlParam role_id integer required The ID of the role.
-     * 
-     * @response 200 
+     *
+     * @response 200
      * {
      * 	"data": {
      * 		"status": 200,
      * 		"message": "role has been removed."
      * 	}
      * }
-     * 
+     *
      * @response 400
      * {
      * 	"data": {
@@ -299,7 +299,7 @@ class RoleController extends Controller
      * 		"message": "We could'not handel your request, please try again later"
      * 	}
      * }
-     * 
+     *
      * @param Role $role
      * @return JsonResponse
      */

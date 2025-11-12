@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DesignProviderTemplates\StoreDesignProviderTemplateRequest;
 use App\Http\Requests\DesignProviderTemplates\UpdateDesignProviderTemplateRequest;
 use App\Http\Resources\DesignProviderTemplates\DesignProviderTemplateResource;
-use App\Models\Tenants\DesignProviderTemplate;
+use App\Models\Tenant\DesignProviderTemplate;
 use App\Repositories\DesignProviderTemplateRepository;
 use App\Scoping\Scopes\DesingProviderTemplates\DesingProvider;
 use Illuminate\Http\JsonResponse;

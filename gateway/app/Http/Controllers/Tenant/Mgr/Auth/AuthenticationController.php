@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ImpersonateLoginRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Impersonation;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Utilities\ProxyRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
@@ -89,7 +89,9 @@ class AuthenticationController extends Controller
             __('This combination does not exists.')
         );
 
+
         if ($resp = $this->proxy->grantPasswordToken($request->email, $request->password)) {
+//            dd(optional($user)->canAccess('mgr'));
             if (!optional($user)->canAccess('mgr')) {
                 return response()->json([
                     'message' => __('You are not unauthorized, contact your administrator.'),

@@ -2,7 +2,7 @@
 
 namespace App\Blueprint\Services;
 
-use App\Models\Tenants\CartVariation;
+use App\Models\Tenant\CartVariation;
 use Illuminate\Validation\ValidationException;
 
 class BluePrintServices

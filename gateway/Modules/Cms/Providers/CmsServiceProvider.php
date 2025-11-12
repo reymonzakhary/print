@@ -3,7 +3,7 @@
 namespace Modules\Cms\Providers;
 
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Modules\Cms\Core\Cache\Cacheable;
 use Modules\Cms\Core\Cms;

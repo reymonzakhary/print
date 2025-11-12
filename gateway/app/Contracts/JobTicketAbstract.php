@@ -3,8 +3,8 @@
 namespace App\Contracts;
 
 
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use Exception;
 
 abstract class JobTicketAbstract

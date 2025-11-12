@@ -2,8 +2,8 @@
 
 namespace App\Actions\PriceAction;
 
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
 use Illuminate\Database\Eloquent\Model;
 use App\Plugins\Moneys;
 

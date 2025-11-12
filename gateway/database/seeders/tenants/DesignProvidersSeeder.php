@@ -3,7 +3,7 @@
 namespace Database\Seeders\Tenants;
 
 use App\Enums\DesignProviderType;
-use App\Models\Tenants\DesignProvider;
+use App\Models\Tenant\DesignProvider;
 use Illuminate\Database\Seeder;
 
 class DesignProvidersSeeder extends Seeder

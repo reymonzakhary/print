@@ -5,8 +5,8 @@
      */
 
     use App\Actions\PriceAction\CalculationAction;
-    use App\Models\Tenants\Item;
-    use App\Models\Tenants\Service;
+    use App\Models\Tenant\Item;
+    use App\Models\Tenant\Service;
     use App\Plugins\Moneys;
     use Carbon\Carbon;
 @endphp

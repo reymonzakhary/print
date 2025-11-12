@@ -2,8 +2,8 @@
 
 namespace App\Actions\Import\Miele;
 
-use App\Models\Tenants\Category;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Category;
+use App\Models\Tenant\Media\FileManager;
 use Mtownsend\XmlToArray\XmlToArray;
 
 

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\Tenants;
 
-use App\Models\Tenants\Area;
-use App\Models\Tenants\Npace;
-use App\Models\Tenants\Setting;
+use App\Models\Tenant\Area;
+use App\Models\Tenant\Npace;
+use App\Models\Tenant\Setting;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder

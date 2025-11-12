@@ -8,7 +8,7 @@ use App\Actions\PriceAction\CalculationAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Orders\TrashedOrderResource;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

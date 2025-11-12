@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Addresses;
 
 use App\Enums\AddressType;
-use App\Models\Tenants\Address;
+use App\Models\Tenant\Address;
 use App\Repositories\AddressRepository;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

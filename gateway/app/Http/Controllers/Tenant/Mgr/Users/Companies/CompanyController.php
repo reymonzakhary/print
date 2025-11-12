@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserCompanyStoreRequest;
 use App\Http\Requests\Users\UserCompanyUpdateRequest;
 use App\Http\Resources\Companies\CompanyResource;
-use App\Models\Tenants\Company;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Company;
+use App\Models\Tenant\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 

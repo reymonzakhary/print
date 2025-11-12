@@ -6,25 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-/**
- * Legacy Website model - kept for backward compatibility
- * This is now an alias/proxy for the Tenant model
- * @deprecated Use Tenant model instead
- */
 class Website extends Model
 {
     use HasFactory;
 
-    protected $table = 'tenants';
-
-    protected $fillable = ['configure', 'supplier', 'external', 'email', 'data'];
+    protected $fillable = ['configure', 'supplier', 'external'];
 
     protected $casts = [
-        'configure' => 'array',
-        'supplier' => 'array',
-        'external' => 'array',
-        'data' => 'array',
+        'configure' => AsArrayObject::class,
     ];
 
     /**
@@ -35,68 +24,34 @@ class Website extends Model
      */
     public function scopeFindEnabledPrimary($builder): void
     {
-        $builder->where('supplier->enabled', true)
-            ->with(['domains' => function ($q) {
-                $q->where('is_primary', true);
-            }]);
+        $builder->where([
+            'supplier' => true
+        ])->with(['hostnames' => function ($q) {
+            $q->where('primary', true);
+        }]);
     }
 
     /**
      * Scope to get enabled suppliers except the current one.
      *
      * This scope filters suppliers that are enabled and not the current one based on the tenant ID.
-     * It also filters based on domains being primary and not starting with 'pr-'.
+     * It also filters based on hostnames being primary and not starting with 'pr-'.
      *
      * @param Builder $builder
      * @return void
      */
     public function scopeGetEnabledSuppliersExceptMe($builder): void
     {
-        $builder->where('supplier->enabled', true)
-            ->where('id', '!=', request()->tenant?->id)
-            ->whereHas('domains', function ($q) {
-                return $q->where('is_primary', true)
-                    ->where('domain','NOT LIKE', 'pr-%');
+        $builder->where('supplier', true)
+            ->where('id', '!=', request()->tenant->id)
+            ->whereHas('hostnames', function ($q) {
+                return $q->where('primary', true)
+                    ->where('fqdn','NOT LIKE', 'pr-%');
             });
     }
 
-    /**
-     * Get all domains for this tenant
-     */
-    public function domains()
-    {
-        return $this->hasMany(Domain::class, 'tenant_id');
-    }
-
-    /**
-     * Get primary domain for this tenant
-     */
-    public function domain()
-    {
-        return $this->hasOne(Domain::class, 'tenant_id')->where('is_primary', true);
-    }
-
-    /**
-     * @deprecated Use domains() instead
-     */
-    public function hostnames()
-    {
-        return $this->domains();
-    }
-
-    /**
-     * @deprecated Use domain() instead
-     */
     public function hostname()
     {
-        return $this->domain();
-    }
-
-    /**
-     * Get UUID attribute for backward compatibility
-     */
-    public function getUuidAttribute()
-    {
-        return $this->id;
+        return $this->hasMany(Hostname::class);
     }
 }

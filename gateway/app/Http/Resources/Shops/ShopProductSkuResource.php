@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Shops;
 
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShopProductSkuResource extends JsonResource

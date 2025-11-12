@@ -2,8 +2,8 @@
 
 namespace App\Events\Tenant\Order\Notification;
 
-use App\Models\Tenants\Order;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;

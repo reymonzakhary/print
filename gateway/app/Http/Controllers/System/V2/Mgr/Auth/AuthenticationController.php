@@ -127,9 +127,9 @@ final class AuthenticationController extends Controller
     ): JsonResponse
     {
         $tenant_id = $request->input('tenant_id');
-        
+
         $initiator_id = auth()->id();
-        
+
         if (!$initiator_id) {
             return response()->json([
                 'message' => __('UNAUTHORIZED.'),

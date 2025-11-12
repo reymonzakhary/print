@@ -1,4 +1,8 @@
 <?php
+
+
+use Illuminate\Support\Facades\Route;
+
 Route::group(['prefix' => 'shops', 'namespace' => 'Shops'], function () {
     Route::group(['prefix' => 'categories', 'namespace' => 'Categories'], function () {
         Route::get('/', 'CategoryController@index')->name('shops-categories-list');

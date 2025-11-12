@@ -7,7 +7,7 @@ namespace Modules\Cms\Observers\Resource;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Modules\Cms\Entities\Resource;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use Modules\Cms\Enums\BlockTypesEnum;
 
 class ResourceObserver

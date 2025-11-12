@@ -2,7 +2,7 @@
 
 namespace App\Listeners\User;
 
-use App\Models\Tenants\Profile;
+use App\Models\Tenant\Profile;
 use App\Models\Traits\GenerateIdentifier;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

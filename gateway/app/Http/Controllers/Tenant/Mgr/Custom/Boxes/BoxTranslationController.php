@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Boxes;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Boxes\BoxResource;
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 use Symfony\Component\HttpFoundation\Response;
 
 class BoxTranslationController extends Controller

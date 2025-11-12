@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Custom\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Products\ProductVariationResource;
-use App\Models\Tenants\Product;
+use App\Models\Tenant\Product;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductSelector extends Controller

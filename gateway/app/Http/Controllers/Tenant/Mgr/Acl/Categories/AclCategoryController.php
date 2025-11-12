@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Acl\Categories;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories\AclCategoryResource;
-use App\Models\Tenants\Category;
+use App\Models\Tenant\Category;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,12 +17,12 @@ class AclCategoryController extends Controller
 
     /**
      * List ACL categories
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @response 200 
+     *
+     * @response 200
      * {
      *	"data": [
      *		{

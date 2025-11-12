@@ -88,10 +88,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapSystemRoutes(): void
     {
-        Route::prefix('api/v1/in')
-            ->domain('manager.' . env('TENANT_URL_BASE'))
-            ->namespace("$this->namespace\\System")
-            ->group(base_path('routes/api.php'));
+//        Route::prefix('api/v1/in')
+//            ->domain('manager.' . env('TENANT_URL_BASE'))
+//            ->namespace("$this->namespace\\System")
+//            ->group(base_path('routes/api.php'));
 
         Route::prefix('api/v2/in')
             ->domain('manager.' . env('TENANT_URL_BASE'))

@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Machines\MachineStoreRequest;
 use App\Http\Requests\Machines\MachineUpdateRequest;
 use App\Http\Resources\Machines\MachineResource;
-use App\Models\Tenants\Machine;
+use App\Models\Tenant\Machine;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\ValidationException;

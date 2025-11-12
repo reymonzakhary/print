@@ -5,7 +5,7 @@ namespace App\Blueprint\Actions;
 use App\Blueprint\Actions\Traits\HasReportingTraits;
 use App\Blueprint\Actions\Traits\TrashCollectionTraits;
 use App\Blueprint\Contract\BluePrintActionContract;
-use App\Models\Tenants\CartVariation;
+use App\Models\Tenant\CartVariation;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

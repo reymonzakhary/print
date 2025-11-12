@@ -3,7 +3,7 @@
 namespace Modules\Cms\Http\Controllers\Resources\Media;
 
 use App\Http\Resources\Media\MediaResource;
-use App\Models\Tenants\Language;
+use App\Models\Tenant\Language;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;

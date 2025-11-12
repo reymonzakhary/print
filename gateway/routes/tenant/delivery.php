@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:print-assortments,delivery', 'namespace' => 'DeliveryDays'], function () {
     Route::resource('/delivery-day', 'DeliveryDayController', [
         'names' => [

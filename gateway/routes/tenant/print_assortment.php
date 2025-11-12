@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:print-assortments,printing-methods', 'prefix' => 'printing-methods', 'namespace' => 'PrintingMethods'], function () {
     Route::get('/', 'PrintingMethodController@index')->name('print-assortments-printing-methods-list');
     Route::get('/{printing_method}', 'PrintingMethodController@show')->name('print-assortments-printing-methods-read');

@@ -12,8 +12,8 @@ use App\Events\Tenant\Order\RemoveItemOrderEvent;
 use App\Events\Tenant\Order\UpdateItemOrderEvent;
 use App\Facades\Settings;
 use App\Mail\Tenant\Order\ProducedItemStatusChangedMail;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
 use App\Models\Website;
 use App\Plugins\Moneys;
 use Illuminate\Database\Eloquent\Collection;
@@ -133,9 +133,9 @@ class ItemRepository extends InitModelAbstract implements RepositoryEloquentInte
                 $this->handleExternalItemUpdate($item);
             }
 
-            
+
             $currentTenant = tenant()->uuid;
-            if ( 
+            if (
                 $currentTenant !== $item->supplier_id &&
                 in_array($item->st, [Status::DRAFT->value, Status::PENDING->value, Status::NEW->value]) &&
                 !optional($item->product)->internal_margin_apllied &&
@@ -147,7 +147,7 @@ class ItemRepository extends InitModelAbstract implements RepositoryEloquentInte
 
                 if (count(
                     array_diff_assoc(
-                        $margin , 
+                        $margin ,
                         $item->product->price['margins'] ?? []
                         )
                 )) {

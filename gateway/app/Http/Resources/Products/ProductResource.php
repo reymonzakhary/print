@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Products;
 
-use App\Models\Tenants\Box;
+use App\Models\Tenant\Box;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use JsonSerializable;

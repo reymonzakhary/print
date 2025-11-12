@@ -10,7 +10,7 @@ use App\Enums\Status;
 use App\Events\Tenant\Quotation\QuotationAcceptedEvent;
 use App\Events\Tenant\Quotation\QuotationRejectedEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Quotation;
 use App\Utilities\Quotation\QuotationHasher;
 use Hyn\Tenancy\Environment;
 use Illuminate\Events\Dispatcher;

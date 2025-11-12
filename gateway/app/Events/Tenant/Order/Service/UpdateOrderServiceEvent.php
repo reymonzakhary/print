@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Events\Tenant\Order\Service;
 
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
-use App\Models\Tenants\Service;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
+use App\Models\Tenant\Service;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;

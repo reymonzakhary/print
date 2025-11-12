@@ -11,7 +11,7 @@ use App\Http\Resources\Categories\PrintBoopsResource;
 use App\Http\Resources\Categories\PrintCategoryResource;
 use App\Http\Resources\Categories\PrintSupplierCategoryResource;
 use App\Jobs\Tenant\Categories\SharedCategoryJob;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use App\Services\Categories\BoopsService;
 use App\Services\Suppliers\SupplierCategoryService;
 use App\Services\Tenant\Categories\SupplierCategoryService as CategoryService;

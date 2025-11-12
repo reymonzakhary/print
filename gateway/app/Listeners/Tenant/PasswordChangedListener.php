@@ -6,8 +6,8 @@ namespace App\Listeners\Tenant;
 
 use App\Events\Tenant\PasswordChangedEvent;
 use App\Mail\Tenant\Auth\PasswordChangedMail;
-use App\Models\Tenants\Member;
-use App\Models\Tenants\User;
+use App\Models\Tenant\Member;
+use App\Models\Tenant\User;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

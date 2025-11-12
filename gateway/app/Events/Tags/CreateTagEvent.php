@@ -2,7 +2,7 @@
 
 namespace App\Events\Tags;
 
-use App\Models\Tenants\Tag;
+use App\Models\Tenant\Tag;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

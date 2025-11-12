@@ -2,7 +2,7 @@
 
 namespace Modules\Campaign\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class CampaignServiceProvider extends ServiceProvider

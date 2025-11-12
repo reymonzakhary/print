@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Quotations\Discounts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Quotation\DiscountQuotationStoreRequest;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Quotation;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

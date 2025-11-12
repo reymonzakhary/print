@@ -14,7 +14,7 @@ use App\Http\Requests\System\Companies\StoreQuotationRequest;
 use App\Http\Resources\Suppliers\QuotationSupplierResource;
 use App\Models\Contract;
 use App\Models\Quotation;
-use App\Models\Tenants\Quotation as TenantQuotation;
+use App\Models\Tenant\Quotation as TenantQuotation;
 use App\Utilities\Traits\ConsumesExternalServices;
 use File;
 use GuzzleHttp\Exception\GuzzleException;

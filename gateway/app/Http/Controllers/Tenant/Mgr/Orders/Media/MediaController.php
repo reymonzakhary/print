@@ -7,10 +7,10 @@ use Alexusmai\LaravelFileManager\Events\FilesUploading;
 use App\Events\Tenant\Order\Media\DeleteOrderMediaEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\Media\StoreOrderMediaRequest;
-use App\Models\Tenants\Order;
+use App\Models\Tenant\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +18,7 @@ class MediaController extends Controller
 {
     /**
      * retrieving order media
-     * @param \App\Models\Tenants\Order $order
+     * @param \App\Models\Tenant\Order $order
      * @return mixed
      */
     public function index(
@@ -58,8 +58,8 @@ class MediaController extends Controller
 
     /**
      * destroy
-     * @param \App\Models\Tenants\Order $order
-     * @param \App\Models\Tenants\Media\FileManager $fileManager
+     * @param \App\Models\Tenant\Order $order
+     * @param \App\Models\Tenant\Media\FileManager $fileManager
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function destroy(

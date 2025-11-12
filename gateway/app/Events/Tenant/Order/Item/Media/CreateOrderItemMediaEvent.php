@@ -2,10 +2,10 @@
 
 namespace App\Events\Tenant\Order\Item\Media;
 
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Media;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Quotation;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Media;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Quotation;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

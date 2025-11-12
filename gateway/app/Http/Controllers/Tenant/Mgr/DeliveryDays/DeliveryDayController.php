@@ -6,7 +6,7 @@ use App\Events\DeliveryDays\CreateDeliveryDayEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DeliveryDay\DeliveryDaysRequest;
 use App\Http\Resources\DeliveryDay\DeliveryDaysResource;
-use App\Models\Tenants\DeliveryDay;
+use App\Models\Tenant\DeliveryDay;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,11 +23,11 @@ class DeliveryDayController extends Controller
 
     /**
      * List Delivery Days
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     *  
+     *
      * @response 200
      * {
 	 * "data": [
@@ -41,7 +41,7 @@ class DeliveryDayController extends Controller
 	 * 	},
      *  ]
      * }
-     * 
+     *
      */
     public function index()
     {
@@ -50,12 +50,12 @@ class DeliveryDayController extends Controller
 
     /**
      * Store Delivery Day
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
      *
-     * @response 201 
+     * @response 201
      * {
      * 	"data": {
      * 		"label": "test",
@@ -68,7 +68,7 @@ class DeliveryDayController extends Controller
      * 	"message": "Delivery day has been create Successfully",
      * 	"status": 201
      * }
-     * 
+     *
      * @response 422
      * {
      * 	"message": "The label field is required. (and 2 more errors)",
@@ -84,7 +84,7 @@ class DeliveryDayController extends Controller
      * 		]
      * 	}
      * }
-     * 
+     *
      * @param Request $request
      * @return Response
      */
@@ -103,7 +103,7 @@ class DeliveryDayController extends Controller
 
     /**
      * Show Delivery Day
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
@@ -119,7 +119,7 @@ class DeliveryDayController extends Controller
      * 		"price": null
      * 	}
      * }
-     * 
+     *
      * @param \App\Models\DeliveryDay $deliveryDay
      * @return Response
      */
@@ -137,12 +137,12 @@ class DeliveryDayController extends Controller
 
     /**
      * Update DeliveryDay
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
-     * 
-     * @response 200 
+     *
+     * @response 200
      * {
      * 	"message": "Delivery day Update Successfully.",
      * 	"status": 200
@@ -153,7 +153,7 @@ class DeliveryDayController extends Controller
      * 	"message": "We can't handle this Request",
      * 	"status": 404
      * }
-     * 
+     *
      * @param Request                 $request
      * @param \App\Models\DeliveryDay $deliveryDay
      * @return Response
@@ -186,7 +186,7 @@ class DeliveryDayController extends Controller
 
     /**
      * Delete Delivery Day
-     * 
+     *
      * @header Origin http://{sub_domin}.prindustry.test
      * @header Referer http://{sub_domin}.prindustry.test
      * @header Authorization Bearer token
@@ -196,13 +196,13 @@ class DeliveryDayController extends Controller
      * 	"message": "Delivery Day has been Deleted Successfully. ",
      * 	"status": 404
      * }
-     * 
-     * @response 404 
+     *
+     * @response 404
      * {
      * 	"message": "Don't have this day",
      * 	"status": 404
      * }
-     * 
+     *
      * @param \App\Models\DeliveryDay $deliveryDay
      * @return Response
      */

@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Members\Mail;
 
 use App\Events\Tenant\PasswordChangedEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Tenants\Member;
+use App\Models\Tenant\Member;
 use Hyn\Tenancy\Environment;
 use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;

@@ -10,11 +10,11 @@ use App\Foundation\Media\FileManager;
 use App\Foundation\Status\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\CheckoutRequest;
-use App\Models\Tenants\Box;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Product;
-use App\Models\Tenants\Sku;
+use App\Models\Tenant\Box;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Product;
+use App\Models\Tenant\Sku;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
@@ -317,7 +317,7 @@ class CheckoutController extends Controller
 
     public function getMedia($sku)
     {
-        $cartModal = \App\Models\Tenants\Cart::whereUuid(session(tenant()->uuid . '_cart_session'))->first();
+        $cartModal = \App\Models\Tenant\Cart::whereUuid(session(tenant()->uuid . '_cart_session'))->first();
         return $cartModal->getMedia('cart' . $sku['sku_id']) ?? [];
     }
 

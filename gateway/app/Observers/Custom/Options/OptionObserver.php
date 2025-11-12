@@ -2,7 +2,7 @@
 
 namespace App\Observers\Custom\Options;
 
-use App\Models\Tenants\Option;
+use App\Models\Tenant\Option;
 
 class OptionObserver
 {

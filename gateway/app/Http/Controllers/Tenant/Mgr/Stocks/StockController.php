@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Services\UpdateStockRequest;
 use App\Http\Requests\Stocks\StoreStockRequest;
 use App\Http\Resources\Stocks\StockResource;
-use App\Models\Tenants\Stock;
+use App\Models\Tenant\Stock;
 use App\Repositories\StockRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

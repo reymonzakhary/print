@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Users\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileUpdateRequest;
 use App\Http\Resources\Profile\ProfileResource;
-use App\Models\Tenants\User;
+use App\Models\Tenant\User;
 use App\Repositories\ProfileRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;

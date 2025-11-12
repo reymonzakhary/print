@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Foundation\Traits;
 
-use App\Models\Tenants\Media\FileManager;
+use App\Models\Tenant\Media\FileManager;
 use Illuminate\Database\Eloquent\Casts\ArrayObject;
 use Illuminate\Support\Collection;
 

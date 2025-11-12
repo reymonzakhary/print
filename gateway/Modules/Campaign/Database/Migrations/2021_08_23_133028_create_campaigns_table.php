@@ -25,9 +25,9 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->jsonb('config')->nullable();
 
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('locked_by')->references('id')->on('users');
+//            $table->foreign('created_by')->references('id')->on('users');
+//            $table->foreign('updated_by')->references('id')->on('users');
+//            $table->foreign('locked_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

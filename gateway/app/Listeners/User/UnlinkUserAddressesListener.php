@@ -2,7 +2,7 @@
 
 namespace App\Listeners\User;
 
-use App\Models\Tenants\Addressable;
+use App\Models\Tenant\Addressable;
 use App\Models\Traits\GenerateIdentifier;
 use Illuminate\Foundation\Bus\Dispatchable;
 

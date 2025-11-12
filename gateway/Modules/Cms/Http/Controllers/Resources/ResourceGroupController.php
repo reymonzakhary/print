@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Http\Controllers\Resources;
 
-use App\Models\Tenants\Team;
+use App\Models\Tenant\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;

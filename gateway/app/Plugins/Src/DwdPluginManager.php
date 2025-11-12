@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Plugins\Src;
 
-use App\Models\Tenants\Address;
-use App\Models\Tenants\Context;
+use App\Models\Tenant\Address;
+use App\Models\Tenant\Context;
 use App\Plugins\Contracts\PluginManager;
 use App\Plugins\Util\DWD\DataMapper;
 use App\Plugins\Util\DWD\ResponseValidator;

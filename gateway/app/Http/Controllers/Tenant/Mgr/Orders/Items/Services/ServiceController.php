@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\ServiceOrderStoreRequest;
 use App\Http\Requests\Order\ServiceOrderUpdateRequest;
 use App\Http\Resources\Services\OrderServiceResource;
-use App\Models\Tenants\Item;
-use App\Models\Tenants\Order;
-use App\Models\Tenants\Service;
+use App\Models\Tenant\Item;
+use App\Models\Tenant\Order;
+use App\Models\Tenant\Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
