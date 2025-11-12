@@ -12,7 +12,7 @@ class CategoryRepository {
      *
      * @param {string} slug - Category slug
      * @param {string} supplierId - Supplier/tenant ID
-     * @returns {Promise<Object|null>} Category with populated machine and boops
+     * @returns {Promise<Object|null>} Category with populated machines and boops
      */
     async findBySlugAndSupplier(slug, supplierId) {
         try {
@@ -21,7 +21,8 @@ class CategoryRepository {
                 tenant_id: supplierId,
                 published: true
             })
-            .populate('machine')
+            .populate('machine')  // Legacy field (if exists)
+            .populate('additional.machine')  // New location in additional array
             .populate('boops')
             .lean();
 
