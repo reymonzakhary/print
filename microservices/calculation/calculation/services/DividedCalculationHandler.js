@@ -165,6 +165,47 @@ class DividedCalculationHandler {
                 formatResult,
                 context.quantity
             );
+
+            // Add lamination timing if lamination machine present
+            if (priceResult.laminate_machine && priceResult.calculation) {
+                const laminationDuration = this.durationCalculator.calculateLaminationDuration(
+                    { machine: priceResult.laminate_machine },
+                    parseFloat(priceResult.calculation.amount_of_sheets_printed) || 0
+                );
+
+                // Add lamination time to total duration
+                duration.lamination_time = laminationDuration.lamination_time;
+                duration.total_time += laminationDuration.total_time;
+                duration.total_hours = Math.round((duration.total_time / 60) * 10) / 10;
+                duration.estimated_delivery_days = Math.ceil(duration.total_time / 480);
+            }
+        }
+
+        // Extract costs breakdown
+        const printingCost = parseFloat(priceResult.calculation?.total_sheet_price) || 0;
+
+        // Calculate lamination cost if laminate machine present
+        let laminationCost = 0;
+        if (priceResult.laminate_machine) {
+            // Try to extract from options_cost or calculate based on row_price difference
+            if (priceResult.options_cost?.breakdown) {
+                const laminationOption = priceResult.options_cost.breakdown.find(
+                    opt => opt.key === 'lamination' || opt.box_calc_ref === 'lamination'
+                );
+                if (laminationOption) {
+                    laminationCost = laminationOption.total_cost || 0;
+                }
+            }
+        }
+
+        // Extract options cost (excluding lamination if already counted)
+        let optionsCost = 0;
+        if (priceResult.options_cost) {
+            optionsCost = priceResult.options_cost.total || 0;
+            // Subtract lamination if it was included
+            if (laminationCost > 0) {
+                optionsCost -= laminationCost;
+            }
         }
 
         return {
@@ -176,9 +217,9 @@ class DividedCalculationHandler {
             calculation: priceResult.calculation,
             duration: duration,
             costs: {
-                printing: parseFloat(priceResult.calculation?.total_sheet_price) || 0,
-                lamination: 0, // TODO: Extract from lamination result
-                options: 0, // TODO: Extract from options result
+                printing: printingCost,
+                lamination: laminationCost,
+                options: optionsCost,
                 subtotal: priceResult.row_price
             },
             sheets: {

@@ -370,6 +370,20 @@ class CalculationPipeline {
                 this.formatResult,
                 this.context.quantity
             );
+
+            // Add lamination timing if lamination machine present
+            if (cheapest.laminate_machine && cheapest.calculation) {
+                const laminationDuration = this.durationCalculator.calculateLaminationDuration(
+                    { machine: cheapest.laminate_machine },
+                    parseFloat(cheapest.calculation.amount_of_sheets_printed) || 0
+                );
+
+                // Add lamination time to total duration
+                duration.lamination_time = laminationDuration.lamination_time;
+                duration.total_time += laminationDuration.total_time;
+                duration.total_hours = Math.round((duration.total_time / 60) * 10) / 10;
+                duration.estimated_delivery_days = Math.ceil(duration.total_time / 480);
+            }
         }
 
         // Format price object using PriceFormatterService
