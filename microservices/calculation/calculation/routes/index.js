@@ -22,12 +22,12 @@ const testV2LogicRoutes = require('./test-v2-logic');
 // router.use('/', v1Routes);
 
 // Mount V2 routes at /v2 prefix
-router.use('/', v2Routes);
+// router.use('/', v2Routes);
 
 
 // Mount TEST routes at /test/v2-logic prefix
 // These accept V1 payload but use V2 calculation logic
-router.use('/test/v2-logic', testV2LogicRoutes);
+router.use('/', testV2LogicRoutes);
 
 module.exports = router;
 

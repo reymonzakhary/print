@@ -28,7 +28,7 @@ class ProductService {
         }
 
         // Extract unique box and option IDs from items
-        const filtered = getUniqueIdsFromDirectIds(items);
+        const filtered = await getUniqueIdsFromDirectIds(items);
         const boxIds = filtered.boxes;
         const optionIds = filtered.options;
 
