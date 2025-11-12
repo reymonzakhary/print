@@ -1,5 +1,6 @@
 const SupplierCategory = require('../Models/SupplierCategory');
 const SupplierBoops = require('../Models/SupplierBoops');
+const SupplierMachine = require('../Models/SupplierMachine');
 
 /**
  * CategoryRepository
