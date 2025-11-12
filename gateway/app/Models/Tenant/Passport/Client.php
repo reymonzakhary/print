@@ -13,9 +13,21 @@ class Client extends PassportClient
 
     protected $table = 'oauth_clients';
 
-    protected $connection = 'tenant';
+//    protected $connection = 'tenant';
 
-    protected $guarded = ['tenant'];
+//    protected $guarded = ['tenant'];
+
+    /**
+     * Get the current connection name for the model.
+     */
+//    public function getConnectionName()
+//    {
+//        if (tenancy()->initialized) {
+//            return 'tenant';
+//        }
+//
+//        return $this->connection;
+//    }
 
     /**
      * Get the user that the client belongs to.

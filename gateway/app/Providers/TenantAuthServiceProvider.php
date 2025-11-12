@@ -43,15 +43,15 @@ class TenantAuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-
         $this->app->singleton(FileManagerInterface::class, function () {
-//            return new FileManager(app(ConfigRepository::class));
             return new FileManagerFactory();
         });
 
-
-        App::setLocale(Str::lower(Str::lower(Settings::managerLanguage('en')?->value)));
+        try {
+            App::setLocale(Str::lower(Settings::managerLanguage('en')?->value ?? 'en'));
+        } catch (\Exception $e) {
+            App::setLocale('en');
+        }
     }
 
     /**
@@ -62,6 +62,10 @@ class TenantAuthServiceProvider extends ServiceProvider
      */
     public function boot(TenancyMigrationAction $migration)
     {
+        // Only run if tenant is initialized
+        if (!tenancy()->initialized) {
+            return;
+        }
         $migration->register(__DIR__ . '/../Database/Migrations');
 
 
@@ -73,12 +77,13 @@ class TenantAuthServiceProvider extends ServiceProvider
             });
         }
 
-        Passport::useTokenModel(Token::class);
-        Passport::useClientModel(Client::class);
-        Passport::useAuthCodeModel(AuthCode::class);
-        Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
-        Passport::useRefreshTokenModel(RefreshToken::class);
-
+//        Passport::useTokenModel(Token::class);
+//        Passport::useClientModel(Client::class);
+//        Passport::useAuthCodeModel(AuthCode::class);
+//        Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
+//        Passport::useRefreshTokenModel(RefreshToken::class);
+        // Enable password grant
+        Passport::enablePasswordGrant();
         $this->commands([
             InstallCommand::class,
             ClientCommand::class,

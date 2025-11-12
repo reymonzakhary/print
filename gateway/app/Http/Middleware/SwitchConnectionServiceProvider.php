@@ -6,9 +6,11 @@ namespace App\Http\Middleware;
 
 use App\Foundation\Settings\Settings;
 use App\Models\Tenant\Media;
+use App\Models\Tenant\Setting;
 use App\Providers\TenantAuthServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,18 +32,17 @@ final class SwitchConnectionServiceProvider
         // These helpers only work because InitializeTenancyByDomain middleware ran first
         $currentTenant = tenant();
         $currentDomain = domain();
-
         // Debug logging (remove in production)
         if (config('app.debug')) {
-            \Log::debug('SwitchConnectionServiceProvider Debug:', [
+            Log::debug('SwitchConnectionServiceProvider Debug:', [
                 'request_host' => $request->getHost(),
                 'request_url' => $request->url(),
                 'tenant_found' => $currentTenant ? $currentTenant->id : 'NULL',
                 'domain_found' => $currentDomain ? $currentDomain->domain : 'NULL',
             ]);
         }
-
         if ($currentDomain && $fqdn = $currentDomain->domain) {
+
             config(['auth.guards.api.provider' => 'tenant']);
             config(['auth.guards.web.provider' => 'tenant']);
             config(['database.default' => 'tenant']);
@@ -64,7 +65,6 @@ final class SwitchConnectionServiceProvider
                 'host_id' => $request->domain?->host_id
             ]);
 
-//            dd(Settings::mailSmtpHosts());
             app()->register(TenantAuthServiceProvider::class);
 
             // Configure mail settings (with error handling for migrations)
@@ -83,7 +83,7 @@ final class SwitchConnectionServiceProvider
             } catch (\Exception $e) {
                 // Settings table might not exist or have wrong schema
                 // Log the error but don't crash the request
-                \Log::warning('Failed to load tenant settings: ' . $e->getMessage(), [
+                Log::warning('Failed to load tenant settings: ' . $e->getMessage(), [
                     'tenant_id' => $currentTenant?->id,
                     'domain' => $fqdn,
                     'error' => $e->getMessage()

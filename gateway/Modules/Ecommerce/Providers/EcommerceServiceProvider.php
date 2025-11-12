@@ -2,7 +2,7 @@
 
 namespace Modules\Ecommerce\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Modules\Ecommerce\Cart\Cart;
 

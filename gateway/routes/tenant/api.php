@@ -8,6 +8,8 @@ use App\Http\Controllers\Tenant\Mgr\Auth\AuthenticationController;
 use App\Http\Controllers\Tenant\Mgr\Auth\ImpersonateController;
 use App\Http\Controllers\Tenant\Mgr\Auth\PasswordResetController;
 use App\Http\Controllers\Tenant\Mgr\Auth\VerificationApiController;
+use App\Http\Controllers\Tenant\Mgr\Cart\CartController;
+use App\Http\Controllers\Tenant\Mgr\Cart\CheckoutController;
 use App\Http\Controllers\Tenant\Mgr\Cart\Media\MediaController;
 use App\Http\Controllers\Tenant\Mgr\Companies\Addresses\AddressController as CompanyAddressController;
 use App\Http\Controllers\Tenant\Mgr\Companies\CompanyController;
@@ -34,10 +36,19 @@ use App\Http\Controllers\Tenant\Mgr\Users\Profile\ProfileController;
 use App\Http\Controllers\Tenant\Mgr\Users\UserController;
 use App\Models\Tenant\Item;
 use App\Models\Tenant\Order;
-use Cart\CartController;
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain;
+use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
-Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic.user','auth.tenant.gate']], function () {
+Route::group([
+    'namespace' => 'Mgr',
+    'prefix' => 'mgr',
+    'middleware' => [
+        'dynamic.user',
+        'auth.tenant.gate',
+//        InitializeTenancyByDomainOrSubdomain::class,
+//        PreventAccessFromCentralDomains::class,
+    ]], function () {
 
     /** params [email, password]*/
     Route::post('login', [AuthenticationController::class, 'login'])
@@ -61,7 +72,7 @@ Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic
         ]);
     });
 
-    Route::get('/apps', AppController::class);
+    Route::get('/apps', [AppController::class, '__invoke']);
 
 
     Route::group(['prefix' => '/currencies'], function (): void {
@@ -140,7 +151,7 @@ Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic
         /////////////////////////////
         ///  ACL group
         ////////////////////////////
-        require __DIR__ . '/acl.php';
+//        require __DIR__ . '/acl.php';
 
         // roles and Permissions
         Route::group(['namespace' => 'Teams', 'middleware' => 'grant:teams'], function () {
@@ -611,8 +622,8 @@ Route::group(['namespace' => 'Mgr', 'prefix' => 'mgr', 'middleware' => ['dynamic
         });
 
         Route::group(['namespace' => 'Cart', 'middleware' => 'grant:cart'], function () {
-            Route::post('cart/checkout', 'CheckoutController')->name('orders-create');
-            Route::apiResource('cart', \CartController::class, [
+            Route::post('cart/checkout', [CheckoutController::class, '__invoke'])->name('orders-create');
+            Route::apiResource('cart', CartController::class, [
                 'parameters' => [
                     'cart' => 'product'
                 ],

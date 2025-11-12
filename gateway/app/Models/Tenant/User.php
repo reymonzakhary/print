@@ -181,6 +181,7 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
     public function canAccess($args): bool
     {
         $ctx = explode('|', $args);
+        dd($this->contexts);
         return (bool)collect($this->contexts)->whereIn('name', $ctx)->count();
     }
 

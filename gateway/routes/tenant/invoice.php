@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:invoices', 'namespace' => 'Invoices'], function () {
     Route::resource('invoices', 'InvoiceController', [
         'names' => [

@@ -22,7 +22,7 @@ Route::group([
         'as' => 'transactions-',
         'namespace' => 'Logs'
     ], function () {
-        Route::get('/logs', TransactionLogController::class)->name('read');
+        Route::get('/logs', [TransactionLogController::class, '__invoke'])->name('read');
     });
 
 });

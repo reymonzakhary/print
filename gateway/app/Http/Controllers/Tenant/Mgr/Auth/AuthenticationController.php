@@ -80,7 +80,6 @@ class AuthenticationController extends Controller
     ): JsonResponse|Response|ResponseFactory
     {
 
-        dd('d');
         $user = User::where('email', $request->email)->first();
 
         abort_unless($user, 404, __('This combination does not exists.'));
@@ -90,7 +89,9 @@ class AuthenticationController extends Controller
             __('This combination does not exists.')
         );
 
+
         if ($resp = $this->proxy->grantPasswordToken($request->email, $request->password)) {
+//            dd(optional($user)->canAccess('mgr'));
             if (!optional($user)->canAccess('mgr')) {
                 return response()->json([
                     'message' => __('You are not unauthorized, contact your administrator.'),

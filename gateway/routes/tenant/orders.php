@@ -19,7 +19,7 @@ Route::group(['middleware' => 'grant:orders', 'namespace' => 'Orders'], function
     ])->except(['create', 'edit']);
 
     Route::group(['namespace' => 'Render'], function () {
-        Route::get('orders/{order}/render/pdf', RenderPdfController::class)
+        Route::get('orders/{order}/render/pdf', [RenderPdfController::class,'__invoke'])
             ->name('orders-read');
     });
 
@@ -54,10 +54,10 @@ Route::group(['middleware' => 'grant:orders', 'namespace' => 'Orders'], function
             ]
         ])->except(['create', 'edit']);
         Route::group(['namespace' => 'Blueprints'], function () {
-            Route::post('orders/{order}/items/{item}/blueprint/rerun', 'BlueprintController')->name('orders-items-blueprints-update');
+            Route::post('orders/{order}/items/{item}/blueprint/rerun', 'BlueprintController@__invoke')->name('orders-items-blueprints-update');
         });
         Route::group(['namespace' => 'Tags'], function () {
-            Route::post('orders/{order}/items/{item}/tags', 'TagController')->name('orders-items-tags-create');
+            Route::post('orders/{order}/items/{item}/tags', 'TagController@__invoke')->name('orders-items-tags-create');
         });
 
         /**
@@ -123,7 +123,7 @@ Route::group(['middleware' => 'grant:orders', 'namespace' => 'Orders'], function
          * item discounts
          */
         Route::group(['middleware' => 'grant:orders,items_discount', 'namespace' => 'Discounts'], function () {
-            Route::post('orders/{order}/items/{item}/discounts', 'DiscountController')
+            Route::post('orders/{order}/items/{item}/discounts', 'DiscountController@__invoke')
                 ->name('orders-items-discount-create');
         });
 
@@ -147,7 +147,7 @@ Route::group(['middleware' => 'grant:orders', 'namespace' => 'Orders'], function
      * discounts orders
      */
     Route::group(['middleware' => 'grant:orders,discount', 'namespace' => 'Discounts'], function () {
-        Route::post('orders/{order}/discounts', 'DiscountController')->name('orders-discount-create');
+        Route::post('orders/{order}/discounts', 'DiscountController@__invoke')->name('orders-discount-create');
     });
 
 

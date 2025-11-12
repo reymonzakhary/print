@@ -80,6 +80,7 @@ class ProxyRequest
             $proxy->headers->set('host', request()->headers->get('host'));
         }
         $resp = json_decode(app()->handle($proxy)->getContent());
+        dd($resp);
         if (optional($resp)->error || !optional($resp)->refresh_token) {
             return false;
         }

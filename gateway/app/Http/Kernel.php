@@ -38,6 +38,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel
 {
+
     /**
      * The application's global HTTP middleware stack.
      *
@@ -46,14 +47,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        // Stancl/tenancy middleware MUST run before custom tenant middleware
-        // This initializes the tenant context so tenant() and domain() helpers work
-        \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-        \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
-
-        // Custom tenant middleware runs after tenancy is initialized
-        SwitchConnectionServiceProvider::class,
-
         // \App\Http\Middleware\TrustHosts::class,
         TrustProxies::class,
         CheckForMaintenanceMode::class,
@@ -91,6 +84,14 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // Stancl/tenancy middleware MUST run before custom tenant middleware
+            // This initializes the tenant context so tenant() and domain() helpers work
+//            \Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain::class,
+//            \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+
+            // Custom tenant middleware runs after tenancy is initialized
+            SwitchConnectionServiceProvider::class,
+
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
             StartSession::class,

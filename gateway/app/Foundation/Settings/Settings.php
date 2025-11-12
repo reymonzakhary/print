@@ -6,6 +6,7 @@ namespace App\Foundation\Settings;
 
 use App\Foundation\Settings\Contracts\SettingsContractInterface;
 use App\Models\Tenant\Setting;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -28,13 +29,12 @@ class Settings
 
         $method = Str::snake($method);
         if ($tenant = tenant()) {
-            // Use tenant->id instead of tenant->uuid (stancl/tenancy uses 'id' as primary key)
+
             $key = $tenant->id . $method;
 
             if (app(SettingsContractInterface::class)->exists($key)) {
                 return app(SettingsContractInterface::class)->get($key);
             }
-//            dd(Setting::get());
 
             if ($setting = Setting::where('key', Str::snake($method))->first()) {
                 app(SettingsContractInterface::class)->add($key, $setting->value);

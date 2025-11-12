@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Tenant\Mgr\Transactions\Logs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Transactions\Log\TransactionLogResource;
-use App\Models\Tenants\Transaction;
+use App\Models\Tenant\Transaction;
 use Symfony\Component\HttpFoundation\Response;
 
 final class TransactionLogController extends Controller

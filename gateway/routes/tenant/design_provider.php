@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:design-providers', 'namespace' => 'DesignProviders'], function () {
     Route::resource('design/providers', 'DesignProviderController', [
         'names' => [

@@ -13,6 +13,8 @@
  */
 
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'grant:blueprints,automation', 'namespace' => 'Blueprints'], function () {
 
     Route::get('blueprints/namespaces', 'BlueprintController@namespaces')->name('*');

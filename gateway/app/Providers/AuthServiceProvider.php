@@ -27,13 +27,19 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        $this->commands([
-            InstallCommand::class,
-            ClientCommand::class,
-            KeysCommand::class,
-        ]);
-        Passport::tokensExpireIn(now()->addMinutes(30));
-        Passport::refreshTokensExpireIn(now()->addDays(10));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        // Enable password grant
+        if (!tenancy()->initialized) {
+            Passport::enablePasswordGrant();
+
+            $this->commands([
+                InstallCommand::class,
+                ClientCommand::class,
+                KeysCommand::class,
+            ]);
+            Passport::tokensExpireIn(now()->addMinutes(30));
+            Passport::refreshTokensExpireIn(now()->addDays(10));
+            Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        }
+
     }
 }
