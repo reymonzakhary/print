@@ -152,14 +152,13 @@ class CalculationPipeline {
      * @private
      */
     async _matchProducts() {
-        const result = await this.productService.getMatchedProducts(
+        // ProductService.getMatchedProducts returns the array directly, not an object with .items
+        this.matchedItems = await this.productService.getMatchedProducts(
             this.context.items,
             this.context.supplierId,
             this.boops,
             this.category._id
         );
-
-        this.matchedItems = result.items;
     }
 
     /**
