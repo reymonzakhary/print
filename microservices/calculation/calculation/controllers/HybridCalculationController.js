@@ -59,104 +59,26 @@ module.exports = class HybridCalculationController {
             );
             console.log('Items enriched with IDs:', enrichedItems.length);
 
-            // Step 3: Match products from enriched payload
-            const productService = new ProductService();
-            const matchedProducts = await productService.getMatchedProducts(
-                enrichedItems,
-                supplier_id,
-                boops,
-                category._id.toString()
-            );
+            // Step 3: Use old calculation engine with enriched payload
+            // This ensures we get proper prices, margins, machine calculations, etc.
+            const FetchProduct = require('../Calculations/FetchProduct');
 
-            console.log('Products matched:', matchedProducts.length);
-
-            // Step 4: Extract material and weight from matched products
-            // FetchCatalogue expects array format: [{option_id: ..., option: {...}}]
-            const materialProduct = matchedProducts.find(p => p.box_calc_ref === 'material');
-            const weightProduct = matchedProducts.find(p => p.box_calc_ref === 'weight');
-
-            console.log('Material extracted:', materialProduct?.option?.name || 'none');
-            console.log('Weight extracted:', weightProduct?.option?.name || 'none');
-
-            // Step 5: Fetch catalogues (materials with prices) from database
-            let catalogues = [];
-            if (materialProduct && weightProduct) {
-                const fetchCatalogue = new FetchCatalogue(
-                    [materialProduct],  // Array format expected
-                    [weightProduct],    // Array format expected
-                    supplier_id
-                );
-                const catalogueResult = await fetchCatalogue.get();
-                catalogues = catalogueResult.results || [];
-                console.log('Catalogues fetched:', catalogues.length);
-            }
-
-            // Step 6: Transform V1 payload to V2 format
-            const v2Payload = V1toV2PayloadTransformer.transform(
-                v1Payload,
+            const calculationEngine = new FetchProduct(
                 slug,
-                supplier_id
+                supplier_id,
+                enrichedItems,  // Use enriched items with IDs
+                v1Payload,
+                v1Payload.contract || null,
+                v1Payload.internal || false
             );
 
-            // Step 7: Enhance V2 payload with actual catalogue data
-            if (catalogues.length > 0) {
-                const catalogue = catalogues[0]; // Use first matching catalogue
-                v2Payload.material = {
-                    type: v2Payload.material?.type || 'paper_uncoated',
-                    name: materialProduct?.option?.name || v2Payload.material?.name,
-                    grs: catalogue.grs || catalogue.gsm,
-                    price: catalogue.price || 0,
-                    calc_type: catalogue.calc_type || (catalogue.sheet ? 'sheet' : 'kg'),
-                    width: catalogue.width,
-                    height: catalogue.height,
-                    sheet: catalogue.sheet
-                };
-            } else if (weightProduct?.option?.name) {
-                // Fallback: use weight from matched products
-                const grsMatch = weightProduct.option.name.match(/(\d+)/);
-                const grsValue = grsMatch ? parseInt(grsMatch[1]) : 0;
-                v2Payload.material = {
-                    ...v2Payload.material,
-                    grs: grsValue,
-                    calc_type: 'kg'
-                };
-            }
+            const result = await calculationEngine.getRunning();
 
-            console.log('Transformed to V2:');
-            console.log('- Format:', v2Payload.format?.name, v2Payload.format?.width + 'x' + v2Payload.format?.height);
-            console.log('- Material:', v2Payload.material?.type, v2Payload.material?.grs + 'gsm');
-            console.log('- Material price:', v2Payload.material?.price || 0);
-            console.log('- Colors:', v2Payload.colors?.front + '/' + v2Payload.colors?.back);
-            console.log('- Finishing:', v2Payload.finishing?.length, 'operations');
+            console.log('=== Calculation Complete ===');
+            console.log('Prices generated:', result.prices?.length || 0);
+            console.log('Calculation details:', result.calculation?.length || 0);
 
-            // Step 8: Use V2 calculation service
-            const calculationService = new CalculationServiceV2();
-
-            const v2Result = await calculationService.calculate({
-                slug: v2Payload.slug,
-                supplierId: v2Payload.supplier_id,
-                quantity: v2Payload.quantity,
-                format: v2Payload.format,
-                material: v2Payload.material,
-                colors: v2Payload.colors,
-                finishing: v2Payload.finishing,
-                contract: v2Payload.contract,
-                internal: v2Payload.internal
-            });
-
-            console.log('V2 Calculation complete:');
-            console.log('- Machines calculated:', v2Result.machines_calculated);
-            console.log('- Prices:', v2Result.prices.length);
-
-            // Step 8: Transform response back to V1 format for compatibility
-            const v1Response = V1toV2PayloadTransformer.transformResponseToV1(
-                v2Result,
-                v1Payload
-            );
-
-            console.log('=== Calculation Complete ===\n');
-
-            return res.status(200).json(v1Response);
+            return res.status(200).json(result);
 
         } catch (error) {
             return HybridCalculationController._handleError(error, res);
