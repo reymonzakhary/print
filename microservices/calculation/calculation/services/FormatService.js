@@ -28,6 +28,11 @@ class FormatService {
 
             const formatOption = formatItems[0].option;
 
+            // Validate format option exists
+            if (!formatOption) {
+                throw new Error(`Format option not loaded for item: ${formatItems[0].key}=${formatItems[0].value}`);
+            }
+
             // Extract related calculation refs
             const pages = filterByCalcRef(items, 'pages');
             const cover = filterByCalcRef(items, 'cover');
@@ -69,23 +74,36 @@ class FormatService {
                 throw new Error(format.message);
             }
 
+            // Validate format has required properties
+            if (!format.width || !format.height) {
+                console.warn('Format calculation missing dimensions:', {
+                    width: format.width,
+                    height: format.height,
+                    format_name: format.name,
+                    format_option: formatOption.name
+                });
+            }
+
             return {
                 status: 200,
                 format: format,
                 // Return commonly used properties for convenience
                 width: format.width,
                 height: format.height,
-                bleed: format.bleed,
-                quantity: format.quantity,
+                bleed: format.bleed || bleed,
+                quantity: format.quantity || quantity,
                 size: format.size,
                 sheets: format.sheets,
                 pages: format.num_pages
             };
         } catch (error) {
+            console.error('Format calculation error:', error.message);
             return {
                 status: 422,
                 message: error.message,
-                format: null
+                format: null,
+                width: undefined,
+                height: undefined
             };
         }
     }
