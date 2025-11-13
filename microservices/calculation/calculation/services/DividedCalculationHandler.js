@@ -2,6 +2,7 @@ const { filterByCalcRef, groupByDividerWithCalcRefCopy } = require('../Helpers/H
 const MachineCalculationService = require('./MachineCalculationService');
 const PriceCalculationService = require('./PriceCalculationService');
 const DurationCalculator = require('./DurationCalculator');
+const MachineCalculatorV2 = require('./v2/MachineCalculatorV2');
 
 /**
  * DividedCalculationHandler
@@ -10,8 +11,10 @@ const DurationCalculator = require('./DurationCalculator');
  * Separates items by divider and calculates each division independently.
  */
 class DividedCalculationHandler {
-    constructor() {
+    constructor(useV2 = false) {
+        this.useV2 = useV2;
         this.machineService = new MachineCalculationService();
+        this.machineCalculatorV2 = new MachineCalculatorV2();
         this.priceService = new PriceCalculationService();
         this.durationCalculator = new DurationCalculator();
     }
@@ -222,18 +225,37 @@ class DividedCalculationHandler {
         const endpapers = filterByCalcRef(items, 'endpapers');
 
         // Run machine calculations for this division with its own format
-        const combinations = await this.machineService.runCombinations(
-            context.machines,
-            divisionFormatResult,
-            catalogue,
-            items,
-            context.request,
-            context.category,
-            {}, // content config
-            bindingMethod,
-            bindingDirection,
-            endpapers
-        );
+        let combinations;
+        if (this.useV2) {
+            // Use V2 pure implementation
+            console.log('  → Using V2 Machine Calculator');
+            const machineGroups = await this.machineCalculatorV2.calculate(
+                context.machines,
+                divisionFormatResult,
+                catalogue,
+                items,
+                context.category,
+                context.quantity
+            );
+
+            // Convert V2 groups to combinations format
+            const { combinations: combinationHelper } = require('../Helpers/Helper');
+            combinations = combinationHelper(machineGroups);
+        } else {
+            // Use V1 legacy implementation
+            combinations = await this.machineService.runCombinations(
+                context.machines,
+                divisionFormatResult,
+                catalogue,
+                items,
+                context.request,
+                context.category,
+                {}, // content config
+                bindingMethod,
+                bindingDirection,
+                endpapers
+            );
+        }
 
         // Calculate prices for this division
         const priceResult = this.priceService.calculateDividedPrice(
