@@ -46,7 +46,9 @@ class CalculationPipeline {
         this.machineCalculationService = new MachineCalculationService();
         this.priceCalculationService = new PriceCalculationService();
         this.priceFormatterService = new PriceFormatterService();
-        this.dividedCalculationHandler = new DividedCalculationHandler();
+        // Use V2 calculator when v2DetailedFormat is enabled
+        const useV2 = context.v2DetailedFormat === true;
+        this.dividedCalculationHandler = new DividedCalculationHandler(useV2);
         this.durationCalculator = new DurationCalculator();
         this.v2ResponseFormatter = new V2ResponseFormatter();
 
