@@ -79,19 +79,26 @@ class FormatService {
                 status: format.status,
                 width: format.width,
                 height: format.height,
+                size_width: format.size?.width,
+                size_height: format.size?.height,
                 name: format.name,
                 hasSize: !!format.size,
                 allKeys: Object.keys(format).slice(0, 20) // First 20 keys
             });
 
+            // Extract width and height from size object if not directly available
+            const width = format.width || format.size?.width;
+            const height = format.height || format.size?.height;
+
             // Validate format has required properties
-            if (!format.width || !format.height) {
+            if (!width || !height) {
                 console.warn('Format calculation missing dimensions:', {
-                    width: format.width,
-                    height: format.height,
+                    width: width,
+                    height: height,
                     format_name: format.name,
                     format_option: formatOption.name,
-                    format_keys: Object.keys(format)
+                    format_keys: Object.keys(format),
+                    size_object: format.size
                 });
             }
 
@@ -99,13 +106,13 @@ class FormatService {
                 status: 200,
                 format: format,
                 // Return commonly used properties for convenience
-                width: format.width,
-                height: format.height,
+                width: width,
+                height: height,
                 bleed: format.bleed || bleed,
                 quantity: format.quantity || quantity,
                 size: format.size,
                 sheets: format.sheets,
-                pages: format.num_pages
+                pages: format.num_pages || format.pages
             };
         } catch (error) {
             console.error('Format calculation error:', error.message);
