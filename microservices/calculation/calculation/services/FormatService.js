@@ -74,13 +74,24 @@ class FormatService {
                 throw new Error(format.message);
             }
 
+            // Debug: Log what Format class returned
+            console.log('Format calculation result:', {
+                status: format.status,
+                width: format.width,
+                height: format.height,
+                name: format.name,
+                hasSize: !!format.size,
+                allKeys: Object.keys(format).slice(0, 20) // First 20 keys
+            });
+
             // Validate format has required properties
             if (!format.width || !format.height) {
                 console.warn('Format calculation missing dimensions:', {
                     width: format.width,
                     height: format.height,
                     format_name: format.name,
-                    format_option: formatOption.name
+                    format_option: formatOption.name,
+                    format_keys: Object.keys(format)
                 });
             }
 
