@@ -259,8 +259,8 @@ class V2ResponseFormatter {
             // 📋 Price List (quantity ranges)
             price_list: this._formatPriceList(calculation.price_list, context),
 
-            // 📐 Imposetioning (sheet layout)
-            imposetioning: this._formatImposetioning(calculation, machine),
+            // 📐 Impositioning (sheet layout and print planning)
+            impositioning: this._formatImpositioning(calculation, machine, formatResult, context.matchedItems),
 
             // 🔧 Calculation Details (for debugging)
             calculation_details: {
@@ -324,10 +324,10 @@ class V2ResponseFormatter {
             // 💵 Prices (V1-compatible format with delivery days)
             prices: this._formatDividedPricesArray(divisions, combined, context, margins),
 
-            // 📐 Imposetioning (per division)
-            imposetioning: divisions.map(division => ({
+            // 📐 Impositioning (per division)
+            impositioning: divisions.map(division => ({
                 division: division.name,
-                layout: this._formatImposetioning(division.calculation, division.machine)
+                layout: this._formatImpositioning(division.calculation, division.machine, { format: division.calculation }, division.items)
             }))
         };
     }
@@ -666,36 +666,100 @@ class V2ResponseFormatter {
     }
 
     /**
-     * Format imposetioning (sheet layout information)
+     * Format impositioning (professional print imposition details)
      *
      * @private
      */
-    _formatImposetioning(calculation, machine) {
+    _formatImpositioning(calculation, machine, formatResult, items) {
+        const productsPerSheet = calculation.maximum_prints_per_sheet || 0;
+        const bindingMethod = this._extractBindingMethod(items);
+        const impositionType = this._determineImpositionType(calculation, bindingMethod);
+
         return {
-            sheet_size: {
-                width: machine.width,
-                height: machine.height,
-                unit: 'mm',
-                area_sqm: (machine.width * machine.height) / 1000000
+            // Sheet configuration
+            sheet: {
+                size: {
+                    width: machine.width,
+                    height: machine.height,
+                    unit: 'mm',
+                    area_sqm: (machine.width * machine.height) / 1000000
+                },
+                type: machine.fed || 'sheet-fed',
+                orientation: calculation.sheet_orientation || 'portrait'
             },
-            product_size: {
-                width: calculation.width_with_bleed || 0,
-                height: calculation.height_with_bleed || 0,
-                unit: 'mm'
+
+            // Product/trim size (with bleed)
+            product: {
+                trim_size: {
+                    width: formatResult?.width || calculation.width || 0,
+                    height: formatResult?.height || calculation.height || 0,
+                    unit: 'mm'
+                },
+                size_with_bleed: {
+                    width: calculation.width_with_bleed || 0,
+                    height: calculation.height_with_bleed || 0,
+                    unit: 'mm'
+                },
+                bleed: formatResult?.bleed || 0,
+                orientation: calculation.ps || 'portrait'
             },
+
+            // Imposition type and method
+            imposition: {
+                type: impositionType,
+                method: this._getImpositionMethod(calculation),
+                work_style: calculation.work_style || 'sheetwise',
+                products_per_sheet: productsPerSheet,
+                pages_per_product: formatResult?.pages || 1,
+                total_pages_per_sheet: productsPerSheet * (formatResult?.pages || 1)
+            },
+
+            // Layout pattern (step-and-repeat)
             layout: {
-                products_per_sheet: calculation.maximum_prints_per_sheet || 0,
-                orientation: calculation.ps || 'Unknown',
-                rows: calculation.rows || null,
-                columns: calculation.columns || null
+                pattern: 'step-and-repeat',
+                rows: calculation.rows || Math.ceil(Math.sqrt(productsPerSheet)),
+                columns: calculation.columns || Math.ceil(productsPerSheet / Math.ceil(Math.sqrt(productsPerSheet))),
+                rotation: calculation.rotation || 0,
+                orientation: calculation.ps || 'optimized',
+                gutter: {
+                    horizontal: 3, // Standard 3mm gutter
+                    vertical: 3,
+                    unit: 'mm'
+                }
             },
+
+            // Binding and folding
+            binding: {
+                method: bindingMethod,
+                spine_edge: this._getSpineEdge(bindingMethod),
+                binding_direction: this._extractBindingDirection(items),
+                folding_pattern: this._getFoldingPattern(formatResult, bindingMethod)
+            },
+
+            // Print marks and guides
+            print_marks: {
+                crop_marks: true,
+                bleed_marks: formatResult?.bleed > 0,
+                registration_marks: true,
+                color_bars: true,
+                fold_marks: bindingMethod ? true : false,
+                cutting_guides: true
+            },
+
+            // Efficiency metrics
             efficiency: {
                 sheet_usage_percentage: this._calculateSheetEfficiency(calculation, machine),
-                waste_area_sqm: this._calculateWasteArea(calculation, machine)
+                waste_area_sqm: this._calculateWasteArea(calculation, machine),
+                material_efficiency_rating: this._getMaterialEfficiencyRating(
+                    this._calculateSheetEfficiency(calculation, machine)
+                )
             },
+
+            // Visualization and description
             visualization: {
-                description: `${calculation.maximum_prints_per_sheet || 0} products fit on each ${machine.width}x${machine.height}mm sheet`,
-                layout_pattern: calculation.ps || 'optimized'
+                description: `${productsPerSheet} products arranged in step-and-repeat pattern on ${machine.width}x${machine.height}mm sheet`,
+                layout_description: this._getLayoutDescription(calculation, productsPerSheet, bindingMethod),
+                optimization_notes: this._getOptimizationNotes(calculation, machine)
             }
         };
     }
@@ -766,6 +830,205 @@ class V2ResponseFormatter {
         const usedArea = productArea * productsPerSheet;
 
         return Math.round((sheetArea - usedArea) * 10000) / 10000; // 4 decimal places
+    }
+
+    /**
+     * Extract binding method from items
+     *
+     * @private
+     */
+    _extractBindingMethod(items) {
+        if (!items || !Array.isArray(items)) return null;
+
+        const bindingItem = items.find(i =>
+            i.box_calc_ref === 'binding_method' ||
+            i.key === 'binding_method' ||
+            i.key === 'binding-method'
+        );
+
+        return bindingItem?.option?.name || bindingItem?.value || null;
+    }
+
+    /**
+     * Extract binding direction from items
+     *
+     * @private
+     */
+    _extractBindingDirection(items) {
+        if (!items || !Array.isArray(items)) return null;
+
+        const directionItem = items.find(i =>
+            i.box_calc_ref === 'binding_direction' ||
+            i.key === 'binding_direction' ||
+            i.key === 'binding-direction'
+        );
+
+        return directionItem?.option?.name || directionItem?.value || 'left';
+    }
+
+    /**
+     * Determine imposition type based on calculation and binding
+     *
+     * @private
+     */
+    _determineImpositionType(calculation, bindingMethod) {
+        if (bindingMethod) {
+            if (bindingMethod.toLowerCase().includes('saddle')) {
+                return 'saddle-stitch';
+            } else if (bindingMethod.toLowerCase().includes('perfect')) {
+                return 'perfect-bound';
+            } else if (bindingMethod.toLowerCase().includes('wire')) {
+                return 'wire-o';
+            } else if (bindingMethod.toLowerCase().includes('spiral')) {
+                return 'spiral';
+            } else {
+                return 'book-imposition';
+            }
+        }
+
+        // For non-book products
+        return 'step-and-repeat';
+    }
+
+    /**
+     * Get imposition method
+     *
+     * @private
+     */
+    _getImpositionMethod(calculation) {
+        // Determine work style based on calculation
+        if (calculation.work_and_turn) {
+            return 'work-and-turn';
+        } else if (calculation.work_and_tumble) {
+            return 'work-and-tumble';
+        } else if (calculation.perfecting) {
+            return 'perfecting';
+        } else if (calculation.duplex) {
+            return 'sheetwise-duplex';
+        } else {
+            return 'sheetwise';
+        }
+    }
+
+    /**
+     * Get spine edge for binding
+     *
+     * @private
+     */
+    _getSpineEdge(bindingMethod) {
+        if (!bindingMethod) return null;
+
+        const method = bindingMethod.toLowerCase();
+
+        if (method.includes('left')) {
+            return 'left';
+        } else if (method.includes('right')) {
+            return 'right';
+        } else if (method.includes('top')) {
+            return 'top';
+        } else if (method.includes('bottom')) {
+            return 'bottom';
+        }
+
+        // Default for most bindings
+        return 'left';
+    }
+
+    /**
+     * Get folding pattern based on format and binding
+     *
+     * @private
+     */
+    _getFoldingPattern(formatResult, bindingMethod) {
+        if (!bindingMethod) return null;
+
+        const pages = formatResult?.pages || formatResult?.num_pages || 0;
+
+        if (pages <= 4) {
+            return 'half-fold';
+        } else if (pages <= 8) {
+            return 'accordion-fold';
+        } else if (pages <= 16) {
+            return '8-page-signature';
+        } else if (pages <= 32) {
+            return '16-page-signature';
+        } else {
+            return 'multi-signature';
+        }
+    }
+
+    /**
+     * Get material efficiency rating
+     *
+     * @private
+     */
+    _getMaterialEfficiencyRating(percentage) {
+        if (percentage >= 90) return 'excellent';
+        if (percentage >= 80) return 'good';
+        if (percentage >= 70) return 'fair';
+        if (percentage >= 60) return 'acceptable';
+        return 'poor';
+    }
+
+    /**
+     * Get layout description
+     *
+     * @private
+     */
+    _getLayoutDescription(calculation, productsPerSheet, bindingMethod) {
+        const rows = calculation.rows || Math.ceil(Math.sqrt(productsPerSheet));
+        const columns = calculation.columns || Math.ceil(productsPerSheet / rows);
+
+        let description = `${rows}x${columns} grid layout`;
+
+        if (bindingMethod) {
+            description += ` with ${bindingMethod.toLowerCase()} binding preparation`;
+        }
+
+        if (calculation.rotation) {
+            description += `, rotated ${calculation.rotation}°`;
+        }
+
+        return description;
+    }
+
+    /**
+     * Get optimization notes
+     *
+     * @private
+     */
+    _getOptimizationNotes(calculation, machine) {
+        const notes = [];
+
+        const efficiency = this._calculateSheetEfficiency(calculation, machine);
+
+        if (efficiency >= 85) {
+            notes.push('Excellent material utilization - minimal waste');
+        } else if (efficiency < 70) {
+            notes.push('Consider alternative sheet size for better efficiency');
+        }
+
+        const productsPerSheet = calculation.maximum_prints_per_sheet || 0;
+        if (productsPerSheet === 1) {
+            notes.push('Single product per sheet - consider smaller sheet size if available');
+        } else if (productsPerSheet >= 8) {
+            notes.push('High density layout - verify cutting precision');
+        }
+
+        if (calculation.width_with_bleed && calculation.height_with_bleed) {
+            const productSize = calculation.width_with_bleed * calculation.height_with_bleed;
+            const sheetSize = machine.width * machine.height;
+
+            if (productSize / sheetSize < 0.3) {
+                notes.push('Small product on large sheet - gang with other jobs for efficiency');
+            }
+        }
+
+        if (notes.length === 0) {
+            notes.push('Standard imposition layout optimized for production');
+        }
+
+        return notes;
     }
 }
 
