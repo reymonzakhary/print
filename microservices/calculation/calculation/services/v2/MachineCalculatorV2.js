@@ -119,23 +119,63 @@ class MachineCalculatorV2 {
                 return null;
             }
 
+            // Prepare format object for FetchColor
+            const formatForColor = format.format || format;
+
             console.log(`      Fetching colors for ${machine.name}:`, {
                 colorValue: colorItem.value,
                 optionId: colorItem.option._id,
-                machineId: machine._id
+                machineId: machine._id,
+                formatHasRange: !!formatForColor.range,
+                formatHasQuantity: !!formatForColor.quantity,
+                formatKeys: formatForColor ? Object.keys(formatForColor).slice(0, 10) : []
             });
 
             // Fetch color pricing
-            // FetchColor expects an ARRAY of color items
+            // FetchColor expects: (color array, machine object, format object)
+            // Format must have: format.range, format.quantity
             const fetchColor = new FetchColor(
                 [colorItem],  // color array
                 machine,      // machine object
-                format.format || format  // format object (not tenant_id!)
+                formatForColor  // format object with range and quantity
             );
-            const colors = await fetchColor.get();
+            const colorResult = await fetchColor.get();
 
+            console.log(`      FetchColor returned:`, {
+                isArray: Array.isArray(colorResult),
+                type: typeof colorResult,
+                hasStatus: colorResult?.status,
+                status: colorResult?.status,
+                message: colorResult?.message,
+                hasPriceList: !!colorResult?.price_list,
+                priceListLength: colorResult?.price_list?.length,
+                hasPrice: colorResult?.price !== undefined,
+                price: colorResult?.price,
+                keys: colorResult ? Object.keys(colorResult) : []
+            });
+
+            // FetchColor.get() returns an object, not an array!
+            // We need to wrap it in an array for PrintMachine
+            const colors = Array.isArray(colorResult) ? colorResult : [colorResult];
+
+            // Validate color result
             if (!colors || colors.length === 0) {
-                console.warn(`      No colors found for machine ${machine.name}`);
+                console.warn(`      No colors returned for machine ${machine.name}`);
+                return null;
+            }
+
+            if (colors[0]?.status === 422) {
+                console.warn(`      Color fetch failed for machine ${machine.name}:`, colors[0]?.message);
+                return null;
+            }
+
+            // PrintMachine requires price and price_list
+            if (!colors[0] || colors[0].price === undefined || !colors[0].price_list) {
+                console.warn(`      Color missing required fields for machine ${machine.name}:`, {
+                    hasColor: !!colors[0],
+                    hasPrice: colors[0]?.price !== undefined,
+                    hasPriceList: !!colors[0]?.price_list
+                });
                 return null;
             }
 
