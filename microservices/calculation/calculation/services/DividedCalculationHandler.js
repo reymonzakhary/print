@@ -24,21 +24,29 @@ class DividedCalculationHandler {
      * @returns {boolean} True if should be divided
      */
     shouldDivide(items, boops) {
-        // Check if boops has divided flag
-        if (boops.divided === true) {
-            return true;
-        }
-
-        // Check if items have dividers
+        // ALWAYS check if items have multiple dividers first
+        // This is the primary indicator of divided calculations
         const dividers = new Set();
         for (const item of items) {
-            if (item.divider) {
+            if (item.divider && item.divider !== 'default' && item.divider !== '') {
                 dividers.add(item.divider);
             }
         }
 
-        // If more than one divider, it's divided
-        return dividers.size > 1;
+        // If items have multiple dividers (e.g., cover + content), always divide
+        if (dividers.size > 1) {
+            console.log(`✓ Divided calculation detected: ${Array.from(dividers).join(', ')}`);
+            return true;
+        }
+
+        // Fallback: Check if boops has divided flag
+        if (boops?.divided === true) {
+            console.log('✓ Divided calculation enabled via boops configuration');
+            return true;
+        }
+
+        console.log('✓ Simple calculation (no division needed)');
+        return false;
     }
 
     /**
@@ -68,7 +76,7 @@ class DividedCalculationHandler {
      *
      * @param {Object} context - Calculation context
      * @param {Object} formatResult - Format calculation result
-     * @param {Object} catalogue - Catalogue results
+     * @param {Object} catalogue - Catalogue results (may be overridden per division)
      * @returns {Promise<Object>} Divided calculation results
      */
     async calculateDivided(context, formatResult, catalogue) {
@@ -94,13 +102,19 @@ class DividedCalculationHandler {
 
             const divisionItems = dividerData.data;
 
-            // Calculate this division
+            // Fetch catalogue specific to this division's material/weight
+            const divisionCatalogue = await this._fetchDivisionCatalogue(
+                divisionItems,
+                context.supplierId
+            );
+
+            // Calculate this division with its own catalogue
             const divisionResult = await this._calculateDivision(
                 dividerName,
                 divisionItems,
                 context,
                 formatResult,
-                catalogue
+                divisionCatalogue || catalogue // Fallback to main catalogue if fetch fails
             );
 
             divisions.push(divisionResult);
@@ -116,6 +130,47 @@ class DividedCalculationHandler {
             divisions: divisions,
             combined: combined
         };
+    }
+
+    /**
+     * Fetch catalogue specific to a division's material and weight
+     *
+     * @param {Array} items - Division items
+     * @param {string} supplierId - Supplier ID
+     * @returns {Promise<Object|null>} Catalogue results or null
+     * @private
+     */
+    async _fetchDivisionCatalogue(items, supplierId) {
+        try {
+            // Extract material and weight from this division's items
+            const materialItem = items.find(i => i.box_calc_ref === 'material');
+            const weightItem = items.find(i => i.box_calc_ref === 'weight');
+
+            if (!materialItem || !weightItem) {
+                console.log('  → Using shared catalogue (no material/weight in division)');
+                return null;
+            }
+
+            const FetchCatalogue = require('../Calculations/Catalogues/FetchCatalogue');
+
+            console.log(`  → Fetching catalogue: ${materialItem.value} @ ${weightItem.value}`);
+
+            const catalogue = await new FetchCatalogue(
+                materialItem,
+                weightItem,
+                supplierId
+            ).get();
+
+            if (catalogue && catalogue.results && catalogue.results.length > 0) {
+                console.log(`  ✓ Division catalogue fetched: ${catalogue.results.length} materials`);
+                return catalogue;
+            }
+
+            return null;
+        } catch (error) {
+            console.warn(`  ⚠ Failed to fetch division catalogue:`, error.message);
+            return null;
+        }
     }
 
     /**
