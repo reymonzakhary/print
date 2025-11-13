@@ -128,9 +128,9 @@ class MachineCalculatorV2 {
             // Fetch color pricing
             // FetchColor expects an ARRAY of color items
             const fetchColor = new FetchColor(
-                [colorItem],  // ← Wrap in array!
-                machine,
-                category.tenant_id
+                [colorItem],  // color array
+                machine,      // machine object
+                format.format || format  // format object (not tenant_id!)
             );
             const colors = await fetchColor.get();
 
