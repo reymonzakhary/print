@@ -1,4 +1,6 @@
-const Machine = require('../../Calculations/Machine');
+const PrintMachine = require('../../Calculations/Machines/PrintMachine');
+const LaminateMachine = require('../../Calculations/Machines/LaminateMachine');
+const FetchColor = require('../../Calculations/FetchColor');
 
 /**
  * MachineCalculatorV2
@@ -16,7 +18,7 @@ class MachineCalculatorV2 {
      * @param {Array} items - Product items
      * @param {Object} category - Category object
      * @param {number} quantity - Quantity
-     * @returns {Promise<Array>} Machine calculation results
+     * @returns {Promise<Object>} Grouped machine results
      */
     async calculate(machines, format, catalogue, items, category, quantity) {
         try {
@@ -26,22 +28,52 @@ class MachineCalculatorV2 {
             console.log('    Weight:', catalogue.weight?.value);
             console.log('    Machines:', machines.length);
 
-            const results = [];
+            const results = {
+                printing: [],
+                lamination: [],
+                finishing: []
+            };
+
+            // Extract color from items
+            const colorItem = items.find(i =>
+                i.box_calc_ref === 'printing_colors' ||
+                i.box_calc_ref === 'printing-colors' ||
+                i.key === 'printing-colors'
+            );
+
+            console.log('    Color item:', colorItem?.value);
 
             // Calculate for each machine
             for (const machine of machines) {
                 try {
-                    const result = await this._calculateForMachine(
-                        machine,
-                        format,
-                        catalogue,
-                        items,
-                        category,
-                        quantity
-                    );
+                    const machineType = machine.type || 'printing';
 
-                    if (result) {
-                        results.push(result);
+                    if (machineType === 'printing') {
+                        const result = await this._calculatePrintMachine(
+                            machine,
+                            format,
+                            catalogue,
+                            colorItem,
+                            category,
+                            quantity
+                        );
+
+                        if (result) {
+                            results.printing.push(result);
+                        }
+                    } else if (machineType === 'lamination') {
+                        const result = await this._calculateLaminateMachine(
+                            machine,
+                            format,
+                            catalogue,
+                            items,
+                            category,
+                            quantity
+                        );
+
+                        if (result) {
+                            results.lamination.push(result);
+                        }
                     }
                 } catch (error) {
                     console.warn(`    ⚠ Machine ${machine.name} failed:`, error.message);
@@ -49,10 +81,13 @@ class MachineCalculatorV2 {
                 }
             }
 
-            console.log(`  ✓ V2 Machine calculations complete: ${results.length} results`);
+            console.log(`  ✓ V2 Machine calculations complete:`, {
+                printing: results.printing.length,
+                lamination: results.lamination.length,
+                finishing: results.finishing.length
+            });
 
-            // Group by type
-            return this._groupByType(results);
+            return results;
         } catch (error) {
             console.error('  ❌ V2 Machine Calculator error:', error.message);
             throw error;
@@ -60,90 +95,106 @@ class MachineCalculatorV2 {
     }
 
     /**
-     * Calculate for a single machine
+     * Calculate for a print machine
      *
      * @private
      */
-    async _calculateForMachine(machine, format, catalogue, items, category, quantity) {
-        // Extract material and weight
-        const materialItem = catalogue.material;
-        const weightItem = catalogue.weight;
-        const materialResults = catalogue.results || [];
+    async _calculatePrintMachine(machine, format, catalogue, colorItem, category, quantity) {
+        try {
+            const materialResults = catalogue.results || [];
 
-        // Find matching catalogue entry for this machine
-        const catalogueEntry = materialResults.find(cat => {
-            // Check if this catalogue entry is compatible with this machine
-            return true; // For now, accept all
-        });
+            // Find matching catalogue entry
+            const catalogueEntry = materialResults[0]; // Use first matching catalogue
 
-        if (!catalogueEntry) {
+            if (!catalogueEntry) {
+                return null;
+            }
+
+            // Fetch color pricing
+            const fetchColor = new FetchColor(
+                colorItem,
+                machine._id,
+                category.tenant_id
+            );
+            const colors = await fetchColor.get();
+
+            if (!colors || colors.length === 0) {
+                console.warn(`      No colors found for machine ${machine.name}`);
+                return null;
+            }
+
+            // Run PrintMachine calculation
+            const printMachine = new PrintMachine(
+                machine,
+                format.format || format, // Pass format object
+                catalogue.material,
+                catalogue.weight,
+                catalogueEntry,
+                quantity,
+                colors[0],
+                format.bleed || 0
+            );
+
+            const calculation = printMachine.calculate();
+
+            if (!calculation || !calculation.calculation) {
+                return null;
+            }
+
+            return {
+                type: 'printing',
+                machine: machine,
+                color: colors[0],
+                results: calculation,
+                calculation: calculation.calculation
+            };
+        } catch (error) {
+            console.warn(`      Print machine error:`, error.message);
             return null;
         }
-
-        // Extract printing colors
-        const colorItem = items.find(i =>
-            i.box_calc_ref === 'printing_colors' ||
-            i.box_calc_ref === 'printing-colors' ||
-            i.key === 'printing-colors'
-        );
-
-        // Run Machine calculation (singular - not Machines)
-        const machineCalc = new Machine(
-            machine,
-            format.width,
-            format.height,
-            format.bleed || 0,
-            quantity,
-            materialItem,
-            weightItem,
-            catalogueEntry,
-            colorItem,
-            items
-        );
-
-        const calculation = await machineCalc.calculate();
-
-        if (!calculation || calculation.status !== 200) {
-            return null;
-        }
-
-        return {
-            type: machine.type || 'printing',
-            machine: machine,
-            results: calculation,
-            calculation: calculation.calculation
-        };
     }
 
     /**
-     * Group results by machine type
+     * Calculate for a lamination machine
      *
      * @private
      */
-    _groupByType(results) {
-        const groups = {
-            printing: [],
-            lamination: [],
-            finishing: []
-        };
+    async _calculateLaminateMachine(machine, format, catalogue, items, category, quantity) {
+        try {
+            // Check if lamination is requested
+            const laminationItem = items.find(i =>
+                i.box_calc_ref === 'lamination' ||
+                i.key === 'lamination' ||
+                i.key === 'afwerking'
+            );
 
-        for (const result of results) {
-            const type = result.type || 'printing';
-
-            if (groups[type]) {
-                groups[type].push(result);
-            } else {
-                groups[type] = [result];
+            if (!laminationItem) {
+                return null;
             }
+
+            const laminateMachine = new LaminateMachine(
+                machine,
+                format.format || format,
+                quantity,
+                laminationItem
+            );
+
+            const calculation = laminateMachine.calculate();
+
+            if (!calculation || !calculation.calculation) {
+                return null;
+            }
+
+            return {
+                type: 'lamination',
+                machine: machine,
+                results: calculation,
+                calculation: calculation.calculation
+            };
+        } catch (error) {
+            console.warn(`      Lamination machine error:`, error.message);
+            return null;
         }
-
-        console.log('    Groups:', {
-            printing: groups.printing.length,
-            lamination: groups.lamination.length,
-            finishing: groups.finishing.length
-        });
-
-        return groups;
     }
 }
 
