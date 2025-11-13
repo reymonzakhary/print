@@ -179,6 +179,18 @@ class MachineCalculatorV2 {
                 return null;
             }
 
+            // Debug format.size object that calculateFit() uses
+            const formatObj = format.format || format;
+            console.log(`      Format.size for PrintMachine:`, {
+                hasSize: !!formatObj.size,
+                width_with_bleed: formatObj.size?.width_with_bleed,
+                height_with_bleed: formatObj.size?.height_with_bleed,
+                width: formatObj.size?.width,
+                height: formatObj.size?.height,
+                is_sides: formatObj.size?.is_sides,
+                sizeKeys: formatObj.size ? Object.keys(formatObj.size) : []
+            });
+
             // Debug catalogues being passed
             console.log(`      Catalogues for PrintMachine:`, {
                 count: catalogueResults.length,
