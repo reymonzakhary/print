@@ -1,6 +1,6 @@
 const PrintMachine = require('../../Calculations/Machines/PrintMachine');
-const LaminateMachine = require('../../Calculations/Machines/LaminateMachine');
 const FetchColor = require('../../Calculations/FetchColor');
+const { filterByCalcRef } = require('../../Helpers/Helper');
 
 /**
  * MachineCalculatorV2
@@ -35,13 +35,9 @@ class MachineCalculatorV2 {
             };
 
             // Extract color from items
-            const colorItem = items.find(i =>
-                i.box_calc_ref === 'printing_colors' ||
-                i.box_calc_ref === 'printing-colors' ||
-                i.key === 'printing-colors'
-            );
+            const colorItem = filterByCalcRef(items, 'printing_colors');
 
-            console.log('    Color item:', colorItem?.value);
+            console.log('    Color item:', colorItem[0]?.value);
 
             // Calculate for each machine
             for (const machine of machines) {
@@ -53,7 +49,7 @@ class MachineCalculatorV2 {
                             machine,
                             format,
                             catalogue,
-                            colorItem,
+                            colorItem[0],
                             category,
                             quantity
                         );
@@ -62,7 +58,7 @@ class MachineCalculatorV2 {
                             results.printing.push(result);
                         }
                     } else if (machineType === 'lamination') {
-                        const result = await this._calculateLaminateMachine(
+                        const result = await this._calculateLaminationInline(
                             machine,
                             format,
                             catalogue,
@@ -101,12 +97,15 @@ class MachineCalculatorV2 {
      */
     async _calculatePrintMachine(machine, format, catalogue, colorItem, category, quantity) {
         try {
-            const materialResults = catalogue.results || [];
+            const catalogueResults = catalogue.results || [];
 
-            // Find matching catalogue entry
-            const catalogueEntry = materialResults[0]; // Use first matching catalogue
+            if (!catalogueResults.length) {
+                console.warn(`      No catalogue results for machine ${machine.name}`);
+                return null;
+            }
 
-            if (!catalogueEntry) {
+            if (!colorItem || !colorItem.option) {
+                console.warn(`      No color option for machine ${machine.name}`);
                 return null;
             }
 
@@ -123,16 +122,15 @@ class MachineCalculatorV2 {
                 return null;
             }
 
-            // Run PrintMachine calculation
+            // PrintMachine constructor: (machine, catalogues, format, color, content, endpaper, request)
             const printMachine = new PrintMachine(
                 machine,
-                format.format || format, // Pass format object
-                catalogue.material,
-                catalogue.weight,
-                catalogueEntry,
-                quantity,
+                catalogueResults,
+                format.format || format,
                 colors[0],
-                format.bleed || 0
+                {}, // content
+                {}, // endpaper
+                { quantity: quantity, bleed: format.bleed || 0 }
             );
 
             const calculation = printMachine.calculate();
@@ -140,6 +138,8 @@ class MachineCalculatorV2 {
             if (!calculation || !calculation.calculation) {
                 return null;
             }
+
+            console.log(`      ✓ Print machine ${machine.name} calculated`);
 
             return {
                 type: 'printing',
@@ -155,41 +155,60 @@ class MachineCalculatorV2 {
     }
 
     /**
-     * Calculate for a lamination machine
+     * Calculate lamination inline (like legacy Machines class does)
      *
      * @private
      */
-    async _calculateLaminateMachine(machine, format, catalogue, items, category, quantity) {
+    async _calculateLaminationInline(machine, format, catalogue, items, category, quantity) {
         try {
             // Check if lamination is requested
-            const laminationItem = items.find(i =>
-                i.box_calc_ref === 'lamination' ||
-                i.key === 'lamination' ||
-                i.key === 'afwerking'
-            );
+            const laminationItem = filterByCalcRef(items, 'lamination');
 
-            if (!laminationItem) {
+            if (!laminationItem || !laminationItem.length) {
                 return null;
             }
 
-            const laminateMachine = new LaminateMachine(
-                machine,
-                format.format || format,
-                quantity,
-                laminationItem
-            );
+            const lamination = laminationItem[0];
 
-            const calculation = laminateMachine.calculate();
-
-            if (!calculation || !calculation.calculation) {
+            if (!lamination.option || !lamination.option.sheet_runs || !lamination.option.sheet_runs.length) {
+                console.warn(`      No lamination sheet_runs for machine ${machine.name}`);
                 return null;
             }
+
+            const startCost = parseInt(machine.price) / 100000;
+            const areaSqm = quantity * (format.size?.m || 0);
+
+            // Get runs related to this machine
+            const runs = lamination.option.sheet_runs?.filter(run =>
+                run.machine.toString() === machine._id.toString()
+            )[0];
+
+            if (!runs) {
+                return null;
+            }
+
+            const run = runs.runs.filter((r) =>
+                quantity >= parseInt(r.from) && quantity <= parseInt(r.to)
+            );
+
+            console.log(`      ✓ Lamination machine ${machine.name} calculated`);
 
             return {
                 type: 'lamination',
                 machine: machine,
-                results: calculation,
-                calculation: calculation.calculation
+                results: {
+                    machine: machine,
+                    format: format.format || format,
+                    lamination: lamination,
+                    calculation: {
+                        calculation_method: lamination.option.calculation_method,
+                        area_sqm: areaSqm,
+                        start_cost: startCost,
+                        option_start_cost: parseInt(lamination.option?.start_cost ?? 0) / 100000,
+                        run: run,
+                        run_price: Number(parseInt(run ? run[0]?.price ?? 0 : 0) / 100000)
+                    }
+                }
             };
         } catch (error) {
             console.warn(`      Lamination machine error:`, error.message);
