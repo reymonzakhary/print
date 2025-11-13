@@ -150,7 +150,22 @@ class MachineCalculatorV2 {
                 { quantity: quantity, bleed: format.bleed || 0 }
             );
 
+            console.log(`      PrintMachine created:`, {
+                hasMachine: !!machine,
+                cataloguesCount: catalogueResults.length,
+                hasFormat: !!(format.format || format),
+                formatKeys: format.format ? Object.keys(format.format) : Object.keys(format),
+                hasColor: !!colors[0]
+            });
+
             const calculation = printMachine.calculate();
+
+            console.log(`      PrintMachine.calculate() returned:`, {
+                hasCalculation: !!calculation,
+                hasCalculationProp: !!calculation?.calculation,
+                status: calculation?.status,
+                message: calculation?.message
+            });
 
             if (!calculation || !calculation.calculation) {
                 return null;
