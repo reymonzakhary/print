@@ -163,6 +163,12 @@ class DividedCalculationHandler {
 
             if (catalogue && catalogue.results && catalogue.results.length > 0) {
                 console.log(`  ✓ Division catalogue fetched: ${catalogue.results.length} materials`);
+
+                // Add material and weight items to catalogue object
+                // (required by MachineCalculationService)
+                catalogue.material = materialItem;
+                catalogue.weight = weightItem;
+
                 return catalogue;
             }
 
