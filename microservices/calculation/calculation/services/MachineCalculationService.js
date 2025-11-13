@@ -40,6 +40,16 @@ class MachineCalculationService {
             const material = catalogue.material;
             const weight = catalogue.weight;
 
+            console.log('  → Running machine combinations:', {
+                format_width: format.width,
+                format_height: format.height,
+                format_has_format: !!format.format,
+                material: material?.value || material,
+                weight: weight?.value || weight,
+                catalogue_results_count: catalogue.results?.length,
+                machines_count: machines?.length
+            });
+
             // Run Machines calculator (legacy)
             const results = await new Machines(
                 format.format,
@@ -58,8 +68,24 @@ class MachineCalculationService {
                 endpapers
             ).prepare();
 
+            console.log('  → Machines.prepare() returned:', {
+                results_type: typeof results,
+                results_is_array: Array.isArray(results),
+                results_length: results?.length,
+                results_status: results?.status,
+                first_result_type: results?.[0]?.type
+            });
+
             // Group results by type (printing, lamination, finishing)
             const groups = this._groupByType(results);
+
+            console.log('  → Grouped by type:', {
+                has_printing: !!groups.printing,
+                has_lamination: !!groups.lamination,
+                has_finishing: !!groups.finishing,
+                printing_count: groups.printing?.length,
+                lamination_count: groups.lamination?.length
+            });
 
             // Validate printing machines exist
             if (!groups.hasOwnProperty('printing')) {
@@ -71,10 +97,17 @@ class MachineCalculationService {
             }
 
             // Create combinations (printing + lamination + finishing)
+            console.log('  → Creating combinations from groups');
             const combos = combinations(groups);
+
+            console.log('  ✓ Machine combinations created:', combos?.length);
 
             return combos;
         } catch (error) {
+            console.error('  ❌ Machine calculation error:', {
+                message: error.message,
+                stack: error.stack?.split('\n').slice(0, 3).join('\n')
+            });
             throw new Error(`Machine calculation failed: ${error.message}`);
         }
     }
