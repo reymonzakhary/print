@@ -185,15 +185,40 @@ class DividedCalculationHandler {
      * @private
      */
     async _calculateDivision(dividerName, items, context, formatResult, catalogue) {
+        // Calculate format specific to this division
+        // Each division may have different pages/sides/specifications
+        const FormatService = require('./FormatService');
+        const formatService = new FormatService();
+
+        const bleed = context.request?.bleed || context.category.bleed;
+        const divisionFormatResult = await formatService.calculate(
+            context.category,
+            items,
+            context.quantity,
+            bleed,
+            context.request
+        );
+
+        if (divisionFormatResult.status !== 200) {
+            console.warn(`  ⚠ Format calculation failed for ${dividerName}: ${divisionFormatResult.message}`);
+            console.warn(`  → Using shared format as fallback`);
+            // Use shared format as fallback
+            divisionFormatResult.width = formatResult.width;
+            divisionFormatResult.height = formatResult.height;
+            divisionFormatResult.format = formatResult.format;
+        } else {
+            console.log(`  ✓ Division format: ${divisionFormatResult.width}x${divisionFormatResult.height}mm`);
+        }
+
         // Extract binding and other special options
         const bindingMethod = filterByCalcRef(items, 'binding_method');
         const bindingDirection = filterByCalcRef(items, 'binding_direction');
         const endpapers = filterByCalcRef(items, 'endpapers');
 
-        // Run machine calculations for this division
+        // Run machine calculations for this division with its own format
         const combinations = await this.machineService.runCombinations(
             context.machines,
-            formatResult,
+            divisionFormatResult,
             catalogue,
             items,
             context.request,
@@ -267,6 +292,7 @@ class DividedCalculationHandler {
             name: dividerName.charAt(0).toUpperCase() + dividerName.slice(1),
             divider: dividerName,
             items: items,
+            format: divisionFormatResult,
             machine: priceResult.machine,
             laminate_machine: priceResult.laminate_machine || null,
             calculation: priceResult.calculation,
