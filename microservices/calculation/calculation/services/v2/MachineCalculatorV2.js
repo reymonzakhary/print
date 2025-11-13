@@ -179,6 +179,18 @@ class MachineCalculatorV2 {
                 return null;
             }
 
+            // Debug catalogues being passed
+            console.log(`      Catalogues for PrintMachine:`, {
+                count: catalogueResults.length,
+                firstThree: catalogueResults.slice(0, 3).map(c => ({
+                    material: c.material,
+                    grs: c.grs,
+                    width: c.width,
+                    height: c.height,
+                    sheet: c.sheet
+                }))
+            });
+
             // PrintMachine constructor: (machine, catalogues, format, color, content, endpaper, request)
             const printMachine = new PrintMachine(
                 machine,
@@ -204,10 +216,15 @@ class MachineCalculatorV2 {
                 hasCalculation: !!calculation,
                 hasCalculationProp: !!calculation?.calculation,
                 status: calculation?.status,
-                message: calculation?.message
+                message: calculation?.message,
+                selectedMaterial: calculation?.material_used,
+                selectedWeight: calculation?.wight_used,
+                catalogueWidth: calculation?.catalogue_width,
+                catalogueHeight: calculation?.catalogue_height
             });
 
             if (!calculation || !calculation.calculation) {
+                console.warn(`      Print machine ${machine.name} failed: ${calculation?.message || 'No calculation result'}`);
                 return null;
             }
 
