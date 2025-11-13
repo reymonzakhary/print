@@ -99,7 +99,8 @@ class CalculationPipeline {
             // Step 6: Check if calculation should be divided
             this.isDivided = this.dividedCalculationHandler.shouldDivide(
                 this.matchedItems,
-                this.boops
+                this.boops,
+                this.context.request?.divided
             );
             console.log(`✓ Calculation type: ${this.isDivided ? 'Divided' : 'Simple'}`);
 

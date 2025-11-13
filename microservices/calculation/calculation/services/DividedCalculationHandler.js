@@ -24,11 +24,23 @@ class DividedCalculationHandler {
      *
      * @param {Array} items - Product items
      * @param {Object} boops - Boops configuration
+     * @param {boolean} dividedFlag - Divided flag from payload (user control)
      * @returns {boolean} True if should be divided
      */
-    shouldDivide(items, boops) {
-        // ALWAYS check if items have multiple dividers first
-        // This is the primary indicator of divided calculations
+    shouldDivide(items, boops, dividedFlag = undefined) {
+        // FIRST: Check if user explicitly set divided flag in payload
+        // This gives user control over division
+        if (dividedFlag === false) {
+            console.log('✓ Divided calculation DISABLED by payload flag (divided: false)');
+            return false;
+        }
+
+        if (dividedFlag === true) {
+            console.log('✓ Divided calculation ENABLED by payload flag (divided: true)');
+            return true;
+        }
+
+        // SECOND: Auto-detect from item dividers
         const dividers = new Set();
         for (const item of items) {
             if (item.divider && item.divider !== 'default' && item.divider !== '') {
@@ -36,19 +48,19 @@ class DividedCalculationHandler {
             }
         }
 
-        // If items have multiple dividers (e.g., cover + content), always divide
+        // If items have multiple dividers (e.g., cover + content), divide automatically
         if (dividers.size > 1) {
-            console.log(`✓ Divided calculation detected: ${Array.from(dividers).join(', ')}`);
+            console.log(`✓ Divided calculation AUTO-DETECTED: ${Array.from(dividers).join(', ')}`);
             return true;
         }
 
-        // Fallback: Check if boops has divided flag
+        // THIRD: Fallback to boops configuration
         if (boops?.divided === true) {
             console.log('✓ Divided calculation enabled via boops configuration');
             return true;
         }
 
-        console.log('✓ Simple calculation (no division needed)');
+        console.log('✓ Simple calculation (no division)');
         return false;
     }
 
