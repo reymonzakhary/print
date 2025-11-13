@@ -126,9 +126,10 @@ class MachineCalculatorV2 {
             });
 
             // Fetch color pricing
+            // FetchColor expects an ARRAY of color items
             const fetchColor = new FetchColor(
-                colorItem,
-                machine._id,
+                [colorItem],  // ← Wrap in array!
+                machine,
                 category.tenant_id
             );
             const colors = await fetchColor.get();
