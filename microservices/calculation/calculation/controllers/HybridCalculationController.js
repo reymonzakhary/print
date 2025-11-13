@@ -118,7 +118,7 @@ module.exports = class HybridCalculationController {
                 v1Payload.product,
                 boops
             );
-            console.log('Items enriched with IDs:', enrichedItems.length);
+
 
             // Step 3: Create V2 calculation context with detailed format flag
             const context = {
