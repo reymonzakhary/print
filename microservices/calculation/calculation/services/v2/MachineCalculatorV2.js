@@ -37,7 +37,13 @@ class MachineCalculatorV2 {
             // Extract color from items
             const colorItem = filterByCalcRef(items, 'printing_colors');
 
-            console.log('    Color item:', colorItem[0]?.value);
+            console.log('    Color item:', {
+                value: colorItem[0]?.value,
+                hasOption: !!colorItem[0]?.option,
+                hasBox: !!colorItem[0]?.box,
+                optionId: colorItem[0]?.option?._id,
+                keys: colorItem[0] ? Object.keys(colorItem[0]) : []
+            });
 
             // Calculate for each machine
             for (const machine of machines) {
@@ -105,9 +111,19 @@ class MachineCalculatorV2 {
             }
 
             if (!colorItem || !colorItem.option) {
-                console.warn(`      No color option for machine ${machine.name}`);
+                console.warn(`      No color option for machine ${machine.name}:`, {
+                    hasColorItem: !!colorItem,
+                    hasOption: !!colorItem?.option,
+                    colorItemKeys: colorItem ? Object.keys(colorItem) : []
+                });
                 return null;
             }
+
+            console.log(`      Fetching colors for ${machine.name}:`, {
+                colorValue: colorItem.value,
+                optionId: colorItem.option._id,
+                machineId: machine._id
+            });
 
             // Fetch color pricing
             const fetchColor = new FetchColor(
