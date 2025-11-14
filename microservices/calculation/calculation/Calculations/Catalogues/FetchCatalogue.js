@@ -53,7 +53,26 @@ module.exports = class FetchCatalogue {
             // grs: parseInt( weight[0]?.option.name.match(/\d+/) ? weight[0]?.option.name.match(/\d+/)[0] : '0', 10)
         };
 
+        console.log(`  FetchCatalogue.get() matching by:`, {
+            tenant_id: MATCH_FIELDS.tenant_id,
+            material_id: MATCH_FIELDS.material_id,
+            grs_id: MATCH_FIELDS.grs_id,
+            materialValue: material[0]?.value,
+            weightValue: weight[0]?.value
+        });
+
         let catalogues = await (this.fetchCatalogues(MATCH_FIELDS));
+
+        console.log(`  FetchCatalogue.get() found ${catalogues?.length || 0} catalogues:`,
+            catalogues?.slice(0, 3).map(c => ({
+                material: c.material,
+                grs: c.grs,
+                width: c.width,
+                height: c.height,
+                sheet: c.sheet
+            }))
+        );
+
         if (!this.cataloguesExist(catalogues)) {
             this.error.message = 'Catalog not found, please try again';
             this.error.status = 422;

@@ -168,11 +168,18 @@ class DividedCalculationHandler {
 
             const FetchCatalogue = require('../Calculations/Catalogues/FetchCatalogue');
 
-            console.log(`  → Fetching catalogue: ${materialItem.value} @ ${weightItem.value}`);
+            console.log(`  → Fetching catalogue: ${materialItem.value} @ ${weightItem.value}`, {
+                materialOptionId: materialItem.option_id,
+                weightOptionId: weightItem.option_id,
+                supplierId: supplierId,
+                hasMaterialOption: !!materialItem.option,
+                hasWeightOption: !!weightItem.option
+            });
 
+            // FetchCatalogue expects arrays: material[0] and weight[0]
             const catalogue = await new FetchCatalogue(
-                materialItem,
-                weightItem,
+                [materialItem],
+                [weightItem],
                 supplierId
             ).get();
 
