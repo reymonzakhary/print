@@ -258,8 +258,30 @@ class DividedCalculationHandler {
             );
 
             // Convert V2 groups to combinations format
+            // Filter out empty machine groups (e.g., if no lamination machines)
+            const nonEmptyGroups = {};
+            for (const [key, value] of Object.entries(machineGroups)) {
+                if (Array.isArray(value) && value.length > 0) {
+                    nonEmptyGroups[key] = value;
+                }
+            }
+
+            console.log(`  → Machine groups for combinations:`, {
+                printing: machineGroups.printing?.length || 0,
+                lamination: machineGroups.lamination?.length || 0,
+                finishing: machineGroups.finishing?.length || 0,
+                nonEmptyKeys: Object.keys(nonEmptyGroups)
+            });
+
             const { combinations: combinationHelper } = require('../Helpers/Helper');
-            combinations = combinationHelper(machineGroups);
+
+            // If only one type (e.g., only printing), convert array to combination objects
+            if (Object.keys(nonEmptyGroups).length === 1) {
+                const [groupKey, groupArray] = Object.entries(nonEmptyGroups)[0];
+                combinations = groupArray.map(item => ({ [groupKey]: item }));
+            } else {
+                combinations = combinationHelper(nonEmptyGroups);
+            }
         } else {
             // Use V1 legacy implementation
             combinations = await this.machineService.runCombinations(
@@ -277,12 +299,23 @@ class DividedCalculationHandler {
         }
 
         // Calculate prices for this division
+        console.log(`  → Calculating prices for ${dividerName}:`, {
+            combinationsCount: combinations?.length || 0,
+            firstCombination: combinations?.[0] ? Object.keys(combinations[0]) : []
+        });
+
         const priceResult = this.priceService.calculateDividedPrice(
             combinations,
             items,
             formatResult,
             context.category
         );
+
+        console.log(`  ✓ Price calculated for ${dividerName}:`, {
+            hasMachine: !!priceResult.machine,
+            hasCalculation: !!priceResult.calculation,
+            price: priceResult.calculation?.total_sheet_price
+        });
 
         // Calculate duration
         let duration = null;
