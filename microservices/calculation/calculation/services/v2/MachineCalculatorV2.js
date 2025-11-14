@@ -248,12 +248,18 @@ class MachineCalculatorV2 {
 
             console.log(`      ✓ Print machine ${machine.name} calculated successfully`);
 
-            // PrintMachine.calculate() returns the calculation directly (not nested)
+            // Return in V1-compatible structure for PriceCalculationService
+            // PriceCalculationService expects: combination.printing.results.calculation
             return {
                 type: 'printing',
-                machine: machine,
-                color: colors[0],
-                calculation: calculation  // The entire returned object IS the calculation
+                results: {
+                    machine: machine,
+                    calculation: {
+                        ...calculation,
+                        color: colors[0]  // PriceCalculationService expects color here
+                    },
+                    color: colors[0]  // Also keep at this level for compatibility
+                }
             };
         } catch (error) {
             console.warn(`      Print machine error:`, error.message);
