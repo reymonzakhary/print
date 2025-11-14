@@ -232,7 +232,6 @@ class MachineCalculatorV2 {
 
             console.log(`      PrintMachine.calculate() returned:`, {
                 hasCalculation: !!calculation,
-                hasCalculationProp: !!calculation?.calculation,
                 status: calculation?.status,
                 message: calculation?.message,
                 selectedMaterial: calculation?.material_used,
@@ -241,19 +240,20 @@ class MachineCalculatorV2 {
                 catalogueHeight: calculation?.catalogue_height
             });
 
-            if (!calculation || !calculation.calculation) {
+            // Check if calculation failed (status 422) or is missing
+            if (!calculation || calculation.status === 422) {
                 console.warn(`      Print machine ${machine.name} failed: ${calculation?.message || 'No calculation result'}`);
                 return null;
             }
 
-            console.log(`      ✓ Print machine ${machine.name} calculated`);
+            console.log(`      ✓ Print machine ${machine.name} calculated successfully`);
 
+            // PrintMachine.calculate() returns the calculation directly (not nested)
             return {
                 type: 'printing',
                 machine: machine,
                 color: colors[0],
-                results: calculation,
-                calculation: calculation.calculation
+                calculation: calculation  // The entire returned object IS the calculation
             };
         } catch (error) {
             console.warn(`      Print machine error:`, error.message);
