@@ -204,13 +204,19 @@ class MachineCalculatorV2 {
             });
 
             // PrintMachine constructor: (machine, catalogues, format, color, content, endpaper, request)
+            // Content object with defaults to prevent NaN in calculateCoverWidth()
+            const contentObj = {
+                thickness: catalogueResults[0]?.thickness || 0,
+                pages: formatObj.pages || 0
+            };
+
             const printMachine = new PrintMachine(
                 machine,
                 catalogueResults,
                 format.format || format,
                 colors[0],
-                {}, // content
-                {}, // endpaper
+                contentObj,  // content with defaults
+                {},          // endpaper
                 { quantity: quantity, bleed: format.bleed || 0 }
             );
 
